@@ -1,610 +1,944 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACE SIGN Install Schedule</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ACE SIGN — Install Schedule</title>
 
-  <!-- Leaflet 地图 -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-  <!-- jsPDF + html2canvas 生成 PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --bg: #0f1419;
+  --bg-secondary: #1a1f2b;
+  --bg-card: #232936;
+  --bg-card-hover: #2a3142;
+  --border: #2d3548;
+  --text: #e4e6ed;
+  --text-secondary: #9ba1b3;
+  --text-muted: #6b7184;
+  --accent: #6366f1;
+  --accent-hover: #5558e3;
+  --urgent: #ef4444;
+  --high: #f97316;
+  --medium: #eab308;
+  --low: #22c55e;
+  --info: #3b82f6;
+  --success: #10b981;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif;
+  background: var(--bg); color: var(--text); font-size: 14px;
+  line-height: 1.5; -webkit-font-smoothing: antialiased;
+}
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #f5f6f8;
-      color: #1f2937;
-    }
+/* ============ Login ============ */
+#login {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at top, #1a1f2b 0%, #0f1419 100%);
+}
+.login-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 40px 36px; width: 360px; text-align: center;
+}
+.login-card .logo {
+  font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.login-card .subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; }
+.login-card input {
+  width: 100%; padding: 12px 16px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-radius: 10px;
+  color: var(--text); font-size: 15px; outline: none;
+}
+.login-card input:focus { border-color: var(--accent); }
+.login-card button {
+  width: 100%; margin-top: 12px; padding: 12px;
+  background: var(--accent); color: white; border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
+}
+.login-card button:hover { background: var(--accent-hover); }
+.login-error { color: var(--urgent); font-size: 13px; margin-top: 12px; min-height: 18px; }
 
-    /* ========== 登录页 ========== */
-    #login {
-      position: fixed; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      z-index: 1000;
-    }
-    .login-box {
-      background: white; padding: 40px; border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.3);
-      width: 320px; text-align: center;
-    }
-    .login-box h1 { font-size: 22px; margin-bottom: 8px; color: #1f2937; }
-    .login-box p { color: #6b7280; font-size: 14px; margin-bottom: 24px; }
-    .login-box input {
-      width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb;
-      border-radius: 8px; font-size: 16px; outline: none;
-    }
-    .login-box input:focus { border-color: #667eea; }
-    .login-box button {
-      width: 100%; margin-top: 16px; padding: 12px;
-      background: #667eea; color: white; border: none;
-      border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;
-    }
-    .login-box button:hover { background: #5568d3; }
-    .login-error { color: #ef4444; font-size: 13px; margin-top: 12px; min-height: 18px; }
+/* ============ Layout ============ */
+#app { display: none; height: 100vh; grid-template-columns: 240px 1fr; }
+#app.loaded { display: grid; }
+aside { background: var(--bg-secondary); border-right: 1px solid var(--border); padding: 20px; overflow-y: auto; }
+.brand {
+  font-size: 18px; font-weight: 800; margin-bottom: 4px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.brand-sub { font-size: 11px; color: var(--text-muted); margin-bottom: 24px; letter-spacing: 0.5px; text-transform: uppercase; }
+.nav-section { margin-bottom: 24px; }
+.nav-title { font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; padding: 0 8px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+  border-radius: 8px; color: var(--text-secondary); cursor: pointer;
+  font-size: 14px; font-weight: 500; transition: all 0.15s;
+}
+.nav-item:hover { background: var(--bg-card); color: var(--text); }
+.nav-item.active { background: var(--accent); color: white; }
+.nav-item .count {
+  margin-left: auto; font-size: 11px; background: rgba(255,255,255,.08);
+  padding: 2px 8px; border-radius: 10px; font-weight: 600;
+}
+.nav-item.active .count { background: rgba(255,255,255,.2); }
+.installer-pill {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+  border-radius: 8px; font-size: 13px; cursor: pointer;
+  color: var(--text-secondary); transition: all 0.15s;
+}
+.installer-pill:hover, .installer-pill.active { background: var(--bg-card); color: var(--text); }
+.installer-pill .dot { width: 8px; height: 8px; border-radius: 50%; }
+.installer-pill .count { margin-left: auto; font-size: 11px; color: var(--text-muted); }
 
-    /* ========== 主页面 ========== */
-    #app { display: none; }
-    header {
-      background: white; padding: 16px 24px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.05);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px;
-    }
-    header h1 { font-size: 18px; font-weight: 700; }
-    header .meta { color: #6b7280; font-size: 13px; }
+main { overflow-y: auto; padding: 24px 32px; }
 
-    .tabs {
-      display: flex; gap: 4px; background: #f3f4f6;
-      padding: 4px; border-radius: 8px;
-    }
-    .tab {
-      padding: 8px 16px; border: none; background: transparent;
-      cursor: pointer; border-radius: 6px; font-size: 14px;
-      color: #6b7280; font-weight: 500;
-    }
-    .tab.active { background: white; color: #1f2937; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+/* ============ Header ============ */
+.topbar { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.topbar h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+.topbar .meta { color: var(--text-muted); font-size: 12px; }
+.topbar-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); cursor: pointer;
+  font-size: 13px; font-weight: 500; transition: all 0.15s;
+}
+.btn:hover { background: var(--bg-card-hover); border-color: var(--text-muted); }
+.btn.success { background: var(--success); border-color: var(--success); color: white; }
+.btn.success:hover { filter: brightness(1.1); }
 
-    .date-controls {
-      display: flex; align-items: center; gap: 8px;
-      padding: 16px 24px; background: white;
-      border-bottom: 1px solid #e5e7eb;
-      flex-wrap: wrap;
-    }
-    .date-controls button {
-      padding: 8px 12px; border: 1px solid #e5e7eb; background: white;
-      border-radius: 6px; cursor: pointer; font-size: 14px;
-    }
-    .date-controls button:hover { background: #f9fafb; }
-    .date-controls button.active { background: #667eea; color: white; border-color: #667eea; }
-    .date-controls input[type="date"] {
-      padding: 8px; border: 1px solid #e5e7eb; border-radius: 6px;
-      font-size: 14px;
-    }
-    .date-controls .month-label {
-      font-weight: 600; font-size: 15px; min-width: 140px; text-align: center;
-    }
-    .date-controls .pdf-btn {
-      margin-left: auto; padding: 8px 16px;
-      background: #10b981; color: white; border: none;
-      border-radius: 6px; cursor: pointer; font-weight: 600;
-    }
-    .date-controls .pdf-btn:hover { background: #059669; }
+/* ============ Stats ============ */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+.stat-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+.stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+.stat-value .unit { font-size: 14px; color: var(--text-muted); font-weight: 500; margin-left: 4px; }
+.stat-card.urgent { border-left: 3px solid var(--urgent); }
+.stat-card.success { border-left: 3px solid var(--success); }
+.stat-card.info { border-left: 3px solid var(--info); }
+.stat-card.warning { border-left: 3px solid var(--high); }
 
-    main { padding: 24px; }
+/* ============ Controls ============ */
+.controls {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 10px 16px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.controls .arrow {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; color: var(--text); font-size: 18px; line-height: 1;
+}
+.controls .arrow:hover { background: var(--bg-card-hover); }
+.controls .month-label { font-size: 16px; font-weight: 700; min-width: 160px; text-align: center; }
+.controls .view-tabs { display: flex; gap: 2px; background: var(--bg-secondary); padding: 3px; border-radius: 8px; margin-left: auto; }
+.controls .view-tab {
+  padding: 6px 14px; border: none; background: transparent;
+  border-radius: 6px; cursor: pointer; color: var(--text-secondary);
+  font-size: 13px; font-weight: 500;
+}
+.controls .view-tab.active { background: var(--accent); color: white; }
 
-    /* ========== 看板视图 ========== */
-    .day-group { margin-bottom: 32px; }
-    .day-header {
-      display: flex; align-items: baseline; gap: 12px;
-      margin-bottom: 12px; padding-bottom: 8px;
-      border-bottom: 2px solid #e5e7eb;
-    }
-    .day-header .date {
-      font-size: 18px; font-weight: 700;
-    }
-    .day-header .weekday { color: #6b7280; font-size: 14px; }
-    .day-header .count {
-      margin-left: auto; background: #667eea; color: white;
-      padding: 2px 10px; border-radius: 12px; font-size: 12px;
-      font-weight: 600;
-    }
-    .day-header.today .date { color: #ef4444; }
-    .day-header.today .date::after { content: " (Today)"; font-size: 13px; }
+/* ============ Schedule ============ */
+.day-block { margin-bottom: 28px; }
+.day-header {
+  display: flex; align-items: baseline; gap: 12px;
+  margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.day-header .day-num { font-size: 28px; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+.day-header .day-month { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+.day-header .day-weekday { font-size: 13px; color: var(--text-secondary); font-weight: 600; }
+.day-header .day-badge {
+  margin-left: auto; background: var(--bg-card); border: 1px solid var(--border);
+  padding: 4px 10px; border-radius: 12px; font-size: 12px; color: var(--text-secondary); font-weight: 600;
+}
+.day-header.is-today .day-num { color: var(--accent); }
+.day-header.is-today::before {
+  content: "TODAY"; background: var(--accent); color: white;
+  padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.5px; margin-right: 8px; align-self: center;
+}
+.day-header.is-past { opacity: 0.5; }
 
-    .cards {
-      display: grid; gap: 12px;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-    .card {
-      background: white; padding: 16px; border-radius: 10px;
-      border-left: 4px solid #667eea;
-      box-shadow: 0 1px 3px rgba(0,0,0,.04);
-    }
-    .card.priority-urgent { border-left-color: #ef4444; }
-    .card.priority-high { border-left-color: #f97316; }
-    .card.priority-medium { border-left-color: #eab308; }
-    .card.priority-low { border-left-color: #22c55e; }
+.job-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 12px; }
 
-    .card .name {
-      font-weight: 600; font-size: 15px; margin-bottom: 8px;
-      line-height: 1.4;
-    }
-    .card .row {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 13px; color: #4b5563; margin-bottom: 4px;
-    }
-    .card .row .label {
-      color: #9ca3af; min-width: 70px;
-    }
-    .card .badges {
-      display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;
-    }
-    .badge {
-      padding: 2px 8px; border-radius: 4px; font-size: 11px;
-      font-weight: 600; background: #e5e7eb; color: #4b5563;
-    }
-    .badge.type { background: #dbeafe; color: #1e40af; }
-    .badge.installer { background: #fef3c7; color: #92400e; }
-    .badge.value { background: #d1fae5; color: #065f46; }
+/* ============ Job Card ============ */
+.job-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 0; overflow: hidden; cursor: pointer;
+  transition: all 0.15s; border-left-width: 3px;
+}
+.job-card:hover {
+  background: var(--bg-card-hover); border-color: var(--text-muted);
+  transform: translateY(-1px);
+}
+.job-card.priority-Urgent { border-left-color: var(--urgent); }
+.job-card.priority-High { border-left-color: var(--high); }
+.job-card.priority-Medium { border-left-color: var(--medium); }
+.job-card.priority-Low { border-left-color: var(--low); }
 
-    .empty-state {
-      text-align: center; padding: 60px 20px;
-      color: #9ca3af; font-size: 15px;
-    }
+.job-thumb {
+  width: 100%; height: 160px; background: var(--bg-secondary);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: 12px; position: relative;
+  overflow: hidden; border-bottom: 1px solid var(--border);
+}
+.job-thumb img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+}
+.job-thumb .placeholder { font-size: 36px; opacity: 0.3; }
+.job-thumb .pages-badge {
+  position: absolute; bottom: 8px; right: 8px;
+  background: rgba(0,0,0,.7); color: white; font-size: 11px;
+  padding: 3px 8px; border-radius: 4px; font-weight: 600;
+}
 
-    /* ========== 地图视图 ========== */
-    #map-view { display: none; }
-    #map {
-      height: 600px; border-radius: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.04);
-    }
-    .map-legend {
-      background: white; padding: 12px; border-radius: 8px;
-      margin-bottom: 12px; font-size: 13px;
-      display: flex; gap: 16px; flex-wrap: wrap;
-    }
-    .map-legend .item {
-      display: flex; align-items: center; gap: 6px;
-    }
-    .map-legend .pin {
-      width: 12px; height: 12px; border-radius: 50%; display: inline-block;
-    }
+.job-body { padding: 12px 14px; }
+.job-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; gap: 8px; }
+.job-name { font-size: 15px; font-weight: 600; line-height: 1.3; flex: 1; }
+.job-priority {
+  font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 4px; letter-spacing: 0.5px; flex-shrink: 0;
+}
+.priority-Urgent .job-priority { background: rgba(239,68,68,.15); color: var(--urgent); }
+.priority-High .job-priority { background: rgba(249,115,22,.15); color: var(--high); }
+.priority-Medium .job-priority { background: rgba(234,179,8,.15); color: var(--medium); }
+.priority-Low .job-priority { background: rgba(34,197,94,.15); color: var(--low); }
 
-    .leaflet-popup-content { font-size: 13px; line-height: 1.5; }
-    .leaflet-popup-content b { display: block; margin-bottom: 4px; }
+.job-row {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12.5px; color: var(--text-secondary); margin-bottom: 4px;
+}
+.job-row .icon { width: 14px; flex-shrink: 0; opacity: 0.7; }
+.job-row .text {
+  flex: 1; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-    /* ========== 响应式 ========== */
-    @media (max-width: 600px) {
-      header { padding: 12px 16px; }
-      main { padding: 16px; }
-      .date-controls { padding: 12px 16px; }
-      .cards { grid-template-columns: 1fr; }
-    }
-  </style>
+.job-tags { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid var(--border); }
+.tag {
+  font-size: 11px; padding: 3px 8px; border-radius: 4px;
+  background: var(--bg-secondary); color: var(--text-secondary); font-weight: 500;
+}
+.tag.type { background: rgba(99,102,241,.15); color: #a5b4fc; }
+.tag.installer { background: rgba(245,158,11,.15); color: #fcd34d; }
+.tag.value { background: rgba(16,185,129,.15); color: #6ee7b7; }
+.tag.unassigned { background: rgba(239,68,68,.15); color: #fca5a5; }
+
+.empty-state { text-align: center; padding: 80px 20px; color: var(--text-muted); }
+.empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+
+/* ============ Modal (Detail View) ============ */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,.85);
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 20px; overflow-y: auto;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 16px; max-width: 900px; width: 100%;
+  margin: 20px 0; overflow: hidden;
+}
+.modal-header {
+  padding: 20px 24px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+}
+.modal-header h2 { font-size: 20px; font-weight: 700; line-height: 1.3; }
+.modal-header .modal-sub { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.modal-close {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  color: var(--text); width: 36px; height: 36px; border-radius: 8px;
+  cursor: pointer; font-size: 20px; flex-shrink: 0;
+}
+.modal-body { padding: 20px 24px; }
+.modal-info-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px; margin-bottom: 20px;
+}
+.modal-info-cell {
+  background: var(--bg-secondary); border-radius: 8px; padding: 10px 12px;
+}
+.modal-info-cell .label {
+  font-size: 11px; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 4px;
+}
+.modal-info-cell .value { font-size: 14px; font-weight: 600; }
+.modal-pages-title {
+  font-size: 13px; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 0.5px; margin-bottom: 12px; margin-top: 4px;
+}
+.modal-pages { display: flex; flex-direction: column; gap: 16px; }
+.modal-page {
+  background: var(--bg-secondary); border-radius: 12px;
+  overflow: hidden; border: 1px solid var(--border);
+}
+.modal-page-num {
+  padding: 8px 14px; font-size: 12px; color: var(--text-muted);
+  font-weight: 600; border-bottom: 1px solid var(--border);
+}
+.modal-page img {
+  width: 100%; display: block; cursor: zoom-in;
+}
+.modal-actions {
+  padding: 16px 24px; border-top: 1px solid var(--border);
+  display: flex; gap: 8px; justify-content: flex-end;
+}
+
+/* full-screen image viewer */
+.image-viewer {
+  position: fixed; inset: 0; z-index: 600;
+  background: rgba(0,0,0,.95);
+  display: none; align-items: center; justify-content: center;
+  cursor: zoom-out;
+}
+.image-viewer.active { display: flex; }
+.image-viewer img { max-width: 95%; max-height: 95%; object-fit: contain; }
+
+/* ============ Map ============ */
+#map-view { display: none; }
+#map {
+  height: calc(100vh - 240px); min-height: 500px;
+  border-radius: 12px; border: 1px solid var(--border);
+}
+.map-legend {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 14px; margin-bottom: 12px;
+  font-size: 12px; color: var(--text-secondary);
+}
+.map-legend .item { display: flex; align-items: center; gap: 6px; }
+.map-legend .dot { width: 10px; height: 10px; border-radius: 50%; }
+.leaflet-popup-content { font-size: 13px; line-height: 1.5; margin: 10px 14px; }
+.leaflet-popup-content b { display: block; margin-bottom: 4px; color: #1f2937; }
+.leaflet-popup-content a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+/* ============ Mobile ============ */
+@media (max-width: 768px) {
+  #app.loaded { grid-template-columns: 1fr; }
+  aside { display: none; }
+  main { padding: 16px; }
+  .job-grid { grid-template-columns: 1fr; }
+  .controls .view-tabs { width: 100%; margin-left: 0; }
+  .modal { margin: 0; border-radius: 0; min-height: 100vh; }
+}
+</style>
 </head>
 <body>
 
-<!-- 登录页 -->
 <div id="login">
-  <div class="login-box">
-    <h1>ACE SIGN</h1>
-    <p>Install Schedule</p>
-    <input type="password" id="password-input" placeholder="Password" autofocus>
-    <button onclick="tryLogin()">Enter</button>
+  <div class="login-card">
+    <div class="logo">ACE SIGN</div>
+    <div class="subtitle">INSTALL SCHEDULE SYSTEM</div>
+    <input type="password" id="password-input" placeholder="Enter password" autofocus>
+    <button onclick="tryLogin()">Sign In</button>
     <div class="login-error" id="login-error"></div>
   </div>
 </div>
 
-<!-- 主面板 -->
 <div id="app">
-  <header>
-    <div>
-      <h1>📋 Install Schedule</h1>
-      <div class="meta" id="data-meta">Loading...</div>
+  <aside>
+    <div class="brand">ACE SIGN</div>
+    <div class="brand-sub">Install schedule</div>
+    <div class="nav-section">
+      <div class="nav-title">Quick filters</div>
+      <div class="nav-item active" data-filter="all" onclick="setFilter('all')"><span>All jobs</span><span class="count" id="count-all">0</span></div>
+      <div class="nav-item" data-filter="today" onclick="setFilter('today')"><span>Today</span><span class="count" id="count-today">0</span></div>
+      <div class="nav-item" data-filter="tomorrow" onclick="setFilter('tomorrow')"><span>Tomorrow</span><span class="count" id="count-tomorrow">0</span></div>
+      <div class="nav-item" data-filter="thisweek" onclick="setFilter('thisweek')"><span>This week</span><span class="count" id="count-week">0</span></div>
+      <div class="nav-item" data-filter="urgent" onclick="setFilter('urgent')"><span>Urgent</span><span class="count" id="count-urgent">0</span></div>
+      <div class="nav-item" data-filter="unassigned" onclick="setFilter('unassigned')"><span>Unassigned</span><span class="count" id="count-unassigned">0</span></div>
     </div>
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('board')">📅 Schedule</button>
-      <button class="tab" onclick="switchTab('map')">🗺️ Map</button>
+    <div class="nav-section">
+      <div class="nav-title">Installers</div>
+      <div id="installer-list"></div>
     </div>
-  </header>
-
-  <div class="date-controls">
-    <button onclick="prevMonth()">‹</button>
-    <span class="month-label" id="month-label"></span>
-    <button onclick="nextMonth()">›</button>
-    <button onclick="goToday()">Today</button>
-    <button class="pdf-btn" onclick="downloadPDF()">📄 Download PDF</button>
-  </div>
+    <div class="nav-section">
+      <div class="nav-title">Project type</div>
+      <div id="type-list"></div>
+    </div>
+  </aside>
 
   <main>
-    <div id="board-view"></div>
+    <div class="topbar">
+      <div>
+        <h1 id="page-title">All Installations</h1>
+        <div class="meta" id="data-meta">Loading...</div>
+      </div>
+      <div class="topbar-right">
+        <button class="btn" onclick="loadData()">↻ Refresh</button>
+        <button class="btn success" onclick="downloadPDF()">↓ Download PDF</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card info"><div class="stat-label">Total this month</div><div class="stat-value" id="stat-total">0</div></div>
+      <div class="stat-card urgent"><div class="stat-label">Urgent</div><div class="stat-value" id="stat-urgent">0</div></div>
+      <div class="stat-card warning"><div class="stat-label">Unassigned</div><div class="stat-value" id="stat-unassigned">0</div></div>
+      <div class="stat-card success"><div class="stat-label">Total value</div><div class="stat-value" id="stat-value">$0</div></div>
+      <div class="stat-card"><div class="stat-label">Today</div><div class="stat-value" id="stat-today">0</div></div>
+      <div class="stat-card"><div class="stat-label">This week</div><div class="stat-value" id="stat-week">0</div></div>
+    </div>
+
+    <div class="controls">
+      <button class="arrow" onclick="prevMonth()">‹</button>
+      <div class="month-label" id="month-label">—</div>
+      <button class="arrow" onclick="nextMonth()">›</button>
+      <button class="btn" onclick="goToday()">Today</button>
+      <div class="view-tabs">
+        <button class="view-tab active" id="tab-schedule" onclick="switchTab('schedule')">📋 Schedule</button>
+        <button class="view-tab" id="tab-map" onclick="switchTab('map')">🗺️ Map</button>
+      </div>
+    </div>
+
+    <div id="schedule-view"></div>
     <div id="map-view">
       <div class="map-legend">
-        <div class="item"><span class="pin" style="background:#ef4444"></span> Urgent</div>
-        <div class="item"><span class="pin" style="background:#f97316"></span> High</div>
-        <div class="item"><span class="pin" style="background:#eab308"></span> Medium</div>
-        <div class="item"><span class="pin" style="background:#22c55e"></span> Low</div>
-        <div class="item"><span class="pin" style="background:#9ca3af"></span> (No priority)</div>
+        <div class="item"><span class="dot" style="background:#ef4444"></span> Urgent</div>
+        <div class="item"><span class="dot" style="background:#f97316"></span> High</div>
+        <div class="item"><span class="dot" style="background:#eab308"></span> Medium</div>
+        <div class="item"><span class="dot" style="background:#22c55e"></span> Low</div>
+        <div class="item"><span class="dot" style="background:#6b7184"></span> No priority</div>
       </div>
       <div id="map"></div>
     </div>
   </main>
 </div>
 
-<script>
-// ============ 密码保护 ============
-// 当前密码: ace2026
-// 改密码：用网上 SHA-256 计算器 (例如 https://emn178.github.io/online-tools/sha256.html)
-// 把新密码输入进去，得到 hash 后替换下面这行
-const PASSWORD_HASH = "a3b5e354c796d0bd0f8a966462c4a738858611963ff85f59d59bc9c9838eec51";
+<!-- Detail Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <h2 id="modal-title">—</h2>
+        <div class="modal-sub" id="modal-sub">—</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal()">Close</button>
+      <button class="btn success" onclick="downloadSinglePDF()">↓ Job PDF</button>
+    </div>
+  </div>
+</div>
 
+<!-- Fullscreen image viewer -->
+<div class="image-viewer" id="image-viewer" onclick="this.classList.remove('active')">
+  <img id="image-viewer-img" alt="Sign Proof">
+</div>
+
+<script>
+// ============ Password ============
+const PASSWORD_HASH = "a3b5e354c796d0bd0f8a966462c4a738858611963ff85f59d59bc9c9838eec51";
 async function sha256(text) {
   const buf = new TextEncoder().encode(text);
   const hash = await crypto.subtle.digest("SHA-256", buf);
-  return Array.from(new Uint8Array(hash))
-    .map(b => b.toString(16).padStart(2, "0")).join("");
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,"0")).join("");
 }
-
 async function tryLogin() {
-  const input = document.getElementById("password-input").value;
-  const errorEl = document.getElementById("login-error");
-  errorEl.textContent = "";
-
-  const hash = await sha256(input);
-  if (hash === PASSWORD_HASH) {
+  const v = document.getElementById("password-input").value;
+  const err = document.getElementById("login-error");
+  err.textContent = "";
+  if (await sha256(v) === PASSWORD_HASH) {
     sessionStorage.setItem("authed", "1");
-    document.getElementById("login").style.display = "none";
-    document.getElementById("app").style.display = "block";
-    loadData();
-  } else {
-    errorEl.textContent = "Wrong password";
-  }
+    showApp();
+  } else { err.textContent = "Incorrect password"; }
 }
-
-document.getElementById("password-input").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") tryLogin();
-});
-
-// 已登录过的话自动进入
-if (sessionStorage.getItem("authed") === "1") {
+function showApp() {
   document.getElementById("login").style.display = "none";
-  document.getElementById("app").style.display = "block";
+  document.getElementById("app").classList.add("loaded");
   loadData();
 }
+document.getElementById("password-input").addEventListener("keypress", e => { if (e.key === "Enter") tryLogin(); });
+if (sessionStorage.getItem("authed") === "1") showApp();
 
-// ============ 数据 ============
+// ============ State ============
 let allItems = [];
-let currentMonth = new Date();  // 当前显示的月份
-currentMonth.setDate(1);
+let proofs = {};
+let currentMonth = new Date(); currentMonth.setDate(1);
+let currentTab = "schedule";
+let currentFilter = "all";
+let installerFilter = null;
+let typeFilter = null;
+let currentModalItem = null;
 
+// ============ Data ============
 async function loadData() {
+  document.getElementById("data-meta").textContent = "Loading...";
   try {
-    // ?v= 防止浏览器缓存
-    const res = await fetch("data.json?v=" + Date.now());
-    const data = await res.json();
-    allItems = data.items;
-    const genTime = new Date(data.generated_at);
+    const [dataRes, proofRes] = await Promise.all([
+      fetch("data.json?v=" + Date.now()),
+      fetch("proofs.json?v=" + Date.now()).catch(() => null),
+    ]);
+    const data = await dataRes.json();
+    allItems = (data.items || []).map(item => ({
+      ...item,
+      address: typeof item.address === "object" ? (item.address.text || "") : (item.address || ""),
+    }));
+    if (proofRes && proofRes.ok) {
+      const pd = await proofRes.json();
+      proofs = pd.proofs || {};
+    }
+    const t = new Date(data.generated_at);
     document.getElementById("data-meta").textContent =
-      `${data.count} jobs • Updated ${genTime.toLocaleString("en-AU", {timeZone: "Australia/Melbourne"})}`;
+      `${data.count} jobs · Updated ${t.toLocaleString("en-AU",{timeZone:"Australia/Melbourne",hour:"2-digit",minute:"2-digit",day:"2-digit",month:"short"})}`;
     render();
-  } catch (e) {
+  } catch(e) {
     document.getElementById("data-meta").textContent = "Failed to load data";
     console.error(e);
   }
 }
 
-// ============ 视图切换 ============
-let currentTab = "board";
-function switchTab(tab) {
-  currentTab = tab;
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  event.target.classList.add("active");
-  document.getElementById("board-view").style.display = tab === "board" ? "block" : "none";
-  document.getElementById("map-view").style.display = tab === "map" ? "block" : "none";
-  if (tab === "map") setTimeout(renderMap, 100);
-}
+function getProof(item) { return proofs[item.id] || null; }
 
-// ============ 月份切换 ============
-function prevMonth() {
-  currentMonth.setMonth(currentMonth.getMonth() - 1);
+// ============ Filters ============
+function setFilter(name) {
+  currentFilter = name; installerFilter = null; typeFilter = null;
+  document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
+  document.querySelector(`.nav-item[data-filter="${name}"]`)?.classList.add("active");
   render();
 }
-function nextMonth() {
-  currentMonth.setMonth(currentMonth.getMonth() + 1);
+function setInstaller(name) {
+  installerFilter = installerFilter === name ? null : name;
+  currentFilter = "all"; typeFilter = null;
+  document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
+  document.querySelector(`.nav-item[data-filter="all"]`)?.classList.add("active");
   render();
 }
-function goToday() {
-  currentMonth = new Date();
-  currentMonth.setDate(1);
+function setType(name) {
+  typeFilter = typeFilter === name ? null : name;
+  currentFilter = "all"; installerFilter = null;
+  document.querySelectorAll(".nav-item").forEach(el => el.classList.remove("active"));
+  document.querySelector(`.nav-item[data-filter="all"]`)?.classList.add("active");
   render();
 }
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function tomorrowStr(){const d=new Date();d.setDate(d.getDate()+1);return d.toISOString().slice(0,10);}
+function weekEnd(){const d=new Date();d.setDate(d.getDate()+7);return d.toISOString().slice(0,10);}
 
 function getMonthItems() {
-  const y = currentMonth.getFullYear();
-  const m = currentMonth.getMonth();
-  return allItems.filter(item => {
-    if (!item.install_date) return false;
-    const d = new Date(item.install_date);
-    return d.getFullYear() === y && d.getMonth() === m;
+  const y=currentMonth.getFullYear(), m=currentMonth.getMonth();
+  return allItems.filter(i=>{
+    if(!i.install_date)return false;
+    const d=new Date(i.install_date+"T00:00:00");
+    return d.getFullYear()===y && d.getMonth()===m;
   });
 }
-
-// ============ 渲染 ============
-function render() {
-  // 月份标签
-  const monthName = currentMonth.toLocaleString("en-AU", { month: "long", year: "numeric" });
-  document.getElementById("month-label").textContent = monthName;
-
-  renderBoard();
-  if (currentTab === "map") renderMap();
+function getFilteredItems() {
+  let items = getMonthItems();
+  if (currentFilter==="today") items = items.filter(i => i.install_date === todayStr());
+  else if (currentFilter==="tomorrow") items = items.filter(i => i.install_date === tomorrowStr());
+  else if (currentFilter==="thisweek") { const t=todayStr(), e=weekEnd(); items = items.filter(i => i.install_date>=t && i.install_date<=e); }
+  else if (currentFilter==="urgent") items = items.filter(i => i.priority==="Urgent");
+  else if (currentFilter==="unassigned") items = items.filter(i => !i.installer);
+  if (installerFilter) items = items.filter(i => (i.installer||"").includes(installerFilter));
+  if (typeFilter) items = items.filter(i => i.project_type===typeFilter);
+  return items;
 }
 
-function renderBoard() {
-  const items = getMonthItems();
-  const container = document.getElementById("board-view");
+// ============ Render ============
+function render() {
+  document.getElementById("month-label").textContent =
+    currentMonth.toLocaleString("en-AU",{month:"long",year:"numeric"});
+  let title = "All Installations";
+  if (currentFilter==="today") title="Today";
+  else if (currentFilter==="tomorrow") title="Tomorrow";
+  else if (currentFilter==="thisweek") title="This Week";
+  else if (currentFilter==="urgent") title="Urgent Jobs";
+  else if (currentFilter==="unassigned") title="Unassigned Jobs";
+  if (installerFilter) title = `${installerFilter}'s Jobs`;
+  if (typeFilter) title = `${typeFilter} Jobs`;
+  document.getElementById("page-title").textContent = title;
 
-  if (items.length === 0) {
-    container.innerHTML = `<div class="empty-state">No installations this month</div>`;
+  renderStats();
+  renderSidebar();
+  renderSchedule();
+  if (currentTab==="map") setTimeout(renderMap,100);
+}
+
+function renderStats() {
+  const mi = getMonthItems(), today = todayStr(), we = weekEnd();
+  const todayN = mi.filter(i=>i.install_date===today).length;
+  const tomN = mi.filter(i=>i.install_date===tomorrowStr()).length;
+  const weekN = mi.filter(i=>i.install_date>=today && i.install_date<=we).length;
+  const urg = mi.filter(i=>i.priority==="Urgent").length;
+  const una = mi.filter(i=>!i.installer).length;
+  const val = mi.reduce((s,i)=>s+(parseFloat(i.installation_value)||0),0);
+  document.getElementById("stat-total").textContent = mi.length;
+  document.getElementById("stat-urgent").innerHTML = `${urg}<span class="unit">jobs</span>`;
+  document.getElementById("stat-unassigned").innerHTML = `${una}<span class="unit">jobs</span>`;
+  document.getElementById("stat-value").innerHTML = `$${val.toLocaleString()}`;
+  document.getElementById("stat-today").textContent = todayN;
+  document.getElementById("stat-week").textContent = weekN;
+  document.getElementById("count-all").textContent = mi.length;
+  document.getElementById("count-today").textContent = todayN;
+  document.getElementById("count-tomorrow").textContent = tomN;
+  document.getElementById("count-week").textContent = weekN;
+  document.getElementById("count-urgent").textContent = urg;
+  document.getElementById("count-unassigned").textContent = una;
+}
+
+function renderSidebar() {
+  const mi = getMonthItems();
+  const installers = {};
+  mi.forEach(i => { if (i.installer) i.installer.split(",").map(s=>s.trim()).forEach(n => installers[n]=(installers[n]||0)+1); });
+  const sortedI = Object.entries(installers).sort((a,b)=>b[1]-a[1]);
+  document.getElementById("installer-list").innerHTML = sortedI.length===0
+    ? `<div style="font-size:12px;color:var(--text-muted);padding:8px 10px">No installers yet</div>`
+    : sortedI.map(([n,c]) =>
+        `<div class="installer-pill ${installerFilter===n?'active':''}" onclick="setInstaller('${escapeJs(n)}')">
+          <span class="dot" style="background:${installerColor(n)}"></span>
+          <span>${escapeHtml(n)}</span><span class="count">${c}</span>
+        </div>`).join("");
+  const types = {};
+  mi.forEach(i => { if (i.project_type) types[i.project_type]=(types[i.project_type]||0)+1; });
+  document.getElementById("type-list").innerHTML = Object.entries(types).map(([n,c]) =>
+    `<div class="installer-pill ${typeFilter===n?'active':''}" onclick="setType('${escapeJs(n)}')">
+      <span>${escapeHtml(n)}</span><span class="count">${c}</span>
+    </div>`).join("");
+}
+
+function renderSchedule() {
+  const items = getFilteredItems();
+  const container = document.getElementById("schedule-view");
+  if (items.length===0) {
+    container.innerHTML = `<div class="empty-state"><div class="icon">📭</div><div>No installations match these filters</div></div>`;
     return;
   }
-
-  // 按日期分组
   const byDate = {};
-  items.forEach(item => {
-    const d = item.install_date;
-    if (!byDate[d]) byDate[d] = [];
-    byDate[d].push(item);
-  });
-
-  const today = new Date().toISOString().slice(0, 10);
-  const sortedDates = Object.keys(byDate).sort();
-
-  let html = "";
-  sortedDates.forEach(date => {
-    const dateObj = new Date(date + "T00:00:00");
-    const weekday = dateObj.toLocaleString("en-AU", { weekday: "long" });
-    const formatted = dateObj.toLocaleString("en-AU", { month: "short", day: "numeric" });
-    const isToday = date === today;
-    html += `<div class="day-group">
-      <div class="day-header ${isToday ? 'today' : ''}">
-        <span class="date">${formatted}</span>
-        <span class="weekday">${weekday}</span>
-        <span class="count">${byDate[date].length}</span>
+  items.forEach(i => (byDate[i.install_date] = byDate[i.install_date]||[]).push(i));
+  const dates = Object.keys(byDate).sort();
+  const today = todayStr();
+  container.innerHTML = dates.map(date => {
+    const d = new Date(date+"T00:00:00");
+    const dayNum = d.getDate();
+    const monthName = d.toLocaleString("en-AU",{month:"short"});
+    const weekday = d.toLocaleString("en-AU",{weekday:"long"});
+    const isToday = date===today;
+    const isPast = date<today;
+    const jobs = byDate[date];
+    const totalVal = jobs.reduce((s,j)=>s+(parseFloat(j.installation_value)||0),0);
+    return `<div class="day-block">
+      <div class="day-header ${isToday?'is-today':''} ${isPast?'is-past':''}">
+        <span class="day-num">${dayNum}</span>
+        <span class="day-month">${monthName}</span>
+        <span class="day-weekday">${weekday}</span>
+        <span class="day-badge">${jobs.length} ${jobs.length===1?'job':'jobs'}${totalVal>0?` · $${totalVal.toLocaleString()}`:''}</span>
       </div>
-      <div class="cards">
-        ${byDate[date].map(renderCard).join("")}
-      </div>
+      <div class="job-grid">${jobs.map(renderJobCard).join("")}</div>
     </div>`;
-  });
-
-  container.innerHTML = html;
+  }).join("");
 }
 
-function renderCard(item) {
-  const priorityClass = (item.priority || "").toLowerCase().replace(/[^a-z]/g, "");
-  const priority = item.priority ? `<span class="badge">${item.priority}</span>` : "";
-  const type = item.project_type ? `<span class="badge type">${item.project_type}</span>` : "";
-  const installer = item.installer ? `<span class="badge installer">👷 ${item.installer}</span>` : "";
-  const value = item.installation_value && parseFloat(item.installation_value) > 0
-    ? `<span class="badge value">$${parseFloat(item.installation_value).toLocaleString()}</span>` : "";
-
-  return `<div class="card priority-${priorityClass}">
-    <div class="name">${escapeHtml(item.name)}</div>
-    ${item.address ? `<div class="row"><span class="label">📍</span> ${escapeHtml(item.address)}</div>` : ""}
-    ${item.sales ? `<div class="row"><span class="label">Sales:</span> ${escapeHtml(item.sales)}</div>` : ""}
-    ${item.schedule_status ? `<div class="row"><span class="label">Status:</span> ${escapeHtml(item.schedule_status)}</div>` : ""}
-    <div class="badges">${priority}${type}${installer}${value}</div>
+function renderJobCard(item) {
+  const pr = item.priority || "";
+  const val = parseFloat(item.installation_value)||0;
+  const proof = getProof(item);
+  const thumb = proof && proof[0]
+    ? `<img src="${proof[0].thumb}" loading="lazy" alt="${escapeHtml(item.name)}">`
+    : `<div class="placeholder">📋</div>`;
+  const pageBadge = proof && proof.length>0
+    ? `<div class="pages-badge">${proof.length} ${proof.length===1?'page':'pages'}</div>` : '';
+  return `<div class="job-card priority-${pr}" onclick="openModal('${item.id}')">
+    <div class="job-thumb">${thumb}${pageBadge}</div>
+    <div class="job-body">
+      <div class="job-header">
+        <div class="job-name">${escapeHtml(item.name)}</div>
+        ${pr ? `<div class="job-priority">${pr.toUpperCase()}</div>` : ''}
+      </div>
+      ${item.address ? `<div class="job-row"><span class="icon">📍</span><span class="text">${escapeHtml(item.address)}</span></div>` : ''}
+      ${item.sales ? `<div class="job-row"><span class="icon">👤</span><span class="text">${escapeHtml(item.sales)}</span></div>` : ''}
+      <div class="job-tags">
+        ${item.project_type ? `<span class="tag type">${escapeHtml(item.project_type)}</span>` : ''}
+        ${item.installer ? `<span class="tag installer">👷 ${escapeHtml(item.installer)}</span>` : `<span class="tag unassigned">⚠ Unassigned</span>`}
+        ${val>0 ? `<span class="tag value">$${val.toLocaleString()}</span>` : ''}
+      </div>
+    </div>
   </div>`;
 }
 
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-  }[c]));
+function installerColor(name) {
+  const colors = ["#6366f1","#ec4899","#f59e0b","#10b981","#3b82f6","#8b5cf6","#ef4444","#14b8a6"];
+  let h=0; for(let i=0;i<name.length;i++) h=name.charCodeAt(i)+((h<<5)-h);
+  return colors[Math.abs(h) % colors.length];
 }
+function escapeHtml(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function escapeJs(s){return String(s).replace(/['\\]/g,"\\$&");}
 
-// ============ 地图 ============
-let map = null;
-let mapMarkers = [];
-let geocodeCache = JSON.parse(localStorage.getItem("geocode_cache") || "{}");
+// ============ Modal ============
+function openModal(itemId) {
+  const item = allItems.find(i=>i.id===itemId);
+  if (!item) return;
+  currentModalItem = item;
+  document.getElementById("modal-title").textContent = item.name;
+  const d = new Date(item.install_date+"T00:00:00");
+  const dateLabel = d.toLocaleString("en-AU",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  document.getElementById("modal-sub").textContent = `${dateLabel}${item.priority?' · '+item.priority:''}`;
+  const val = parseFloat(item.installation_value)||0;
+  const info = [
+    {label:"Address", value:item.address || "—", full:true},
+    {label:"Type", value:item.project_type || "—"},
+    {label:"Installer", value:item.installer || "⚠ Unassigned"},
+    {label:"Sales", value:item.sales || "—"},
+    {label:"Priority", value:item.priority || "—"},
+    {label:"Value", value:val>0?`$${val.toLocaleString()}`:"—"},
+    {label:"Schedule", value:item.schedule_status || "—"},
+    {label:"Notes", value:item.notes || "—", full:true},
+  ];
+  const proof = getProof(item);
+  let html = `<div class="modal-info-grid">${info.filter(i=>i.value!=="—"||i.label==="Installer").map(i=>
+    `<div class="modal-info-cell" ${i.full?'style="grid-column:1/-1"':''}>
+      <div class="label">${i.label}</div><div class="value">${escapeHtml(i.value)}</div>
+    </div>`).join("")}</div>`;
+  if (proof && proof.length>0) {
+    html += `<div class="modal-pages-title">Sign Proof (${proof.length} ${proof.length===1?'page':'pages'})</div>
+      <div class="modal-pages">${proof.map(p=>
+        `<div class="modal-page">
+          <div class="modal-page-num">Page ${p.page}</div>
+          <img src="${p.full}" loading="lazy" onclick="viewImage('${p.full}')" alt="Page ${p.page}">
+        </div>`).join("")}</div>`;
+  } else {
+    html += `<div class="modal-pages-title">Sign Proof</div>
+      <div style="background:var(--bg-secondary);border-radius:8px;padding:24px;text-align:center;color:var(--text-muted)">No Sign Proof uploaded for this project</div>`;
+  }
+  document.getElementById("modal-body").innerHTML = html;
+  document.getElementById("modal-overlay").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(e) {
+  if (e && e.target.classList && !e.target.classList.contains("modal-overlay")) return;
+  document.getElementById("modal-overlay").classList.remove("active");
+  document.body.style.overflow = "";
+  currentModalItem = null;
+}
+function viewImage(src) {
+  document.getElementById("image-viewer-img").src = src;
+  document.getElementById("image-viewer").classList.add("active");
+}
+document.addEventListener("keydown", e=>{
+  if (e.key==="Escape") {
+    document.getElementById("image-viewer").classList.remove("active");
+    closeModal({target:{classList:{contains:()=>true}}});
+  }
+});
 
-async function geocode(address) {
-  if (!address) return null;
-  if (geocodeCache[address]) return geocodeCache[address];
+// ============ Tabs / month nav ============
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById("tab-schedule").classList.toggle("active", tab==="schedule");
+  document.getElementById("tab-map").classList.toggle("active", tab==="map");
+  document.getElementById("schedule-view").style.display = tab==="schedule"?"block":"none";
+  document.getElementById("map-view").style.display = tab==="map"?"block":"none";
+  if (tab==="map") setTimeout(renderMap,100);
+}
+function prevMonth(){currentMonth.setMonth(currentMonth.getMonth()-1);render();}
+function nextMonth(){currentMonth.setMonth(currentMonth.getMonth()+1);render();}
+function goToday(){currentMonth=new Date();currentMonth.setDate(1);setFilter("all");}
 
-  // Nominatim 限制：每秒 1 次请求
-  await new Promise(r => setTimeout(r, 1100));
-
+// ============ Map ============
+let map=null, mapMarkers=[];
+let geocodeCache = JSON.parse(localStorage.getItem("geocode_cache")||"{}");
+async function geocode(a) {
+  if (!a || a.length<5) return null;
+  if (geocodeCache[a]) return geocodeCache[a];
+  await new Promise(r=>setTimeout(r,1100));
   try {
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address + ", Australia")}&limit=1`;
-    const res = await fetch(url);
-    const data = await res.json();
-    if (data && data.length > 0) {
-      const result = { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
-      geocodeCache[address] = result;
+    const r = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(a+", Australia")}&limit=1`);
+    const d = await r.json();
+    if (d?.length>0) {
+      const result = { lat:parseFloat(d[0].lat), lng:parseFloat(d[0].lon) };
+      geocodeCache[a] = result;
       localStorage.setItem("geocode_cache", JSON.stringify(geocodeCache));
       return result;
     }
-  } catch (e) {
-    console.error("Geocode failed:", address, e);
-  }
+  } catch(e){}
   return null;
 }
-
 async function renderMap() {
   if (!map) {
-    // 默认中心 Melbourne
-    map = L.map("map").setView([-37.8136, 144.9631], 11);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: "© OpenStreetMap",
-      maxZoom: 19,
-    }).addTo(map);
+    map = L.map("map").setView([-37.8136,144.9631],11);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap",maxZoom:19}).addTo(map);
   }
-
-  // 清空旧 marker
-  mapMarkers.forEach(m => map.removeLayer(m));
-  mapMarkers = [];
-
-  const items = getMonthItems().filter(i => i.address);
-  if (items.length === 0) return;
-
-  const priorityColor = {
-    "Urgent": "#ef4444", "High": "#f97316",
-    "Medium": "#eab308", "Low": "#22c55e",
-  };
-
+  mapMarkers.forEach(m=>map.removeLayer(m)); mapMarkers=[];
+  const items = getFilteredItems().filter(i=>i.address);
+  const pc = {Urgent:"#ef4444",High:"#f97316",Medium:"#eab308",Low:"#22c55e"};
   const bounds = [];
   for (const item of items) {
     const loc = await geocode(item.address);
     if (!loc) continue;
-
-    const color = priorityColor[item.priority] || "#9ca3af";
-    const icon = L.divIcon({
-      className: "",
-      html: `<div style="background:${color};color:white;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.3)">📍</div>`,
-      iconSize: [24, 24],
-      iconAnchor: [12, 12],
-    });
-
-    const marker = L.marker([loc.lat, loc.lng], { icon }).addTo(map);
-    const gmapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${loc.lat},${loc.lng}`;
-    marker.bindPopup(`
-      <b>${escapeHtml(item.name)}</b>
-      📅 ${item.install_date}<br>
-      📍 ${escapeHtml(item.address)}<br>
-      ${item.installer ? `👷 ${escapeHtml(item.installer)}<br>` : ""}
-      ${item.priority ? `🚩 ${item.priority}<br>` : ""}
-      <a href="${gmapsUrl}" target="_blank" style="color:#667eea">→ Google Maps 路线</a>
-    `);
-    mapMarkers.push(marker);
-    bounds.push([loc.lat, loc.lng]);
+    const color = pc[item.priority] || "#6b7184";
+    const icon = L.divIcon({className:"",
+      html:`<div style="background:${color};width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:bold;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4)">${item.priority?item.priority[0]:'?'}</div>`,
+      iconSize:[28,28], iconAnchor:[14,14]});
+    const m = L.marker([loc.lat,loc.lng],{icon}).addTo(map);
+    const dl = new Date(item.install_date+"T00:00:00").toLocaleString("en-AU",{weekday:"short",month:"short",day:"numeric"});
+    const gm = `https://www.google.com/maps/dir/?api=1&destination=${loc.lat},${loc.lng}`;
+    m.bindPopup(`<b>${escapeHtml(item.name)}</b>
+      📅 ${dl}<br>📍 ${escapeHtml(item.address)}<br>
+      ${item.installer?`👷 ${escapeHtml(item.installer)}<br>`:`<span style="color:#dc2626">⚠ Unassigned</span><br>`}
+      ${item.priority?`🚩 ${item.priority}<br>`:""}
+      <a href="${gm}" target="_blank">→ Google Maps</a> · <a onclick="openModal('${item.id}')" style="cursor:pointer">→ Details</a>`);
+    mapMarkers.push(m);
+    bounds.push([loc.lat,loc.lng]);
   }
-
-  if (bounds.length > 0) {
-    map.fitBounds(bounds, { padding: [40, 40] });
-  }
+  if (bounds.length>0) map.fitBounds(bounds,{padding:[50,50]});
 }
 
-// ============ PDF ============
-async function downloadPDF() {
+// ============ PDF (with images) ============
+async function imageToDataURL(src) {
+  try {
+    const r = await fetch(src);
+    const blob = await r.blob();
+    return await new Promise((res, rej) => {
+      const fr = new FileReader();
+      fr.onload = () => res(fr.result);
+      fr.onerror = rej;
+      fr.readAsDataURL(blob);
+    });
+  } catch(e) { return null; }
+}
+
+async function downloadPDF() { return generatePDF(getFilteredItems(), false); }
+async function downloadSinglePDF() {
+  if (!currentModalItem) return;
+  return generatePDF([currentModalItem], true);
+}
+
+async function generatePDF(items, single) {
   const { jsPDF } = window.jspdf;
-  const items = getMonthItems();
-  if (items.length === 0) {
-    alert("No installations to export");
-    return;
-  }
+  if (items.length===0) { alert("No jobs to export"); return; }
+  const pdf = new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
+  const W = pdf.internal.pageSize.getWidth();
+  const H = pdf.internal.pageSize.getHeight();
+  const M = 14;
 
-  const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
-  const margin = 12;
-  let y = margin;
-
-  // 标题
-  pdf.setFontSize(18);
-  pdf.setFont("helvetica", "bold");
-  const monthName = currentMonth.toLocaleString("en-AU", { month: "long", year: "numeric" });
-  pdf.text(`ACE SIGN — Install Schedule`, margin, y);
-  y += 8;
-  pdf.setFontSize(13);
-  pdf.setFont("helvetica", "normal");
-  pdf.text(monthName, margin, y);
-  y += 6;
+  // Cover
+  pdf.setFillColor(99,102,241);
+  pdf.rect(0,0,W,40,"F");
+  pdf.setTextColor(255);
+  pdf.setFontSize(20); pdf.setFont("helvetica","bold");
+  pdf.text("ACE SIGN",M,18);
+  pdf.setFontSize(12); pdf.setFont("helvetica","normal");
+  pdf.text(single ? "Install Job Detail" : "Install Schedule", M, 26);
+  pdf.setFontSize(10);
+  if (!single) pdf.text(currentMonth.toLocaleString("en-AU",{month:"long",year:"numeric"}),M,33);
   pdf.setFontSize(9);
-  pdf.setTextColor(120);
-  pdf.text(`Generated: ${new Date().toLocaleString("en-AU")}  •  ${items.length} jobs`, margin, y);
+  const tdLabel = `Generated: ${new Date().toLocaleString("en-AU")}`;
+  pdf.text(tdLabel, W-M-pdf.getTextWidth(tdLabel), 33);
   pdf.setTextColor(0);
-  y += 8;
+  let y = 50;
 
-  // 按日期分组
-  const byDate = {};
-  items.forEach(item => {
-    const d = item.install_date;
-    if (!byDate[d]) byDate[d] = [];
-    byDate[d].push(item);
-  });
-  const sortedDates = Object.keys(byDate).sort();
-
-  for (const date of sortedDates) {
-    // 检查分页
-    if (y > pageHeight - 30) {
-      pdf.addPage();
-      y = margin;
-    }
-
-    // 日期 header
-    const dateObj = new Date(date + "T00:00:00");
-    const dateLabel = dateObj.toLocaleString("en-AU", { weekday: "long", month: "short", day: "numeric" });
-    pdf.setFontSize(12);
-    pdf.setFont("helvetica", "bold");
-    pdf.setFillColor(102, 126, 234);
-    pdf.setTextColor(255);
-    pdf.rect(margin, y, pageWidth - margin * 2, 7, "F");
-    pdf.text(`${dateLabel}  (${byDate[date].length} jobs)`, margin + 2, y + 5);
-    pdf.setTextColor(0);
-    y += 9;
-
-    // 项目列表
-    for (const item of byDate[date]) {
-      if (y > pageHeight - 25) {
-        pdf.addPage();
-        y = margin;
-      }
-
-      pdf.setFontSize(11);
-      pdf.setFont("helvetica", "bold");
-      pdf.text(item.name, margin, y);
-      y += 5;
-
-      pdf.setFontSize(9);
-      pdf.setFont("helvetica", "normal");
-
-      if (item.address) {
-        const addrLines = pdf.splitTextToSize(`📍 ${item.address}`, pageWidth - margin * 2 - 4);
-        pdf.text(addrLines, margin + 2, y);
-        y += 4 * addrLines.length;
-      }
-
-      const meta = [];
-      if (item.installer) meta.push(`👷 ${item.installer}`);
-      if (item.priority) meta.push(`🚩 ${item.priority}`);
-      if (item.project_type) meta.push(item.project_type);
-      if (item.sales) meta.push(`Sales: ${item.sales}`);
-      if (item.installation_value && parseFloat(item.installation_value) > 0) {
-        meta.push(`$${parseFloat(item.installation_value).toLocaleString()}`);
-      }
-      if (meta.length > 0) {
-        pdf.setTextColor(80);
-        pdf.text(meta.join("  •  "), margin + 2, y);
-        pdf.setTextColor(0);
-        y += 4;
-      }
-
-      if (item.notes) {
-        const noteLines = pdf.splitTextToSize(`Notes: ${item.notes}`, pageWidth - margin * 2 - 4);
-        pdf.setTextColor(80);
-        pdf.text(noteLines, margin + 2, y);
-        pdf.setTextColor(0);
-        y += 4 * noteLines.length;
-      }
-
-      y += 3;  // 间距
-    }
-
-    y += 3;
+  // Summary (only multi-job mode)
+  if (!single) {
+    const urg = items.filter(i=>i.priority==="Urgent").length;
+    const una = items.filter(i=>!i.installer).length;
+    const totalVal = items.reduce((s,i)=>s+(parseFloat(i.installation_value)||0),0);
+    pdf.setFontSize(11); pdf.setFont("helvetica","bold");
+    pdf.text("Summary",M,y); y += 6;
+    pdf.setFontSize(9); pdf.setFont("helvetica","normal");
+    pdf.text(`Total jobs: ${items.length}    Urgent: ${urg}    Unassigned: ${una}    Total value: $${totalVal.toLocaleString()}`,M,y);
+    y += 10;
   }
 
-  // 保存
-  const filename = `ACE-Install-Schedule-${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}.pdf`;
-  pdf.save(filename);
+  const byDate = {};
+  items.forEach(i => (byDate[i.install_date]=byDate[i.install_date]||[]).push(i));
+  const dates = Object.keys(byDate).sort();
+
+  for (const date of dates) {
+    if (y > H-30) { pdf.addPage(); y = M; }
+    const d = new Date(date+"T00:00:00");
+    const label = d.toLocaleString("en-AU",{weekday:"long",day:"numeric",month:"long"});
+    pdf.setFillColor(35,41,54);
+    pdf.rect(M,y,W-M*2,8,"F");
+    pdf.setTextColor(255); pdf.setFontSize(11); pdf.setFont("helvetica","bold");
+    pdf.text(label,M+2,y+5.5);
+    pdf.text(`${byDate[date].length} jobs`, W-M-2-pdf.getTextWidth(`${byDate[date].length} jobs`), y+5.5);
+    pdf.setTextColor(0);
+    y += 11;
+
+    for (const item of byDate[date]) {
+      if (y > H-30) { pdf.addPage(); y = M; }
+      const pColor = {Urgent:[239,68,68],High:[249,115,22],Medium:[234,179,8],Low:[34,197,94]}[item.priority]||[200,200,200];
+      pdf.setFillColor(...pColor); pdf.rect(M,y,1.5,12,"F");
+      pdf.setFontSize(10); pdf.setFont("helvetica","bold");
+      pdf.text(item.name,M+3,y+4);
+      if (item.priority) {
+        pdf.setFontSize(8); pdf.setTextColor(...pColor);
+        const pw = pdf.getTextWidth(item.priority);
+        pdf.text(item.priority, W-M-pw, y+4);
+        pdf.setTextColor(0);
+      }
+      y += 5;
+      pdf.setFontSize(8); pdf.setFont("helvetica","normal"); pdf.setTextColor(80);
+      if (item.address) {
+        const lines = pdf.splitTextToSize(`Address: ${item.address}`, W-M*2-6);
+        pdf.text(lines,M+3,y); y += 3.5*lines.length;
+      }
+      const meta = [];
+      if (item.installer) meta.push(`Installer: ${item.installer}`); else meta.push("⚠ UNASSIGNED");
+      if (item.project_type) meta.push(`Type: ${item.project_type}`);
+      if (item.sales) meta.push(`Sales: ${item.sales}`);
+      if (parseFloat(item.installation_value)>0) meta.push(`$${parseFloat(item.installation_value).toLocaleString()}`);
+      if (meta.length) { pdf.text(meta.join("  ·  "),M+3,y); y += 4; }
+      if (item.notes) {
+        const lines = pdf.splitTextToSize(`Notes: ${item.notes}`, W-M*2-6);
+        pdf.text(lines,M+3,y); y += 3.5*lines.length;
+      }
+      pdf.setTextColor(0);
+      y += 3;
+
+      // Sign Proof images
+      const proof = getProof(item);
+      if (proof && proof.length>0) {
+        for (const page of proof) {
+          if (y > H-60) { pdf.addPage(); y = M; }
+          const dataUrl = await imageToDataURL(page.full);
+          if (!dataUrl) continue;
+          try {
+            const img = new Image();
+            await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=dataUrl;});
+            const maxW = W - M*2;
+            const maxH = H - y - 15;
+            const ratio = img.width / img.height;
+            let drawW = maxW, drawH = drawW / ratio;
+            if (drawH > maxH) { drawH = maxH; drawW = drawH * ratio; }
+            if (drawW < 50) { drawW = 50; drawH = drawW / ratio; }
+            pdf.addImage(dataUrl, "JPEG", M, y, drawW, drawH);
+            y += drawH + 4;
+          } catch(e) { console.error("img add failed", e); }
+        }
+      }
+      y += 4;
+    }
+    y += 2;
+  }
+
+  // Footer
+  const pages = pdf.getNumberOfPages();
+  for (let p=1; p<=pages; p++) {
+    pdf.setPage(p);
+    pdf.setFontSize(7); pdf.setTextColor(150);
+    pdf.text(`Page ${p}/${pages} · ACE SIGN PTY LTD`, W/2, H-6, {align:"center"});
+  }
+
+  const fn = single
+    ? `ACE-${items[0].name.replace(/[^\w]+/g,"-")}.pdf`
+    : `ACE-Install-${currentMonth.getFullYear()}-${String(currentMonth.getMonth()+1).padStart(2,"0")}.pdf`;
+  pdf.save(fn);
 }
 </script>
-
 </body>
 </html>
