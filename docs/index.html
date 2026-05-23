@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACE SIGN Install Schedule</title>
+
+  <!-- Leaflet 地图 -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- jsPDF + html2canvas 生成 PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f6f8;
+      color: #1f2937;
+    }
+
+    /* ========== 登录页 ========== */
+    #login {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      z-index: 1000;
+    }
+    .login-box {
+      background: white; padding: 40px; border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      width: 320px; text-align: center;
+    }
+    .login-box h1 { font-size: 22px; margin-bottom: 8px; color: #1f2937; }
+    .login-box p { color: #6b7280; font-size: 14px; margin-bottom: 24px; }
+    .login-box input {
+      width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb;
+      border-radius: 8px; font-size: 16px; outline: none;
+    }
+    .login-box input:focus { border-color: #667eea; }
+    .login-box button {
+      width: 100%; margin-top: 16px; padding: 12px;
+      background: #667eea; color: white; border: none;
+      border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;
+    }
+    .login-box button:hover { background: #5568d3; }
+    .login-error { color: #ef4444; font-size: 13px; margin-top: 12px; min-height: 18px; }
+
+    /* ========== 主页面 ========== */
+    #app { display: none; }
+    header {
+      background: white; padding: 16px 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    header h1 { font-size: 18px; font-weight: 700; }
+    header .meta { color: #6b7280; font-size: 13px; }
+
+    .tabs {
+      display: flex; gap: 4px; background: #f3f4f6;
+      padding: 4px; border-radius: 8px;
+    }
+    .tab {
+      padding: 8px 16px; border: none; background: transparent;
+      cursor: pointer; border-radius: 6px; font-size: 14px;
+      color: #6b7280; font-weight: 500;
+    }
+    .tab.active { background: white; color: #1f2937; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+
+    .date-controls {
+      display: flex; align-items: center; gap: 8px;
+      padding: 16px 24px; background: white;
+      border-bottom: 1px solid #e5e7eb;
+      flex-wrap: wrap;
+    }
+    .date-controls button {
+      padding: 8px 12px; border: 1px solid #e5e7eb; background: white;
+      border-radius: 6px; cursor: pointer; font-size: 14px;
+    }
+    .date-controls button:hover { background: #f9fafb; }
+    .date-controls button.active { background: #667eea; color: white; border-color: #667eea; }
+    .date-controls input[type="date"] {
+      padding: 8px; border: 1px solid #e5e7eb; border-radius: 6px;
+      font-size: 14px;
+    }
+    .date-controls .month-label {
+      font-weight: 600; font-size: 15px; min-width: 140px; text-align: center;
+    }
+    .date-controls .pdf-btn {
+      margin-left: auto; padding: 8px 16px;
+      background: #10b981; color: white; border: none;
+      border-radius: 6px; cursor: pointer; font-weight: 600;
+    }
+    .date-controls .pdf-btn:hover { background: #059669; }
+
+    main { padding: 24px; }
+
+    /* ========== 看板视图 ========== */
+    .day-group { margin-bottom: 32px; }
+    .day-header {
+      display: flex; align-items: baseline; gap: 12px;
+      margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    .day-header .date {
+      font-size: 18px; font-weight: 700;
+    }
+    .day-header .weekday { color: #6b7280; font-size: 14px; }
+    .day-header .count {
+      margin-left: auto; background: #667eea; color: white;
+      padding: 2px 10px; border-radius: 12px; font-size: 12px;
+      font-weight: 600;
+    }
+    .day-header.today .date { color: #ef4444; }
+    .day-header.today .date::after { content: " (Today)"; font-size: 13px; }
+
+    .cards {
+      display: grid; gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    .card {
+      background: white; padding: 16px; border-radius: 10px;
+      border-left: 4px solid #667eea;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .card.priority-urgent { border-left-color: #ef4444; }
+    .card.priority-high { border-left-color: #f97316; }
+    .card.priority-medium { border-left-color: #eab308; }
+    .card.priority-low { border-left-color: #22c55e; }
+
+    .card .name {
+      font-weight: 600; font-size: 15px; margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .card .row {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: #4b5563; margin-bottom: 4px;
+    }
+    .card .row .label {
+      color: #9ca3af; min-width: 70px;
+    }
+    .card .badges {
+      display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;
+    }
+    .badge {
+      padding: 2px 8px; border-radius: 4px; font-size: 11px;
+      font-weight: 600; background: #e5e7eb; color: #4b5563;
+    }
+    .badge.type { background: #dbeafe; color: #1e40af; }
+    .badge.installer { background: #fef3c7; color: #92400e; }
+    .badge.value { background: #d1fae5; color: #065f46; }
+
+    .empty-state {
+      text-align: center; padding: 60px 20px;
+      color: #9ca3af; font-size: 15px;
+    }
+
+    /* ========== 地图视图 ========== */
+    #map-view { display: none; }
+    #map {
+      height: 600px; border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .map-legend {
+      background: white; padding: 12px; border-radius: 8px;
+      margin-bottom: 12px; font-size: 13px;
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .map-legend .item {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .map-legend .pin {
+      width: 12px; height: 12px; border-radius: 50%; display: inline-block;
+    }
+
+    .leaflet-popup-content { font-size: 13px; line-height: 1.5; }
+    .leaflet-popup-content b { display: block; margin-bottom: 4px; }
+
+    /* ========== 响应式 ========== */
+    @media (max-width: 600px) {
+      header { padding: 12px 16px; }
+      main { padding: 16px; }
+      .date-controls { padding: 12px 16px; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 登录页 -->
+<div id="login">
+  <div class="login-box">
+    <h1>ACE SIGN</h1>
+    <p>Install Schedule</p>
+    <input type="password" id="password-input" placeholder="Password" autofocus>
+    <button onclick="tryLogin()">Enter</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- 主面板 -->
+<div id="app">
+  <header>
+    <div>
+      <h1>📋 Install Schedule</h1>
+      <div class="meta" id="data-meta">Loading...</div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('board')">📅 Schedule</button>
+      <button class="tab" onclick="switchTab('map')">🗺️ Map</button>
+    </div>
+  </header>
+
+  <div class="date-controls">
+    <button onclick="prevMonth()">‹</button>
+    <span class="month-label" id="month-label"></span>
+    <button onclick="nextMonth()">›</button>
+    <button onclick="goToday()">Today</button>
+    <button class="pdf-btn" onclick="downloadPDF()">📄 Download PDF</button>
+  </div>
+
+  <main>
+    <div id="board-view"></div>
+    <div id="map-view">
+      <div class="map-legend">
+        <div class="item"><span class="pin" style="background:#ef4444"></span> Urgent</div>
+        <div class="item"><span class="pin" style="background:#f97316"></span> High</div>
+        <div class="item"><span class="pin" style="background:#eab308"></span> Medium</div>
+        <div class="item"><span class="pin" style="background:#22c55e"></span> Low</div>
+        <div class="item"><span class="pin" style="background:#9ca3af"></span> (No priority)</div>
+      </div>
+      <div id="map"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ============ 密码保护 ============
+// 当前密码: ace2026
+// 改密码：用网上 SHA-256 计算器 (例如 https://emn178.github.io/online-tools/sha256.html)
+// 把新密码输入进去，得到 hash 后替换下面这行
+const PASSWORD_HASH = "a3b5e354c796d0bd0f8a966462c4a738858611963ff85f59d59bc9c9838eec51";
+
+async function sha256(text) {
+  const buf = new TextEncoder().encode(text);
+  const hash = await crypto.subtle.digest("SHA-256", buf);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function tryLogin() {
+  const input = document.getElementById("password-input").value;
+  const errorEl = document.getElementById("login-error");
+  errorEl.textContent = "";
+
+  const hash = await sha256(input);
+  if (hash === PASSWORD_HASH) {
+    sessionStorage.setItem("authed", "1");
+    document.getElementById("login").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    loadData();
+  } else {
+    errorEl.textContent = "Wrong password";
+  }
+}
+
+document.getElementById("password-input").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") tryLogin();
+});
+
+// 已登录过的话自动进入
+if (sessionStorage.getItem("authed") === "1") {
+  document.getElementById("login").style.display = "none";
+  document.getElementById("app").style.display = "block";
+  loadData();
+}
+
+// ============ 数据 ============
+let allItems = [];
+let currentMonth = new Date();  // 当前显示的月份
+currentMonth.setDate(1);
+
+async function loadData() {
+  try {
+    // ?v= 防止浏览器缓存
+    const res = await fetch("data.json?v=" + Date.now());
+    const data = await res.json();
+    allItems = data.items;
+    const genTime = new Date(data.generated_at);
+    document.getElementById("data-meta").textContent =
+      `${data.count} jobs • Updated ${genTime.toLocaleString("en-AU", {timeZone: "Australia/Melbourne"})}`;
+    render();
+  } catch (e) {
+    document.getElementById("data-meta").textContent = "Failed to load data";
+    console.error(e);
+  }
+}
+
+// ============ 视图切换 ============
+let currentTab = "board";
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  event.target.classList.add("active");
+  document.getElementById("board-view").style.display = tab === "board" ? "block" : "none";
+  document.getElementById("map-view").style.display = tab === "map" ? "block" : "none";
+  if (tab === "map") setTimeout(renderMap, 100);
+}
+
+// ============ 月份切换 ============
+function prevMonth() {
+  currentMonth.setMonth(currentMonth.getMonth() - 1);
+  render();
+}
+function nextMonth() {
+  currentMonth.setMonth(currentMonth.getMonth() + 1);
+  render();
+}
+function goToday() {
+  currentMonth = new Date();
+  currentMonth.setDate(1);
+  render();
+}
+
+function getMonthItems() {
+  const y = currentMonth.getFullYear();
+  const m = currentMonth.getMonth();
+  return allItems.filter(item => {
+    if (!item.install_date) return false;
+    const d = new Date(item.install_date);
+    return d.getFullYear() === y && d.getMonth() === m;
+  });
+}
+
+// ============ 渲染 ============
+function render() {
+  // 月份标签
+  const monthName = currentMonth.toLocaleString("en-AU", { month: "long", year: "numeric" });
+  document.getElementById("month-label").textContent = monthName;
+
+  renderBoard();
+  if (currentTab === "map") renderMap();
+}
+
+function renderBoard() {
+  const items = getMonthItems();
+  const container = document.getElementById("board-view");
+
+  if (items.length === 0) {
+    container.innerHTML = `<div class="empty-state">No installations this month</div>`;
+    return;
+  }
+
+  // 按日期分组
+  const byDate = {};
+  items.forEach(item => {
+    const d = item.install_date;
+    if (!byDate[d]) byDate[d] = [];
+    byDate[d].push(item);
+  });
+
+  const today = new Date().toISOString().slice(0, 10);
+  const sortedDates = Object.keys(byDate).sort();
+
+  let html = "";
+  sortedDates.forEach(date => {
+    const dateObj = new Date(date + "T00:00:00");
+    const weekday = dateObj.toLocaleString("en-AU", { weekday: "long" });
+    const formatted = dateObj.toLocaleString("en-AU", { month: "short", day: "numeric" });
+    const isToday = date === today;
+    html += `<div class="day-group">
+      <div class="day-header ${isToday ? 'today' : ''}">
+        <span class="date">${formatted}</span>
+        <span class="weekday">${weekday}</span>
+        <span class="count">${byDate[date].length}</span>
+      </div>
+      <div class="cards">
+        ${byDate[date].map(renderCard).join("")}
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function renderCard(item) {
+  const priorityClass = (item.priority || "").toLowerCase().replace(/[^a-z]/g, "");
+  const priority = item.priority ? `<span class="badge">${item.priority}</span>` : "";
+  const type = item.project_type ? `<span class="badge type">${item.project_type}</span>` : "";
+  const installer = item.installer ? `<span class="badge installer">👷 ${item.installer}</span>` : "";
+  const value = item.installation_value && parseFloat(item.installation_value) > 0
+    ? `<span class="badge value">$${parseFloat(item.installation_value).toLocaleString()}</span>` : "";
+
+  return `<div class="card priority-${priorityClass}">
+    <div class="name">${escapeHtml(item.name)}</div>
+    ${item.address ? `<div class="row"><span class="label">📍</span> ${escapeHtml(item.address)}</div>` : ""}
+    ${item.sales ? `<div class="row"><span class="label">Sales:</span> ${escapeHtml(item.sales)}</div>` : ""}
+    ${item.schedule_status ? `<div class="row"><span class="label">Status:</span> ${escapeHtml(item.schedule_status)}</div>` : ""}
+    <div class="badges">${priority}${type}${installer}${value}</div>
+  </div>`;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[c]));
+}
+
+// ============ 地图 ============
+let map = null;
+let mapMarkers = [];
+let geocodeCache = JSON.parse(localStorage.getItem("geocode_cache") || "{}");
+
+async function geocode(address) {
+  if (!address) return null;
+  if (geocodeCache[address]) return geocodeCache[address];
+
+  // Nominatim 限制：每秒 1 次请求
+  await new Promise(r => setTimeout(r, 1100));
+
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address + ", Australia")}&limit=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data && data.length > 0) {
+      const result = { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+      geocodeCache[address] = result;
+      localStorage.setItem("geocode_cache", JSON.stringify(geocodeCache));
+      return result;
+    }
+  } catch (e) {
+    console.error("Geocode failed:", address, e);
+  }
+  return null;
+}
+
+async function renderMap() {
+  if (!map) {
+    // 默认中心 Melbourne
+    map = L.map("map").setView([-37.8136, 144.9631], 11);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap",
+      maxZoom: 19,
+    }).addTo(map);
+  }
+
+  // 清空旧 marker
+  mapMarkers.forEach(m => map.removeLayer(m));
+  mapMarkers = [];
+
+  const items = getMonthItems().filter(i => i.address);
+  if (items.length === 0) return;
+
+  const priorityColor = {
+    "Urgent": "#ef4444", "High": "#f97316",
+    "Medium": "#eab308", "Low": "#22c55e",
+  };
+
+  const bounds = [];
+  for (const item of items) {
+    const loc = await geocode(item.address);
+    if (!loc) continue;
+
+    const color = priorityColor[item.priority] || "#9ca3af";
+    const icon = L.divIcon({
+      className: "",
+      html: `<div style="background:${color};color:white;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:bold;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,.3)">📍</div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+    });
+
+    const marker = L.marker([loc.lat, loc.lng], { icon }).addTo(map);
+    const gmapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${loc.lat},${loc.lng}`;
+    marker.bindPopup(`
+      <b>${escapeHtml(item.name)}</b>
+      📅 ${item.install_date}<br>
+      📍 ${escapeHtml(item.address)}<br>
+      ${item.installer ? `👷 ${escapeHtml(item.installer)}<br>` : ""}
+      ${item.priority ? `🚩 ${item.priority}<br>` : ""}
+      <a href="${gmapsUrl}" target="_blank" style="color:#667eea">→ Google Maps 路线</a>
+    `);
+    mapMarkers.push(marker);
+    bounds.push([loc.lat, loc.lng]);
+  }
+
+  if (bounds.length > 0) {
+    map.fitBounds(bounds, { padding: [40, 40] });
+  }
+}
+
+// ============ PDF ============
+async function downloadPDF() {
+  const { jsPDF } = window.jspdf;
+  const items = getMonthItems();
+  if (items.length === 0) {
+    alert("No installations to export");
+    return;
+  }
+
+  const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const pageHeight = pdf.internal.pageSize.getHeight();
+  const margin = 12;
+  let y = margin;
+
+  // 标题
+  pdf.setFontSize(18);
+  pdf.setFont("helvetica", "bold");
+  const monthName = currentMonth.toLocaleString("en-AU", { month: "long", year: "numeric" });
+  pdf.text(`ACE SIGN — Install Schedule`, margin, y);
+  y += 8;
+  pdf.setFontSize(13);
+  pdf.setFont("helvetica", "normal");
+  pdf.text(monthName, margin, y);
+  y += 6;
+  pdf.setFontSize(9);
+  pdf.setTextColor(120);
+  pdf.text(`Generated: ${new Date().toLocaleString("en-AU")}  •  ${items.length} jobs`, margin, y);
+  pdf.setTextColor(0);
+  y += 8;
+
+  // 按日期分组
+  const byDate = {};
+  items.forEach(item => {
+    const d = item.install_date;
+    if (!byDate[d]) byDate[d] = [];
+    byDate[d].push(item);
+  });
+  const sortedDates = Object.keys(byDate).sort();
+
+  for (const date of sortedDates) {
+    // 检查分页
+    if (y > pageHeight - 30) {
+      pdf.addPage();
+      y = margin;
+    }
+
+    // 日期 header
+    const dateObj = new Date(date + "T00:00:00");
+    const dateLabel = dateObj.toLocaleString("en-AU", { weekday: "long", month: "short", day: "numeric" });
+    pdf.setFontSize(12);
+    pdf.setFont("helvetica", "bold");
+    pdf.setFillColor(102, 126, 234);
+    pdf.setTextColor(255);
+    pdf.rect(margin, y, pageWidth - margin * 2, 7, "F");
+    pdf.text(`${dateLabel}  (${byDate[date].length} jobs)`, margin + 2, y + 5);
+    pdf.setTextColor(0);
+    y += 9;
+
+    // 项目列表
+    for (const item of byDate[date]) {
+      if (y > pageHeight - 25) {
+        pdf.addPage();
+        y = margin;
+      }
+
+      pdf.setFontSize(11);
+      pdf.setFont("helvetica", "bold");
+      pdf.text(item.name, margin, y);
+      y += 5;
+
+      pdf.setFontSize(9);
+      pdf.setFont("helvetica", "normal");
+
+      if (item.address) {
+        const addrLines = pdf.splitTextToSize(`📍 ${item.address}`, pageWidth - margin * 2 - 4);
+        pdf.text(addrLines, margin + 2, y);
+        y += 4 * addrLines.length;
+      }
+
+      const meta = [];
+      if (item.installer) meta.push(`👷 ${item.installer}`);
+      if (item.priority) meta.push(`🚩 ${item.priority}`);
+      if (item.project_type) meta.push(item.project_type);
+      if (item.sales) meta.push(`Sales: ${item.sales}`);
+      if (item.installation_value && parseFloat(item.installation_value) > 0) {
+        meta.push(`$${parseFloat(item.installation_value).toLocaleString()}`);
+      }
+      if (meta.length > 0) {
+        pdf.setTextColor(80);
+        pdf.text(meta.join("  •  "), margin + 2, y);
+        pdf.setTextColor(0);
+        y += 4;
+      }
+
+      if (item.notes) {
+        const noteLines = pdf.splitTextToSize(`Notes: ${item.notes}`, pageWidth - margin * 2 - 4);
+        pdf.setTextColor(80);
+        pdf.text(noteLines, margin + 2, y);
+        pdf.setTextColor(0);
+        y += 4 * noteLines.length;
+      }
+
+      y += 3;  // 间距
+    }
+
+    y += 3;
+  }
+
+  // 保存
+  const filename = `ACE-Install-Schedule-${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, "0")}.pdf`;
+  pdf.save(filename);
+}
+</script>
+
+</body>
+</html>
