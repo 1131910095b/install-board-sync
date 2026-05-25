@@ -1,6 +1,10 @@
 """
-Install Board Sync v5
+Install Board Sync v5.1
 从 Production Board 同步到 Install Board
+
+v5.1 修复:
+- fetch_install_items 使用 BoardRelationValue typed fragment 读 production_link
+  (之前用 cv.value 拿不到 linked_item_ids 导致去重失败 -> 每次跑都创建重复项目)
 
 v5 新增字段:
 - Project Manager (Producer 列)
@@ -11,7 +15,6 @@ import json
 import os
 import sys
 from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional
 
 import requests
 
@@ -32,7 +35,6 @@ PROD_COL = {
     "producer": "dropdown_mkthvkf5",
     "plan_hours": "text_mm3pfqy5",
     "status": "status",
-    "install_board_link": "board_relation_mm3mmcjn",
 }
 
 INSTALL_COL = {
@@ -50,7 +52,6 @@ INSTALL_COL = {
     "duration_hours": "numeric_mm3mk5em",
 }
 
-# Priority label mapping (Production -> Install)
 PRIORITY_MAP = {
     "Urgent ⚠️️": "Urgent",
     "High": "High",
@@ -59,11 +60,11 @@ PRIORITY_MAP = {
 }
 
 
-def log(msg: str) -> None:
+def log(msg):
     print(f"[{datetime.utcnow().isoformat()}] {msg}", flush=True)
 
 
-def monday_query(query: str, variables: Optional[Dict] = None) -> Dict[str, Any]:
+def monday_query(query, variables=None):
     r = requests.post(
         "https://api.monday.com/v2",
         headers={
@@ -81,11 +82,10 @@ def monday_query(query: str, variables: Optional[Dict] = None) -> Dict[str, Any]
     return data["data"]
 
 
-def fetch_production_items() -> List[Dict[str, Any]]:
-    """Fetch all Production items that have an install_date within 30 days back to unlimited future."""
+def fetch_production_items():
     log("读取 Production Board...")
-    items: List[Dict[str, Any]] = []
-    cursor: Optional[str] = None
+    items = []
+    cursor = None
     cols = json.dumps(list(PROD_COL.values()))
     while True:
         if cursor:
@@ -96,7 +96,7 @@ def fetch_production_items() -> List[Dict[str, Any]]:
                   cursor
                   items {{
                     id name
-                    column_values(ids: {cols}) {{ id text value }}
+                    column_values(ids: {cols}) {{ id text }}
                   }}
                 }}
               }}
@@ -110,7 +110,7 @@ def fetch_production_items() -> List[Dict[str, Any]]:
                   cursor
                   items {{
                     id name
-                    column_values(ids: {cols}) {{ id text value }}
+                    column_values(ids: {cols}) {{ id text }}
                   }}
                 }}
               }}
@@ -126,11 +126,15 @@ def fetch_production_items() -> List[Dict[str, Any]]:
     return items
 
 
-def fetch_install_items() -> Dict[str, str]:
-    """Map production_id -> install_item_id by reading the production_link column."""
+def fetch_install_items():
+    """
+    Map production_id -> install_item_id using BoardRelationValue typed fragment.
+    v5.1 fix: 之前用 cv.value 拿不到数据导致全部 production_id 是 None,
+    去重失败 -> 每次 sync 都创建重复项目。
+    """
     log("读取 Install Board 现有项目...")
-    existing: Dict[str, str] = {}
-    cursor: Optional[str] = None
+    existing = {}
+    cursor = None
     while True:
         if cursor:
             q = """
@@ -140,7 +144,11 @@ def fetch_install_items() -> Dict[str, str]:
                   cursor
                   items {
                     id name
-                    column_values(ids: ["board_relation_mm3mj5j8"]) { value }
+                    relation: column_values(ids: ["board_relation_mm3mj5j8"]) {
+                      ... on BoardRelationValue {
+                        linked_item_ids
+                      }
+                    }
                   }
                 }
               }
@@ -154,7 +162,11 @@ def fetch_install_items() -> Dict[str, str]:
                   cursor
                   items {
                     id name
-                    column_values(ids: ["board_relation_mm3mj5j8"]) { value }
+                    relation: column_values(ids: ["board_relation_mm3mj5j8"]) {
+                      ... on BoardRelationValue {
+                        linked_item_ids
+                      }
+                    }
                   }
                 }
               }
@@ -163,17 +175,19 @@ def fetch_install_items() -> Dict[str, str]:
         data = monday_query(q, vars_)
         page = data["boards"][0]["items_page"]
         for item in page["items"]:
-            cv = item["column_values"][0] if item["column_values"] else None
-            if not cv or not cv.get("value"):
+            relation_list = item.get("relation", [])
+            if not relation_list:
                 continue
-            try:
-                v = json.loads(cv["value"])
-                prod_ids = v.get("linkedPulseIds") or []
-                if prod_ids:
-                    pid = str(prod_ids[0].get("linkedPulseId"))
-                    existing[pid] = item["id"]
-            except Exception:
-                pass
+            first = relation_list[0]
+            if not first or "linked_item_ids" not in first:
+                continue
+            ids = first.get("linked_item_ids") or []
+            if not ids:
+                continue
+            pid = str(ids[0])
+            # 如果已有同一个 production_id 的 install item，只保留第一个（其他是重复）
+            if pid not in existing:
+                existing[pid] = item["id"]
         cursor = page.get("cursor")
         if not cursor:
             break
@@ -181,10 +195,10 @@ def fetch_install_items() -> Dict[str, str]:
     return existing
 
 
-def parse_prod(item: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+def parse_prod(item):
     cv_map = {cv["id"]: cv for cv in item.get("column_values", [])}
 
-    def text_of(col_id: str) -> str:
+    def text_of(col_id):
         cv = cv_map.get(col_id)
         return (cv.get("text") or "").strip() if cv else ""
 
@@ -192,7 +206,6 @@ def parse_prod(item: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     if not install_date:
         return None
 
-    # Only sync items within 30 days back to future
     try:
         d = datetime.strptime(install_date, "%Y-%m-%d").date()
     except ValueError:
@@ -218,8 +231,8 @@ def parse_prod(item: Dict[str, Any]) -> Optional[Dict[str, Any]]:
     }
 
 
-def to_install_column_values(p: Dict[str, Any]) -> Dict[str, Any]:
-    cv: Dict[str, Any] = {
+def to_install_column_values(p):
+    cv = {
         INSTALL_COL["install_date"]: {"date": p["install_date"]} if p["install_date"] else None,
         INSTALL_COL["address"]: p["address"],
         INSTALL_COL["production_link"]: {"item_ids": [int(p["prod_id"])]},
@@ -243,12 +256,11 @@ def to_install_column_values(p: Dict[str, Any]) -> Dict[str, Any]:
             cv[INSTALL_COL["duration_hours"]] = float(p["plan_hours"])
         except (ValueError, TypeError):
             pass
-    # Remove nulls
     cv = {k: v for k, v in cv.items() if v is not None}
     return cv
 
 
-def create_install_item(p: Dict[str, Any]) -> str:
+def create_install_item(p):
     cv = to_install_column_values(p)
     data = monday_query(
         """
@@ -260,7 +272,7 @@ def create_install_item(p: Dict[str, Any]) -> str:
     return data["create_item"]["id"]
 
 
-def update_install_item(item_id: str, p: Dict[str, Any]) -> None:
+def update_install_item(item_id, p):
     cv = to_install_column_values(p)
     monday_query(
         """
@@ -271,7 +283,7 @@ def update_install_item(item_id: str, p: Dict[str, Any]) -> None:
     )
 
 
-def main() -> None:
+def main():
     log("开始同步 Production → Install Board")
     prod_items = fetch_production_items()
     existing = fetch_install_items()
