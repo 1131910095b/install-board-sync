@@ -400,6 +400,207 @@
   /* === MAP VIEW === */
   #map { flex: 1; min-height: 600px; }
 
+  .map-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    min-height: 600px;
+    height: 100%;
+  }
+  .map-sidebar {
+    background: var(--panel);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .map-canvas {
+    background: #0f1115;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+  }
+  .map-canvas #map { width: 100%; height: 100%; min-height: 600px; }
+
+  .map-tools {
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    overflow-y: auto;
+    flex-shrink: 0;
+    max-height: 55%;
+  }
+  .map-tool-group { margin-bottom: 14px; }
+  .map-tool-group:last-child { margin-bottom: 0; }
+  .tool-label {
+    font-size: 10px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .date-chips {
+    display: flex; gap: 4px; flex-wrap: wrap;
+  }
+  .date-chip {
+    padding: 5px 10px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .date-chip:hover { background: var(--panel-3); color: var(--text); }
+  .date-chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .team-route-tools {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .route-btn {
+    padding: 8px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    cursor: pointer;
+    text-align: left;
+    display: flex; align-items: center; gap: 8px;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+  .route-btn:hover { background: var(--panel-3); }
+  .route-btn .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .route-btn.route-a .dot { background: var(--team-a); }
+  .route-btn.route-b .dot { background: var(--team-b); }
+  .route-btn.active.route-a {
+    background: var(--team-a-bg);
+    border-color: var(--team-a-border);
+    color: var(--team-a);
+  }
+  .route-btn.active.route-b {
+    background: var(--team-b-bg);
+    border-color: var(--team-b-border);
+    color: var(--team-b);
+  }
+  #clearRouteBtn {
+    color: var(--urgent);
+    border-color: rgba(239,68,68,0.3);
+  }
+  #clearRouteBtn:hover { background: rgba(239,68,68,0.1); }
+
+  .route-summary {
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .route-summary .row { display: flex; justify-content: space-between; gap: 8px; }
+  .route-summary .row .label { color: var(--text-faint); }
+  .route-summary .row .value { color: var(--text); font-weight: 600; }
+
+  .map-display-tools {
+    display: flex; gap: 4px;
+  }
+  .map-btn {
+    flex: 1;
+    padding: 6px 10px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .map-btn:hover { background: var(--panel-3); color: var(--text); }
+  .map-btn[data-active="1"] { background: var(--accent); border-color: var(--accent); color: white; }
+
+  .map-list-header {
+    padding: 12px 16px;
+    font-size: 11px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel-2);
+  }
+  .map-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+  }
+  .map-list-item {
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--team-none);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .map-list-item:hover { background: var(--panel-3); border-color: var(--border-strong); }
+  .map-list-item.highlighted {
+    background: rgba(124,92,255,0.15);
+    border-color: var(--accent);
+  }
+  .map-list-item.team-a { border-left-color: var(--team-a); }
+  .map-list-item.team-b { border-left-color: var(--team-b); }
+  .map-list-item .li-order {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px;
+    background: var(--panel-3);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: 8px;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+  .map-list-item.team-a .li-order { background: var(--team-a-bg); color: var(--team-a); }
+  .map-list-item.team-b .li-order { background: var(--team-b-bg); color: var(--team-b); }
+  .map-list-item .li-title {
+    font-size: 13px; font-weight: 600;
+    margin-bottom: 4px;
+    display: flex; align-items: center;
+  }
+  .map-list-item .li-addr {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-left: 30px;
+    line-height: 1.4;
+  }
+  .map-list-item .li-meta {
+    font-size: 10px;
+    color: var(--text-faint);
+    margin-top: 4px;
+    margin-left: 30px;
+    display: flex; gap: 8px;
+  }
+  .map-list-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-faint);
+    font-size: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .map-layout { grid-template-columns: 1fr; }
+    .map-sidebar { max-height: 40vh; }
+  }
+
   /* === MODAL === */
   .modal-backdrop {
     position: fixed; inset: 0; background: rgba(0,0,0,0.75);
@@ -633,7 +834,57 @@
 
   <!-- MAP VIEW -->
   <div class="view-content" id="view-map">
-    <div id="map"></div>
+    <div class="map-layout">
+      <!-- LEFT: Tools + List -->
+      <div class="map-sidebar">
+        <div class="map-tools">
+          <div class="map-tool-group">
+            <div class="tool-label">DATE</div>
+            <div class="date-chips">
+              <button class="date-chip" data-date-filter="all">All</button>
+              <button class="date-chip active" data-date-filter="today">Today</button>
+              <button class="date-chip" data-date-filter="tomorrow">Tomorrow</button>
+              <button class="date-chip" data-date-filter="week">This Week</button>
+              <button class="date-chip" data-date-filter="month">This Month</button>
+            </div>
+          </div>
+
+          <div class="map-tool-group">
+            <div class="tool-label">TEAM ROUTE</div>
+            <div class="team-route-tools">
+              <button class="route-btn route-a" data-route-team="Group A">
+                <span class="dot"></span>Plan Group A Route
+              </button>
+              <button class="route-btn route-b" data-route-team="Group B">
+                <span class="dot"></span>Plan Group B Route
+              </button>
+              <button class="route-btn" id="clearRouteBtn" style="display:none;">
+                ✕ Clear Route
+              </button>
+            </div>
+            <div class="route-summary" id="routeSummary" style="display:none;"></div>
+          </div>
+
+          <div class="map-tool-group">
+            <div class="tool-label">DISPLAY</div>
+            <div class="map-display-tools">
+              <button class="map-btn" id="toggleSatelliteBtn">🛰️ Satellite</button>
+              <button class="map-btn" id="toggleClusterBtn" data-active="1">⊙ Cluster</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-list-header">
+          <span id="mapListCount">0 jobs</span>
+        </div>
+        <div class="map-list" id="mapList"></div>
+      </div>
+
+      <!-- RIGHT: Map -->
+      <div class="map-canvas">
+        <div id="map"></div>
+      </div>
+    </div>
   </div>
 
   <div class="footer">
@@ -688,8 +939,17 @@ let typeFilters = new Set(['Install', 'Pick Up', 'Delivery']);
 let geoCache = JSON.parse(localStorage.getItem('geoCache') || '{}');
 let gmap = null;
 let gmapMarkers = [];
+let gmapMarkersByJobId = {};
 let gmapInfoWindow = null;
 let gmapsLoaded = false;
+let directionsService = null;
+let directionsRenderer = null;
+let mapDateFilter = 'today'; // all | today | tomorrow | week | month
+let mapRouteTeam = null; // 'Group A' | 'Group B' | null
+let mapShowSatellite = false;
+let mapClusterEnabled = true;
+let mapClusterer = null;
+let mapVisibleJobs = []; // jobs currently shown on map (after filter)
 
 const ACTIVE_STATUSES = new Set(['Pre-Installation', 'Installation']);
 const INSTALLER_OPTIONS = ['Peter', 'Chris', 'Kent', 'Daniel', 'Dani'];
@@ -1052,18 +1312,67 @@ async function submitDateChangeIssue(prodId, newDate, jobName, oldDate) {
 }
 
 // ============ MAP VIEW (Google Maps) ============
+// ============ MAP VIEW (Google Maps + Routes + Cluster) ============
+const PREMIUM_DARK_MAP_STYLE = [
+  { elementType: 'geometry', stylers: [{ color: '#0f1115' }] },
+  { elementType: 'labels.text.fill', stylers: [{ color: '#8b91a0' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#0a0b0d' }, { weight: 2 }] },
+  { elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
+  { featureType: 'administrative', elementType: 'geometry', stylers: [{ visibility: 'off' }] },
+  { featureType: 'administrative.country', elementType: 'labels.text.fill', stylers: [{ color: '#a8aebd' }] },
+  { featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers: [{ color: '#c9ced9' }, { weight: 600 }] },
+  { featureType: 'administrative.neighborhood', elementType: 'labels.text.fill', stylers: [{ color: '#6b7280' }] },
+  { featureType: 'administrative.land_parcel', stylers: [{ visibility: 'off' }] },
+  { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+  { featureType: 'poi.park', elementType: 'geometry', stylers: [{ color: '#162520' }, { visibility: 'on' }] },
+  { featureType: 'poi.park', elementType: 'labels.text.fill', stylers: [{ color: '#4a7c5e' }] },
+  { featureType: 'road', elementType: 'geometry.fill', stylers: [{ color: '#1a1d24' }] },
+  { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#0a0b0d' }] },
+  { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#6b7280' }] },
+  { featureType: 'road.local', elementType: 'geometry.fill', stylers: [{ color: '#15181f' }] },
+  { featureType: 'road.local', elementType: 'labels', stylers: [{ visibility: 'off' }] },
+  { featureType: 'road.arterial', elementType: 'geometry.fill', stylers: [{ color: '#1f242d' }] },
+  { featureType: 'road.arterial', elementType: 'labels.text.fill', stylers: [{ color: '#7c8294' }] },
+  { featureType: 'road.highway', elementType: 'geometry.fill', stylers: [{ color: '#2d3441' }] },
+  { featureType: 'road.highway', elementType: 'geometry.stroke', stylers: [{ color: '#1a1d24' }] },
+  { featureType: 'road.highway', elementType: 'labels.text.fill', stylers: [{ color: '#a8aebd' }] },
+  { featureType: 'road.highway.controlled_access', elementType: 'geometry.fill', stylers: [{ color: '#3a4252' }] },
+  { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+  { featureType: 'transit.line', elementType: 'geometry', stylers: [{ color: '#1a1d24' }, { visibility: 'on' }] },
+  { featureType: 'transit.station', elementType: 'labels.text.fill', stylers: [{ color: '#7c5cff' }] },
+  { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0a1929' }] },
+  { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#4a6b8a' }] },
+  { featureType: 'landscape', elementType: 'geometry', stylers: [{ color: '#0f1115' }] },
+  { featureType: 'landscape.man_made', elementType: 'geometry', stylers: [{ color: '#13161b' }] },
+  { featureType: 'landscape.natural', elementType: 'geometry', stylers: [{ color: '#0d1014' }] },
+];
+
 function loadGoogleMaps() {
   return new Promise((resolve, reject) => {
     if (gmapsLoaded || window.google?.maps) {
       gmapsLoaded = true;
-      resolve();
+      // Load clusterer if not yet
+      if (!window.markerClusterer) {
+        const cs = document.createElement('script');
+        cs.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';
+        cs.onload = () => resolve();
+        cs.onerror = () => resolve(); // still resolve without clusterer
+        document.head.appendChild(cs);
+      } else {
+        resolve();
+      }
       return;
     }
     const cb = '__gmapsReady_' + Date.now();
     window[cb] = () => {
       gmapsLoaded = true;
       delete window[cb];
-      resolve();
+      // Now load clusterer
+      const cs = document.createElement('script');
+      cs.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';
+      cs.onload = () => resolve();
+      cs.onerror = () => resolve();
+      document.head.appendChild(cs);
     };
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${GMAPS_KEY}&libraries=geocoding&callback=${cb}&loading=async`;
@@ -1075,7 +1384,14 @@ function loadGoogleMaps() {
 }
 
 async function renderMap() {
-  document.getElementById('weekLabel').textContent = 'Map · Install only';
+  const filterLabel = {
+    all: 'All dates',
+    today: 'Today',
+    tomorrow: 'Tomorrow',
+    week: 'This Week',
+    month: 'This Month',
+  }[mapDateFilter] || 'All';
+  document.getElementById('weekLabel').textContent = `Map · ${filterLabel}`;
 
   try {
     await loadGoogleMaps();
@@ -1092,121 +1408,394 @@ async function renderMap() {
   if (!gmap) {
     gmap = new google.maps.Map(document.getElementById('map'), {
       center: { lat: -37.8136, lng: 144.9631 },
-      zoom: 10,
+      zoom: 11,
       mapTypeId: 'roadmap',
-      mapTypeControl: true,
+      mapTypeControl: false,
       streetViewControl: false,
       fullscreenControl: true,
-      // Dark-ish styled map matching the app
-      styles: [
-        { elementType: 'geometry', stylers: [{ color: '#1c1f25' }] },
-        { elementType: 'labels.text.stroke', stylers: [{ color: '#14161a' }] },
-        { elementType: 'labels.text.fill', stylers: [{ color: '#9aa0a8' }] },
-        { featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers: [{ color: '#d59563' }] },
-        { featureType: 'poi', elementType: 'labels.text.fill', stylers: [{ color: '#9aa0a8' }] },
-        { featureType: 'poi.park', elementType: 'geometry', stylers: [{ color: '#1a3d2e' }] },
-        { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#2a2e36' }] },
-        { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#1a1d24' }] },
-        { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#9aa0a8' }] },
-        { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#3a3e48' }] },
-        { featureType: 'transit', elementType: 'geometry', stylers: [{ color: '#2a2e36' }] },
-        { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0d1a26' }] },
-        { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#4a6280' }] },
-      ],
+      zoomControl: true,
+      gestureHandling: 'greedy',
+      backgroundColor: '#0a0b0d',
+      styles: PREMIUM_DARK_MAP_STYLE,
     });
-    gmapInfoWindow = new google.maps.InfoWindow();
+    gmapInfoWindow = new google.maps.InfoWindow({
+      pixelOffset: new google.maps.Size(0, -8),
+    });
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer({
+      suppressMarkers: true,
+      polylineOptions: {
+        strokeColor: '#7c5cff',
+        strokeWeight: 5,
+        strokeOpacity: 0.85,
+      },
+    });
+    directionsRenderer.setMap(gmap);
   }
 
   // Clear existing markers
   gmapMarkers.forEach(m => m.setMap(null));
   gmapMarkers = [];
+  gmapMarkersByJobId = {};
+  if (mapClusterer) {
+    mapClusterer.clearMarkers();
+    mapClusterer = null;
+  }
 
-  // Only Install type
-  const items = applyFilters(DATA.items)
+  // Apply date filter on top of global filters
+  let items = applyFilters(DATA.items)
     .filter(i => (i.project_type || 'Install') === 'Install')
-    .filter(i => i.address);
+    .filter(i => i.address)
+    .filter(i => i.install_date);
 
+  items = filterByMapDate(items, mapDateFilter);
+  mapVisibleJobs = items;
+
+  // Geocode all + create markers
   const bounds = new google.maps.LatLngBounds();
-  let plotted = 0;
+  const validMarkers = [];
 
   for (const job of items) {
     try {
       const coords = await geocode(job.address);
       if (!coords) continue;
-
-      const color = job.priority === 'Urgent' ? '#ef4444'
-                  : job.priority === 'High'   ? '#f97316'
-                  : job.priority === 'Medium' ? '#eab308'
-                  : '#10b981';
-      const borderColor = job.team === 'Group A' ? '#4f8cff'
-                       : job.team === 'Group B' ? '#ff6d3b'
-                       : '#6b7079';
-
-      // Custom SVG pin
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
-        <path d="M16 0C7.2 0 0 7.2 0 16c0 12 16 24 16 24s16-12 16-24c0-8.8-7.2-16-16-16z"
-          fill="${color}" stroke="${borderColor}" stroke-width="3"/>
-        <circle cx="16" cy="16" r="6" fill="white"/>
-      </svg>`;
-
-      const marker = new google.maps.Marker({
-        position: { lat: coords.lat, lng: coords.lon },
-        map: gmap,
-        title: job.name,
-        icon: {
-          url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
-          scaledSize: new google.maps.Size(32, 40),
-          anchor: new google.maps.Point(16, 40),
-        },
-      });
-
-      const infoHTML = `
-        <div style="font-family: -apple-system, sans-serif; min-width: 240px; padding: 4px; color: #222;">
-          <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">${escapeHTML(job.name)}</div>
-          <div style="font-size: 12px; color: #666; margin-bottom: 6px;">${escapeHTML(job.address)}</div>
-          <div style="font-size: 11px; color: #888;">
-            ${job.install_date || '—'} · ${job.team || 'Unassigned'} · ${job.installer || 'No installer'}
-          </div>
-          ${job.priority ? `<div style="margin-top: 6px;"><span style="background: ${color}; color: white; padding: 2px 8px; border-radius: 99px; font-size: 11px;">${job.priority}</span></div>` : ''}
-          <div style="margin-top: 8px;">
-            <a href="#" onclick="event.preventDefault(); window.openModalFromMap('${job.id}'); return false;" style="font-size: 12px; color: #4f8cff;">Open details →</a>
-          </div>
-        </div>`;
-
-      marker.addListener('click', () => {
-        gmapInfoWindow.setContent(infoHTML);
-        gmapInfoWindow.open({ anchor: marker, map: gmap });
-      });
-
+      const marker = createJobMarker(job, coords);
+      validMarkers.push(marker);
       gmapMarkers.push(marker);
+      gmapMarkersByJobId[job.id] = marker;
       bounds.extend(marker.getPosition());
-      plotted++;
     } catch (e) {
       console.error('Marker error for', job.name, e);
     }
   }
 
-  if (plotted > 0) {
+  // Clusterer
+  if (mapClusterEnabled && window.markerClusterer && validMarkers.length > 1) {
+    mapClusterer = new markerClusterer.MarkerClusterer({
+      map: gmap,
+      markers: validMarkers,
+      renderer: {
+        render: ({ count, position }) => {
+          return new google.maps.Marker({
+            position,
+            icon: {
+              url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+                  <circle cx="28" cy="28" r="24" fill="#7c5cff" opacity="0.3"/>
+                  <circle cx="28" cy="28" r="18" fill="#7c5cff"/>
+                  <text x="28" y="33" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="14" font-weight="700">${count}</text>
+                </svg>`),
+              scaledSize: new google.maps.Size(56, 56),
+              anchor: new google.maps.Point(28, 28),
+            },
+            zIndex: 1000 + count,
+          });
+        }
+      }
+    });
+  }
+
+  if (validMarkers.length > 0) {
     gmap.fitBounds(bounds, { top: 60, right: 60, bottom: 60, left: 60 });
-    // Don't zoom in too far if only 1 marker
-    if (plotted === 1) {
-      const listener = google.maps.event.addListenerOnce(gmap, 'idle', () => {
+    if (validMarkers.length === 1) {
+      google.maps.event.addListenerOnce(gmap, 'idle', () => {
         if (gmap.getZoom() > 15) gmap.setZoom(15);
       });
     }
   }
+
+  // Render sidebar list
+  renderMapList(items);
+
+  // If route was active, re-plan
+  if (mapRouteTeam) {
+    planRoute(mapRouteTeam);
+  }
 }
 
-// Expose for InfoWindow callbacks
+function createJobMarker(job, coords) {
+  const color = job.priority === 'Urgent' ? '#ef4444'
+              : job.priority === 'High'   ? '#f97316'
+              : job.priority === 'Medium' ? '#eab308'
+              : '#10b981';
+  const ringColor = job.team === 'Group A' ? '#4f8cff'
+                 : job.team === 'Group B' ? '#ff6d3b'
+                 : '#9aa0a8';
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="44" height="56" viewBox="0 0 44 56">
+    <defs>
+      <filter id="s" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+        <feOffset dx="0" dy="2" result="o"/>
+        <feFlood flood-color="#000" flood-opacity="0.4"/>
+        <feComposite in2="o" operator="in" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+    <g filter="url(#s)">
+      <circle cx="22" cy="22" r="18" fill="${ringColor}" opacity="0.25"/>
+      <circle cx="22" cy="22" r="14" fill="${ringColor}"/>
+      <circle cx="22" cy="22" r="11" fill="${color}"/>
+      <circle cx="22" cy="22" r="4" fill="white" opacity="0.95"/>
+    </g>
+  </svg>`;
+
+  const marker = new google.maps.Marker({
+    position: { lat: coords.lat, lng: coords.lon },
+    map: mapClusterEnabled ? null : gmap, // clusterer will manage if enabled
+    title: job.name,
+    icon: {
+      url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+      scaledSize: new google.maps.Size(44, 56),
+      anchor: new google.maps.Point(22, 22),
+    },
+    optimized: false,
+  });
+
+  marker.addListener('click', () => {
+    showJobInfoWindow(job, marker, color, ringColor);
+    highlightListItem(job.id);
+  });
+
+  return marker;
+}
+
+function showJobInfoWindow(job, marker, color, ringColor) {
+  const navUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(job.address)}`;
+
+  const infoHTML = `
+    <div style="font-family: -apple-system, 'Segoe UI', sans-serif; min-width: 280px; padding: 4px 2px;">
+      ${job.invoice_number ? `<div style="font-size: 10px; font-weight: 600; letter-spacing: 1.5px; color: #7c5cff; text-transform: uppercase; margin-bottom: 4px;">INV ${escapeHTML(job.invoice_number)}</div>` : ''}
+      <div style="font-weight: 700; font-size: 15px; color: #14161a; margin-bottom: 8px; line-height: 1.3;">${escapeHTML(job.name)}</div>
+      <div style="font-size: 12px; color: #6b7280; margin-bottom: 10px; line-height: 1.4; display: flex; align-items: flex-start; gap: 4px;">
+        <span style="color: #9aa0a8; flex-shrink: 0;">📍</span>
+        <span>${escapeHTML(job.address)}</span>
+      </div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">
+        ${job.priority ? `<span style="display: inline-flex; align-items: center; padding: 2px 8px; background: ${color}1a; color: ${color}; border-radius: 99px; font-size: 11px; font-weight: 600;">${job.priority}</span>` : ''}
+        ${job.team ? `<span style="display: inline-flex; align-items: center; padding: 2px 8px; background: ${ringColor}1a; color: ${ringColor}; border-radius: 99px; font-size: 11px; font-weight: 600;">${escapeHTML(job.team)}</span>` : ''}
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; padding-top: 10px; border-top: 1px solid #e5e7eb; font-size: 11px;">
+        <div><span style="color: #9aa0a8;">Date:</span> <strong style="color: #14161a;">${job.install_date || '—'}</strong></div>
+        <div><span style="color: #9aa0a8;">Installer:</span> <strong style="color: #14161a;">${escapeHTML(job.installer || '—')}</strong></div>
+      </div>
+      <div style="display: flex; gap: 8px; margin-top: 12px;">
+        <a href="#" onclick="event.preventDefault(); window.openModalFromMap('${job.id}'); return false;"
+           style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #7c5cff; font-weight: 600; text-decoration: none;">
+          Details →
+        </a>
+        <a href="${navUrl}" target="_blank" rel="noopener"
+           style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: #10b981; font-weight: 600; text-decoration: none; margin-left: auto;">
+          🧭 Navigate
+        </a>
+      </div>
+    </div>`;
+  gmapInfoWindow.setContent(infoHTML);
+  gmapInfoWindow.open({ anchor: marker, map: gmap });
+}
+
 window.openModalFromMap = (id) => {
   if (gmapInfoWindow) gmapInfoWindow.close();
   openModal(id);
 };
 
+function filterByMapDate(items, filter) {
+  if (filter === 'all') return items;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayKey = ymd(today);
+
+  if (filter === 'today') {
+    return items.filter(i => i.install_date === todayKey);
+  }
+  if (filter === 'tomorrow') {
+    const t = new Date(today); t.setDate(t.getDate() + 1);
+    return items.filter(i => i.install_date === ymd(t));
+  }
+  if (filter === 'week') {
+    const start = startOfWeek(today);
+    const end = new Date(start); end.setDate(end.getDate() + 6);
+    return items.filter(i => {
+      const d = new Date(i.install_date + 'T00:00');
+      return d >= start && d <= end;
+    });
+  }
+  if (filter === 'month') {
+    const ym = todayKey.slice(0, 7);
+    return items.filter(i => i.install_date && i.install_date.startsWith(ym));
+  }
+  return items;
+}
+
+// === SIDEBAR LIST ===
+function renderMapList(items, orderedIds = null) {
+  const container = document.getElementById('mapList');
+  document.getElementById('mapListCount').textContent = `${items.length} job${items.length !== 1 ? 's' : ''}`;
+
+  let listItems = items;
+  // If we have route order, use that order
+  if (orderedIds) {
+    const map = new Map(items.map(i => [i.id, i]));
+    listItems = orderedIds.map(id => map.get(id)).filter(Boolean);
+  }
+
+  if (listItems.length === 0) {
+    container.innerHTML = `<div class="map-list-empty">No jobs match filters</div>`;
+    return;
+  }
+
+  container.innerHTML = listItems.map((j, idx) => {
+    const teamCls = j.team === 'Group A' ? 'team-a' : (j.team === 'Group B' ? 'team-b' : '');
+    return `
+      <div class="map-list-item ${teamCls}" data-id="${j.id}">
+        <div class="li-title"><span class="li-order">${idx + 1}</span>${escapeHTML(j.name)}</div>
+        <div class="li-addr">${escapeHTML(j.address)}</div>
+        <div class="li-meta">
+          ${j.team ? `<span>${escapeHTML(j.team)}</span>` : ''}
+          ${j.installer ? `<span>· ${escapeHTML(j.installer)}</span>` : ''}
+          ${j.plan_hours ? `<span>· ${escapeHTML(j.plan_hours)}h</span>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+
+  // Click → fly to + open info
+  container.querySelectorAll('.map-list-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.dataset.id;
+      const marker = gmapMarkersByJobId[id];
+      const job = mapVisibleJobs.find(j => j.id === id);
+      if (marker && job) {
+        gmap.panTo(marker.getPosition());
+        if (gmap.getZoom() < 14) gmap.setZoom(14);
+        google.maps.event.trigger(marker, 'click');
+      }
+    });
+  });
+}
+
+function highlightListItem(jobId) {
+  document.querySelectorAll('.map-list-item').forEach(el => {
+    el.classList.toggle('highlighted', el.dataset.id === jobId);
+  });
+  const el = document.querySelector(`.map-list-item[data-id="${jobId}"]`);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// === ROUTE PLANNING ===
+async function planRoute(team) {
+  // Get team's jobs from currently visible
+  const teamJobs = mapVisibleJobs.filter(j => j.team === team);
+  if (teamJobs.length < 2) {
+    toast(team + ' has only ' + teamJobs.length + ' job(s) — need at least 2 to plan a route', 'error');
+    return;
+  }
+
+  toast(`Planning route for ${team}...`, 'info');
+
+  // Resolve coords
+  const stops = [];
+  for (const j of teamJobs) {
+    const c = await geocode(j.address);
+    if (c) stops.push({ job: j, coords: c });
+  }
+  if (stops.length < 2) {
+    toast('Not enough geocoded addresses', 'error');
+    return;
+  }
+
+  // Origin = first stop, dest = last stop, rest = waypoints (let Google optimize)
+  const origin = new google.maps.LatLng(stops[0].coords.lat, stops[0].coords.lon);
+  const destination = new google.maps.LatLng(stops[stops.length - 1].coords.lat, stops[stops.length - 1].coords.lon);
+  const waypoints = stops.slice(1, -1).map(s => ({
+    location: new google.maps.LatLng(s.coords.lat, s.coords.lon),
+    stopover: true,
+  }));
+
+  directionsService.route({
+    origin,
+    destination,
+    waypoints,
+    optimizeWaypoints: true,
+    travelMode: google.maps.TravelMode.DRIVING,
+  }, (result, status) => {
+    if (status !== 'OK') {
+      toast('Route planning failed: ' + status, 'error');
+      return;
+    }
+    directionsRenderer.setDirections(result);
+
+    // Reorder list by Google's optimized order
+    const order = result.routes[0].waypoint_order; // indices into waypoints array
+    const orderedStops = [stops[0], ...order.map(i => stops[i + 1]), stops[stops.length - 1]];
+    const orderedIds = orderedStops.map(s => s.job.id);
+
+    renderMapList(mapVisibleJobs, orderedIds);
+
+    // Numbered markers for route order
+    addRouteOrderLabels(orderedStops, team);
+
+    // Compute total distance + duration
+    const legs = result.routes[0].legs;
+    const totalDist = legs.reduce((s, l) => s + l.distance.value, 0); // meters
+    const totalDur = legs.reduce((s, l) => s + l.duration.value, 0); // seconds
+
+    const teamColor = team === 'Group A' ? 'var(--team-a)' : 'var(--team-b)';
+    document.getElementById('routeSummary').style.display = '';
+    document.getElementById('routeSummary').innerHTML = `
+      <div class="row"><span class="label">Team</span><span class="value" style="color: ${teamColor};">${team}</span></div>
+      <div class="row"><span class="label">Stops</span><span class="value">${stops.length}</span></div>
+      <div class="row"><span class="label">Distance</span><span class="value">${(totalDist/1000).toFixed(1)} km</span></div>
+      <div class="row"><span class="label">Drive Time</span><span class="value">${Math.round(totalDur/60)} min</span></div>
+    `;
+    document.getElementById('clearRouteBtn').style.display = '';
+    toast(`Route planned for ${team}: ${stops.length} stops`, 'success');
+  });
+}
+
+function addRouteOrderLabels(orderedStops, team) {
+  const teamColor = team === 'Group A' ? '#4f8cff' : '#ff6d3b';
+  // Replace markers with numbered ones for route stops
+  orderedStops.forEach((s, idx) => {
+    const m = gmapMarkersByJobId[s.job.id];
+    if (!m) return;
+    const num = idx + 1;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="44" height="56" viewBox="0 0 44 56">
+      <defs>
+        <filter id="s${num}" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+          <feOffset dx="0" dy="2" result="o"/>
+          <feFlood flood-color="#000" flood-opacity="0.5"/>
+          <feComposite in2="o" operator="in" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <g filter="url(#s${num})">
+        <circle cx="22" cy="22" r="20" fill="${teamColor}" opacity="0.25"/>
+        <circle cx="22" cy="22" r="16" fill="${teamColor}"/>
+        <text x="22" y="27" text-anchor="middle" fill="white" font-family="Inter, sans-serif" font-size="14" font-weight="800">${num}</text>
+      </g>
+    </svg>`;
+    m.setIcon({
+      url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+      scaledSize: new google.maps.Size(44, 56),
+      anchor: new google.maps.Point(22, 22),
+    });
+    m.setZIndex(2000 + (orderedStops.length - idx));
+  });
+}
+
+function clearRoute() {
+  if (directionsRenderer) directionsRenderer.setDirections({ routes: [] });
+  mapRouteTeam = null;
+  document.getElementById('routeSummary').style.display = 'none';
+  document.getElementById('clearRouteBtn').style.display = 'none';
+  document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('active'));
+  renderMap(); // re-render to reset markers
+}
+
 async function geocode(addr) {
   if (geoCache[addr]) return geoCache[addr];
   try {
-    // Use Google Geocoding API via the loaded Maps JS
     if (!window.google?.maps?.Geocoder) {
       await loadGoogleMaps();
     }
@@ -1226,6 +1815,54 @@ async function geocode(addr) {
     console.warn('Geocode failed for', addr, e);
     return null;
   }
+}
+
+// === MAP CONTROL HANDLERS ===
+function bindMapControls() {
+  // Date chips
+  document.querySelectorAll('.date-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.date-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      mapDateFilter = chip.dataset.dateFilter;
+      mapRouteTeam = null;
+      if (directionsRenderer) directionsRenderer.setDirections({ routes: [] });
+      document.getElementById('routeSummary').style.display = 'none';
+      document.getElementById('clearRouteBtn').style.display = 'none';
+      document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('active'));
+      renderMap();
+    });
+  });
+
+  // Route buttons
+  document.querySelectorAll('[data-route-team]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const team = btn.dataset.routeTeam;
+      document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      mapRouteTeam = team;
+      planRoute(team);
+    });
+  });
+
+  document.getElementById('clearRouteBtn').addEventListener('click', clearRoute);
+
+  // Satellite toggle
+  document.getElementById('toggleSatelliteBtn').addEventListener('click', () => {
+    mapShowSatellite = !mapShowSatellite;
+    const btn = document.getElementById('toggleSatelliteBtn');
+    if (gmap) {
+      gmap.setMapTypeId(mapShowSatellite ? 'hybrid' : 'roadmap');
+    }
+    btn.dataset.active = mapShowSatellite ? '1' : '0';
+  });
+
+  // Cluster toggle
+  document.getElementById('toggleClusterBtn').addEventListener('click', () => {
+    mapClusterEnabled = !mapClusterEnabled;
+    document.getElementById('toggleClusterBtn').dataset.active = mapClusterEnabled ? '1' : '0';
+    renderMap();
+  });
 }
 
 // ============ MODAL ============
@@ -1936,6 +2573,7 @@ function render() {
 // ============ INIT ============
 async function init() {
   await loadData();
+  bindMapControls();
   renderStats();
   render();
 }
