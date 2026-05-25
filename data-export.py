@@ -1,12 +1,11 @@
 """
-Install Board → data.json 导出脚本
-
-每次跑会把 Install Board 全部项目导出为 docs/data.json，
-网页可以静态读取（不需要 monday token 暴露在前端）。
+Install Board → docs/data.json
+v4: 增加 team + duration_hours 字段，供 Outlook 风格周视图使用
 """
-import os
 import json
-import datetime as dt
+import os
+import sys
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 import requests
@@ -25,10 +24,16 @@ COL = {
     "sales": "dropdown_mm3mgx76",
     "notes": "long_text_mm3mq5tb",
     "production_link": "board_relation_mm3mj5j8",
+    "team": "color_mm3matf",
+    "duration_hours": "numeric_mm3mk5em",
 }
 
 
-def monday_query(query: str) -> Dict[str, Any]:
+def log(msg: str) -> None:
+    print(f"[{datetime.utcnow().isoformat()}] {msg}", flush=True)
+
+
+def monday_query(query: str, variables: Optional[Dict] = None) -> Dict[str, Any]:
     r = requests.post(
         "https://api.monday.com/v2",
         headers={
@@ -36,100 +41,135 @@ def monday_query(query: str) -> Dict[str, Any]:
             "Content-Type": "application/json",
             "API-Version": "2024-01",
         },
-        json={"query": query},
+        json={"query": query, "variables": variables or {}},
         timeout=60,
     )
     r.raise_for_status()
     data = r.json()
     if "errors" in data:
-        raise RuntimeError(f"GraphQL error: {data['errors']}")
+        raise RuntimeError(f"monday GraphQL error: {data['errors']}")
     return data["data"]
 
 
 def fetch_all_items() -> List[Dict[str, Any]]:
-    col_ids = list(COL.values())
-    col_ids_json = json.dumps(col_ids)
-
-    items = []
-    cursor = None
+    log("读取 Install Board 所有项目...")
+    all_items: List[Dict[str, Any]] = []
+    cursor: Optional[str] = None
+    column_ids_str = json.dumps(list(COL.values()))
     while True:
-        cursor_part = f', cursor: "{cursor}"' if cursor else ""
-        query = f"""
-        query {{
-          boards(ids: [{INSTALL_BOARD_ID}]) {{
-            items_page(limit: 500{cursor_part}) {{
-              cursor
-              items {{
-                id
-                name
-                column_values(ids: {col_ids_json}) {{
-                  id
-                  text
-                  value
+        if cursor:
+            query = f"""
+            query ($board: ID!, $cursor: String!) {{
+              boards(ids: [$board]) {{
+                items_page(limit: 200, cursor: $cursor) {{
+                  cursor
+                  items {{
+                    id
+                    name
+                    column_values(ids: {column_ids_str}) {{ id text value }}
+                  }}
                 }}
               }}
-            }}
-          }}
-        }}
-        """
-        data = monday_query(query)
+            }}"""
+            vars_ = {"board": INSTALL_BOARD_ID, "cursor": cursor}
+        else:
+            query = f"""
+            query ($board: ID!) {{
+              boards(ids: [$board]) {{
+                items_page(limit: 200) {{
+                  cursor
+                  items {{
+                    id
+                    name
+                    column_values(ids: {column_ids_str}) {{ id text value }}
+                  }}
+                }}
+              }}
+            }}"""
+            vars_ = {"board": INSTALL_BOARD_ID}
+        data = monday_query(query, vars_)
         page = data["boards"][0]["items_page"]
-        for item in page["items"]:
-            vals = {cv["id"]: {"text": cv.get("text"), "value": cv.get("value")}
-                    for cv in item.get("column_values", [])}
-            items.append({
-                "id": item["id"],
-                "name": item["name"],
-                "install_date": vals.get(COL["install_date"], {}).get("text") or "",
-                "address": vals.get(COL["address"], {}).get("text") or "",
-                "installer": vals.get(COL["installer"], {}).get("text") or "",
-                "schedule_status": vals.get(COL["schedule_status"], {}).get("text") or "",
-                "project_type": vals.get(COL["project_type"], {}).get("text") or "",
-                "priority": vals.get(COL["priority"], {}).get("text") or "",
-                "installation_value": vals.get(COL["installation_value"], {}).get("text") or "",
-                "sales": vals.get(COL["sales"], {}).get("text") or "",
-                "notes": vals.get(COL["notes"], {}).get("text") or "",
-            })
+        all_items.extend(page["items"])
         cursor = page.get("cursor")
         if not cursor:
             break
-    return items
+    log(f"读取 {len(all_items)} 个项目")
+    return all_items
+
+
+def safe_float(s: Optional[str]) -> Optional[float]:
+    if s is None or s == "":
+        return None
+    try:
+        return float(s)
+    except (ValueError, TypeError):
+        return None
+
+
+def parse_item(item: Dict[str, Any]) -> Dict[str, Any]:
+    cv_map: Dict[str, Dict[str, Any]] = {cv["id"]: cv for cv in item.get("column_values", [])}
+
+    def get_text(col_key: str) -> str:
+        cv = cv_map.get(COL[col_key])
+        return (cv.get("text") or "").strip() if cv else ""
+
+    install_date = get_text("install_date")
+    installer = get_text("installer")
+    project_type = get_text("project_type")
+    priority = get_text("priority")
+    schedule_status = get_text("schedule_status")
+    sales = get_text("sales")
+    team = get_text("team")
+    duration_raw = get_text("duration_hours")
+    value_raw = get_text("installation_value")
+    address = get_text("address")
+    notes = get_text("notes")
+
+    # production_link 拿 item id
+    prod_link_cv = cv_map.get(COL["production_link"])
+    prod_id: Optional[str] = None
+    if prod_link_cv and prod_link_cv.get("value"):
+        try:
+            val = json.loads(prod_link_cv["value"])
+            ids = val.get("linkedPulseIds") or []
+            if ids:
+                prod_id = str(ids[0].get("linkedPulseId"))
+        except Exception:
+            prod_id = None
+
+    return {
+        "id": item["id"],
+        "name": item["name"],
+        "install_date": install_date,
+        "address": address,
+        "installer": installer,
+        "schedule_status": schedule_status,
+        "project_type": project_type,
+        "priority": priority,
+        "installation_value": safe_float(value_raw) or 0,
+        "sales": sales,
+        "notes": notes,
+        "production_id": prod_id,
+        "team": team,
+        "duration_hours": safe_float(duration_raw),
+    }
 
 
 def main() -> None:
-    print(f"[{dt.datetime.utcnow().isoformat()}] 导出 Install Board 数据...")
-    items = fetch_all_items()
-    print(f"  共 {len(items)} 个项目")
+    items_raw = fetch_all_items()
+    items = [parse_item(i) for i in items_raw]
+    # 按日期排序
+    items.sort(key=lambda x: x["install_date"] or "9999-99-99")
 
-    # 按 install_date 过滤 + 排序，只保留今天前30天到未来 60 天的
-    today = dt.date.today()
-    cutoff_past = today - dt.timedelta(days=30)
-    cutoff_future = today + dt.timedelta(days=60)
-
-    filtered = []
-    for item in items:
-        if not item["install_date"]:
-            continue
-        try:
-            d = dt.datetime.strptime(item["install_date"], "%Y-%m-%d").date()
-        except ValueError:
-            continue
-        if cutoff_past <= d <= cutoff_future:
-            filtered.append(item)
-
-    filtered.sort(key=lambda x: x["install_date"])
-
-    output = {
-        "generated_at": dt.datetime.utcnow().isoformat() + "Z",
-        "count": len(filtered),
-        "items": filtered,
+    out = {
+        "updated_at": datetime.utcnow().isoformat() + "Z",
+        "count": len(items),
+        "items": items,
     }
-
     os.makedirs("docs", exist_ok=True)
     with open("docs/data.json", "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
-
-    print(f"  写入 docs/data.json: {len(filtered)} 个项目")
+        json.dump(out, f, ensure_ascii=False, indent=2)
+    log(f"已写 docs/data.json ({len(items)} 项)")
 
 
 if __name__ == "__main__":

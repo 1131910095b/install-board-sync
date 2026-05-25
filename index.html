@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACE SIGN · Install Schedule</title>
+<style>
+  :root {
+    --bg: #0d0e10;
+    --panel: #16181c;
+    --panel-2: #1d2025;
+    --panel-3: #22262c;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.15);
+    --text: #ecedef;
+    --text-dim: #9aa0a8;
+    --text-faint: #6b7079;
+    --accent: #7c5cff;
+    --accent-2: #ff7a59;
+
+    --team-a: #4f8cff;
+    --team-a-bg: rgba(79,140,255,0.10);
+    --team-a-border: rgba(79,140,255,0.35);
+    --team-b: #ff6d3b;
+    --team-b-bg: rgba(255,109,59,0.10);
+    --team-b-border: rgba(255,109,59,0.35);
+    --team-none: #6b7079;
+
+    --urgent: #ef4444;
+    --high:   #f97316;
+    --medium: #eab308;
+    --low:    #10b981;
+
+    --shadow: 0 8px 24px rgba(0,0,0,0.45);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* === LOGIN === */
+  .login-overlay {
+    position: fixed; inset: 0;
+    background: radial-gradient(circle at 50% 30%, #1a1d24 0%, #0a0b0d 70%);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  .login-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px 32px;
+    width: 360px;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .login-box h1 { font-size: 22px; margin-bottom: 4px; letter-spacing: 0.5px; }
+  .login-box .sub { color: var(--text-dim); font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 24px; }
+  .login-box input {
+    width: 100%; padding: 12px 14px;
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); color: var(--text); font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .login-box input:focus { outline: none; border-color: var(--accent); }
+  .login-box button {
+    width: 100%; padding: 12px;
+    background: var(--accent); color: white; border: none;
+    border-radius: var(--radius-sm); cursor: pointer;
+    font-size: 14px; font-weight: 500;
+  }
+  .login-box button:hover { background: #6849ff; }
+  .login-error { color: #ef4444; font-size: 12px; margin-top: 8px; min-height: 16px; }
+
+  /* === LAYOUT === */
+  .app { display: none; min-height: 100vh; flex-direction: column; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar .brand {
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .topbar .brand .logo {
+    font-size: 18px; font-weight: 700; letter-spacing: 1px;
+    color: var(--accent);
+  }
+  .topbar .brand .tag {
+    font-size: 11px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase;
+  }
+  .topbar .actions { display: flex; gap: 8px; }
+  .btn {
+    padding: 8px 14px;
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer; font-size: 13px;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: background 0.15s;
+  }
+  .btn:hover { background: var(--panel-3); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: white; }
+  .btn.primary:hover { background: #6849ff; }
+  .btn.success { background: #10b981; border-color: #10b981; color: white; }
+  .btn.success:hover { background: #0ea372; }
+
+  /* === STATS STRIP === */
+  .stats-strip {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    gap: 1px; background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-cell {
+    background: var(--panel);
+    padding: 14px 18px;
+  }
+  .stat-cell .label {
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-faint); margin-bottom: 4px;
+  }
+  .stat-cell .value {
+    font-size: 22px; font-weight: 600; color: var(--text);
+  }
+  .stat-cell .value .small { font-size: 12px; color: var(--text-dim); font-weight: 400; margin-left: 6px; }
+  .stat-cell.team-a { border-top: 3px solid var(--team-a); }
+  .stat-cell.team-b { border-top: 3px solid var(--team-b); }
+  .stat-cell.urgent { border-top: 3px solid var(--urgent); }
+
+  /* === TOOLBAR === */
+  .toolbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .view-tabs {
+    display: flex; background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .view-tab {
+    padding: 7px 14px; cursor: pointer; font-size: 13px;
+    color: var(--text-dim);
+    border-right: 1px solid var(--border);
+  }
+  .view-tab:last-child { border-right: none; }
+  .view-tab.active { background: var(--accent); color: white; }
+
+  .date-nav { display: flex; align-items: center; gap: 8px; }
+  .date-nav .week-label {
+    font-size: 14px; font-weight: 500;
+    min-width: 220px; text-align: center;
+  }
+  .nav-btn {
+    width: 28px; height: 28px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+
+  .team-toggles { display: flex; gap: 6px; }
+  .team-toggle {
+    padding: 6px 12px; cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 12px; user-select: none;
+    background: var(--panel-2); color: var(--text-dim);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .team-toggle .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .team-toggle.active.a { background: var(--team-a-bg); color: var(--team-a); border-color: var(--team-a-border); }
+  .team-toggle.active.b { background: var(--team-b-bg); color: var(--team-b); border-color: var(--team-b-border); }
+  .team-toggle.active.none { background: rgba(107,112,121,0.15); color: var(--text); border-color: rgba(107,112,121,0.4); }
+  .team-toggle.a .dot { background: var(--team-a); }
+  .team-toggle.b .dot { background: var(--team-b); }
+  .team-toggle.none .dot { background: var(--team-none); }
+
+  .quick-filters { display: flex; gap: 4px; flex-wrap: wrap; }
+  .quick-filter {
+    padding: 6px 10px; cursor: pointer; font-size: 12px;
+    background: var(--panel-2); color: var(--text-dim);
+    border: 1px solid var(--border); border-radius: var(--radius-sm);
+  }
+  .quick-filter.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* === WEEK GRID === */
+  .week-container { flex: 1; padding: 16px 24px 32px; overflow: auto; }
+  .week-grid {
+    display: grid;
+    grid-template-columns: 60px repeat(5, 1fr);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    min-width: 1100px;
+  }
+  .grid-header-cell {
+    background: var(--panel-2);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .grid-header-cell:last-child { border-right: none; }
+  .grid-header-cell .day-name { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 1px; }
+  .grid-header-cell .day-number { font-size: 18px; font-weight: 600; margin-top: 2px; }
+  .grid-header-cell.today .day-number { color: var(--accent); }
+  .grid-header-cell.today { background: linear-gradient(180deg, rgba(124,92,255,0.15), var(--panel-2)); }
+  .grid-header-cell .day-teams {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    margin-top: 8px; font-size: 10px; color: var(--text-faint);
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .grid-header-cell .day-teams .a { color: var(--team-a); }
+  .grid-header-cell .day-teams .b { color: var(--team-b); }
+
+  .time-col-header {
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
+  .time-label {
+    padding: 4px 8px;
+    font-size: 10px;
+    color: var(--text-faint);
+    border-right: 1px solid var(--border);
+    text-align: right;
+    background: var(--panel-2);
+    position: relative;
+    top: -6px;
+  }
+
+  .day-column {
+    border-right: 1px solid var(--border);
+    position: relative;
+    background: var(--panel);
+  }
+  .day-column:last-child { border-right: none; }
+  .day-column.today { background: rgba(124,92,255,0.03); }
+  .day-column .team-split {
+    display: grid; grid-template-columns: 1fr 1fr;
+    height: 100%; min-height: 600px;
+    position: relative;
+  }
+  .day-column .team-lane {
+    position: relative;
+    border-right: 1px dashed var(--border);
+  }
+  .day-column .team-lane:last-child { border-right: none; }
+  .day-column .hour-line {
+    position: absolute; left: 0; right: 0;
+    border-bottom: 1px solid var(--border);
+    pointer-events: none;
+  }
+
+  /* Job block in week view */
+  .job-block {
+    position: absolute;
+    left: 4px; right: 4px;
+    background: var(--panel-2);
+    border-left: 3px solid var(--team-none);
+    border-radius: var(--radius-sm);
+    padding: 6px 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.12s, box-shadow 0.12s;
+    z-index: 2;
+  }
+  .job-block:hover {
+    transform: translateX(1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    z-index: 5;
+  }
+  .job-block.team-a { border-left-color: var(--team-a); background: linear-gradient(90deg, rgba(79,140,255,0.18), var(--panel-2) 40%); }
+  .job-block.team-b { border-left-color: var(--team-b); background: linear-gradient(90deg, rgba(255,109,59,0.18), var(--panel-2) 40%); }
+  .job-block .job-title {
+    font-size: 12px; font-weight: 600;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    margin-bottom: 2px;
+  }
+  .job-block .job-meta {
+    font-size: 10px; color: var(--text-dim);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .job-block .job-priority-dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    margin-right: 4px; vertical-align: middle;
+  }
+  .priority-Urgent { background: var(--urgent); }
+  .priority-High   { background: var(--high); }
+  .priority-Medium { background: var(--medium); }
+  .priority-Low    { background: var(--low); }
+
+  /* List view (fallback / day list) */
+  .list-view { flex: 1; padding: 16px 24px 32px; overflow: auto; }
+  .day-section { margin-bottom: 28px; }
+  .day-section .day-header {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 12px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-section .day-header .num { font-size: 28px; font-weight: 600; color: var(--text); }
+  .day-section .day-header .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; }
+  .day-section .day-header .count { margin-left: auto; font-size: 12px; color: var(--text-faint); }
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+  .job-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .job-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+  .job-card.team-a { border-top: 3px solid var(--team-a); }
+  .job-card.team-b { border-top: 3px solid var(--team-b); }
+  .job-card .card-img-row {
+    display: flex; gap: 2px; height: 110px; background: #000;
+    overflow: hidden;
+  }
+  .job-card .card-img-row img {
+    flex: 1; min-width: 0; object-fit: cover; height: 100%;
+  }
+  .job-card .card-body { padding: 12px 14px; }
+  .job-card .card-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+  .job-card .card-row { display: flex; gap: 6px; font-size: 11px; color: var(--text-dim); margin-bottom: 4px; align-items: center; }
+  .job-card .pill {
+    display: inline-block; padding: 2px 8px; border-radius: 99px;
+    font-size: 10px; letter-spacing: 0.5px;
+  }
+  .pill.urgent { background: rgba(239,68,68,0.15); color: var(--urgent); }
+  .pill.high   { background: rgba(249,115,22,0.15); color: var(--high); }
+  .pill.medium { background: rgba(234,179,8,0.15); color: var(--medium); }
+  .pill.low    { background: rgba(16,185,129,0.15); color: var(--low); }
+  .pill.team-a { background: var(--team-a-bg); color: var(--team-a); }
+  .pill.team-b { background: var(--team-b-bg); color: var(--team-b); }
+  .pill.unassigned { background: rgba(107,112,121,0.15); color: var(--text-dim); }
+
+  /* === MAP === */
+  #map { flex: 1; min-height: 600px; }
+
+  /* === MODAL === */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; backdrop-filter: blur(4px);
+  }
+  .modal-backdrop.show { display: flex; }
+  .modal {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    width: min(900px, 92vw); max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px;
+    position: relative;
+  }
+  .modal .close-btn {
+    position: absolute; top: 14px; right: 14px;
+    background: var(--panel-2); border: 1px solid var(--border);
+    width: 30px; height: 30px; border-radius: 50%;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim); font-size: 18px;
+  }
+  .modal h2 { font-size: 22px; margin-bottom: 12px; padding-right: 50px; }
+  .modal .meta-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px;
+    margin-bottom: 20px;
+  }
+  .modal .meta-item .meta-label {
+    font-size: 11px; color: var(--text-faint); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 2px;
+  }
+  .modal .meta-item .meta-value { font-size: 14px; color: var(--text); }
+  .modal .proofs-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .modal .proofs-section h3 { font-size: 13px; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+  .modal .proofs-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .modal .proofs-grid img {
+    width: 100%; height: 180px; object-fit: contain;
+    background: #000; border-radius: var(--radius-sm);
+    cursor: pointer; border: 1px solid var(--border);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: none; align-items: center; justify-content: center;
+    z-index: 2000; padding: 20px;
+  }
+  .lightbox.show { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .lightbox .close-btn {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--panel-2); color: white;
+    width: 40px; height: 40px; border-radius: 50%;
+    cursor: pointer; border: none; font-size: 22px;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .stats-strip { grid-template-columns: repeat(3, 1fr); }
+    .week-container { padding: 8px; }
+    .week-grid { min-width: 800px; }
+    .toolbar { padding: 10px; }
+  }
+
+  /* === FOOTER === */
+  .footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 11px;
+    text-align: center;
+  }
+
+  /* hide based on view */
+  .view-content { display: none; }
+  .view-content.active { display: flex; flex-direction: column; flex: 1; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <h1>ACE SIGN</h1>
+    <div class="sub">Install Schedule</div>
+    <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="current-password">
+    <button id="loginBtn">Sign In</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">ACE SIGN</div>
+      <div class="tag">Install Schedule</div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="refreshBtn">↻ Refresh</button>
+      <button class="btn success" id="downloadPdfBtn">↓ Download PDF</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip" id="statsStrip"></div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <div class="view-tabs" id="viewTabs">
+        <div class="view-tab active" data-view="week">Week</div>
+        <div class="view-tab" data-view="day">Day</div>
+        <div class="view-tab" data-view="list">List</div>
+        <div class="view-tab" data-view="map">Map</div>
+      </div>
+      <div class="date-nav">
+        <button class="btn nav-btn" id="prevBtn">‹</button>
+        <div class="week-label" id="weekLabel">—</div>
+        <button class="btn nav-btn" id="nextBtn">›</button>
+        <button class="btn" id="todayBtn">Today</button>
+      </div>
+    </div>
+    <div class="toolbar-right">
+      <div class="team-toggles">
+        <div class="team-toggle a active" data-team="Group A"><span class="dot"></span>Group A</div>
+        <div class="team-toggle b active" data-team="Group B"><span class="dot"></span>Group B</div>
+        <div class="team-toggle none active" data-team="__none__"><span class="dot"></span>Unassigned</div>
+      </div>
+      <div class="quick-filters" id="quickFilters">
+        <div class="quick-filter" data-filter="all">All</div>
+        <div class="quick-filter" data-filter="urgent">Urgent</div>
+        <div class="quick-filter" data-filter="unassigned">Unassigned</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW: WEEK -->
+  <div class="view-content active" id="view-week">
+    <div class="week-container">
+      <div class="week-grid" id="weekGrid"></div>
+    </div>
+  </div>
+
+  <!-- VIEW: DAY -->
+  <div class="view-content" id="view-day">
+    <div class="week-container">
+      <div class="week-grid" id="dayGrid" style="grid-template-columns: 60px 1fr; min-width: 600px;"></div>
+    </div>
+  </div>
+
+  <!-- VIEW: LIST -->
+  <div class="view-content" id="view-list">
+    <div class="list-view" id="listView"></div>
+  </div>
+
+  <!-- VIEW: MAP -->
+  <div class="view-content" id="view-map">
+    <div id="map"></div>
+  </div>
+
+  <div class="footer">
+    <span id="footerText">—</span>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" id="modalContent">
+    <button class="close-btn" id="modalClose">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="close-btn" id="lightboxClose">×</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+// ============ CONFIG ============
+const PASSWORD_HASH = 'a3b5e354c796d0bd0f8a966462c4a738858611963ff85f59d59bc9c9838eec51'; // ace2026
+
+const DAY_START_HOUR = 8;
+const DAY_END_HOUR = 18;
+const HOUR_HEIGHT_PX = 60;
+const DEFAULT_DURATION_HOURS = 2;
+
+// ============ STATE ============
+let DATA = { items: [], updated_at: '', count: 0 };
+let weekStart = startOfWeek(new Date()); // Monday
+let dayCursor = new Date();
+let currentView = 'week';
+let teamFilters = new Set(['Group A', 'Group B', '__none__']);
+let quickFilter = 'all';
+let geoCache = JSON.parse(localStorage.getItem('geoCache') || '{}');
+let mapInstance = null;
+let mapMarkers = [];
+
+// ============ AUTH ============
+async function sha256(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+document.getElementById('loginBtn').addEventListener('click', tryLogin);
+document.getElementById('passwordInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') tryLogin();
+});
+
+async function tryLogin() {
+  const pw = document.getElementById('passwordInput').value;
+  const hash = await sha256(pw);
+  if (hash === PASSWORD_HASH) {
+    sessionStorage.setItem('auth', '1');
+    showApp();
+  } else {
+    document.getElementById('loginError').textContent = 'Incorrect password';
+  }
+}
+
+function showApp() {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  init();
+}
+
+if (sessionStorage.getItem('auth') === '1') {
+  showApp();
+}
+
+// ============ DATE UTILS ============
+function startOfWeek(d) {
+  const result = new Date(d);
+  const day = result.getDay(); // 0=Sun, 1=Mon, ...
+  const diff = day === 0 ? -6 : 1 - day; // Monday
+  result.setDate(result.getDate() + diff);
+  result.setHours(0, 0, 0, 0);
+  return result;
+}
+function endOfWeek(d) {
+  const r = startOfWeek(d);
+  r.setDate(r.getDate() + 4); // Friday
+  return r;
+}
+function fmtDate(d, fmt = 'short') {
+  const opts = fmt === 'short' ? { month: 'short', day: 'numeric' } : { year: 'numeric', month: 'long', day: 'numeric' };
+  return d.toLocaleDateString('en-US', opts);
+}
+function fmtDay(d) {
+  return d.toLocaleDateString('en-US', { weekday: 'short' });
+}
+function ymd(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+function sameDay(a, b) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+function isToday(d) { return sameDay(d, new Date()); }
+
+// ============ LOAD ============
+async function loadData() {
+  try {
+    const r = await fetch('data.json?t=' + Date.now());
+    DATA = await r.json();
+  } catch (e) {
+    console.error(e);
+    DATA = { items: [], updated_at: '', count: 0 };
+  }
+  document.getElementById('footerText').textContent =
+    `${DATA.count} jobs · Updated ${DATA.updated_at ? new Date(DATA.updated_at).toLocaleString() : '—'}`;
+}
+
+// ============ STATS ============
+function renderStats() {
+  const now = new Date();
+  const wkStart = startOfWeek(now);
+  const wkEnd = new Date(wkStart); wkEnd.setDate(wkEnd.getDate() + 4); wkEnd.setHours(23,59,59,999);
+  const monthStr = ymd(now).slice(0, 7);
+
+  const items = DATA.items;
+  const inMonth = items.filter(i => i.install_date && i.install_date.startsWith(monthStr));
+  const inWeek = items.filter(i => {
+    if (!i.install_date) return false;
+    const d = new Date(i.install_date + 'T00:00');
+    return d >= wkStart && d <= wkEnd;
+  });
+  const today = items.filter(i => i.install_date === ymd(now));
+  const urgent = items.filter(i => i.priority === 'Urgent');
+  const unassigned = items.filter(i => !i.installer);
+  const totalValue = items.reduce((s, i) => s + (i.installation_value || 0), 0);
+
+  const teamAJobs = inWeek.filter(i => i.team === 'Group A');
+  const teamBJobs = inWeek.filter(i => i.team === 'Group B');
+  const teamAHrs = teamAJobs.reduce((s, i) => s + (i.duration_hours || DEFAULT_DURATION_HOURS), 0);
+  const teamBHrs = teamBJobs.reduce((s, i) => s + (i.duration_hours || DEFAULT_DURATION_HOURS), 0);
+
+  const cells = [
+    { label: 'This Month', value: inMonth.length, cls: '' },
+    { label: 'Group A (week)', value: `${teamAJobs.length}<span class="small">${teamAHrs}h</span>`, cls: 'team-a' },
+    { label: 'Group B (week)', value: `${teamBJobs.length}<span class="small">${teamBHrs}h</span>`, cls: 'team-b' },
+    { label: 'Urgent', value: urgent.length, cls: 'urgent' },
+    { label: 'Unassigned', value: unassigned.length, cls: '' },
+    { label: 'Total Value', value: '$' + totalValue.toLocaleString(), cls: '' },
+  ];
+
+  document.getElementById('statsStrip').innerHTML = cells.map(c => `
+    <div class="stat-cell ${c.cls}">
+      <div class="label">${c.label}</div>
+      <div class="value">${c.value}</div>
+    </div>
+  `).join('');
+}
+
+// ============ FILTERING ============
+function applyFilters(items) {
+  return items.filter(i => {
+    // Team filter
+    const teamKey = i.team || '__none__';
+    if (!teamFilters.has(teamKey)) return false;
+    // Quick filter
+    if (quickFilter === 'urgent' && i.priority !== 'Urgent') return false;
+    if (quickFilter === 'unassigned' && i.installer) return false;
+    return true;
+  });
+}
+
+// ============ WEEK VIEW ============
+function renderWeek() {
+  const grid = document.getElementById('weekGrid');
+  const today = new Date();
+
+  // Day columns + Group A/B subdivisions
+  const days = [];
+  for (let i = 0; i < 5; i++) {
+    const d = new Date(weekStart);
+    d.setDate(d.getDate() + i);
+    days.push(d);
+  }
+
+  document.getElementById('weekLabel').textContent =
+    `${fmtDate(weekStart)} – ${fmtDate(days[4])}`;
+
+  // Header row
+  let html = '<div class="time-col-header"></div>';
+  for (const d of days) {
+    const todayCls = isToday(d) ? 'today' : '';
+    html += `
+      <div class="grid-header-cell ${todayCls}">
+        <div class="day-name">${fmtDay(d)}</div>
+        <div class="day-number">${d.getDate()}</div>
+        <div class="day-teams">
+          <div class="a">A</div>
+          <div class="b">B</div>
+        </div>
+      </div>`;
+  }
+
+  // Time grid
+  const hours = DAY_END_HOUR - DAY_START_HOUR;
+  const gridHeight = hours * HOUR_HEIGHT_PX;
+
+  // Time column
+  let timeColHTML = '';
+  for (let h = 0; h <= hours; h++) {
+    const hourStr = (DAY_START_HOUR + h);
+    const top = h * HOUR_HEIGHT_PX;
+    if (h < hours) {
+      timeColHTML += `<div class="time-label" style="height: ${HOUR_HEIGHT_PX}px;">${formatHour(hourStr)}</div>`;
+    }
+  }
+  html += `<div style="background: var(--panel-2); border-right: 1px solid var(--border);">${timeColHTML}</div>`;
+
+  // Day columns
+  const filtered = applyFilters(DATA.items);
+  for (const d of days) {
+    const todayCls = isToday(d) ? 'today' : '';
+    const dayKey = ymd(d);
+    const dayJobs = filtered.filter(i => i.install_date === dayKey);
+    const teamAJobs = dayJobs.filter(i => i.team === 'Group A');
+    const teamBJobs = dayJobs.filter(i => (i.team || '__none__') !== 'Group A'); // B + unassigned in B lane
+
+    // Hour lines
+    let hourLinesHTML = '';
+    for (let h = 1; h < hours; h++) {
+      hourLinesHTML += `<div class="hour-line" style="top: ${h * HOUR_HEIGHT_PX}px;"></div>`;
+    }
+
+    // Build job blocks for each lane with stacking
+    const teamAHTML = buildJobBlocks(teamAJobs, 'team-a');
+    const teamBHTML = buildJobBlocks(teamBJobs, 'team-b');
+
+    html += `
+      <div class="day-column ${todayCls}" style="min-height: ${gridHeight}px;">
+        <div class="team-split" style="min-height: ${gridHeight}px;">
+          <div class="team-lane">
+            ${hourLinesHTML}
+            ${teamAHTML}
+          </div>
+          <div class="team-lane">
+            ${hourLinesHTML}
+            ${teamBHTML}
+          </div>
+        </div>
+      </div>`;
+  }
+
+  grid.innerHTML = html;
+
+  // Attach click handlers
+  grid.querySelectorAll('.job-block').forEach(el => {
+    el.addEventListener('click', e => {
+      const id = el.dataset.id;
+      openModal(id);
+    });
+  });
+}
+
+function formatHour(h) {
+  const hour12 = h % 12 === 0 ? 12 : h % 12;
+  const ampm = h < 12 ? 'AM' : 'PM';
+  return `${hour12} ${ampm}`;
+}
+
+function buildJobBlocks(jobs, teamClass) {
+  // Auto-stack jobs starting at DAY_START_HOUR, each takes duration_hours
+  let cursor = DAY_START_HOUR;
+  let html = '';
+  for (const job of jobs) {
+    const dur = job.duration_hours || DEFAULT_DURATION_HOURS;
+    const top = (cursor - DAY_START_HOUR) * HOUR_HEIGHT_PX;
+    const height = Math.max(dur * HOUR_HEIGHT_PX - 4, 40);
+    const prioCls = job.priority ? `priority-${job.priority}` : '';
+    const teamCls = job.team === 'Group A' ? 'team-a' : (job.team === 'Group B' ? 'team-b' : '');
+
+    html += `
+      <div class="job-block ${teamCls}" data-id="${job.id}"
+           style="top: ${top}px; height: ${height}px;">
+        <div class="job-title">${escapeHTML(job.name)}</div>
+        <div class="job-meta">
+          ${job.priority ? `<span><span class="job-priority-dot ${prioCls}"></span>${job.priority}</span>` : ''}
+          ${job.installer ? `<span>👤 ${escapeHTML(job.installer)}</span>` : ''}
+          <span>${dur}h</span>
+        </div>
+      </div>`;
+    cursor += dur;
+    if (cursor > DAY_END_HOUR) cursor = DAY_END_HOUR;
+  }
+  return html;
+}
+
+// ============ DAY VIEW ============
+function renderDay() {
+  const grid = document.getElementById('dayGrid');
+  const d = dayCursor;
+  document.getElementById('weekLabel').textContent =
+    d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' });
+
+  const dayKey = ymd(d);
+  const filtered = applyFilters(DATA.items).filter(i => i.install_date === dayKey);
+  const teamAJobs = filtered.filter(i => i.team === 'Group A');
+  const teamBJobs = filtered.filter(i => (i.team || '__none__') !== 'Group A');
+
+  const hours = DAY_END_HOUR - DAY_START_HOUR;
+  const gridHeight = hours * HOUR_HEIGHT_PX;
+
+  // Header
+  let html = '<div class="time-col-header"></div>';
+  html += `
+    <div class="grid-header-cell ${isToday(d) ? 'today' : ''}">
+      <div class="day-name">${fmtDay(d)}</div>
+      <div class="day-number">${d.getDate()}</div>
+      <div class="day-teams">
+        <div class="a">Group A</div>
+        <div class="b">Group B + Unassigned</div>
+      </div>
+    </div>`;
+
+  // Time column
+  let timeColHTML = '';
+  for (let h = 0; h < hours; h++) {
+    timeColHTML += `<div class="time-label" style="height: ${HOUR_HEIGHT_PX}px;">${formatHour(DAY_START_HOUR + h)}</div>`;
+  }
+  html += `<div style="background: var(--panel-2); border-right: 1px solid var(--border);">${timeColHTML}</div>`;
+
+  // Day column
+  let hourLinesHTML = '';
+  for (let h = 1; h < hours; h++) {
+    hourLinesHTML += `<div class="hour-line" style="top: ${h * HOUR_HEIGHT_PX}px;"></div>`;
+  }
+  const teamAHTML = buildJobBlocks(teamAJobs, 'team-a');
+  const teamBHTML = buildJobBlocks(teamBJobs, 'team-b');
+
+  html += `
+    <div class="day-column ${isToday(d) ? 'today' : ''}" style="min-height: ${gridHeight}px;">
+      <div class="team-split" style="min-height: ${gridHeight}px;">
+        <div class="team-lane">
+          ${hourLinesHTML}
+          ${teamAHTML}
+        </div>
+        <div class="team-lane">
+          ${hourLinesHTML}
+          ${teamBHTML}
+        </div>
+      </div>
+    </div>`;
+
+  grid.innerHTML = html;
+  grid.querySelectorAll('.job-block').forEach(el => {
+    el.addEventListener('click', () => openModal(el.dataset.id));
+  });
+}
+
+// ============ LIST VIEW ============
+function renderList() {
+  const container = document.getElementById('listView');
+  const filtered = applyFilters(DATA.items)
+    .filter(i => i.install_date)
+    .sort((a, b) => a.install_date.localeCompare(b.install_date));
+
+  // Group by date
+  const byDate = {};
+  for (const i of filtered) {
+    if (!byDate[i.install_date]) byDate[i.install_date] = [];
+    byDate[i.install_date].push(i);
+  }
+
+  document.getElementById('weekLabel').textContent = 'All Installs';
+
+  let html = '';
+  for (const date of Object.keys(byDate).sort()) {
+    const d = new Date(date + 'T00:00');
+    const jobs = byDate[date];
+    html += `
+      <div class="day-section">
+        <div class="day-header">
+          <div class="num">${d.getDate()}</div>
+          <div class="label">${d.toLocaleDateString('en-US', { weekday: 'long', month: 'short' })}</div>
+          <div class="count">${jobs.length} job${jobs.length > 1 ? 's' : ''}</div>
+        </div>
+        <div class="cards-grid">
+          ${jobs.map(j => jobCardHTML(j)).join('')}
+        </div>
+      </div>`;
+  }
+  if (!html) html = '<div style="padding: 40px; text-align:center; color: var(--text-faint);">No jobs match the current filters.</div>';
+  container.innerHTML = html;
+  container.querySelectorAll('.job-card').forEach(el => {
+    el.addEventListener('click', () => openModal(el.dataset.id));
+  });
+}
+
+function jobCardHTML(job) {
+  const teamCls = job.team === 'Group A' ? 'team-a' : (job.team === 'Group B' ? 'team-b' : '');
+  const teamPill = job.team
+    ? `<span class="pill ${teamCls}">${job.team}</span>`
+    : `<span class="pill unassigned">No Team</span>`;
+  const prio = job.priority ? `<span class="pill ${job.priority.toLowerCase()}">${job.priority}</span>` : '';
+  const proofs = (job.production_id && [1,2,3]).map(n =>
+    `<img src="proofs/${job.production_id}_p${n}_thumb.jpg" onerror="this.style.display='none'">`
+  ).join('');
+
+  return `
+    <div class="job-card ${teamCls}" data-id="${job.id}">
+      ${job.production_id ? `<div class="card-img-row">${proofs}</div>` : ''}
+      <div class="card-body">
+        <div class="card-title">${escapeHTML(job.name)}</div>
+        <div class="card-row">${prio} ${teamPill}</div>
+        ${job.address ? `<div class="card-row" style="color: var(--text-dim);">📍 ${escapeHTML(job.address)}</div>` : ''}
+        <div class="card-row">
+          ${job.installer ? `<span>👤 ${escapeHTML(job.installer)}</span>` : '<span style="color: var(--text-faint);">Unassigned</span>'}
+          ${job.duration_hours ? `<span>· ${job.duration_hours}h</span>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
+// ============ MAP VIEW ============
+function renderMap() {
+  document.getElementById('weekLabel').textContent = 'Map View';
+
+  if (!mapInstance) {
+    mapInstance = L.map('map').setView([-37.8136, 144.9631], 10); // Melbourne
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap',
+      maxZoom: 19,
+    }).addTo(mapInstance);
+  }
+
+  mapMarkers.forEach(m => mapInstance.removeLayer(m));
+  mapMarkers = [];
+
+  const items = applyFilters(DATA.items).filter(i => i.address);
+  const bounds = [];
+
+  items.forEach(async (job, idx) => {
+    const coords = await geocode(job.address);
+    if (!coords) return;
+    const color = job.priority === 'Urgent' ? '#ef4444'
+                : job.priority === 'High'   ? '#f97316'
+                : job.priority === 'Medium' ? '#eab308'
+                : '#10b981';
+    const borderColor = job.team === 'Group A' ? '#4f8cff' : (job.team === 'Group B' ? '#ff6d3b' : '#6b7079');
+    const icon = L.divIcon({
+      html: `<div style="width: 20px; height: 20px; background: ${color}; border: 3px solid ${borderColor}; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.4);"></div>`,
+      className: '',
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
+    });
+    const m = L.marker([coords.lat, coords.lon], { icon }).addTo(mapInstance);
+    m.bindPopup(`
+      <div style="font-family: sans-serif;">
+        <strong>${escapeHTML(job.name)}</strong><br>
+        ${escapeHTML(job.address)}<br>
+        ${job.priority || ''} · ${job.team || 'Unassigned'} · ${job.installer || ''}
+      </div>
+    `);
+    m.on('click', () => openModal(job.id));
+    mapMarkers.push(m);
+    bounds.push([coords.lat, coords.lon]);
+    if (bounds.length === items.length && bounds.length > 0) {
+      mapInstance.fitBounds(bounds, { padding: [50, 50] });
+    }
+  });
+}
+
+async function geocode(addr) {
+  if (geoCache[addr]) return geoCache[addr];
+  try {
+    const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(addr)}&format=json&limit=1`);
+    const j = await r.json();
+    if (j.length) {
+      const c = { lat: parseFloat(j[0].lat), lon: parseFloat(j[0].lon) };
+      geoCache[addr] = c;
+      localStorage.setItem('geoCache', JSON.stringify(geoCache));
+      return c;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  return null;
+}
+
+// ============ MODAL ============
+function openModal(id) {
+  const job = DATA.items.find(i => i.id === id);
+  if (!job) return;
+  const teamCls = job.team === 'Group A' ? 'team-a' : (job.team === 'Group B' ? 'team-b' : '');
+  const teamPill = job.team
+    ? `<span class="pill ${teamCls}">${job.team}</span>`
+    : `<span class="pill unassigned">No Team</span>`;
+  const prio = job.priority ? `<span class="pill ${job.priority.toLowerCase()}">${job.priority}</span>` : '';
+
+  const proofsHTML = job.production_id
+    ? [1,2,3,4,5,6,7,8].map(n =>
+        `<img src="proofs/${job.production_id}_p${n}.jpg" onerror="this.style.display='none'" data-page="${n}">`
+      ).join('')
+    : '';
+
+  document.getElementById('modalBody').innerHTML = `
+    <h2>${escapeHTML(job.name)}</h2>
+    <div style="margin-bottom: 14px;">${prio} ${teamPill}</div>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label">Install Date</div>
+        <div class="meta-value">${job.install_date || '—'}</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Duration</div>
+        <div class="meta-value">${job.duration_hours ? job.duration_hours + ' hrs' : '—'}</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Installer</div>
+        <div class="meta-value">${escapeHTML(job.installer || '—')}</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Sales</div>
+        <div class="meta-value">${escapeHTML(job.sales || '—')}</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Project Type</div>
+        <div class="meta-value">${escapeHTML(job.project_type || '—')}</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Status</div>
+        <div class="meta-value">${escapeHTML(job.schedule_status || '—')}</div>
+      </div>
+      <div class="meta-item" style="grid-column: 1/-1;">
+        <div class="meta-label">Address</div>
+        <div class="meta-value">${escapeHTML(job.address || '—')}</div>
+      </div>
+      <div class="meta-item" style="grid-column: 1/-1;">
+        <div class="meta-label">Value</div>
+        <div class="meta-value">$${(job.installation_value || 0).toLocaleString()}</div>
+      </div>
+      ${job.notes ? `
+      <div class="meta-item" style="grid-column: 1/-1;">
+        <div class="meta-label">Notes</div>
+        <div class="meta-value">${escapeHTML(job.notes)}</div>
+      </div>` : ''}
+    </div>
+    ${proofsHTML ? `
+      <div class="proofs-section">
+        <h3>Sign Proof</h3>
+        <div class="proofs-grid">${proofsHTML}</div>
+      </div>` : ''}
+  `;
+  document.getElementById('modalBackdrop').classList.add('show');
+
+  document.querySelectorAll('.proofs-grid img').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src));
+  });
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalBackdrop').addEventListener('click', e => {
+  if (e.target.id === 'modalBackdrop') closeModal();
+});
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('show');
+}
+
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('show');
+}
+document.getElementById('lightboxClose').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.remove('show');
+});
+document.getElementById('lightbox').addEventListener('click', e => {
+  if (e.target.id === 'lightbox') document.getElementById('lightbox').classList.remove('show');
+});
+
+// ============ NAVIGATION ============
+document.getElementById('viewTabs').addEventListener('click', e => {
+  const tab = e.target.closest('.view-tab');
+  if (!tab) return;
+  document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+  currentView = tab.dataset.view;
+  document.getElementById('view-' + currentView).classList.add('active');
+  render();
+  if (currentView === 'map' && mapInstance) {
+    setTimeout(() => mapInstance.invalidateSize(), 100);
+  }
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => {
+  if (currentView === 'week') {
+    weekStart.setDate(weekStart.getDate() - 7);
+  } else if (currentView === 'day') {
+    dayCursor.setDate(dayCursor.getDate() - 1);
+  }
+  render();
+});
+document.getElementById('nextBtn').addEventListener('click', () => {
+  if (currentView === 'week') {
+    weekStart.setDate(weekStart.getDate() + 7);
+  } else if (currentView === 'day') {
+    dayCursor.setDate(dayCursor.getDate() + 1);
+  }
+  render();
+});
+document.getElementById('todayBtn').addEventListener('click', () => {
+  weekStart = startOfWeek(new Date());
+  dayCursor = new Date();
+  render();
+});
+
+document.getElementById('refreshBtn').addEventListener('click', async () => {
+  await loadData();
+  renderStats();
+  render();
+});
+
+// Team toggles
+document.querySelectorAll('.team-toggle').forEach(t => {
+  t.addEventListener('click', () => {
+    const team = t.dataset.team;
+    if (teamFilters.has(team)) teamFilters.delete(team);
+    else teamFilters.add(team);
+    t.classList.toggle('active');
+    render();
+  });
+});
+
+// Quick filters
+document.getElementById('quickFilters').addEventListener('click', e => {
+  const f = e.target.closest('.quick-filter');
+  if (!f) return;
+  document.querySelectorAll('.quick-filter').forEach(x => x.classList.remove('active'));
+  f.classList.add('active');
+  quickFilter = f.dataset.filter;
+  render();
+});
+
+// PDF
+document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'a4' });
+  const filtered = applyFilters(DATA.items);
+
+  // Title
+  pdf.setFontSize(18);
+  pdf.text('ACE SIGN — Install Schedule', 40, 40);
+  pdf.setFontSize(10);
+  pdf.text(`Generated ${new Date().toLocaleString()}`, 40, 56);
+
+  let y = 80;
+  if (currentView === 'week') {
+    pdf.text(`Week: ${fmtDate(weekStart)} – ${fmtDate(endOfWeek(weekStart))}`, 40, 72);
+  } else if (currentView === 'day') {
+    pdf.text(`Day: ${dayCursor.toDateString()}`, 40, 72);
+  }
+
+  // Group by date
+  const inRange = currentView === 'week'
+    ? filtered.filter(i => {
+        if (!i.install_date) return false;
+        const d = new Date(i.install_date + 'T00:00');
+        return d >= weekStart && d <= endOfWeek(weekStart);
+      })
+    : currentView === 'day'
+    ? filtered.filter(i => i.install_date === ymd(dayCursor))
+    : filtered;
+
+  const byDate = {};
+  for (const i of inRange) {
+    if (!byDate[i.install_date]) byDate[i.install_date] = [];
+    byDate[i.install_date].push(i);
+  }
+
+  pdf.setFontSize(11);
+  for (const date of Object.keys(byDate).sort()) {
+    const d = new Date(date + 'T00:00');
+    if (y > 520) { pdf.addPage(); y = 40; }
+    pdf.setFontSize(13);
+    pdf.setTextColor(124, 92, 255);
+    pdf.text(d.toDateString(), 40, y);
+    pdf.setTextColor(0, 0, 0);
+    y += 18;
+    pdf.setFontSize(10);
+    for (const j of byDate[date]) {
+      if (y > 540) { pdf.addPage(); y = 40; }
+      const teamMark = j.team === 'Group A' ? '[A]' : j.team === 'Group B' ? '[B]' : '[—]';
+      const prio = j.priority ? `(${j.priority})` : '';
+      const inst = j.installer || 'Unassigned';
+      const dur = j.duration_hours ? `${j.duration_hours}h` : '';
+      pdf.text(`${teamMark} ${j.name} ${prio}`, 40, y);
+      pdf.setTextColor(100, 100, 100);
+      pdf.text(`  ${j.address || ''} · ${inst} · ${dur}`, 40, y + 12);
+      pdf.setTextColor(0, 0, 0);
+      y += 30;
+    }
+    y += 8;
+  }
+
+  pdf.save(`ACE-SIGN-Schedule-${ymd(new Date())}.pdf`);
+});
+
+// ============ RENDER ============
+function render() {
+  if (currentView === 'week') renderWeek();
+  else if (currentView === 'day') renderDay();
+  else if (currentView === 'list') renderList();
+  else if (currentView === 'map') renderMap();
+}
+
+// ============ INIT ============
+async function init() {
+  await loadData();
+  renderStats();
+  render();
+}
+
+// ============ UTIL ============
+function escapeHTML(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[c]));
+}
+</script>
+</body>
+</html>
