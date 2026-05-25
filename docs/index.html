@@ -2324,6 +2324,15 @@ async function loadImageAsDataUrl(url) {
   }
 }
 
+function getImageDims(dataUrl) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve({ w: img.naturalWidth || img.width, h: img.naturalHeight || img.height });
+    img.onerror = () => resolve({ w: 800, h: 600 }); // fallback
+    img.src = dataUrl;
+  });
+}
+
 // ============ PDF EXPORT (Professional Job Sheet) ============
 const PDF_COLORS = {
   primary: [124, 92, 255],
@@ -2409,7 +2418,6 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin) {
   const totalHrs = jobs.reduce((s, j) => s + parseFloat(j.duration_hours || 0), 0);
   const teamAJobs = jobs.filter(j => j.team === 'Group A').length;
   const teamBJobs = jobs.filter(j => j.team === 'Group B').length;
-  const urgent = jobs.filter(j => j.priority === 'Urgent').length;
 
   let sy = 160;
   pdf.setDrawColor(...PDF_COLORS.border);
@@ -2421,7 +2429,6 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin) {
     { label: 'TOTAL HOURS', value: totalHrs > 0 ? totalHrs.toFixed(0) + 'h' : '—' },
     { label: 'GROUP A', value: teamAJobs, color: PDF_COLORS.teamA },
     { label: 'GROUP B', value: teamBJobs, color: PDF_COLORS.teamB },
-    { label: 'URGENT', value: urgent, color: urgent ? PDF_COLORS.urgent : null },
   ];
 
   const blockW = (pageW - margin * 2) / statBlocks.length;
@@ -2642,39 +2649,58 @@ async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum,
     const proofImages = [];
     for (let p = 1; p <= 8; p++) {
       const data = await loadImageAsDataUrl(`proofs/${job.production_id}_p${p}.jpg`);
-      if (data) proofImages.push(data);
-      else break;
+      if (data) {
+        // Get dimensions
+        const dims = await getImageDims(data);
+        proofImages.push({ data, w: dims.w, h: dims.h, ar: dims.w / dims.h });
+      } else break;
     }
 
     if (proofImages.length) {
-      const remainingH = pageH - y - 60; // leave room for footer + notes
-      const maxImgH = 320;
-      // Layout: if 1 image, big; if 2-4, 2-col grid
-      if (proofImages.length === 1) {
-        const imgH = Math.min(maxImgH, remainingH - 80);
+      const remainingH = pageH - y - 100; // reserve room for notes + footer
+      const n = proofImages.length;
+
+      if (n === 1) {
+        // Single image: fit within (contentW × maxH), preserving aspect ratio
+        const maxH = Math.min(360, remainingH);
+        const img = proofImages[0];
+        let drawW = contentW;
+        let drawH = drawW / img.ar;
+        if (drawH > maxH) {
+          drawH = maxH;
+          drawW = drawH * img.ar;
+        }
+        const drawX = margin + (contentW - drawW) / 2; // center horizontally
         try {
-          pdf.addImage(proofImages[0], 'JPEG', margin, y, contentW, imgH, undefined, 'FAST');
-          y += imgH + 12;
+          pdf.addImage(img.data, 'JPEG', drawX, y, drawW, drawH, undefined, 'FAST');
+          y += drawH + 12;
         } catch (e) { console.error(e); }
       } else {
-        const cols = proofImages.length === 2 ? 2 : 2;
-        const rows = Math.ceil(proofImages.length / cols);
-        const gap = 6;
-        const imgW = (contentW - gap * (cols - 1)) / cols;
-        const imgH = Math.min(140, (remainingH - 80) / rows - gap);
-        proofImages.slice(0, cols * rows).forEach((dataUrl, idx) => {
+        // Multiple images: 2-column grid, each image fit-within its cell preserving AR
+        const cols = 2;
+        const rows = Math.ceil(n / cols);
+        const gap = 8;
+        const cellW = (contentW - gap * (cols - 1)) / cols;
+        const cellH = Math.min(180, (remainingH - gap * (rows - 1)) / rows);
+        proofImages.slice(0, cols * rows).forEach((img, idx) => {
           const ri = Math.floor(idx / cols);
           const ci = idx % cols;
+          const cellX = margin + ci * (cellW + gap);
+          const cellY = y + ri * (cellH + gap);
+          // Fit within cell preserving AR
+          let drawW = cellW;
+          let drawH = drawW / img.ar;
+          if (drawH > cellH) {
+            drawH = cellH;
+            drawW = drawH * img.ar;
+          }
+          const drawX = cellX + (cellW - drawW) / 2;
+          const drawY = cellY + (cellH - drawH) / 2;
           try {
-            pdf.addImage(
-              dataUrl, 'JPEG',
-              margin + ci * (imgW + gap),
-              y + ri * (imgH + gap),
-              imgW, imgH, undefined, 'FAST'
-            );
+            pdf.addImage(img.data, 'JPEG', drawX, drawY, drawW, drawH, undefined, 'FAST');
           } catch (e) { console.error(e); }
         });
-        y += rows * (imgH + gap) + 4;
+        y += rows * cellH + (rows - 1) * gap + 8;
       }
     } else {
       pdf.setFontSize(10);
