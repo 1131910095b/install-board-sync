@@ -184,9 +184,37 @@
   .scope-tab:last-child { border-right: none; }
   .scope-tab.active { background: var(--status-inst); color: white; }
 
-  .date-nav { display: flex; align-items: center; gap: 8px; }
-  .date-nav .week-label { font-size: 14px; font-weight: 500; min-width: 240px; text-align: center; }
-  .nav-btn { width: 28px; height: 28px; padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+  .date-nav {
+    display: flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, rgba(124,92,255,0.12), rgba(124,92,255,0.05));
+    border: 1px solid rgba(124,92,255,0.25);
+    border-radius: 10px;
+    padding: 4px 6px;
+  }
+  .date-nav .week-label {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    min-width: 240px;
+    text-align: center;
+    color: var(--accent);
+    text-shadow: 0 0 18px rgba(124,92,255,0.4);
+    padding: 4px 8px;
+    line-height: 1.1;
+  }
+  .nav-btn {
+    width: 34px; height: 34px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--accent);
+  }
+  .nav-btn:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
 
   .team-toggles { display: flex; gap: 6px; }
   .team-toggle {
