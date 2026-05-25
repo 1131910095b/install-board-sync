@@ -191,6 +191,9 @@
     border-radius: 10px;
     padding: 4px 6px;
   }
+  .week-label-wrap {
+    position: relative;
+  }
   .date-nav .week-label {
     font-size: 22px;
     font-weight: 800;
@@ -201,6 +204,92 @@
     text-shadow: 0 0 18px rgba(124,92,255,0.4);
     padding: 4px 8px;
     line-height: 1.1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 6px;
+    font-family: inherit;
+  }
+  .date-nav .week-label:hover {
+    background: rgba(124,92,255,0.12);
+  }
+  .week-label::after {
+    content: ' ▾';
+    font-size: 14px;
+    color: var(--accent);
+    opacity: 0.6;
+    margin-left: 4px;
+  }
+  .week-label-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--panel);
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    min-width: 280px;
+    padding: 12px;
+    z-index: 100;
+    display: none;
+  }
+  .week-label-dropdown.show {
+    display: block;
+    animation: dropFade 0.18s ease-out;
+  }
+  @keyframes dropFade {
+    from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .wld-section {
+    margin-bottom: 14px;
+  }
+  .wld-section:last-child { margin-bottom: 0; }
+  .wld-section-label {
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .wld-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .wld-option:last-child { margin-bottom: 0; }
+  .wld-option:hover {
+    background: var(--panel-3);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .wld-date-input {
+    width: 100%;
+    padding: 8px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+    color-scheme: dark;
+  }
+  .wld-date-input:focus {
+    outline: none;
+    border-color: var(--accent);
   }
   .nav-btn {
     width: 34px; height: 34px; padding: 0;
@@ -836,7 +925,26 @@
       </div>
       <div class="date-nav">
         <button class="btn nav-btn" id="prevBtn">‹</button>
-        <div class="week-label" id="weekLabel">—</div>
+        <div class="week-label-wrap">
+          <button class="week-label" id="weekLabel">—</button>
+          <div class="week-label-dropdown" id="weekDropdown">
+            <div class="wld-section">
+              <div class="wld-section-label">QUICK</div>
+              <button class="wld-option" data-quick="today">📍 Today</button>
+              <button class="wld-option" data-quick="tomorrow">→ Tomorrow</button>
+              <button class="wld-option" data-quick="thisweek">📅 This Week</button>
+              <button class="wld-option" data-quick="thismonth">🗓️ This Month</button>
+            </div>
+            <div class="wld-section">
+              <div class="wld-section-label">PICK A DATE</div>
+              <input type="date" id="customDatePicker" class="wld-date-input">
+            </div>
+            <div class="wld-section">
+              <div class="wld-section-label">PICK A MONTH</div>
+              <input type="month" id="customMonthPicker" class="wld-date-input">
+            </div>
+          </div>
+        </div>
         <button class="btn nav-btn" id="nextBtn">›</button>
         <button class="btn small" id="todayBtn">Today</button>
       </div>
@@ -874,6 +982,10 @@
               <button class="date-chip" data-date-filter="tomorrow">Tomorrow</button>
               <button class="date-chip" data-date-filter="week">This Week</button>
               <button class="date-chip" data-date-filter="month">This Month</button>
+            </div>
+            <div class="date-picker-row">
+              <input type="date" id="mapDatePicker" class="date-picker-input" placeholder="Specific date">
+              <button class="date-picker-clear" id="mapDatePickerClear" title="Clear">✕</button>
             </div>
           </div>
 
@@ -972,7 +1084,9 @@ let gmapInfoWindow = null;
 let gmapsLoaded = false;
 let directionsService = null;
 let directionsRenderer = null;
-let mapDateFilter = 'today'; // all | today | tomorrow | week | month
+let mapDateFilter = 'today'; // all | today | tomorrow | week | month | custom
+let mapCustomDate = null; // YYYY-MM-DD when filter is 'custom'
+let mapCustomMonth = null; // YYYY-MM when month picker used
 let mapRouteTeam = null; // 'Group A' | 'Group B' | null
 let mapShowSatellite = false;
 let mapClusterEnabled = true;
@@ -1418,6 +1532,7 @@ async function renderMap() {
     tomorrow: 'Tomorrow',
     week: 'This Week',
     month: 'This Month',
+    custom: mapCustomDate || 'Custom',
   }[mapDateFilter] || 'All';
   document.getElementById('weekLabel').textContent = `Map · ${filterLabel}`;
 
@@ -1629,6 +1744,9 @@ window.openModalFromMap = (id) => {
 
 function filterByMapDate(items, filter) {
   if (filter === 'all') return items;
+  if (filter === 'custom' && mapCustomDate) {
+    return items.filter(i => i.install_date === mapCustomDate);
+  }
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const todayKey = ymd(today);
@@ -1649,7 +1767,7 @@ function filterByMapDate(items, filter) {
     });
   }
   if (filter === 'month') {
-    const ym = todayKey.slice(0, 7);
+    const ym = mapCustomMonth || todayKey.slice(0, 7);
     return items.filter(i => i.install_date && i.install_date.startsWith(ym));
   }
   return items;
@@ -1713,22 +1831,49 @@ function highlightListItem(jobId) {
 async function planRoute(team) {
   // Get team's jobs from currently visible
   const teamJobs = mapVisibleJobs.filter(j => j.team === team);
-  if (teamJobs.length < 2) {
-    toast(team + ' has only ' + teamJobs.length + ' job(s) — need at least 2 to plan a route', 'error');
+  if (teamJobs.length === 0) {
+    toast(`No ${team} jobs visible. Try changing the date filter (currently: ${mapDateFilter}).`, 'error');
+    return;
+  }
+  if (teamJobs.length === 1) {
+    toast(`${team} has only 1 job. Need at least 2 jobs to plan a route.`, 'error');
+    // Just zoom to it
+    const c = await geocode(teamJobs[0].address);
+    if (c) {
+      gmap.panTo({ lat: c.lat, lng: c.lon });
+      gmap.setZoom(15);
+    }
     return;
   }
 
-  toast(`Planning route for ${team}...`, 'info');
+  toast(`Planning route for ${team} (${teamJobs.length} stops)...`, 'info');
 
   // Resolve coords
   const stops = [];
+  const failedAddresses = [];
   for (const j of teamJobs) {
     const c = await geocode(j.address);
-    if (c) stops.push({ job: j, coords: c });
+    if (c) {
+      stops.push({ job: j, coords: c });
+    } else {
+      failedAddresses.push(j.name + ' (' + (j.address || 'no address') + ')');
+    }
   }
+
   if (stops.length < 2) {
-    toast('Not enough geocoded addresses', 'error');
+    let msg = `Only ${stops.length} of ${teamJobs.length} ${team} addresses could be located. `;
+    if (failedAddresses.length) {
+      msg += `Failed: ${failedAddresses.slice(0, 2).join('; ')}`;
+      if (failedAddresses.length > 2) msg += `, +${failedAddresses.length - 2} more`;
+    }
+    toast(msg, 'error');
+    console.warn('Failed addresses:', failedAddresses);
     return;
+  }
+
+  if (failedAddresses.length) {
+    toast(`Routing ${stops.length} of ${teamJobs.length} ${team} stops (${failedAddresses.length} address(es) failed to geocode)`, 'info');
+    console.warn('Failed addresses:', failedAddresses);
   }
 
   // Origin = first stop, dest = last stop, rest = waypoints (let Google optimize)
@@ -1747,25 +1892,30 @@ async function planRoute(team) {
     travelMode: google.maps.TravelMode.DRIVING,
   }, (result, status) => {
     if (status !== 'OK') {
-      toast('Route planning failed: ' + status, 'error');
+      let msg = 'Route planning failed: ' + status;
+      if (status === 'REQUEST_DENIED') {
+        msg += ' — Directions API may not be enabled. Go to Google Cloud Console → APIs & Services → Library → enable "Directions API"';
+      } else if (status === 'OVER_QUERY_LIMIT') {
+        msg += ' — Hit query limit. Try again later.';
+      } else if (status === 'ZERO_RESULTS') {
+        msg += ' — Google could not find a driving route between these stops.';
+      }
+      toast(msg, 'error');
       return;
     }
     directionsRenderer.setDirections(result);
 
     // Reorder list by Google's optimized order
-    const order = result.routes[0].waypoint_order; // indices into waypoints array
+    const order = result.routes[0].waypoint_order;
     const orderedStops = [stops[0], ...order.map(i => stops[i + 1]), stops[stops.length - 1]];
     const orderedIds = orderedStops.map(s => s.job.id);
 
     renderMapList(mapVisibleJobs, orderedIds);
-
-    // Numbered markers for route order
     addRouteOrderLabels(orderedStops, team);
 
-    // Compute total distance + duration
     const legs = result.routes[0].legs;
-    const totalDist = legs.reduce((s, l) => s + l.distance.value, 0); // meters
-    const totalDur = legs.reduce((s, l) => s + l.duration.value, 0); // seconds
+    const totalDist = legs.reduce((s, l) => s + l.distance.value, 0);
+    const totalDur = legs.reduce((s, l) => s + l.duration.value, 0);
 
     const teamColor = team === 'Group A' ? 'var(--team-a)' : 'var(--team-b)';
     document.getElementById('routeSummary').style.display = '';
@@ -1853,6 +2003,8 @@ function bindMapControls() {
       document.querySelectorAll('.date-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       mapDateFilter = chip.dataset.dateFilter;
+      mapCustomDate = null;
+      mapCustomMonth = null;
       mapRouteTeam = null;
       if (directionsRenderer) directionsRenderer.setDirections({ routes: [] });
       document.getElementById('routeSummary').style.display = 'none';
@@ -2548,6 +2700,109 @@ document.getElementById('todayBtn').addEventListener('click', () => {
     const todaySec = document.querySelector(`.day-section[data-date="${today}"]`);
     if (todaySec) todaySec.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+});
+
+// === Week label dropdown ===
+const weekLabel = document.getElementById('weekLabel');
+const weekDropdown = document.getElementById('weekDropdown');
+
+weekLabel.addEventListener('click', (e) => {
+  e.stopPropagation();
+  weekDropdown.classList.toggle('show');
+});
+
+// Close on outside click
+document.addEventListener('click', (e) => {
+  if (!weekDropdown.contains(e.target) && e.target !== weekLabel) {
+    weekDropdown.classList.remove('show');
+  }
+});
+
+// Quick options
+weekDropdown.querySelectorAll('.wld-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const quick = opt.dataset.quick;
+    const today = new Date();
+
+    if (currentView === 'map') {
+      // For map: control date filter chips
+      const map = { today: 'today', tomorrow: 'tomorrow', thisweek: 'week', thismonth: 'month' };
+      mapDateFilter = map[quick];
+      document.querySelectorAll('.date-chip').forEach(c => {
+        c.classList.toggle('active', c.dataset.dateFilter === mapDateFilter);
+      });
+      mapRouteTeam = null;
+      if (directionsRenderer) directionsRenderer.setDirections({ routes: [] });
+      const rs = document.getElementById('routeSummary');
+      const cb = document.getElementById('clearRouteBtn');
+      if (rs) rs.style.display = 'none';
+      if (cb) cb.style.display = 'none';
+      document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('active'));
+      renderMap();
+    } else {
+      // For list view: navigate monthCursor
+      if (quick === 'today' || quick === 'thisweek' || quick === 'thismonth') {
+        monthCursor = new Date();
+      } else if (quick === 'tomorrow') {
+        const t = new Date(); t.setDate(t.getDate() + 1);
+        monthCursor = new Date(t.getFullYear(), t.getMonth(), 1);
+      }
+      render();
+      // Scroll to relevant section
+      let targetDate;
+      if (quick === 'today') targetDate = ymd(today);
+      else if (quick === 'tomorrow') { const t = new Date(); t.setDate(t.getDate() + 1); targetDate = ymd(t); }
+      if (targetDate) {
+        setTimeout(() => {
+          const sec = document.querySelector(`.day-section[data-date="${targetDate}"]`);
+          if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+    weekDropdown.classList.remove('show');
+  });
+});
+
+// Custom date picker (single day)
+document.getElementById('customDatePicker').addEventListener('change', (e) => {
+  const val = e.target.value; // "2026-05-25"
+  if (!val) return;
+  const picked = new Date(val + 'T00:00');
+
+  if (currentView === 'map') {
+    // Treat as a "today-style" filter but for the picked date
+    // Use a custom filter that matches exactly this date
+    mapCustomDate = val;
+    mapDateFilter = 'custom';
+    document.querySelectorAll('.date-chip').forEach(c => c.classList.remove('active'));
+    renderMap();
+  } else {
+    monthCursor = new Date(picked.getFullYear(), picked.getMonth(), 1);
+    render();
+    setTimeout(() => {
+      const sec = document.querySelector(`.day-section[data-date="${val}"]`);
+      if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+  weekDropdown.classList.remove('show');
+});
+
+// Custom month picker
+document.getElementById('customMonthPicker').addEventListener('change', (e) => {
+  const val = e.target.value; // "2026-05"
+  if (!val) return;
+  const [y, m] = val.split('-').map(Number);
+
+  if (currentView === 'map') {
+    mapDateFilter = 'month';
+    mapCustomMonth = val;
+    document.querySelectorAll('.date-chip').forEach(c => c.classList.remove('active'));
+    renderMap();
+  } else {
+    monthCursor = new Date(y, m - 1, 1);
+    render();
+  }
+  weekDropdown.classList.remove('show');
 });
 
 document.getElementById('refreshBtn').addEventListener('click', async () => {
