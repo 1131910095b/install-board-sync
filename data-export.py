@@ -1,11 +1,10 @@
 """
-data-export.py v5
+data-export.py v5.1
 导出 Install Board + Production Board 数据到 docs/data.json
 
-v5 新增:
-- 通过 production_link 获取 Production Board 上的额外字段:
-  Project Manager (Producer), Planned Hours, Status, Invoice Number
-- 保留 Install Board 的本地字段: team, duration_hours (这些是本地调度数据)
+v5.1 修复:
+- 使用 BoardRelationValue GraphQL fragment 正确读取 board_relation 列
+  (之前 cv.value 返回 null 导致 production_id 拿不到，进而所有 Production 补充字段都拿不到)
 """
 import json
 import os
@@ -43,11 +42,11 @@ PROD_COL = {
 }
 
 
-def log(msg: str) -> None:
+def log(msg):
     print(f"[{datetime.utcnow().isoformat()}] {msg}", flush=True)
 
 
-def monday_query(query: str, variables: Optional[Dict] = None) -> Dict[str, Any]:
+def monday_query(query, variables=None):
     r = requests.post(
         "https://api.monday.com/v2",
         headers={
@@ -65,11 +64,17 @@ def monday_query(query: str, variables: Optional[Dict] = None) -> Dict[str, Any]
     return data["data"]
 
 
-def fetch_install_items() -> List[Dict[str, Any]]:
+def fetch_install_items():
+    """
+    Read Install Board items. 
+    For board_relation, we use the typed fragment to get linked_item_ids properly.
+    """
     log("读取 Install Board...")
-    items: List[Dict[str, Any]] = []
-    cursor: Optional[str] = None
-    cols = json.dumps(list(INSTALL_COL.values()))
+    items = []
+    cursor = None
+    other_cols = [v for k, v in INSTALL_COL.items() if k != "production_link"]
+    other_cols_str = json.dumps(other_cols)
+
     while True:
         if cursor:
             q = f"""
@@ -79,7 +84,12 @@ def fetch_install_items() -> List[Dict[str, Any]]:
                   cursor
                   items {{
                     id name
-                    column_values(ids: {cols}) {{ id text value }}
+                    column_values(ids: {other_cols_str}) {{ id text }}
+                    relation: column_values(ids: ["board_relation_mm3mj5j8"]) {{
+                      ... on BoardRelationValue {{
+                        linked_item_ids
+                      }}
+                    }}
                   }}
                 }}
               }}
@@ -93,7 +103,12 @@ def fetch_install_items() -> List[Dict[str, Any]]:
                   cursor
                   items {{
                     id name
-                    column_values(ids: {cols}) {{ id text value }}
+                    column_values(ids: {other_cols_str}) {{ id text }}
+                    relation: column_values(ids: ["board_relation_mm3mj5j8"]) {{
+                      ... on BoardRelationValue {{
+                        linked_item_ids
+                      }}
+                    }}
                   }}
                 }}
               }}
@@ -109,11 +124,11 @@ def fetch_install_items() -> List[Dict[str, Any]]:
     return items
 
 
-def fetch_prod_extra() -> Dict[str, Dict[str, str]]:
-    """Fetch extra fields from Production Board: producer, plan_hours, invoice, status, project_type"""
+def fetch_prod_extra():
+    """Fetch extra fields from Production Board"""
     log("读取 Production Board 补充字段...")
-    extra: Dict[str, Dict[str, str]] = {}
-    cursor: Optional[str] = None
+    extra = {}
+    cursor = None
     cols = json.dumps(list(PROD_COL.values()))
     while True:
         if cursor:
@@ -161,7 +176,7 @@ def fetch_prod_extra() -> Dict[str, Dict[str, str]]:
     return extra
 
 
-def safe_float(s: Optional[str]) -> Optional[float]:
+def safe_float(s):
     if s is None or s == "":
         return None
     try:
@@ -170,10 +185,10 @@ def safe_float(s: Optional[str]) -> Optional[float]:
         return None
 
 
-def parse_item(item: Dict[str, Any], prod_extra: Dict[str, Dict[str, str]]) -> Dict[str, Any]:
+def parse_item(item, prod_extra):
     cv_map = {cv["id"]: cv for cv in item.get("column_values", [])}
 
-    def get_text(col_key: str) -> str:
+    def get_text(col_key):
         cv = cv_map.get(INSTALL_COL[col_key])
         return (cv.get("text") or "").strip() if cv else ""
 
@@ -189,17 +204,15 @@ def parse_item(item: Dict[str, Any], prod_extra: Dict[str, Dict[str, str]]) -> D
     address = get_text("address")
     notes = get_text("notes")
 
-    # production_link
-    prod_link_cv = cv_map.get(INSTALL_COL["production_link"])
-    prod_id: Optional[str] = None
-    if prod_link_cv and prod_link_cv.get("value"):
-        try:
-            val = json.loads(prod_link_cv["value"])
-            ids = val.get("linkedPulseIds") or []
+    # production_link via typed fragment (linked_item_ids)
+    prod_id = None
+    relation_list = item.get("relation", [])
+    if relation_list and isinstance(relation_list, list):
+        first = relation_list[0]
+        if first and "linked_item_ids" in first:
+            ids = first.get("linked_item_ids") or []
             if ids:
-                prod_id = str(ids[0].get("linkedPulseId"))
-        except Exception:
-            prod_id = None
+                prod_id = str(ids[0])
 
     # Merge in extra production data
     extra = prod_extra.get(prod_id, {}) if prod_id else {}
@@ -230,11 +243,16 @@ def parse_item(item: Dict[str, Any], prod_extra: Dict[str, Dict[str, str]]) -> D
     }
 
 
-def main() -> None:
+def main():
     items_raw = fetch_install_items()
     prod_extra = fetch_prod_extra()
     items = [parse_item(i, prod_extra) for i in items_raw]
     items.sort(key=lambda x: x["install_date"] or "9999-99-99")
+
+    # Stats
+    with_prod_id = sum(1 for i in items if i["production_id"])
+    with_status = sum(1 for i in items if i["production_status"])
+    log(f"production_id 命中: {with_prod_id}/{len(items)}, production_status 命中: {with_status}/{len(items)}")
 
     out = {
         "updated_at": datetime.utcnow().isoformat() + "Z",
