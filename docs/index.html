@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ACE SIGN · Install Schedule</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<!-- Google Maps loaded dynamically -->
 <style>
   :root {
     --bg: #0a0b0d;
@@ -539,15 +539,16 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 // ============ CONFIG ============
 const PASSWORD_HASH = 'a3b5e354c796d0bd0f8a966462c4a738858611963ff85f59d59bc9c9838eec51'; // ace2026
 // IMPORTANT: paste your fine-grained GitHub PAT here. Only needs Issues: Read & Write on this repo.
-const GH_TOKEN = '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'; // <-- PASTE TOKEN HERE
+const GH_TOKEN = ''; // <-- PASTE TOKEN HERE
 const GH_REPO  = '1131910095b/install-board-sync';
+// Google Maps API key. Restricted to https://1131910095b.github.io/*
+const GMAPS_KEY = 'AIzaSyDB2HtMCrvTSaZtKOT2az6GF_fzHYatt3E';
 
 // ============ STATE ============
 let DATA = { items: [], updated_at: '', count: 0 };
@@ -559,8 +560,10 @@ let currentScope = 'all'; // all | active
 let teamFilters = new Set(['Group A', 'Group B', '__none__']);
 let typeFilters = new Set(['Install', 'Pick Up', 'Delivery']);
 let geoCache = JSON.parse(localStorage.getItem('geoCache') || '{}');
-let mapInstance = null;
-let mapMarkers = [];
+let gmap = null;
+let gmapMarkers = [];
+let gmapInfoWindow = null;
+let gmapsLoaded = false;
 
 const ACTIVE_STATUSES = new Set(['Pre-Installation', 'Installation']);
 const INSTALLER_OPTIONS = ['Peter', 'Chris', 'Kent', 'Daniel', 'Dani'];
@@ -893,74 +896,181 @@ async function submitDateChangeIssue(prodId, newDate, jobName, oldDate) {
   }
 }
 
-// ============ MAP VIEW ============
-function renderMap() {
+// ============ MAP VIEW (Google Maps) ============
+function loadGoogleMaps() {
+  return new Promise((resolve, reject) => {
+    if (gmapsLoaded || window.google?.maps) {
+      gmapsLoaded = true;
+      resolve();
+      return;
+    }
+    const cb = '__gmapsReady_' + Date.now();
+    window[cb] = () => {
+      gmapsLoaded = true;
+      delete window[cb];
+      resolve();
+    };
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${GMAPS_KEY}&libraries=geocoding&callback=${cb}&loading=async`;
+    script.async = true;
+    script.defer = true;
+    script.onerror = () => reject(new Error('Failed to load Google Maps'));
+    document.head.appendChild(script);
+  });
+}
+
+async function renderMap() {
   document.getElementById('weekLabel').textContent = 'Map · Install only';
 
-  if (!mapInstance) {
-    mapInstance = L.map('map', { zoomControl: true }).setView([-37.8136, 144.9631], 10);
-    // Carto Voyager - much prettier than default OSM
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap © CARTO',
-      subdomains: 'abcd',
-      maxZoom: 19,
-    }).addTo(mapInstance);
+  try {
+    await loadGoogleMaps();
+  } catch (e) {
+    document.getElementById('map').innerHTML = `
+      <div style="padding: 40px; text-align: center; color: var(--text-faint);">
+        <div style="font-size: 40px; margin-bottom: 12px;">🗺️</div>
+        <div>Failed to load Google Maps. Check API key configuration.</div>
+      </div>`;
+    return;
   }
 
-  mapMarkers.forEach(m => mapInstance.removeLayer(m));
-  mapMarkers = [];
+  // Init map once
+  if (!gmap) {
+    gmap = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: -37.8136, lng: 144.9631 },
+      zoom: 10,
+      mapTypeId: 'roadmap',
+      mapTypeControl: true,
+      streetViewControl: false,
+      fullscreenControl: true,
+      // Dark-ish styled map matching the app
+      styles: [
+        { elementType: 'geometry', stylers: [{ color: '#1c1f25' }] },
+        { elementType: 'labels.text.stroke', stylers: [{ color: '#14161a' }] },
+        { elementType: 'labels.text.fill', stylers: [{ color: '#9aa0a8' }] },
+        { featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers: [{ color: '#d59563' }] },
+        { featureType: 'poi', elementType: 'labels.text.fill', stylers: [{ color: '#9aa0a8' }] },
+        { featureType: 'poi.park', elementType: 'geometry', stylers: [{ color: '#1a3d2e' }] },
+        { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#2a2e36' }] },
+        { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#1a1d24' }] },
+        { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#9aa0a8' }] },
+        { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#3a3e48' }] },
+        { featureType: 'transit', elementType: 'geometry', stylers: [{ color: '#2a2e36' }] },
+        { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0d1a26' }] },
+        { featureType: 'water', elementType: 'labels.text.fill', stylers: [{ color: '#4a6280' }] },
+      ],
+    });
+    gmapInfoWindow = new google.maps.InfoWindow();
+  }
+
+  // Clear existing markers
+  gmapMarkers.forEach(m => m.setMap(null));
+  gmapMarkers = [];
 
   // Only Install type
   const items = applyFilters(DATA.items)
     .filter(i => (i.project_type || 'Install') === 'Install')
     .filter(i => i.address);
 
-  const bounds = [];
+  const bounds = new google.maps.LatLngBounds();
+  let plotted = 0;
 
-  items.forEach(async (job) => {
-    const coords = await geocode(job.address);
-    if (!coords) return;
-    const color = job.priority === 'Urgent' ? '#ef4444'
-                : job.priority === 'High'   ? '#f97316'
-                : job.priority === 'Medium' ? '#eab308'
-                : '#10b981';
-    const borderColor = job.team === 'Group A' ? '#4f8cff' : (job.team === 'Group B' ? '#ff6d3b' : '#6b7079');
-    const icon = L.divIcon({
-      html: `<div style="width: 22px; height: 22px; background: ${color}; border: 3px solid ${borderColor}; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.5);"></div>`,
-      className: '',
-      iconSize: [22, 22],
-      iconAnchor: [11, 11],
-    });
-    const m = L.marker([coords.lat, coords.lon], { icon }).addTo(mapInstance);
-    m.bindPopup(`
-      <div style="font-family: sans-serif; min-width: 200px;">
-        <strong>${escapeHTML(job.name)}</strong><br>
-        <small>${escapeHTML(job.address)}</small><br>
-        <span style="color:#666;">${job.install_date || '—'} · ${job.team || 'Unassigned'} · ${job.installer || ''}</span>
-      </div>
-    `);
-    m.on('click', () => openModal(job.id));
-    mapMarkers.push(m);
-    bounds.push([coords.lat, coords.lon]);
-    if (bounds.length === items.length && bounds.length > 0) {
-      mapInstance.fitBounds(bounds, { padding: [50, 50] });
+  for (const job of items) {
+    try {
+      const coords = await geocode(job.address);
+      if (!coords) continue;
+
+      const color = job.priority === 'Urgent' ? '#ef4444'
+                  : job.priority === 'High'   ? '#f97316'
+                  : job.priority === 'Medium' ? '#eab308'
+                  : '#10b981';
+      const borderColor = job.team === 'Group A' ? '#4f8cff'
+                       : job.team === 'Group B' ? '#ff6d3b'
+                       : '#6b7079';
+
+      // Custom SVG pin
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
+        <path d="M16 0C7.2 0 0 7.2 0 16c0 12 16 24 16 24s16-12 16-24c0-8.8-7.2-16-16-16z"
+          fill="${color}" stroke="${borderColor}" stroke-width="3"/>
+        <circle cx="16" cy="16" r="6" fill="white"/>
+      </svg>`;
+
+      const marker = new google.maps.Marker({
+        position: { lat: coords.lat, lng: coords.lon },
+        map: gmap,
+        title: job.name,
+        icon: {
+          url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+          scaledSize: new google.maps.Size(32, 40),
+          anchor: new google.maps.Point(16, 40),
+        },
+      });
+
+      const infoHTML = `
+        <div style="font-family: -apple-system, sans-serif; min-width: 240px; padding: 4px; color: #222;">
+          <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">${escapeHTML(job.name)}</div>
+          <div style="font-size: 12px; color: #666; margin-bottom: 6px;">${escapeHTML(job.address)}</div>
+          <div style="font-size: 11px; color: #888;">
+            ${job.install_date || '—'} · ${job.team || 'Unassigned'} · ${job.installer || 'No installer'}
+          </div>
+          ${job.priority ? `<div style="margin-top: 6px;"><span style="background: ${color}; color: white; padding: 2px 8px; border-radius: 99px; font-size: 11px;">${job.priority}</span></div>` : ''}
+          <div style="margin-top: 8px;">
+            <a href="#" onclick="event.preventDefault(); window.openModalFromMap('${job.id}'); return false;" style="font-size: 12px; color: #4f8cff;">Open details →</a>
+          </div>
+        </div>`;
+
+      marker.addListener('click', () => {
+        gmapInfoWindow.setContent(infoHTML);
+        gmapInfoWindow.open({ anchor: marker, map: gmap });
+      });
+
+      gmapMarkers.push(marker);
+      bounds.extend(marker.getPosition());
+      plotted++;
+    } catch (e) {
+      console.error('Marker error for', job.name, e);
     }
-  });
+  }
+
+  if (plotted > 0) {
+    gmap.fitBounds(bounds, { top: 60, right: 60, bottom: 60, left: 60 });
+    // Don't zoom in too far if only 1 marker
+    if (plotted === 1) {
+      const listener = google.maps.event.addListenerOnce(gmap, 'idle', () => {
+        if (gmap.getZoom() > 15) gmap.setZoom(15);
+      });
+    }
+  }
 }
+
+// Expose for InfoWindow callbacks
+window.openModalFromMap = (id) => {
+  if (gmapInfoWindow) gmapInfoWindow.close();
+  openModal(id);
+};
 
 async function geocode(addr) {
   if (geoCache[addr]) return geoCache[addr];
   try {
-    const r = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(addr)}&format=json&limit=1`);
-    const j = await r.json();
-    if (j.length) {
-      const c = { lat: parseFloat(j[0].lat), lon: parseFloat(j[0].lon) };
-      geoCache[addr] = c;
-      localStorage.setItem('geoCache', JSON.stringify(geoCache));
-      return c;
+    // Use Google Geocoding API via the loaded Maps JS
+    if (!window.google?.maps?.Geocoder) {
+      await loadGoogleMaps();
     }
-  } catch (e) { console.error(e); }
-  return null;
+    const geocoder = new google.maps.Geocoder();
+    const result = await new Promise((resolve, reject) => {
+      geocoder.geocode({ address: addr, region: 'au' }, (results, status) => {
+        if (status === 'OK' && results?.[0]) resolve(results[0]);
+        else reject(new Error(status));
+      });
+    });
+    const loc = result.geometry.location;
+    const c = { lat: loc.lat(), lon: loc.lng() };
+    geoCache[addr] = c;
+    localStorage.setItem('geoCache', JSON.stringify(geoCache));
+    return c;
+  } catch (e) {
+    console.warn('Geocode failed for', addr, e);
+    return null;
+  }
 }
 
 // ============ MODAL ============
@@ -1303,9 +1413,7 @@ document.getElementById('viewTabs').addEventListener('click', e => {
   currentView = tab.dataset.view;
   document.getElementById('view-' + currentView).classList.add('active');
   render();
-  if (currentView === 'map' && mapInstance) {
-    setTimeout(() => mapInstance.invalidateSize(), 100);
-  }
+  // For Google Maps, no resize call needed - it auto-detects
 });
 
 document.getElementById('scopeTabs').addEventListener('click', e => {
