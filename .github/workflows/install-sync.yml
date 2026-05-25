@@ -2,7 +2,11 @@ name: Install Board Sync
 
 on:
   schedule:
-    - cron: '0 */2 * * *'
+    # 每半小时跑一次，限制在 Melbourne 时间 9 AM - 5 PM（AEDT, UTC+11）
+    # UTC: 22:00 (前一天) - 06:00
+    # 周一到周五（Melbourne 时间）= UTC 周日晚 - 周五早
+    - cron: '0,30 22,23 * * 0-4'
+    - cron: '0,30 0-6 * * 1-5'
   workflow_dispatch:
 
 permissions:
@@ -21,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests pdf2image
+          pip install requests pdf2image Pillow
           sudo apt-get update && sudo apt-get install -y poppler-utils
 
       - name: Process GitHub Issues (date changes)
