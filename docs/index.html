@@ -278,19 +278,56 @@
   }
   .wld-date-input {
     width: 100%;
-    padding: 8px 12px;
+    padding: 10px 14px;
     background: var(--panel-2);
     border: 1px solid var(--border);
     color: var(--text);
-    border-radius: 6px;
-    font-size: 13px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
     font-family: inherit;
     color-scheme: dark;
+    cursor: pointer;
+    transition: all 0.15s;
+    /* Hide ugly browser default styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+  }
+  .wld-date-input:hover {
+    background: var(--panel-3);
+    border-color: var(--accent);
   }
   .wld-date-input:focus {
     outline: none;
     border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(124,92,255,0.2);
   }
+  .wld-date-input::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: var(--accent);
+    cursor: pointer;
+    opacity: 0.7;
+    filter: invert(0.7) sepia(1) saturate(5) hue-rotate(220deg);
+    transition: opacity 0.15s;
+  }
+  .wld-date-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+  /* Date placeholder color */
+  .wld-date-input::-webkit-datetime-edit {
+    color: var(--text);
+  }
+  .wld-date-input::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  .wld-date-input:invalid::-webkit-datetime-edit {
+    color: var(--text-faint);
+  }
+  /* Hide clear button some browsers add */
+  .wld-date-input::-webkit-clear-button { display: none; }
+  .wld-date-input::-webkit-inner-spin-button { display: none; }
   .nav-btn {
     width: 34px; height: 34px; padding: 0;
     display: inline-flex; align-items: center; justify-content: center;
@@ -983,10 +1020,7 @@
               <button class="date-chip" data-date-filter="week">This Week</button>
               <button class="date-chip" data-date-filter="month">This Month</button>
             </div>
-            <div class="date-picker-row">
-              <input type="date" id="mapDatePicker" class="date-picker-input" placeholder="Specific date">
-              <button class="date-picker-clear" id="mapDatePickerClear" title="Clear">✕</button>
-            </div>
+            <button class="date-chip wide" id="pickDateBtn" style="margin-top: 6px; width: 100%; text-align: center;">📅 Pick Specific Date</button>
           </div>
 
           <div class="map-tool-group">
@@ -2043,6 +2077,21 @@ function bindMapControls() {
     document.getElementById('toggleClusterBtn').dataset.active = mapClusterEnabled ? '1' : '0';
     renderMap();
   });
+
+  // Pick specific date → open the purple label dropdown
+  const pickDateBtn = document.getElementById('pickDateBtn');
+  if (pickDateBtn) {
+    pickDateBtn.addEventListener('click', () => {
+      const dd = document.getElementById('weekDropdown');
+      dd.classList.add('show');
+      // Focus the date input
+      setTimeout(() => {
+        const d = document.getElementById('customDatePicker');
+        if (d) d.focus();
+        if (d && d.showPicker) try { d.showPicker(); } catch (e) {}
+      }, 100);
+    });
+  }
 }
 
 // ============ MODAL ============
