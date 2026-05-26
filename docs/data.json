@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-25T09:35:42.567452Z",
-  "count": 16,
+  "updated_at": "2026-05-26T01:44:48.508401Z",
+  "count": 19,
   "items": [
     {
       "id": "2715867167",
@@ -60,7 +60,7 @@
       "invoice_number": "45922",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2715895343",
@@ -80,7 +80,7 @@
       "invoice_number": "45895",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2715912269",
@@ -90,7 +90,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "",
-      "priority": "Medium",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Jenny",
       "notes": "",
@@ -130,7 +130,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "",
-      "priority": "High",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Jenny",
       "notes": "",
@@ -163,14 +163,34 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2715942253",
-      "name": "Village Sage Court Add On",
-      "install_date": "2026-05-28",
-      "address": "1 SAGE COURT, LANGWARRIN VIC 3910",
+      "id": "2716941656",
+      "name": "INV-45829 ASTER COCKTAIL & WINE BAR  install the letter “T”",
+      "install_date": "2026-05-27",
+      "address": "Level 1 & 2/31 Tattersalls Ln, Melbourne VIC 3000",
       "installer": "",
       "schedule_status": "",
       "project_type": "",
       "priority": "",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2716773716",
+      "team": "",
+      "duration_hours": 0.5,
+      "invoice_number": "45829",
+      "producer": "",
+      "plan_hours": "0.5",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2715942253",
+      "name": "Village Sage Court Add On",
+      "install_date": "2026-05-28",
+      "address": "1 sage court, baranduda vic 3691",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
       "installation_value": 400.0,
       "sales": "Barry",
       "notes": "",
@@ -263,6 +283,26 @@
       "production_status": "Sign Proof"
     },
     {
+      "id": "2716896134",
+      "name": "Church ACP Sign",
+      "install_date": "2026-05-29",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2715610002",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45952",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
+    },
+    {
       "id": "2715955355",
       "name": "Sushi Hub Packington Strand Geelong",
       "install_date": "2026-06-01",
@@ -281,6 +321,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2716941500",
+      "name": "Main&Will Robin ACP",
+      "install_date": "2026-06-05",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2716723303",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45950",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production File Start"
     },
     {
       "id": "2715919403",
