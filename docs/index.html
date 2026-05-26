@@ -551,8 +551,204 @@
   .pill.status[data-status="Job Completed!"] { background: rgba(196,196,196,0.18); color: var(--status-completed); }
   .pill.status[data-status="Finished"] { background: rgba(0,200,117,0.18); color: var(--status-finished); }
 
-  /* === MAP VIEW === */
-  #map { flex: 1; min-height: 600px; }
+  /* === WEEK VIEW === */
+  .week-view {
+    flex: 1;
+    padding: 16px 24px 32px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(180px, 1fr));
+    gap: 10px;
+    min-width: 1400px;
+    flex: 1;
+  }
+  .week-day-col {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+  }
+  .week-day-col.today {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(124,92,255,0.3), 0 0 20px rgba(124,92,255,0.15);
+  }
+  .week-day-col.weekend {
+    background: var(--panel);
+    opacity: 0.85;
+  }
+  .week-day-header {
+    padding: 12px 14px;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 8px;
+  }
+  .week-day-col.today .week-day-header {
+    background: linear-gradient(180deg, rgba(124,92,255,0.18), var(--panel-2));
+  }
+  .week-day-header .wdh-left {
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  .week-day-header .wdh-name {
+    font-size: 11px; color: var(--text-faint);
+    text-transform: uppercase; letter-spacing: 1.5px;
+    font-weight: 700;
+  }
+  .week-day-header .wdh-num {
+    font-size: 24px; font-weight: 800; color: var(--text);
+    line-height: 1; letter-spacing: -0.5px;
+  }
+  .week-day-col.today .wdh-num { color: var(--accent); }
+  .week-day-header .wdh-count {
+    font-size: 11px; color: var(--text-faint);
+    background: var(--panel-3);
+    padding: 2px 7px;
+    border-radius: 99px;
+    font-weight: 600;
+  }
+  .week-day-col.today .wdh-count {
+    background: var(--accent);
+    color: white;
+  }
+  .week-day-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    display: flex; flex-direction: column;
+    gap: 8px;
+  }
+  .week-day-body.drop-target {
+    background: rgba(124,92,255,0.06);
+  }
+  .week-day-empty {
+    color: var(--text-faint);
+    font-size: 11px;
+    text-align: center;
+    padding: 20px 8px;
+    opacity: 0.6;
+  }
+
+  /* Compact week card (smaller than list card) */
+  .week-card {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .week-card:hover {
+    border-color: var(--border-strong);
+    background: var(--panel-3);
+    transform: translateY(-1px);
+  }
+  .week-card[draggable="true"] { cursor: grab; }
+  .week-card[draggable="true"]:active { cursor: grabbing; }
+  .week-card.dragging { opacity: 0.5; }
+  .week-card.team-a { border-left: 3px solid var(--team-a); }
+  .week-card.team-b { border-left: 3px solid var(--team-b); }
+  .week-card.team-none { border-left: 3px solid var(--team-none); }
+
+  .week-card .wc-thumb {
+    width: 100%; height: 64px; background: #000;
+    overflow: hidden;
+    display: flex; gap: 1px;
+  }
+  .week-card .wc-thumb img {
+    flex: 1; min-width: 0; height: 100%; object-fit: cover;
+    background: #1a1a1a;
+  }
+  .week-card .wc-body { padding: 8px 10px; }
+  .week-card .wc-inv {
+    font-size: 9px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .week-card .wc-title {
+    font-size: 12px; font-weight: 600; line-height: 1.3;
+    margin-bottom: 4px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: var(--text);
+  }
+  .week-card .wc-addr {
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.3;
+    margin-bottom: 6px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .week-card .wc-badges {
+    display: flex; gap: 4px; flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .week-card .wc-badges .pill { font-size: 9px; padding: 1px 6px; }
+  .week-card .wc-meta {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    font-size: 10px; color: var(--text-faint);
+    padding-top: 6px; border-top: 1px solid var(--border);
+  }
+  .week-card .wc-meta .key { color: var(--text-faint); }
+  .week-card .wc-meta .val { color: var(--text-dim); font-weight: 500; }
+
+  /* Week navigation chips */
+  .week-nav-bar {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .week-nav-chips {
+    display: flex; gap: 4px;
+  }
+  .week-nav-chip {
+    padding: 6px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+  .week-nav-chip:hover { background: var(--panel-3); color: var(--text); }
+  .week-nav-chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .week-nav-arrows {
+    display: flex; gap: 4px;
+    margin-left: auto;
+  }
+  .week-nav-arrow {
+    width: 32px; height: 32px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--accent);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 16px; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .week-nav-arrow:hover { background: var(--accent); color: white; }
+
+  @media (max-width: 1200px) {
+    .week-grid { min-width: 1100px; }
+    .week-card .wc-thumb { height: 50px; }
+  }
 
   /* === Viewer role: read-only mode === */
   body[data-role="viewer"] .job-card { cursor: pointer; }
@@ -995,6 +1191,7 @@
     <div class="toolbar-left">
       <div class="view-tabs" id="viewTabs">
         <div class="view-tab active" data-view="list">List</div>
+        <div class="view-tab" data-view="week">Week</div>
         <div class="view-tab" data-view="map">Map</div>
       </div>
       <div class="scope-tabs" id="scopeTabs">
@@ -1011,6 +1208,7 @@
               <button class="wld-option" data-quick="today">📍 Today</button>
               <button class="wld-option" data-quick="tomorrow">→ Tomorrow</button>
               <button class="wld-option" data-quick="thisweek">📅 This Week</button>
+              <button class="wld-option" data-quick="nextweek">📅 Next Week</button>
               <button class="wld-option" data-quick="thismonth">🗓️ This Month</button>
             </div>
             <div class="wld-section">
@@ -1046,6 +1244,11 @@
     <div class="list-view" id="listView"></div>
   </div>
 
+  <!-- WEEK VIEW -->
+  <div class="view-content" id="view-week">
+    <div class="week-view" id="weekView"></div>
+  </div>
+
   <!-- MAP VIEW -->
   <div class="view-content" id="view-map">
     <div class="map-layout">
@@ -1059,6 +1262,7 @@
               <button class="date-chip active" data-date-filter="today">Today</button>
               <button class="date-chip" data-date-filter="tomorrow">Tomorrow</button>
               <button class="date-chip" data-date-filter="week">This Week</button>
+              <button class="date-chip" data-date-filter="nextweek">Next Week</button>
               <button class="date-chip" data-date-filter="month">This Month</button>
             </div>
             <button class="date-chip wide" id="pickDateBtn" style="margin-top: 6px; width: 100%; text-align: center;">📅 Pick Specific Date</button>
@@ -1153,6 +1357,7 @@ let LOCAL = JSON.parse(localStorage.getItem('localOverrides') || '{}'); // per-j
 let weekStart = startOfWeek(new Date());
 let dayCursor = new Date();
 let monthCursor = new Date(); // for month-based filtering in list view
+let weekViewCursor = startOfWeek(new Date()); // Monday of currently viewed week
 let currentView = 'list';
 let currentScope = 'all'; // all | active
 let teamFilters = new Set(['Group A', 'Group B', '__none__']);
@@ -1462,6 +1667,154 @@ function jobCardHTML(job) {
     </div>`;
 }
 
+// ============ WEEK VIEW ============
+function renderWeek() {
+  const container = document.getElementById('weekView');
+  const startOfThisWeek = startOfWeek(new Date());
+
+  // Compute days array (7 days starting Monday)
+  const days = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(weekViewCursor);
+    d.setDate(d.getDate() + i);
+    days.push(d);
+  }
+
+  // Determine which week relative to current
+  const diffWeeks = Math.round((weekViewCursor - startOfThisWeek) / (7 * 24 * 60 * 60 * 1000));
+  const weekLabel = diffWeeks === 0 ? 'This Week'
+                  : diffWeeks === 1 ? 'Next Week'
+                  : diffWeeks === 2 ? 'Week After Next'
+                  : diffWeeks === -1 ? 'Last Week'
+                  : diffWeeks > 0 ? `${diffWeeks} weeks ahead`
+                  : `${Math.abs(diffWeeks)} weeks ago`;
+  const startStr = days[0].toLocaleDateString('en-AU', { month: 'short', day: 'numeric' });
+  const endStr = days[6].toLocaleDateString('en-AU', { month: 'short', day: 'numeric', year: 'numeric' });
+  document.getElementById('weekLabel').textContent = `${startStr} – ${endStr}`;
+
+  // Group filtered items by date
+  const filtered = applyFilters(DATA.items).filter(i => i.install_date);
+  const byDate = {};
+  for (const i of filtered) {
+    if (!byDate[i.install_date]) byDate[i.install_date] = [];
+    byDate[i.install_date].push(i);
+  }
+
+  // Render
+  let html = `
+    <div class="week-nav-bar">
+      <div class="week-nav-chips">
+        <button class="week-nav-chip ${diffWeeks === 0 ? 'active' : ''}" data-week-offset="0">This Week</button>
+        <button class="week-nav-chip ${diffWeeks === 1 ? 'active' : ''}" data-week-offset="1">Next Week</button>
+        <button class="week-nav-chip ${diffWeeks === 2 ? 'active' : ''}" data-week-offset="2">Week After Next</button>
+        <button class="week-nav-chip ${diffWeeks === 3 ? 'active' : ''}" data-week-offset="3">+3 Weeks</button>
+      </div>
+      <div style="flex:1; font-size: 13px; color: var(--text-dim); text-align:center; font-weight: 500;">
+        <span style="color: var(--accent); font-weight: 700;">${weekLabel}</span>
+      </div>
+      <div class="week-nav-arrows">
+        <button class="week-nav-arrow" id="weekPrevBtn">‹</button>
+        <button class="week-nav-arrow" id="weekTodayBtn" style="width: auto; padding: 0 12px; font-size: 12px; font-weight: 600;">Today</button>
+        <button class="week-nav-arrow" id="weekNextBtn">›</button>
+      </div>
+    </div>
+    <div class="week-grid">
+  `;
+
+  for (const d of days) {
+    const dKey = ymd(d);
+    const dayJobs = byDate[dKey] || [];
+    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
+    const isTodayCol = isToday(d);
+    const cls = ['week-day-col'];
+    if (isTodayCol) cls.push('today');
+    if (isWeekend) cls.push('weekend');
+
+    html += `
+      <div class="${cls.join(' ')}" data-date="${dKey}">
+        <div class="week-day-header">
+          <div class="wdh-left">
+            <div>
+              <div class="wdh-name">${d.toLocaleDateString('en-US', { weekday: 'short' })}</div>
+              <div class="wdh-num">${d.getDate()}</div>
+            </div>
+          </div>
+          <div class="wdh-count">${dayJobs.length}</div>
+        </div>
+        <div class="week-day-body" data-date="${dKey}">
+          ${dayJobs.length === 0
+            ? '<div class="week-day-empty">No jobs</div>'
+            : dayJobs.map(j => weekCardHTML(j)).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  html += '</div>';
+  container.innerHTML = html;
+
+  // Click handlers
+  container.querySelectorAll('.week-card').forEach(el => {
+    el.addEventListener('click', () => openModal(el.dataset.id));
+    el.addEventListener('dragstart', onDragStart);
+    el.addEventListener('dragend', onDragEnd);
+  });
+  container.querySelectorAll('.week-day-body').forEach(el => {
+    el.addEventListener('dragover', onDragOver);
+    el.addEventListener('dragleave', onDragLeave);
+    el.addEventListener('drop', onDrop);
+  });
+
+  // Nav buttons
+  container.querySelectorAll('[data-week-offset]').forEach(b => {
+    b.addEventListener('click', () => {
+      const offset = parseInt(b.dataset.weekOffset);
+      weekViewCursor = new Date(startOfThisWeek);
+      weekViewCursor.setDate(weekViewCursor.getDate() + offset * 7);
+      renderWeek();
+    });
+  });
+  document.getElementById('weekPrevBtn').addEventListener('click', () => {
+    weekViewCursor.setDate(weekViewCursor.getDate() - 7);
+    renderWeek();
+  });
+  document.getElementById('weekNextBtn').addEventListener('click', () => {
+    weekViewCursor.setDate(weekViewCursor.getDate() + 7);
+    renderWeek();
+  });
+  document.getElementById('weekTodayBtn').addEventListener('click', () => {
+    weekViewCursor = startOfWeek(new Date());
+    renderWeek();
+  });
+}
+
+function weekCardHTML(job) {
+  const teamCls = job.team === 'Group A' ? 'team-a' : (job.team === 'Group B' ? 'team-b' : 'team-none');
+  const prio = job.priority ? `<span class="pill ${job.priority.toLowerCase()}">${job.priority}</span>` : '';
+  const type = job.project_type ? `<span class="pill type">${escapeHTML(job.project_type)}</span>` : '';
+
+  const proofs = job.production_id
+    ? [1,2].map(n => `<img src="proofs/${job.production_id}_p${n}_thumb.jpg" onerror="this.style.display='none'">`).join('')
+    : '';
+
+  const draggable = USER_ROLE === 'editor' ? 'true' : 'false';
+
+  return `
+    <div class="week-card ${teamCls}" data-id="${job.id}" draggable="${draggable}">
+      ${proofs ? `<div class="wc-thumb">${proofs}</div>` : ''}
+      <div class="wc-body">
+        ${job.invoice_number ? `<div class="wc-inv">INV ${escapeHTML(job.invoice_number)}</div>` : ''}
+        <div class="wc-title">${escapeHTML(job.name)}</div>
+        ${job.address ? `<div class="wc-addr">📍 ${escapeHTML(job.address)}</div>` : ''}
+        <div class="wc-badges">${prio} ${type}</div>
+        <div class="wc-meta">
+          ${job.installer ? `<span><span class="key">👤</span> <span class="val">${escapeHTML(job.installer)}</span></span>` : ''}
+          ${job.plan_hours ? `<span><span class="key">⏱</span> <span class="val">${escapeHTML(job.plan_hours)}h</span></span>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+
 // ============ DRAG & DROP ============
 let dragJobId = null;
 function onDragStart(e) {
@@ -1506,8 +1859,7 @@ async function onDrop(e) {
   const oldDate = job.install_date;
   // Local update first
   saveLocal(jobId, { install_date: newDate });
-  renderList();
-  renderStats();
+  render();
   toast(`Moved "${job.name}" to ${newDate}`, 'info');
 
   // Submit GitHub issue
@@ -1624,6 +1976,7 @@ async function renderMap() {
     today: 'Today',
     tomorrow: 'Tomorrow',
     week: 'This Week',
+    nextweek: 'Next Week',
     month: 'This Month',
     custom: mapCustomDate || 'Custom',
   }[mapDateFilter] || 'All';
@@ -1853,6 +2206,15 @@ function filterByMapDate(items, filter) {
   }
   if (filter === 'week') {
     const start = startOfWeek(today);
+    const end = new Date(start); end.setDate(end.getDate() + 6);
+    return items.filter(i => {
+      const d = new Date(i.install_date + 'T00:00');
+      return d >= start && d <= end;
+    });
+  }
+  if (filter === 'nextweek') {
+    const start = startOfWeek(today);
+    start.setDate(start.getDate() + 7);
     const end = new Date(start); end.setDate(end.getDate() + 6);
     return items.filter(i => {
       const d = new Date(i.install_date + 'T00:00');
@@ -2860,7 +3222,7 @@ weekDropdown.querySelectorAll('.wld-option').forEach(opt => {
 
     if (currentView === 'map') {
       // For map: control date filter chips
-      const map = { today: 'today', tomorrow: 'tomorrow', thisweek: 'week', thismonth: 'month' };
+      const map = { today: 'today', tomorrow: 'tomorrow', thisweek: 'week', nextweek: 'nextweek', thismonth: 'month' };
       mapDateFilter = map[quick];
       document.querySelectorAll('.date-chip').forEach(c => {
         c.classList.toggle('active', c.dataset.dateFilter === mapDateFilter);
@@ -2984,6 +3346,7 @@ function toast(msg, type = 'info') {
 function render() {
   renderStats();
   if (currentView === 'list') renderList();
+  else if (currentView === 'week') renderWeek();
   else if (currentView === 'map') renderMap();
 }
 
