@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-27T04:07:29.661648Z",
+  "updated_at": "2026-05-27T04:13:13.900565Z",
   "count": 28,
   "items": [
     {
@@ -300,7 +300,7 @@
       "invoice_number": "45946",
       "producer": "",
       "plan_hours": "",
-      "production_status": ""
+      "production_status": "Order Placed"
     },
     {
       "id": "2715867289",
@@ -360,7 +360,7 @@
       "invoice_number": "45951",
       "producer": "",
       "plan_hours": "",
-      "production_status": ""
+      "production_status": "Sign Proof"
     },
     {
       "id": "2719015788",
@@ -420,7 +420,7 @@
       "invoice_number": "45953",
       "producer": "",
       "plan_hours": "",
-      "production_status": ""
+      "production_status": "Sign Proof"
     },
     {
       "id": "2719015710",
@@ -437,10 +437,10 @@
       "production_id": "2718826357",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "",
+      "invoice_number": "45954",
       "producer": "",
       "plan_hours": "",
-      "production_status": ""
+      "production_status": "Sign Proof"
     },
     {
       "id": "2718983530",
@@ -540,7 +540,7 @@
       "invoice_number": "45901",
       "producer": "",
       "plan_hours": "",
-      "production_status": ""
+      "production_status": "Order Placed"
     },
     {
       "id": "2715955378",
