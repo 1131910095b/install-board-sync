@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-27T12:39:36.877777Z",
-  "count": 28,
+  "updated_at": "2026-05-28T11:54:13.618403Z",
+  "count": 29,
   "items": [
     {
       "id": "2715867167",
@@ -160,7 +160,7 @@
       "invoice_number": "45845",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2715912269",
@@ -180,7 +180,7 @@
       "invoice_number": "45871",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2716941656",
@@ -200,7 +200,7 @@
       "invoice_number": "45829",
       "producer": "",
       "plan_hours": "0.5",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2715942253",
@@ -280,27 +280,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
-    },
-    {
-      "id": "2715867271",
-      "name": "Gongcha Blade Sign and Cladding Board",
-      "install_date": "2026-05-29",
-      "address": "296 Clarendon St, South Melbourne VIC 3205",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2715385232",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45946",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715867289",
@@ -381,6 +361,46 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
+    },
+    {
+      "id": "2721085313",
+      "name": "INV-45956  Vinyl decal (cut)",
+      "install_date": "2026-05-29",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2717028444",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45976",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
+      "id": "2715867271",
+      "name": "Gongcha Blade Sign and Cladding Board",
+      "install_date": "2026-06-01",
+      "address": "296 Clarendon St, South Melbourne VIC 3205",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2715385232",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45946",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Construct Attention"
     },
     {
       "id": "2715955355",
@@ -560,7 +580,7 @@
       "invoice_number": "45913",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Construct Attention"
     }
   ]
 }
