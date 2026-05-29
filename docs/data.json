@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-28T12:51:18.950759Z",
-  "count": 29,
+  "updated_at": "2026-05-29T10:58:55.603247Z",
+  "count": 30,
   "items": [
     {
       "id": "2715867167",
@@ -220,7 +220,7 @@
       "invoice_number": "45929",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715912202",
@@ -380,7 +380,7 @@
       "invoice_number": "45976",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715867271",
@@ -400,7 +400,7 @@
       "invoice_number": "45946",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Production"
     },
     {
       "id": "2715955355",
@@ -521,6 +521,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
+    },
+    {
+      "id": "2722409336",
+      "name": "Midson construction",
+      "install_date": "2026-06-05",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2722234418",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45977",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2718992861",
