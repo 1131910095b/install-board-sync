@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-29T12:01:00.531095Z",
-  "count": 30,
+  "updated_at": "2026-06-01T19:15:38.291846Z",
+  "count": 31,
   "items": [
     {
       "id": "2715867167",
@@ -230,7 +230,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "",
-      "priority": "Low",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
@@ -263,6 +263,26 @@
       "production_status": "Production"
     },
     {
+      "id": "2715867289",
+      "name": "Village Bendigo Design",
+      "install_date": "2026-05-28",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2701060292",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
       "id": "2715955550",
       "name": "New Balance QV Melbourne",
       "install_date": "2026-05-28",
@@ -281,26 +301,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Job Completed!"
-    },
-    {
-      "id": "2715867289",
-      "name": "Village Bendigo Design",
-      "install_date": "2026-05-29",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2701060292",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
     },
     {
       "id": "2716896134",
@@ -323,26 +323,6 @@
       "production_status": "Production"
     },
     {
-      "id": "2718836809",
-      "name": "Foresite Logistics install only",
-      "install_date": "2026-05-29",
-      "address": "40 Patch Cct, Laverton North 3026",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2718869309",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45951",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Sign Proof"
-    },
-    {
       "id": "2719015788",
       "name": "Binary Advertising Board",
       "install_date": "2026-05-29",
@@ -354,13 +334,13 @@
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
-      "production_id": "2718720597",
+      "production_id": null,
       "team": "",
       "duration_hours": null,
-      "invoice_number": "45948",
+      "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": ""
     },
     {
       "id": "2721085313",
@@ -400,7 +380,7 @@
       "invoice_number": "45946",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2715955355",
@@ -420,12 +400,32 @@
       "invoice_number": "45850",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
+    },
+    {
+      "id": "2718836809",
+      "name": "Foresite Logistics install only",
+      "install_date": "2026-06-03",
+      "address": "40 Patch Cct, Laverton North 3026",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2718869309",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45951",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
     },
     {
       "id": "2718837064",
       "name": "village banner blackburn",
-      "install_date": "2026-06-02",
+      "install_date": "2026-06-04",
       "address": "199-203 WHITEHORSE ROAD\nBLACKBURN",
       "installer": "",
       "schedule_status": "",
@@ -440,12 +440,12 @@
       "invoice_number": "45953",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2719015710",
       "name": "Village banner Croydon",
-      "install_date": "2026-06-02",
+      "install_date": "2026-06-04",
       "address": "65-67 BEAUFORT RD\nCROYDON",
       "installer": "",
       "schedule_status": "",
@@ -460,7 +460,7 @@
       "invoice_number": "45954",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2718983530",
@@ -480,7 +480,7 @@
       "invoice_number": "45723",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2716941500",
@@ -543,6 +543,26 @@
       "production_status": "Order Placed"
     },
     {
+      "id": "2725596290",
+      "name": "Lucas Bugejia",
+      "install_date": "2026-06-05",
+      "address": "321 Middleborough Rd\nBox Hill South VIC 3128",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 600.0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2724666489",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45905",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production File Start"
+    },
+    {
       "id": "2718992861",
       "name": "FunctionCo-Bench Coffee",
       "install_date": "2026-06-10",
@@ -560,7 +580,7 @@
       "invoice_number": "45892",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2715919403",
@@ -571,7 +591,7 @@
       "schedule_status": "",
       "project_type": "",
       "priority": "Medium",
-      "installation_value": 0,
+      "installation_value": 1060.0,
       "sales": "Jenny",
       "notes": "",
       "production_id": "2691793672",
@@ -580,7 +600,7 @@
       "invoice_number": "45901",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Construct Attention"
     },
     {
       "id": "2715955378",
