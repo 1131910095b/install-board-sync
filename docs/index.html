@@ -1854,7 +1854,6 @@ function saveJSON(key, obj) {
   try { localStorage.setItem(key, JSON.stringify(obj)); } catch {}
 }
 let JOB_ORDER = loadJSON('aceJobOrder', {});          // { "2026-06-03": ["id1","id2", ...] }
-let GROUP_INSTALLERS = loadJSON('aceGroupInstallers', {}); // { "2026-06-03": {a:"Chris", b:"Kent"} }
 
 // Sort a day's jobs by the saved manual order (unsaved jobs keep their natural order, appended last)
 function orderJobsForDay(date, jobs) {
@@ -2895,14 +2894,7 @@ function downloadDayPDF(date) {
     toast(`No jobs on ${date}`, 'error');
     return;
   }
-  // Pre-fill: saved value > distinct installers among each team's jobs
-  const saved = GROUP_INSTALLERS[date] || {};
-  const distinct = (team) => [...new Set(
-    jobs.filter(j => j.team === team).map(j => (j.installer || '').trim()).filter(Boolean)
-  )].join(', ');
-  const aVal = saved.a != null ? saved.a : distinct('Group A');
-  const bVal = saved.b != null ? saved.b : distinct('Group B');
-
+  // 每次手填 — 输入框永远空白，不自动预填、不记忆
   const dStr = new Date(date + 'T00:00').toLocaleDateString('en-AU',
     { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -2922,11 +2914,11 @@ function downloadDayPDF(date) {
     <div class="meta-grid">
       <div class="meta-item">
         <div class="meta-label" style="color:var(--team-a)">● Group A — installer(s)</div>
-        <div class="meta-value"><input id="pdfGroupA" type="text" value="${escapeHTML(aVal)}" placeholder="e.g. Chris, Peter"></div>
+        <div class="meta-value"><input id="pdfGroupA" type="text" value="" placeholder="e.g. Chris, Peter"></div>
       </div>
       <div class="meta-item">
         <div class="meta-label" style="color:var(--team-b)">● Group B — installer(s)</div>
-        <div class="meta-value"><input id="pdfGroupB" type="text" value="${escapeHTML(bVal)}" placeholder="e.g. Kent, Daniel"></div>
+        <div class="meta-value"><input id="pdfGroupB" type="text" value="" placeholder="e.g. Kent, Daniel"></div>
       </div>
     </div>
 
@@ -2943,8 +2935,6 @@ function downloadDayPDF(date) {
   document.getElementById('pdfGenerateBtn').addEventListener('click', () => {
     const a = document.getElementById('pdfGroupA').value.trim();
     const b = document.getElementById('pdfGroupB').value.trim();
-    GROUP_INSTALLERS[date] = { a, b };
-    saveJSON('aceGroupInstallers', GROUP_INSTALLERS);
     closeModal();
     generateDayPDF(date, a, b);
   });
