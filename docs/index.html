@@ -2910,15 +2910,33 @@ function downloadDayPDF(date) {
     <h2>Generate Day PDF</h2>
     <div class="modal-sub">${dStr} · ${jobs.length} job${jobs.length>1?'s':''}</div>
 
-    <div class="section-title">Crew on cover page</div>
+    <div class="section-title">Crew &amp; vehicle on cover page</div>
     <div class="meta-grid">
       <div class="meta-item">
         <div class="meta-label" style="color:var(--team-a)">● Group A — installer(s)</div>
         <div class="meta-value"><input id="pdfGroupA" type="text" value="" placeholder="e.g. Chris, Peter"></div>
       </div>
       <div class="meta-item">
+        <div class="meta-label" style="color:var(--team-a)">● Group A — vehicle</div>
+        <div class="meta-value">
+          <select id="pdfVehicleA">
+            <option value="">— None —</option>
+            ${VEHICLE_OPTIONS.map(v => `<option value="${v}">${v}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="meta-item">
         <div class="meta-label" style="color:var(--team-b)">● Group B — installer(s)</div>
         <div class="meta-value"><input id="pdfGroupB" type="text" value="" placeholder="e.g. Kent, Daniel"></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label" style="color:var(--team-b)">● Group B — vehicle</div>
+        <div class="meta-value">
+          <select id="pdfVehicleB">
+            <option value="">— None —</option>
+            ${VEHICLE_OPTIONS.map(v => `<option value="${v}">${v}</option>`).join('')}
+          </select>
+        </div>
       </div>
     </div>
 
@@ -2935,13 +2953,15 @@ function downloadDayPDF(date) {
   document.getElementById('pdfGenerateBtn').addEventListener('click', () => {
     const a = document.getElementById('pdfGroupA').value.trim();
     const b = document.getElementById('pdfGroupB').value.trim();
+    const va = document.getElementById('pdfVehicleA').value;
+    const vb = document.getElementById('pdfVehicleB').value;
     closeModal();
-    generateDayPDF(date, a, b);
+    generateDayPDF(date, a, b, va, vb);
   });
 }
 
 // Step 2: actually build the PDF, in the saved order, with crew names on the cover
-async function generateDayPDF(date, groupA, groupB) {
+async function generateDayPDF(date, groupA, groupB, vehicleA, vehicleB) {
   const jobs = orderJobsForDay(date, applyFilters(DATA.items).filter(i => i.install_date === date));
   if (!jobs.length) { toast(`No jobs on ${date}`, 'error'); return; }
   toast(`Generating PDF for ${jobs.length} job${jobs.length>1?'s':''}...`, 'info');
@@ -2953,12 +2973,14 @@ async function generateDayPDF(date, groupA, groupB) {
   const margin = 36;
 
   // Cover page (jobs already in display order; crew names passed in)
-  drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB);
+  drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, vehicleA, vehicleB);
 
-  // Per-job page (same order)
+  // Per-job page (same order). Vehicle comes from the group-level selection.
   for (let i = 0; i < jobs.length; i++) {
     pdf.addPage();
-    await renderJobSheet(pdf, jobs[i], margin, pageW - margin * 2, pageW, pageH, i + 1, jobs.length);
+    const groupVehicle = jobs[i].team === 'Group A' ? vehicleA
+                       : jobs[i].team === 'Group B' ? vehicleB : '';
+    await renderJobSheet(pdf, jobs[i], margin, pageW - margin * 2, pageW, pageH, i + 1, jobs.length, groupVehicle);
   }
 
   pdf.save(`ACE-${date}.pdf`);
@@ -2979,7 +3001,7 @@ async function downloadJobPDF(jobId) {
   toast(`PDF saved`, 'success');
 }
 
-function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB) {
+function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, vehicleA, vehicleB) {
   const dObj = new Date(date + 'T00:00');
   const dateStr = dObj.toLocaleDateString('en-AU', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
@@ -3016,8 +3038,8 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB) {
   const statBlocks = [
     { label: 'TOTAL JOBS', value: String(jobs.length), big: true },
     { label: 'TOTAL HOURS', value: totalHrs > 0 ? totalHrs.toFixed(0) + 'h' : '—', big: true },
-    { label: 'GROUP A', value: (groupA && groupA.trim()) ? groupA.trim() : '—', sub: `${teamAJobs} job${teamAJobs!==1?'s':''}`, color: PDF_COLORS.teamA, big: false },
-    { label: 'GROUP B', value: (groupB && groupB.trim()) ? groupB.trim() : '—', sub: `${teamBJobs} job${teamBJobs!==1?'s':''}`, color: PDF_COLORS.teamB, big: false },
+    { label: 'GROUP A', value: (groupA && groupA.trim()) ? groupA.trim() : '—', sub: `${teamAJobs} job${teamAJobs!==1?'s':''}${vehicleA ? ' · ' + vehicleA : ''}`, color: PDF_COLORS.teamA, big: false },
+    { label: 'GROUP B', value: (groupB && groupB.trim()) ? groupB.trim() : '—', sub: `${teamBJobs} job${teamBJobs!==1?'s':''}${vehicleB ? ' · ' + vehicleB : ''}`, color: PDF_COLORS.teamB, big: false },
   ];
 
   const blockW = (pageW - margin * 2) / statBlocks.length;
@@ -3101,7 +3123,7 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB) {
   pdf.text('Cover page', pageW - margin, pageH - 24, { align: 'right' });
 }
 
-async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum, totalPages) {
+async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum, totalPages, groupVehicle) {
   // === Top accent band ===
   const teamColor = job.team === 'Group A' ? PDF_COLORS.teamA
                   : job.team === 'Group B' ? PDF_COLORS.teamB
@@ -3225,10 +3247,11 @@ async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum,
   pdf.text('VEHICLE', margin, y);
   pdf.setDrawColor(...PDF_COLORS.border);
   pdf.roundedRect(margin, y + 6, halfW, 28, 4, 4, 'S');
-  if (job.vehicle) {
+  const vehicleText = (groupVehicle != null && groupVehicle !== '') ? groupVehicle : (job.vehicle || '');
+  if (vehicleText) {
     pdf.setFontSize(12);
     pdf.setTextColor(...PDF_COLORS.dark);
-    pdf.text(job.vehicle, margin + 10, y + 24);
+    pdf.text(vehicleText, margin + 10, y + 24);
   }
   // Actual hours box
   pdf.setFontSize(8);
