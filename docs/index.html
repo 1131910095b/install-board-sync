@@ -417,6 +417,29 @@
   }
   .job-card[draggable="true"] { cursor: grab; }
   .job-card[draggable="true"]:active { cursor: grabbing; }
+  .job-card { position: relative; }
+  .seq-badge {
+    position: absolute; top: 8px; left: 8px; z-index: 3;
+    min-width: 22px; height: 22px; padding: 0 5px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(15,17,21,0.82); color: #fff;
+    font-size: 12px; font-weight: 800; border-radius: 7px;
+    border: 1px solid rgba(255,255,255,0.18);
+    font-variant-numeric: tabular-nums;
+  }
+  .job-card.team-a .seq-badge { background: var(--team-a); }
+  .job-card.team-b .seq-badge { background: var(--team-b); }
+  .job-card.reorder-before { box-shadow: -4px 0 0 0 var(--accent); }
+  .job-card.reorder-after  { box-shadow: 4px 0 0 0 var(--accent); }
+  .pdf-ord-list { max-height: 240px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 6px; }
+  .pdf-ord-row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 6px; }
+  .pdf-ord-row:nth-child(odd) { background: rgba(255,255,255,0.03); }
+  .pdf-ord-num { font-weight: 800; font-variant-numeric: tabular-nums; color: var(--text-faint); min-width: 20px; }
+  .pdf-ord-tag { font-weight: 800; font-size: 11px; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 5px; color: #fff; }
+  .pdf-ord-tag.t-a { background: var(--team-a); }
+  .pdf-ord-tag.t-b { background: var(--team-b); }
+  .pdf-ord-tag.t-none { background: var(--text-faint); }
+  .pdf-ord-name { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .job-card.dragging { opacity: 0.5; }
   .job-card.team-a { border-left: 4px solid var(--team-a); }
   .job-card.team-b { border-left: 4px solid var(--team-b); }
@@ -1569,7 +1592,7 @@ function renderList() {
   let html = '';
   for (const date of allDates) {
     const d = new Date(date + 'T00:00');
-    const jobs = byDate[date];
+    const jobs = orderJobsForDay(date, byDate[date]);
     const totalHrs = jobs.reduce((s, j) => s + parseFloat(j.duration_hours || 0), 0);
     html += `
       <div class="day-section" data-date="${date}">
@@ -1585,7 +1608,7 @@ function renderList() {
           </div>
         </div>
         <div class="cards-grid">
-          ${jobs.map(j => jobCardHTML(j)).join('')}
+          ${jobs.map((j, idx) => jobCardHTML(j, idx + 1)).join('')}
         </div>
       </div>`;
   }
@@ -1601,6 +1624,9 @@ function renderList() {
     // Drag handlers
     el.addEventListener('dragstart', onDragStart);
     el.addEventListener('dragend', onDragEnd);
+    el.addEventListener('dragover', onCardDragOver);
+    el.addEventListener('dragleave', onCardDragLeave);
+    el.addEventListener('drop', onCardDrop);
   });
   container.querySelectorAll('.day-section').forEach(el => {
     el.addEventListener('dragover', onDragOver);
@@ -1615,10 +1641,11 @@ function renderList() {
   });
 }
 
-function jobCardHTML(job) {
+function jobCardHTML(job, seq) {
   const teamCls = job.team === 'Group A' ? 'team-a' : (job.team === 'Group B' ? 'team-b' : 'team-none');
   const teamLabel = job.team || 'Unassigned';
   const teamPillCls = teamCls;
+  const seqBadge = seq ? `<div class="seq-badge">${String(seq).padStart(2,'0')}</div>` : '';
 
   // Priority badge
   const prio = job.priority ? `<span class="pill ${job.priority.toLowerCase()}">${job.priority}</span>` : '';
@@ -1640,7 +1667,8 @@ function jobCardHTML(job) {
     : '';
 
   return `
-    <div class="job-card ${teamCls}" data-id="${job.id}" draggable="${USER_ROLE === 'editor' ? 'true' : 'false'}">
+    <div class="job-card ${teamCls}" data-id="${job.id}" data-date="${job.install_date || ''}" draggable="${USER_ROLE === 'editor' ? 'true' : 'false'}">
+      ${seqBadge}
       ${proofs ? `<div class="card-img-row">${proofs}</div>` : ''}
       <div class="card-body">
         ${job.invoice_number ? `<div class="card-invoice">INV ${escapeHTML(job.invoice_number)}</div>` : ''}
@@ -1817,6 +1845,48 @@ function weekCardHTML(job) {
     </div>`;
 }
 
+// ============ PER-DAY JOB ORDER + GROUP INSTALLERS (persisted) ============
+function loadJSON(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key) || 'null') || fallback; }
+  catch { return fallback; }
+}
+function saveJSON(key, obj) {
+  try { localStorage.setItem(key, JSON.stringify(obj)); } catch {}
+}
+let JOB_ORDER = loadJSON('aceJobOrder', {});          // { "2026-06-03": ["id1","id2", ...] }
+let GROUP_INSTALLERS = loadJSON('aceGroupInstallers', {}); // { "2026-06-03": {a:"Chris", b:"Kent"} }
+
+// Sort a day's jobs by the saved manual order (unsaved jobs keep their natural order, appended last)
+function orderJobsForDay(date, jobs) {
+  const ord = JOB_ORDER[date];
+  if (!ord || !ord.length) return jobs;
+  const pos = {};
+  ord.forEach((id, i) => { pos[id] = i; });
+  return [...jobs].sort((a, b) => {
+    const pa = (a.id in pos) ? pos[a.id] : 9999;
+    const pb = (b.id in pos) ? pos[b.id] : 9999;
+    return pa - pb;
+  });
+}
+function setDayOrder(date, ids) {
+  JOB_ORDER[date] = ids;
+  saveJSON('aceJobOrder', JOB_ORDER);
+}
+// Reorder within a day: move draggedId to the position of targetId (insert before it)
+function reorderWithinDay(date, draggedId, targetId, insertAfter) {
+  const section = document.querySelector(`.day-section[data-date="${date}"]`);
+  if (!section) return;
+  let ids = [...section.querySelectorAll('.job-card')].map(c => c.dataset.id);
+  ids = ids.filter(id => id !== draggedId);
+  let ti = ids.indexOf(targetId);
+  if (ti < 0) ti = ids.length;
+  if (insertAfter) ti += 1;
+  ids.splice(ti, 0, draggedId);
+  setDayOrder(date, ids);
+  render();
+  toast('Job order updated', 'info');
+}
+
 // ============ DRAG & DROP ============
 let dragJobId = null;
 function onDragStart(e) {
@@ -1854,8 +1924,53 @@ async function onDrop(e) {
   const jobId = dragJobId;
   e.currentTarget.classList.remove('drop-target');
   if (!jobId || !newDate) return;
+  await rescheduleJob(jobId, newDate);
+}
+
+// ---- Card-level drag: reorder within a day, or reschedule across days ----
+function onCardDragOver(e) {
+  if (USER_ROLE !== 'editor' || !dragJobId) return;
+  const card = e.currentTarget;
+  if (card.dataset.id === dragJobId) return;
+  e.preventDefault();
+  e.stopPropagation();
+  e.dataTransfer.dropEffect = 'move';
+  const sameDay = card.dataset.date === (DATA.items.find(i => i.id === dragJobId) || {}).install_date;
+  card.classList.remove('reorder-before', 'reorder-after');
+  if (sameDay) {
+    const r = card.getBoundingClientRect();
+    const after = (e.clientX - r.left) > r.width / 2;
+    card.classList.add(after ? 'reorder-after' : 'reorder-before');
+  }
+}
+function onCardDragLeave(e) {
+  e.currentTarget.classList.remove('reorder-before', 'reorder-after');
+}
+async function onCardDrop(e) {
+  if (USER_ROLE !== 'editor' || !dragJobId) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const card = e.currentTarget;
+  const targetId = card.dataset.id;
+  const jobId = dragJobId;
+  const after = card.classList.contains('reorder-after');
+  card.classList.remove('reorder-before', 'reorder-after');
+  if (!jobId || jobId === targetId) return;
+  const dragged = DATA.items.find(i => i.id === jobId);
+  const target = DATA.items.find(i => i.id === targetId);
+  if (!dragged || !target) return;
+  if (dragged.install_date === target.install_date) {
+    // same day -> reorder
+    reorderWithinDay(dragged.install_date, jobId, targetId, after);
+  } else {
+    // dropped on a card in another day -> reschedule to that day
+    await rescheduleJob(jobId, target.install_date);
+  }
+}
+
+async function rescheduleJob(jobId, newDate) {
   const job = DATA.items.find(i => i.id === jobId);
-  if (!job) return;
+  if (!job || !newDate) return;
   if (job.install_date === newDate) return;
 
   const oldDate = job.install_date;
@@ -2773,12 +2888,72 @@ const PDF_COLORS = {
   low: [16, 185, 129],
 };
 
-async function downloadDayPDF(date) {
-  const jobs = applyFilters(DATA.items).filter(i => i.install_date === date);
+// Step 1: open options modal to set Group A / Group B installers before generating
+function downloadDayPDF(date) {
+  const jobs = orderJobsForDay(date, applyFilters(DATA.items).filter(i => i.install_date === date));
   if (!jobs.length) {
     toast(`No jobs on ${date}`, 'error');
     return;
   }
+  // Pre-fill: saved value > distinct installers among each team's jobs
+  const saved = GROUP_INSTALLERS[date] || {};
+  const distinct = (team) => [...new Set(
+    jobs.filter(j => j.team === team).map(j => (j.installer || '').trim()).filter(Boolean)
+  )].join(', ');
+  const aVal = saved.a != null ? saved.a : distinct('Group A');
+  const bVal = saved.b != null ? saved.b : distinct('Group B');
+
+  const dStr = new Date(date + 'T00:00').toLocaleDateString('en-AU',
+    { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+  const listPreview = jobs.map((j, i) => {
+    const cls = j.team === 'Group A' ? 'a' : (j.team === 'Group B' ? 'b' : 'none');
+    const tag = j.team === 'Group A' ? 'A' : (j.team === 'Group B' ? 'B' : '–');
+    return `<div class="pdf-ord-row"><span class="pdf-ord-num">${String(i+1).padStart(2,'0')}</span>
+      <span class="pdf-ord-tag t-${cls}">${tag}</span>
+      <span class="pdf-ord-name">${escapeHTML(j.name || '')}</span></div>`;
+  }).join('');
+
+  document.getElementById('modalBody').innerHTML = `
+    <h2>Generate Day PDF</h2>
+    <div class="modal-sub">${dStr} · ${jobs.length} job${jobs.length>1?'s':''}</div>
+
+    <div class="section-title">Crew on cover page</div>
+    <div class="meta-grid">
+      <div class="meta-item">
+        <div class="meta-label" style="color:var(--team-a)">● Group A — installer(s)</div>
+        <div class="meta-value"><input id="pdfGroupA" type="text" value="${escapeHTML(aVal)}" placeholder="e.g. Chris, Peter"></div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label" style="color:var(--team-b)">● Group B — installer(s)</div>
+        <div class="meta-value"><input id="pdfGroupB" type="text" value="${escapeHTML(bVal)}" placeholder="e.g. Kent, Daniel"></div>
+      </div>
+    </div>
+
+    <div class="section-title">Job order (drag cards in the list to change) </div>
+    <div class="pdf-ord-list">${listPreview}</div>
+
+    <div class="modal-footer">
+      <button class="btn" id="pdfCancelBtn">Cancel</button>
+      <button class="btn primary" id="pdfGenerateBtn">↓ Generate PDF</button>
+    </div>
+  `;
+  document.getElementById('modalBackdrop').classList.add('show');
+  document.getElementById('pdfCancelBtn').addEventListener('click', closeModal);
+  document.getElementById('pdfGenerateBtn').addEventListener('click', () => {
+    const a = document.getElementById('pdfGroupA').value.trim();
+    const b = document.getElementById('pdfGroupB').value.trim();
+    GROUP_INSTALLERS[date] = { a, b };
+    saveJSON('aceGroupInstallers', GROUP_INSTALLERS);
+    closeModal();
+    generateDayPDF(date, a, b);
+  });
+}
+
+// Step 2: actually build the PDF, in the saved order, with crew names on the cover
+async function generateDayPDF(date, groupA, groupB) {
+  const jobs = orderJobsForDay(date, applyFilters(DATA.items).filter(i => i.install_date === date));
+  if (!jobs.length) { toast(`No jobs on ${date}`, 'error'); return; }
   toast(`Generating PDF for ${jobs.length} job${jobs.length>1?'s':''}...`, 'info');
 
   const { jsPDF } = window.jspdf;
@@ -2787,10 +2962,10 @@ async function downloadDayPDF(date) {
   const pageH = pdf.internal.pageSize.getHeight();
   const margin = 36;
 
-  // Cover page
-  drawCoverPage(pdf, date, jobs, pageW, pageH, margin);
+  // Cover page (jobs already in display order; crew names passed in)
+  drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB);
 
-  // Per-job page
+  // Per-job page (same order)
   for (let i = 0; i < jobs.length; i++) {
     pdf.addPage();
     await renderJobSheet(pdf, jobs[i], margin, pageW - margin * 2, pageW, pageH, i + 1, jobs.length);
@@ -2814,7 +2989,7 @@ async function downloadJobPDF(jobId) {
   toast(`PDF saved`, 'success');
 }
 
-function drawCoverPage(pdf, date, jobs, pageW, pageH, margin) {
+function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB) {
   const dObj = new Date(date + 'T00:00');
   const dateStr = dObj.toLocaleDateString('en-AU', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
@@ -2849,10 +3024,10 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin) {
   sy += 26;
 
   const statBlocks = [
-    { label: 'TOTAL JOBS', value: jobs.length },
-    { label: 'TOTAL HOURS', value: totalHrs > 0 ? totalHrs.toFixed(0) + 'h' : '—' },
-    { label: 'GROUP A', value: teamAJobs, color: PDF_COLORS.teamA },
-    { label: 'GROUP B', value: teamBJobs, color: PDF_COLORS.teamB },
+    { label: 'TOTAL JOBS', value: String(jobs.length), big: true },
+    { label: 'TOTAL HOURS', value: totalHrs > 0 ? totalHrs.toFixed(0) + 'h' : '—', big: true },
+    { label: 'GROUP A', value: (groupA && groupA.trim()) ? groupA.trim() : '—', sub: `${teamAJobs} job${teamAJobs!==1?'s':''}`, color: PDF_COLORS.teamA, big: false },
+    { label: 'GROUP B', value: (groupB && groupB.trim()) ? groupB.trim() : '—', sub: `${teamBJobs} job${teamBJobs!==1?'s':''}`, color: PDF_COLORS.teamB, big: false },
   ];
 
   const blockW = (pageW - margin * 2) / statBlocks.length;
@@ -2861,11 +3036,24 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin) {
     pdf.setFontSize(8);
     pdf.setTextColor(...PDF_COLORS.textSecondary);
     pdf.text(b.label, bx, sy);
-    pdf.setFontSize(22);
-    pdf.setTextColor(...(b.color || PDF_COLORS.dark));
-    pdf.setFont(undefined, 'bold');
-    pdf.text(String(b.value), bx, sy + 26);
-    pdf.setFont(undefined, 'normal');
+    if (b.big) {
+      pdf.setFontSize(22);
+      pdf.setTextColor(...(b.color || PDF_COLORS.dark));
+      pdf.setFont(undefined, 'bold');
+      pdf.text(String(b.value), bx, sy + 26);
+      pdf.setFont(undefined, 'normal');
+    } else {
+      // Crew name(s): smaller font, wrap to fit the column, then job count beneath
+      pdf.setFontSize(13);
+      pdf.setTextColor(...(b.color || PDF_COLORS.dark));
+      pdf.setFont(undefined, 'bold');
+      const lines = pdf.splitTextToSize(String(b.value), blockW - 10).slice(0, 2);
+      pdf.text(lines, bx, sy + 14);
+      pdf.setFont(undefined, 'normal');
+      pdf.setFontSize(8);
+      pdf.setTextColor(...PDF_COLORS.textSecondary);
+      pdf.text(b.sub || '', bx, sy + 14 + lines.length * 14 + 4);
+    }
   });
 
   // Job list
@@ -2879,11 +3067,8 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin) {
   pdf.line(margin, sy, pageW - margin, sy);
   sy += 18;
 
-  // Sort by team then name
-  const sortedJobs = [...jobs].sort((a, b) => {
-    const ta = a.team || 'Z'; const tb = b.team || 'Z';
-    return ta.localeCompare(tb) || (a.name || '').localeCompare(b.name || '');
-  });
+  // Use the order passed in (matches the on-screen list / manual drag order)
+  const sortedJobs = jobs;
 
   pdf.setFontSize(10);
   for (let i = 0; i < sortedJobs.length; i++) {
