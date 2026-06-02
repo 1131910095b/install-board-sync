@@ -199,7 +199,7 @@ def download_file(url):
     return r.content
 
 
-def convert_pdf_to_images(pdf_bytes, prefix, max_pages=20):
+def convert_pdf_to_images(pdf_bytes, prefix, max_pages=20, start_page=1):
     try:
         pages = convert_from_bytes(pdf_bytes, dpi=120, fmt="jpeg")
     except Exception as e:
@@ -207,7 +207,8 @@ def convert_pdf_to_images(pdf_bytes, prefix, max_pages=20):
         return []
     pages = pages[:max_pages]
     results = []
-    for i, page_img in enumerate(pages, 1):
+    for idx, page_img in enumerate(pages):
+        i = start_page + idx
         # thumbnail
         thumb = page_img.copy()
         thumb.thumbnail((THUMBNAIL_WIDTH, THUMBNAIL_WIDTH * 2))
@@ -226,8 +227,8 @@ def convert_pdf_to_images(pdf_bytes, prefix, max_pages=20):
     return results
 
 
-def convert_image_to_jpgs(image_bytes, prefix):
-    """Handle JPG/PNG: create _p1.jpg and _p1_thumb.jpg"""
+def convert_image_to_jpgs(image_bytes, prefix, page=1):
+    """Handle JPG/PNG: create _p{page}.jpg and _p{page}_thumb.jpg"""
     try:
         img = Image.open(io.BytesIO(image_bytes))
         img.load()
@@ -238,15 +239,15 @@ def convert_image_to_jpgs(image_bytes, prefix):
     # thumb
     thumb = img.copy()
     thumb.thumbnail((THUMBNAIL_WIDTH, THUMBNAIL_WIDTH * 2))
-    thumb_path = prefix.parent / f"{prefix.name}_p1_thumb.jpg"
+    thumb_path = prefix.parent / f"{prefix.name}_p{page}_thumb.jpg"
     thumb.convert("RGB").save(thumb_path, "JPEG", quality=JPEG_QUALITY, optimize=True)
     # full
     full = img.copy()
     full.thumbnail((FULL_WIDTH, FULL_WIDTH * 2))
-    full_path = prefix.parent / f"{prefix.name}_p1.jpg"
+    full_path = prefix.parent / f"{prefix.name}_p{page}.jpg"
     full.convert("RGB").save(full_path, "JPEG", quality=JPEG_QUALITY, optimize=True)
     return [{
-        "page": 1,
+        "page": page,
         "full": str(full_path.relative_to("docs")),
         "thumb": str(thumb_path.relative_to("docs")),
     }]
@@ -289,20 +290,22 @@ def main():
                 continue
 
         try:
-            first = files[0]
-            log(f"  下载 Production {prod_id}: {first['name']} [{first['source']}]")
-            content = download_file(first["url"])
             prefix = PROOFS_DIR / prod_id
-            
-            if first["ext"] == "pdf":
-                pages = convert_pdf_to_images(content, prefix)
-            else:
-                # JPG/PNG: single-page output
-                pages = convert_image_to_jpgs(content, prefix)
+            pages = []
+            next_page = 1
+            for f in files:
+                log(f"  下载 Production {prod_id}: {f['name']} [{f['source']}]")
+                content = download_file(f["url"])
+                if f["ext"] == "pdf":
+                    new_pages = convert_pdf_to_images(content, prefix, start_page=next_page)
+                else:
+                    new_pages = convert_image_to_jpgs(content, prefix, page=next_page)
+                pages.extend(new_pages)
+                next_page += len(new_pages)
             
             if pages:
                 proof_map[prod_id] = pages
-                cache[prod_id] = {"key": cache_key, "pages": pages, "source": first["source"]}
+                cache[prod_id] = {"key": cache_key, "pages": pages, "source": files[0]["source"]}
                 downloaded += 1
                 log(f"    ✓ {len(pages)} 页")
             else:
