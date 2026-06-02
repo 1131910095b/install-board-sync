@@ -100,8 +100,12 @@ def fetch_files(production_ids):
     """
     log(f"批量获取 {len(production_ids)} 个 Production 项目的文件...")
     result = {}
-    for i in range(0, len(production_ids), 50):
-        chunk = production_ids[i:i+50]
+    # 注意：每批只查 10 个。文件列的 asset 嵌套查询复杂度高，
+    # 一次查太多 (如 50) 会被 monday 截断响应、悄悄丢掉后面的项目，
+    # 导致部分(常是较新的)项目抓不到 proof。
+    CHUNK = 10
+    for i in range(0, len(production_ids), CHUNK):
+        chunk = production_ids[i:i+CHUNK]
         ids_str = ",".join(chunk)
         q = f"""
         query {{
@@ -133,7 +137,10 @@ def fetch_files(production_ids):
         }}
         """
         data = monday_query(q)
-        for item in data["items"]:
+        returned = data.get("items") or []
+        if len(returned) < len(chunk):
+            log(f"  ⚠ 警告：请求 {len(chunk)} 个项目，monday 只返回 {len(returned)} 个（可能被截断）")
+        for item in returned:
             sign_files = (item.get("signProof") or [{}])[0].get("files") or []
             prod_files = (item.get("prodFile") or [{}])[0].get("files") or []
             
