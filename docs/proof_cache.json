@@ -439,17 +439,6 @@
     ],
     "source": "sign_proof"
   },
-  "2717028444": {
-    "key": "1b522bb26d45",
-    "pages": [
-      {
-        "page": 1,
-        "full": "proofs/2717028444_p1.jpg",
-        "thumb": "proofs/2717028444_p1_thumb.jpg"
-      }
-    ],
-    "source": "production_file"
-  },
   "2691793672": {
     "key": "4da4e8baefcf",
     "pages": [
@@ -486,15 +475,15 @@
     ],
     "source": "sign_proof"
   },
-  "2718826357": {
-    "key": "d8d44824185d",
+  "2700759011": {
+    "key": "1cc851e55701",
     "pages": [
       {
         "page": 1,
-        "full": "proofs/2718826357_p1.jpg",
-        "thumb": "proofs/2718826357_p1_thumb.jpg"
+        "full": "proofs/2700759011_p1.jpg",
+        "thumb": "proofs/2700759011_p1_thumb.jpg"
       }
     ],
-    "source": "sign_proof"
+    "source": "production_file"
   }
 }
