@@ -2975,12 +2975,14 @@ async function generateDayPDF(date, groupA, groupB, vehicleA, vehicleB) {
   // Cover page (jobs already in display order; crew names passed in)
   drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, vehicleA, vehicleB);
 
-  // Per-job page (same order). Vehicle comes from the group-level selection.
+  // Per-job page (same order). Installer & vehicle come from the group-level selection.
   for (let i = 0; i < jobs.length; i++) {
     pdf.addPage();
     const groupVehicle = jobs[i].team === 'Group A' ? vehicleA
                        : jobs[i].team === 'Group B' ? vehicleB : '';
-    await renderJobSheet(pdf, jobs[i], margin, pageW - margin * 2, pageW, pageH, i + 1, jobs.length, groupVehicle);
+    const groupInstaller = jobs[i].team === 'Group A' ? groupA
+                         : jobs[i].team === 'Group B' ? groupB : '';
+    await renderJobSheet(pdf, jobs[i], margin, pageW - margin * 2, pageW, pageH, i + 1, jobs.length, groupVehicle, groupInstaller);
   }
 
   pdf.save(`ACE-${date}.pdf`);
@@ -3123,7 +3125,9 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, ve
   pdf.text('Cover page', pageW - margin, pageH - 24, { align: 'right' });
 }
 
-async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum, totalPages, groupVehicle) {
+async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum, totalPages, groupVehicle, groupInstaller) {
+  // Installer shown on the sheet: group-level selection takes priority, else the item's own field
+  const installerText = (groupInstaller != null && groupInstaller !== '') ? groupInstaller : (job.installer || '');
   // === Top accent band ===
   const teamColor = job.team === 'Group A' ? PDF_COLORS.teamA
                   : job.team === 'Group B' ? PDF_COLORS.teamB
@@ -3159,7 +3163,7 @@ async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum,
   // === Team badge ===
   if (job.team) {
     pdf.setFillColor(...teamColor);
-    const teamText = `${job.team}${job.installer ? '   ·   ' + job.installer : ''}`;
+    const teamText = `${job.team}${installerText ? '   ·   ' + installerText : ''}`;
     const tw = pdf.getTextWidth(teamText) + 20;
     pdf.roundedRect(margin, y, tw, 22, 11, 11, 'F');
     pdf.setFontSize(11);
@@ -3190,7 +3194,7 @@ async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum,
       { label: 'PLANNED HOURS', value: job.plan_hours ? job.plan_hours + ' hrs' : '—' },
     ],
     [
-      { label: 'INSTALLER', value: job.installer || '—' },
+      { label: 'INSTALLER', value: installerText || '—' },
       { label: 'PROJECT TYPE', value: job.project_type || 'Install' },
     ],
     [
