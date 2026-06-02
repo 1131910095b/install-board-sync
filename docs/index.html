@@ -3283,7 +3283,9 @@ async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum,
     }
 
     if (proofImages.length) {
-      const remainingH = pageH - y - 100; // reserve room for notes + footer
+      // Proof area must end above the fixed NOTES box (notes height 64 + label 14 + footer/gap ~40)
+      const proofBottom = pageH - 24 - 14 - 64 - 18;
+      const remainingH = proofBottom - y;
       const n = proofImages.length;
 
       if (n === 1) {
@@ -3336,18 +3338,19 @@ async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum,
     }
   }
 
-  // === Notes (always at bottom) ===
-  const notesY = Math.max(y + 6, pageH - 130);
+  // === Notes (FIXED position at page bottom for consistent layout across all pages) ===
+  const NOTES_H = 64;
+  const notesY = pageH - 24 - 14 - NOTES_H; // footer at pageH-24; gap; then notes box
   pdf.setFontSize(8);
   pdf.setTextColor(...PDF_COLORS.textSecondary);
-  pdf.text('NOTES', margin, notesY);
+  pdf.text('NOTES', margin, notesY - 6);
   pdf.setDrawColor(...PDF_COLORS.border);
-  pdf.roundedRect(margin, notesY + 6, contentW, 64, 4, 4, 'S');
+  pdf.roundedRect(margin, notesY, contentW, NOTES_H, 4, 4, 'S');
   if (job.scheduler_notes) {
     pdf.setFontSize(10);
     pdf.setTextColor(...PDF_COLORS.dark);
     const lines = pdf.splitTextToSize(job.scheduler_notes, contentW - 16);
-    pdf.text(lines.slice(0, 3), margin + 8, notesY + 22);
+    pdf.text(lines.slice(0, 3), margin + 8, notesY + 16);
   }
 
   // === Footer ===
