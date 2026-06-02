@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-02T10:05:51.346989+00:00Z",
+  "generated_at": "2026-06-02T13:02:16.373072+00:00Z",
   "proofs": {
     "2715867271": [
       {
@@ -760,6 +760,28 @@
         "page": 1,
         "full": "proofs/2700759011_p1.jpg",
         "thumb": "proofs/2700759011_p1_thumb.jpg"
+      }
+    ],
+    "2726681106": [
+      {
+        "page": 1,
+        "full": "proofs/2726583926_p1.jpg",
+        "thumb": "proofs/2726583926_p1_thumb.jpg"
+      },
+      {
+        "page": 2,
+        "full": "proofs/2726583926_p2.jpg",
+        "thumb": "proofs/2726583926_p2_thumb.jpg"
+      },
+      {
+        "page": 3,
+        "full": "proofs/2726583926_p3.jpg",
+        "thumb": "proofs/2726583926_p3_thumb.jpg"
+      },
+      {
+        "page": 4,
+        "full": "proofs/2726583926_p4.jpg",
+        "thumb": "proofs/2726583926_p4_thumb.jpg"
       }
     ]
   }
