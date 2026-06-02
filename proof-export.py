@@ -254,8 +254,10 @@ def convert_image_to_jpgs(image_bytes, prefix, page=1):
 
 
 def get_cache_key(files):
+    # 把文件数量也算进 key：文件数变了 (例如从 1 张图变 2 张) key 一定会变，缓存自动失效
     parts = [f"{a['asset_id']}:{a['size']}" for a in files]
-    return hashlib.md5("|".join(parts).encode()).hexdigest()[:12]
+    raw = f"n={len(files)}|" + "|".join(parts)
+    return hashlib.md5(raw.encode()).hexdigest()[:12]
 
 
 def main():
@@ -283,8 +285,13 @@ def main():
         current_keys.add(prod_id)
 
         if cache.get(prod_id, {}).get("key") == cache_key:
-            cached_pages = cache[prod_id].get("pages", [])
-            if cached_pages and all((Path("docs") / p["full"]).exists() for p in cached_pages):
+            entry = cache[prod_id]
+            cached_pages = entry.get("pages", [])
+            # ① 有缓存页 ② 记录的文件数 == 当前文件数 ③ 缓存的图都还在磁盘上
+            # (用 file_count 对账，兼容「单个 PDF 多页」的情况)
+            files_ok = cached_pages and entry.get("file_count") == len(files) and \
+                all((Path("docs") / p["full"]).exists() for p in cached_pages)
+            if files_ok:
                 proof_map[prod_id] = cached_pages
                 skipped_cache += 1
                 continue
@@ -305,7 +312,7 @@ def main():
             
             if pages:
                 proof_map[prod_id] = pages
-                cache[prod_id] = {"key": cache_key, "pages": pages, "source": files[0]["source"]}
+                cache[prod_id] = {"key": cache_key, "pages": pages, "source": files[0]["source"], "file_count": len(files)}
                 downloaded += 1
                 log(f"    ✓ {len(pages)} 页")
             else:
