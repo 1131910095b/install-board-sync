@@ -2960,14 +2960,69 @@ function downloadDayPDF(date) {
   });
 }
 
+// ===== Chinese font for PDF (loaded on demand) =====
+let _cnFontLoading = null;
+function ensureCNFont() {
+  if (window.ACE_CN_FONT_B64) return Promise.resolve(true);
+  if (_cnFontLoading) return _cnFontLoading;
+  _cnFontLoading = new Promise((resolve) => {
+    const s = document.createElement('script');
+    s.src = 'ace-cn-font.js';   // same folder on GitHub Pages
+    s.onload = () => resolve(!!window.ACE_CN_FONT_B64);
+    s.onerror = () => { console.warn('CN font failed to load'); resolve(false); };
+    document.head.appendChild(s);
+  });
+  return _cnFontLoading;
+}
+
+const _hasCJK = (s) => /[\u2e80-\u9fff\u3000-\u303f\uff00-\uffef]/.test(s);
+
+// Register the CN font on a pdf instance and auto-route any CJK text to it.
+// Non-CJK text keeps Helvetica (crisp). Returns true if installed.
+function installCNFont(pdf) {
+  if (!window.ACE_CN_FONT_B64) return false;
+  try {
+    pdf.addFileToVFS(window.ACE_CN_FONT_FILE, window.ACE_CN_FONT_B64);
+    pdf.addFont(window.ACE_CN_FONT_FILE, window.ACE_CN_FONT_NAME, 'normal');
+  } catch (e) { console.warn('addFont failed', e); return false; }
+  const CN = window.ACE_CN_FONT_NAME;
+  const _text = pdf.text.bind(pdf);
+  pdf.text = function(txt, x, y, options) {
+    const s = Array.isArray(txt) ? txt.join('') : String(txt == null ? '' : txt);
+    if (_hasCJK(s)) {
+      const cur = pdf.getFont();
+      try { pdf.setFont(CN, 'normal'); } catch (e) {}
+      const r = _text(txt, x, y, options);
+      try { pdf.setFont(cur.fontName, cur.fontStyle); } catch (e) { try { pdf.setFont('helvetica', 'normal'); } catch (_) {} }
+      return r;
+    }
+    return _text(txt, x, y, options);
+  };
+  const _split = pdf.splitTextToSize.bind(pdf);
+  pdf.splitTextToSize = function(text, maxlen, options) {
+    const s = String(text == null ? '' : text);
+    if (_hasCJK(s)) {
+      const cur = pdf.getFont();
+      try { pdf.setFont(CN, 'normal'); } catch (e) {}
+      const r = _split(text, maxlen, options);
+      try { pdf.setFont(cur.fontName, cur.fontStyle); } catch (e) {}
+      return r;
+    }
+    return _split(text, maxlen, options);
+  };
+  return true;
+}
+
 // Step 2: actually build the PDF, in the saved order, with crew names on the cover
 async function generateDayPDF(date, groupA, groupB, vehicleA, vehicleB) {
   const jobs = orderJobsForDay(date, applyFilters(DATA.items).filter(i => i.install_date === date));
   if (!jobs.length) { toast(`No jobs on ${date}`, 'error'); return; }
   toast(`Generating PDF for ${jobs.length} job${jobs.length>1?'s':''}...`, 'info');
 
+  await ensureCNFont();
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+  installCNFont(pdf);
   const pageW = pdf.internal.pageSize.getWidth();
   const pageH = pdf.internal.pageSize.getHeight();
   const margin = 36;
@@ -2994,8 +3049,10 @@ async function downloadJobPDF(jobId) {
   if (!job) return;
   toast(`Generating PDF...`, 'info');
 
+  await ensureCNFont();
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+  installCNFont(pdf);
   const pageW = pdf.internal.pageSize.getWidth();
   const pageH = pdf.internal.pageSize.getHeight();
   await renderJobSheet(pdf, job, 36, pageW - 72, pageW, pageH, 1, 1);
