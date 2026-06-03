@@ -440,6 +440,9 @@
   .pdf-ord-tag.t-b { background: var(--team-b); }
   .pdf-ord-tag.t-none { background: var(--text-faint); }
   .pdf-ord-name { font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .route-day-btn.route-a { border-color: var(--team-a); color: var(--team-a); }
+  .route-day-btn.route-b { border-color: var(--team-b); color: var(--team-b); }
+  body[data-role="viewer"] .route-day-btn { display: none; }
   .job-card.dragging { opacity: 0.5; }
   .job-card.team-a { border-left: 4px solid var(--team-a); }
   .job-card.team-b { border-left: 4px solid var(--team-b); }
@@ -1604,6 +1607,8 @@ function renderList() {
           </div>
           <div class="count">${jobs.length} job${jobs.length > 1 ? 's' : ''} · ${totalHrs}h</div>
           <div class="day-actions">
+            <button class="btn small route-day-btn route-a" data-date="${date}" data-team="Group A" title="Optimise Group A driving order">🅰 Auto-route</button>
+            <button class="btn small route-day-btn route-b" data-date="${date}" data-team="Group B" title="Optimise Group B driving order">🅱 Auto-route</button>
             <button class="btn small download-day-btn" data-date="${date}">↓ Day PDF</button>
           </div>
         </div>
@@ -1637,6 +1642,13 @@ function renderList() {
     el.addEventListener('click', e => {
       e.stopPropagation();
       downloadDayPDF(el.dataset.date);
+    });
+  });
+  container.querySelectorAll('.route-day-btn').forEach(el => {
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      if (USER_ROLE !== 'editor') { toast('Only editors can re-order jobs', 'error'); return; }
+      autoRouteGroupInList(el.dataset.date, el.dataset.team);
     });
   });
 }
@@ -2499,6 +2511,74 @@ async function planRoute(team) {
     `;
     document.getElementById('clearRouteBtn').style.display = '';
     toast(`Route planned for ${team}: ${stops.length} stops`, 'success');
+  });
+}
+
+// ===== auto-route a group's jobs in the List view, write optimised order into JOB_ORDER =====
+async function autoRouteGroupInList(date, team) {
+  const dayJobs = orderJobsForDay(date, applyFilters(DATA.items).filter(i => i.install_date === date));
+  const teamJobs = dayJobs.filter(j => j.team === team);
+  if (teamJobs.length === 0) { toast(`No ${team} jobs on ${date}`, 'error'); return; }
+  if (teamJobs.length === 1) { toast(`${team} has only 1 job — nothing to optimise`, 'info'); return; }
+
+  toast(`Planning ${team} route (${teamJobs.length} stops)...`, 'info');
+  try { await loadGoogleMaps(); }
+  catch (e) { toast('Google Maps failed to load', 'error'); return; }
+  if (!directionsService) directionsService = new google.maps.DirectionsService();
+
+  const stops = [];
+  const failed = [];
+  for (const j of teamJobs) {
+    const c = await geocode(j.address);
+    if (c) stops.push({ job: j, coords: c });
+    else failed.push(j.name + (j.address ? '' : ' (no address)'));
+  }
+  if (stops.length < 2) {
+    toast(`Only ${stops.length} of ${teamJobs.length} ${team} address(es) could be located — need 2+`, 'error');
+    if (failed.length) console.warn('Failed addresses:', failed);
+    return;
+  }
+
+  const origin = new google.maps.LatLng(stops[0].coords.lat, stops[0].coords.lon);
+  const destination = new google.maps.LatLng(stops[stops.length - 1].coords.lat, stops[stops.length - 1].coords.lon);
+  const waypoints = stops.slice(1, -1).map(s => ({
+    location: new google.maps.LatLng(s.coords.lat, s.coords.lon),
+    stopover: true,
+  }));
+
+  directionsService.route({
+    origin, destination, waypoints,
+    optimizeWaypoints: true,
+    travelMode: google.maps.TravelMode.DRIVING,
+  }, (result, status) => {
+    if (status !== 'OK') {
+      let msg = `${team} route failed: ${status}`;
+      if (status === 'REQUEST_DENIED') msg += ' — enable "Directions API" in Google Cloud Console';
+      else if (status === 'OVER_QUERY_LIMIT') msg += ' — hit query limit, try again later';
+      else if (status === 'ZERO_RESULTS') msg += ' — no driving route between these stops';
+      toast(msg, 'error');
+      return;
+    }
+    const order = result.routes[0].waypoint_order;
+    const orderedStops = [stops[0], ...order.map(i => stops[i + 1]), stops[stops.length - 1]];
+    const orderedTeamIds = orderedStops.map(s => s.job.id);
+    teamJobs.forEach(j => { if (!orderedTeamIds.includes(j.id)) orderedTeamIds.push(j.id); });
+
+    // Rebuild day order: Group A block, Group B block, then unassigned. Routed team uses optimised order.
+    const curA = dayJobs.filter(j => j.team === 'Group A').map(j => j.id);
+    const curB = dayJobs.filter(j => j.team === 'Group B').map(j => j.id);
+    const curN = dayJobs.filter(j => j.team !== 'Group A' && j.team !== 'Group B').map(j => j.id);
+    const blockA = team === 'Group A' ? orderedTeamIds : curA;
+    const blockB = team === 'Group B' ? orderedTeamIds : curB;
+    setDayOrder(date, [...blockA, ...blockB, ...curN]);
+    render();
+
+    const legs = result.routes[0].legs;
+    const km = (legs.reduce((s, l) => s + l.distance.value, 0) / 1000).toFixed(1);
+    const min = Math.round(legs.reduce((s, l) => s + l.duration.value, 0) / 60);
+    let msg = `${team} route optimised: ${stops.length} stops · ${km} km · ${min} min`;
+    if (failed.length) msg += ` (${failed.length} address(es) couldn't be located)`;
+    toast(msg, 'success');
   });
 }
 
