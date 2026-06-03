@@ -3018,16 +3018,25 @@ const COMPANY_ADDRESS = 'Unit 4/222 Fairbairn Rd, Sunshine West VIC 3020';
 const STATIC_MAP_W = 300, STATIC_MAP_H = 220;  // requested px (scale=2 -> retina)
 
 function fetchImageAsDataURL(url) {
+  // Google Static Maps doesn't allow fetch()/CORS, but <img> loading works.
+  // Load via Image with crossOrigin so the canvas isn't tainted, then export dataURL.
   return new Promise((resolve) => {
-    fetch(url)
-      .then(r => r.ok ? r.blob() : Promise.reject(new Error('HTTP ' + r.status)))
-      .then(blob => {
-        const fr = new FileReader();
-        fr.onload = () => resolve(fr.result);
-        fr.onerror = () => resolve(null);
-        fr.readAsDataURL(blob);
-      })
-      .catch(e => { console.warn('static map fetch failed', e); resolve(null); });
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth || STATIC_MAP_W * 2;
+        canvas.height = img.naturalHeight || STATIC_MAP_H * 2;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        resolve(canvas.toDataURL('image/png'));
+      } catch (e) {
+        console.warn('static map canvas export failed (CORS taint?):', e);
+        resolve(null);
+      }
+    };
+    img.onerror = (e) => { console.warn('static map image load failed:', url.slice(0, 120), e); resolve(null); };
+    img.src = url;
   });
 }
 
