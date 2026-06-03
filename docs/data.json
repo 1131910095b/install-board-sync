@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-02T13:01:07.425338Z",
+  "updated_at": "2026-06-03T06:41:09.792281Z",
   "count": 51,
   "items": [
     {
@@ -317,10 +317,10 @@
       "production_id": "2717028444",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "45976",
+      "invoice_number": "45956",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2715955355",
@@ -380,7 +380,7 @@
       "invoice_number": "45621",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2716896134",
@@ -400,7 +400,7 @@
       "invoice_number": "45952",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2718836809",
@@ -423,49 +423,9 @@
       "production_status": "Installation"
     },
     {
-      "id": "2726632830",
-      "name": "Volgren Letters",
-      "install_date": "2026-06-03",
-      "address": "221-243 Hammond Road, Dandenong South\n64 Bangholme Road, Dandenong South.",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2726230769",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45888 & 45891",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
-      "id": "2726604717",
-      "name": "IDS MR Ramen",
-      "install_date": "2026-06-03",
-      "address": "TENANCY T901-3 & T901-4 STATE LIBRARY STATION VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
-      "installation_value": 300.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2700759011",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45912",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Installation"
-    },
-    {
       "id": "2718837064",
       "name": "village banner blackburn",
-      "install_date": "2026-06-04",
+      "install_date": "2026-06-03",
       "address": "199-203 WHITEHORSE ROAD\nBLACKBURN",
       "installer": "",
       "schedule_status": "",
@@ -480,12 +440,12 @@
       "invoice_number": "45953",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2719015710",
       "name": "Village banner Croydon",
-      "install_date": "2026-06-04",
+      "install_date": "2026-06-03",
       "address": "65-67 BEAUFORT RD\nCROYDON",
       "installer": "",
       "schedule_status": "",
@@ -500,32 +460,12 @@
       "invoice_number": "45954",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
-    },
-    {
-      "id": "2718983530",
-      "name": "81个号码牌",
-      "install_date": "2026-06-04",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2718842570",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45723",
-      "producer": "",
-      "plan_hours": "",
       "production_status": "Pre-Installation"
     },
     {
       "id": "2726580763",
       "name": "45960-abby's pizza",
-      "install_date": "2026-06-04",
+      "install_date": "2026-06-03",
       "address": "",
       "installer": "",
       "schedule_status": "",
@@ -543,9 +483,29 @@
       "production_status": "Sign Proof"
     },
     {
+      "id": "2726632830",
+      "name": "Volgren Letters",
+      "install_date": "2026-06-03",
+      "address": "221-243 Hammond Road, Dandenong South\n64 Bangholme Road, Dandenong South.",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2726230769",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45888 & 45891",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Job Completed!"
+    },
+    {
       "id": "2726613205",
       "name": "KINCAID",
-      "install_date": "2026-06-04",
+      "install_date": "2026-06-03",
       "address": "",
       "installer": "",
       "schedule_status": "",
@@ -558,6 +518,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "45903",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2718983530",
+      "name": "81个号码牌",
+      "install_date": "2026-06-04",
+      "address": "55 Hopkins St Footscray VIC 3011",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2718842570",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45723",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
@@ -581,6 +561,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2726604717",
+      "name": "IDS MR Ramen",
+      "install_date": "2026-06-04",
+      "address": "TENANCY T901-3 & T901-4 STATE LIBRARY STATION VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 300.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2700759011",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45912",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2716941500",
@@ -640,7 +640,7 @@
       "invoice_number": "45977",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2725596290",
@@ -660,7 +660,7 @@
       "invoice_number": "45905",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Production"
     },
     {
       "id": "2726580750",
@@ -680,7 +680,7 @@
       "invoice_number": "45982",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2726594577",
@@ -700,7 +700,7 @@
       "invoice_number": "45889",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2726633225",
@@ -860,7 +860,7 @@
       "invoice_number": "45895",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
     },
     {
       "id": "2715955378",
@@ -920,7 +920,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2726583227",
