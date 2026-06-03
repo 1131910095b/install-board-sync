@@ -2091,7 +2091,7 @@ function loadGoogleMaps() {
       document.head.appendChild(cs);
     };
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${GMAPS_KEY}&libraries=geocoding&callback=${cb}&loading=async`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${GMAPS_KEY}&libraries=geocoding,geometry&callback=${cb}&loading=async`;
     script.async = true;
     script.defer = true;
     script.onerror = () => reject(new Error('Failed to load Google Maps'));
@@ -3093,6 +3093,93 @@ function installCNFont(pdf) {
   return true;
 }
 
+// ===== Static route map for PDF cover (company -> stops in list order) =====
+const COMPANY_ADDRESS = 'Unit 4/222 Fairbairn Rd, Sunshine West VIC 3020';
+const STATIC_MAP_W = 300, STATIC_MAP_H = 220;  // requested px (scale=2 -> retina)
+
+function fetchImageAsDataURL(url) {
+  return new Promise((resolve) => {
+    fetch(url)
+      .then(r => r.ok ? r.blob() : Promise.reject(new Error('HTTP ' + r.status)))
+      .then(blob => {
+        const fr = new FileReader();
+        fr.onload = () => resolve(fr.result);
+        fr.onerror = () => resolve(null);
+        fr.readAsDataURL(blob);
+      })
+      .catch(e => { console.warn('static map fetch failed', e); resolve(null); });
+  });
+}
+
+// Returns a PNG dataURL for a group's route, or null. teamHex e.g. '4f8cff' (no #).
+async function buildGroupRouteMap(orderedJobs, teamHex) {
+  const withAddr = orderedJobs.filter(j => j.address && j.address.trim());
+  if (!withAddr.length) return null;
+  try { await loadGoogleMaps(); } catch (e) { return null; }
+  if (!directionsService) directionsService = new google.maps.DirectionsService();
+
+  const origin = await geocode(COMPANY_ADDRESS);
+  if (!origin) return null;
+
+  const stops = [];
+  for (const j of withAddr) {
+    const c = await geocode(j.address);
+    if (c) stops.push(c);
+  }
+  if (!stops.length) return null;
+
+  // Road-following polyline via Directions (keep the given order, do NOT optimise)
+  let encoded = null;
+  try {
+    const o = new google.maps.LatLng(origin.lat, origin.lon);
+    const dest = new google.maps.LatLng(stops[stops.length - 1].lat, stops[stops.length - 1].lon);
+    const waypoints = stops.slice(0, -1).map(s => ({ location: new google.maps.LatLng(s.lat, s.lon), stopover: true }));
+    const result = await new Promise((resolve, reject) => {
+      directionsService.route({
+        origin: o, destination: dest, waypoints,
+        optimizeWaypoints: false, travelMode: google.maps.TravelMode.DRIVING,
+      }, (res, status) => status === 'OK' ? resolve(res) : reject(new Error(status)));
+    });
+    let path = result.routes[0].overview_path || [];
+    // downsample to keep URL short
+    if (path.length > 100) {
+      const step = Math.ceil(path.length / 100);
+      path = path.filter((_, i) => i % step === 0 || i === path.length - 1);
+    }
+    if (google.maps.geometry?.encoding) {
+      encoded = google.maps.geometry.encoding.encodePath(path);
+    }
+  } catch (e) {
+    console.warn('directions for route map failed (will draw straight lines):', e);
+  }
+
+  // Build Static Maps URL
+  const base = 'https://maps.googleapis.com/maps/api/staticmap';
+  const params = [];
+  params.push(`size=${STATIC_MAP_W}x${STATIC_MAP_H}`);
+  params.push('scale=2');
+  params.push('maptype=roadmap');
+  // company marker (start)
+  params.push(`markers=${encodeURIComponent(`color:0x2e7d32|label:S|${origin.lat},${origin.lon}`)}`);
+  // stop markers (labels 1-9, then unlabeled)
+  stops.forEach((s, i) => {
+    const label = (i + 1) <= 9 ? `label:${i + 1}|` : '';
+    params.push(`markers=${encodeURIComponent(`color:0x${teamHex}|${label}${s.lat},${s.lon}`)}`);
+  });
+  // route line
+  if (encoded) {
+    params.push(`path=${encodeURIComponent(`color:0x${teamHex}ff|weight:4|enc:${encoded}`)}`);
+  } else {
+    // fallback: straight lines company -> stops
+    const pts = [`${origin.lat},${origin.lon}`, ...stops.map(s => `${s.lat},${s.lon}`)].join('|');
+    params.push(`path=${encodeURIComponent(`color:0x${teamHex}ff|weight:3|${pts}`)}`);
+  }
+  params.push(`key=${GMAPS_KEY}`);
+  const url = `${base}?${params.join('&')}`;
+  if (url.length > 8000) console.warn('static map URL long:', url.length);
+  return await fetchImageAsDataURL(url);
+}
+
 // Step 2: actually build the PDF, in the saved order, with crew names on the cover
 async function generateDayPDF(date, groupA, groupB, vehicleA, vehicleB) {
   const jobs = orderJobsForDay(date, applyFilters(DATA.items).filter(i => i.install_date === date));
@@ -3108,7 +3195,7 @@ async function generateDayPDF(date, groupA, groupB, vehicleA, vehicleB) {
   const margin = 36;
 
   // Cover page (jobs already in display order; crew names passed in)
-  drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, vehicleA, vehicleB);
+  await drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, vehicleA, vehicleB);
 
   // Per-job page (same order). Installer & vehicle come from the group-level selection.
   for (let i = 0; i < jobs.length; i++) {
@@ -3140,7 +3227,7 @@ async function downloadJobPDF(jobId) {
   toast(`PDF saved`, 'success');
 }
 
-function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, vehicleA, vehicleB) {
+async function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, vehicleA, vehicleB) {
   const dObj = new Date(date + 'T00:00');
   const dateStr = dObj.toLocaleDateString('en-AU', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
@@ -3221,10 +3308,19 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, ve
   // Use the order passed in (matches the on-screen list / manual drag order)
   const sortedJobs = jobs;
 
+  // Reserve a band at the bottom for the two route maps
+  const mapW = (contentW => (contentW - 14) / 2)(pageW - margin * 2);
+  const mapH = mapW * (STATIC_MAP_H / STATIC_MAP_W);
+  const footerY = pageH - 24;
+  const mapsBottom = footerY - 12;
+  const mapsTop = mapsBottom - mapH;
+  const mapsLabelY = mapsTop - 8;
+  const jobListLimit = mapsLabelY - 22;  // job list must stop above the ROUTES label
+
   pdf.setFontSize(10);
   for (let i = 0; i < sortedJobs.length; i++) {
     const j = sortedJobs[i];
-    if (sy > pageH - margin - 30) break; // Don't overflow cover page
+    if (sy > jobListLimit) break; // leave room for route maps
 
     // Team color tag
     const teamColor = j.team === 'Group A' ? PDF_COLORS.teamA
@@ -3253,6 +3349,50 @@ function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, groupB, ve
     pdf.text(j.project_type || 'Install', margin + 470, sy);
 
     sy += 20;
+  }
+
+  // === Route maps (company -> stops, per group) ===
+  const aJobs = sortedJobs.filter(j => j.team === 'Group A');
+  const bJobs = sortedJobs.filter(j => j.team === 'Group B');
+  const teamAHex = '4f8cff', teamBHex = 'ff6d3b';
+  let mapA = null, mapB = null;
+  try {
+    [mapA, mapB] = await Promise.all([
+      aJobs.length ? buildGroupRouteMap(aJobs, teamAHex) : Promise.resolve(null),
+      bJobs.length ? buildGroupRouteMap(bJobs, teamBHex) : Promise.resolve(null),
+    ]);
+  } catch (e) { console.warn('route maps failed', e); }
+
+  if (mapA || mapB) {
+    pdf.setFontSize(8);
+    pdf.setTextColor(...PDF_COLORS.textSecondary);
+    pdf.text('ROUTES  (S = company, numbers = stops in order)', margin, mapsLabelY);
+
+    const drawMap = (dataUrl, x, label, hex) => {
+      // title
+      const rgb = [parseInt(hex.slice(0,2),16), parseInt(hex.slice(2,4),16), parseInt(hex.slice(4,6),16)];
+      pdf.setFontSize(9);
+      pdf.setTextColor(...rgb);
+      pdf.setFont(undefined, 'bold');
+      pdf.text(label, x, mapsTop - 0.5);
+      pdf.setFont(undefined, 'normal');
+      if (dataUrl) {
+        try { pdf.addImage(dataUrl, 'PNG', x, mapsTop + 4, mapW, mapH - 4, undefined, 'FAST'); }
+        catch (e) {
+          pdf.setDrawColor(...PDF_COLORS.border);
+          pdf.roundedRect(x, mapsTop + 4, mapW, mapH - 4, 4, 4, 'S');
+          pdf.setFontSize(8); pdf.setTextColor(...PDF_COLORS.textSecondary);
+          pdf.text('(map unavailable)', x + 8, mapsTop + 24);
+        }
+      } else {
+        pdf.setDrawColor(...PDF_COLORS.border);
+        pdf.roundedRect(x, mapsTop + 4, mapW, mapH - 4, 4, 4, 'S');
+        pdf.setFontSize(8); pdf.setTextColor(...PDF_COLORS.textSecondary);
+        pdf.text('(no located stops)', x + 8, mapsTop + 24);
+      }
+    };
+    drawMap(mapA, margin, 'Group A', teamAHex);
+    drawMap(mapB, margin + mapW + 14, 'Group B', teamBHex);
   }
 
   // Footer
