@@ -2051,40 +2051,35 @@ const PREMIUM_DARK_MAP_STYLE = [
   { featureType: 'landscape.natural', elementType: 'geometry', stylers: [{ color: '#0d1014' }] },
 ];
 
+let _gmapsPromise = null;
+function _loadClusterer() {
+  return new Promise((resolve) => {
+    if (window.markerClusterer) { resolve(); return; }
+    const cs = document.createElement('script');
+    cs.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';
+    cs.onload = () => resolve();
+    cs.onerror = () => resolve(); // still resolve without clusterer
+    document.head.appendChild(cs);
+  });
+}
 function loadGoogleMaps() {
-  return new Promise((resolve, reject) => {
-    if (gmapsLoaded || window.google?.maps) {
-      gmapsLoaded = true;
-      // Load clusterer if not yet
-      if (!window.markerClusterer) {
-        const cs = document.createElement('script');
-        cs.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';
-        cs.onload = () => resolve();
-        cs.onerror = () => resolve(); // still resolve without clusterer
-        document.head.appendChild(cs);
-      } else {
-        resolve();
-      }
-      return;
-    }
+  // Concurrency-safe: all callers share ONE promise so the Maps script is
+  // injected at most once. Previously two concurrent callers (e.g. building
+  // Group A & Group B route maps at the same time) could each inject the
+  // script, loading Maps twice and breaking google.maps services.
+  if (_gmapsPromise) return _gmapsPromise;
+  _gmapsPromise = new Promise((resolve, reject) => {
+    if (window.google?.maps) { gmapsLoaded = true; resolve(); return; }
     const cb = '__gmapsReady_' + Date.now();
-    window[cb] = () => {
-      gmapsLoaded = true;
-      delete window[cb];
-      // Now load clusterer
-      const cs = document.createElement('script');
-      cs.src = 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js';
-      cs.onload = () => resolve();
-      cs.onerror = () => resolve();
-      document.head.appendChild(cs);
-    };
+    window[cb] = () => { gmapsLoaded = true; delete window[cb]; resolve(); };
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${GMAPS_KEY}&libraries=geocoding,geometry&callback=${cb}&loading=async`;
     script.async = true;
     script.defer = true;
-    script.onerror = () => reject(new Error('Failed to load Google Maps'));
+    script.onerror = () => { _gmapsPromise = null; reject(new Error('Failed to load Google Maps')); };
     document.head.appendChild(script);
-  });
+  }).then(_loadClusterer);
+  return _gmapsPromise;
 }
 
 async function renderMap() {
@@ -3074,19 +3069,21 @@ function fetchImageAsDataURL(url) {
 // Returns a PNG dataURL for a group's route, or null. teamHex e.g. '4f8cff' (no #).
 async function buildGroupRouteMap(orderedJobs, teamHex) {
   const withAddr = orderedJobs.filter(j => j.address && j.address.trim());
-  if (!withAddr.length) return null;
-  try { await loadGoogleMaps(); } catch (e) { return null; }
+  console.log('[routemap] build', teamHex, '| jobs:', orderedJobs.length, '| withAddr:', withAddr.length);
+  if (!withAddr.length) { console.warn('[routemap] no jobs with address for', teamHex); return null; }
+  try { await loadGoogleMaps(); } catch (e) { console.warn('[routemap] maps load failed', e); return null; }
   if (!directionsService) directionsService = new google.maps.DirectionsService();
 
   const origin = await geocode(COMPANY_ADDRESS);
-  if (!origin) return null;
+  if (!origin) { console.warn('[routemap] company address geocode failed'); return null; }
 
   const stops = [];
   for (const j of withAddr) {
     const c = await geocode(j.address);
     if (c) stops.push(c);
   }
-  if (!stops.length) return null;
+  console.log('[routemap]', teamHex, 'stops geocoded:', stops.length, '/', withAddr.length);
+  if (!stops.length) { console.warn('[routemap] no stops geocoded for', teamHex); return null; }
 
   // Road-following polyline via Directions (keep the given order, do NOT optimise)
   let encoded = null;
@@ -3137,7 +3134,9 @@ async function buildGroupRouteMap(orderedJobs, teamHex) {
   params.push(`key=${GMAPS_KEY}`);
   const url = `${base}?${params.join('&')}`;
   if (url.length > 8000) console.warn('static map URL long:', url.length);
-  return await fetchImageAsDataURL(url);
+  const _result = await fetchImageAsDataURL(url);
+  console.log('[routemap]', teamHex, 'static map:', _result ? ('OK (' + _result.length + ' chars)') : 'NULL');
+  return _result;
 }
 
 // Step 2: actually build the PDF, in the saved order, with crew names on the cover
@@ -3354,6 +3353,7 @@ async function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, grou
   // === Route maps (company -> stops, per group) ===
   const aJobs = sortedJobs.filter(j => j.team === 'Group A');
   const bJobs = sortedJobs.filter(j => j.team === 'Group B');
+  console.log('[routemap] day has', sortedJobs.length, 'jobs | Group A:', aJobs.length, '| Group B:', bJobs.length, '| teams =', sortedJobs.map(j => (j.name || j.id) + ':' + (j.team || '(none)')));
   const teamAHex = '4f8cff', teamBHex = 'ff6d3b';
   let mapA = null, mapB = null;
   // Hard timeout: if Google Maps / geocoding / directions hang, give up after 12s and
