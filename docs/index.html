@@ -3018,31 +3018,57 @@ const COMPANY_ADDRESS = 'Unit 4/222 Fairbairn Rd, Sunshine West VIC 3020';
 const STATIC_MAP_W = 300, STATIC_MAP_H = 220;  // requested px (scale=2 -> retina)
 
 function fetchImageAsDataURL(url) {
-  // Google Static Maps doesn't allow fetch()/CORS, but <img> loading works.
-  // Load via Image with crossOrigin so the canvas isn't tainted, then export dataURL.
-  // A timeout guarantees we never hang PDF generation if the request stalls.
-  return new Promise((resolve) => {
-    let done = false;
-    const finish = (val) => { if (!done) { done = true; resolve(val); } };
-    const timer = setTimeout(() => { console.warn('static map timed out'); finish(null); }, 8000);
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      clearTimeout(timer);
-      try {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth || STATIC_MAP_W * 2;
-        canvas.height = img.naturalHeight || STATIC_MAP_H * 2;
-        canvas.getContext('2d').drawImage(img, 0, 0);
-        finish(canvas.toDataURL('image/png'));
-      } catch (e) {
-        console.warn('static map canvas export failed (CORS taint?):', e);
-        finish(null);
+  // Primary path: fetch the bytes directly. Google Static Maps returns
+  // Access-Control-Allow-Origin: *, so a CORS fetch succeeds and avoids the
+  // canvas entirely (no tainted-canvas SecurityError possible). cache:'reload'
+  // forces a fresh network request so a previously cached non-CORS copy can't
+  // poison this one. Falls back to <img>+canvas if fetch is unavailable.
+  return (async () => {
+    try {
+      const r = await Promise.race([
+        fetch(url, { mode: 'cors', cache: 'reload' }),
+        new Promise((_, rej) => setTimeout(() => rej(new Error('fetch timeout')), 8000)),
+      ]);
+      if (r && r.ok) {
+        const blob = await r.blob();
+        const dataUrl = await new Promise((res) => {
+          const fr = new FileReader();
+          fr.onload = () => res(fr.result);
+          fr.onerror = () => res(null);
+          fr.readAsDataURL(blob);
+        });
+        if (dataUrl) return dataUrl;
+      } else {
+        console.warn('static map fetch not ok:', r && r.status);
       }
-    };
-    img.onerror = (e) => { clearTimeout(timer); console.warn('static map image load failed:', url.slice(0, 120), e); finish(null); };
-    img.src = url;
-  });
+    } catch (e) {
+      console.warn('static map fetch failed, trying <img> fallback:', e && e.message);
+    }
+    // Fallback: <img crossOrigin> + canvas, with a cache-buster so the browser
+    // issues a brand-new CORS request instead of reusing a poisoned cache entry.
+    return await new Promise((resolve) => {
+      let done = false;
+      const finish = (val) => { if (!done) { done = true; resolve(val); } };
+      const timer = setTimeout(() => { console.warn('static map img timed out'); finish(null); }, 8000);
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        clearTimeout(timer);
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth || STATIC_MAP_W * 2;
+          canvas.height = img.naturalHeight || STATIC_MAP_H * 2;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          finish(canvas.toDataURL('image/png'));
+        } catch (e) {
+          console.warn('static map canvas export failed (CORS taint?):', e);
+          finish(null);
+        }
+      };
+      img.onerror = (e) => { clearTimeout(timer); console.warn('static map image load failed:', url.slice(0, 120), e); finish(null); };
+      img.src = url + (url.includes('?') ? '&' : '?') + '_cb=' + Date.now();
+    });
+  })();
 }
 
 // Returns a PNG dataURL for a group's route, or null. teamHex e.g. '4f8cff' (no #).
