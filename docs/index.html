@@ -3115,6 +3115,27 @@ async function buildGroupRouteMap(orderedJobs, teamHex) {
 }
 
 // Step 2: actually build the PDF, in the saved order, with crew names on the cover
+async function ensureJsPDF() {
+  if (window.jspdf && window.jspdf.jsPDF) return true;
+  const sources = [
+    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js',
+    'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js'
+  ];
+  for (const src of sources) {
+    try {
+      await new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = () => reject(new Error('failed: ' + src));
+        document.head.appendChild(s);
+      });
+      if (window.jspdf && window.jspdf.jsPDF) return true;
+    } catch (e) { console.warn('jsPDF load source failed:', src, e); }
+  }
+  return !!(window.jspdf && window.jspdf.jsPDF);
+}
+
 async function generateDayPDF(date, groupA, groupB, vehicleA, vehicleB) {
   const jobs = orderJobsForDay(date, applyFilters(DATA.items).filter(i => i.install_date === date));
   if (!jobs.length) { toast(`No jobs on ${date}`, 'error'); return; }
@@ -3122,6 +3143,7 @@ async function generateDayPDF(date, groupA, groupB, vehicleA, vehicleB) {
 
   try { await Promise.race([ensureCNFont(), new Promise(r => setTimeout(r, 6000))]); }
   catch (e) { console.warn('CN font load issue', e); }
+  if (!(await ensureJsPDF())) { toast('PDF library failed to load — check your connection and try again', 'error'); return; }
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
   try { installCNFont(pdf); } catch (e) { console.warn('installCNFont failed', e); }
@@ -3144,7 +3166,12 @@ async function generateDayPDF(date, groupA, groupB, vehicleA, vehicleB) {
                        : jobs[i].team === 'Group B' ? vehicleB : '';
     const groupInstaller = jobs[i].team === 'Group A' ? groupA
                          : jobs[i].team === 'Group B' ? groupB : '';
-    await renderJobSheet(pdf, jobs[i], margin, pageW - margin * 2, pageW, pageH, i + 1, jobs.length, groupVehicle, groupInstaller);
+    try {
+      await renderJobSheet(pdf, jobs[i], margin, pageW - margin * 2, pageW, pageH, i + 1, jobs.length, groupVehicle, groupInstaller);
+    } catch (e) {
+      console.error(`Job sheet ${i+1} render failed:`, jobs[i] && jobs[i].name, e);
+      toast(`Job "${(jobs[i] && jobs[i].name) || (i+1)}" had an error — skipped on PDF`, 'info');
+    }
   }
 
   pdf.save(`ACE-${date}.pdf`);
@@ -3158,12 +3185,18 @@ async function downloadJobPDF(jobId) {
 
   try { await Promise.race([ensureCNFont(), new Promise(r => setTimeout(r, 6000))]); }
   catch (e) { console.warn('CN font load issue', e); }
+  if (!(await ensureJsPDF())) { toast('PDF library failed to load — check your connection and try again', 'error'); return; }
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
   try { installCNFont(pdf); } catch (e) { console.warn('installCNFont failed', e); }
   const pageW = pdf.internal.pageSize.getWidth();
   const pageH = pdf.internal.pageSize.getHeight();
-  await renderJobSheet(pdf, job, 36, pageW - 72, pageW, pageH, 1, 1);
+  try {
+    await renderJobSheet(pdf, job, 36, pageW - 72, pageW, pageH, 1, 1);
+  } catch (e) {
+    console.error('Job sheet render failed:', e);
+    toast('Job page had an error — PDF still saved', 'info');
+  }
   pdf.save(`ACE-job-${job.invoice_number || job.id}.pdf`);
   toast(`PDF saved`, 'success');
 }
