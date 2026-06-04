@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-03T18:11:15.047262+00:00Z",
+  "generated_at": "2026-06-04T10:51:09.130744+00:00Z",
   "proofs": {
     "2715867271": [
       {
@@ -400,6 +400,21 @@
         "page": 2,
         "full": "proofs/2716723303_p2.jpg",
         "thumb": "proofs/2716723303_p2_thumb.jpg"
+      },
+      {
+        "page": 3,
+        "full": "proofs/2716723303_p3.jpg",
+        "thumb": "proofs/2716723303_p3_thumb.jpg"
+      },
+      {
+        "page": 4,
+        "full": "proofs/2716723303_p4.jpg",
+        "thumb": "proofs/2716723303_p4_thumb.jpg"
+      },
+      {
+        "page": 5,
+        "full": "proofs/2716723303_p5.jpg",
+        "thumb": "proofs/2716723303_p5_thumb.jpg"
       }
     ],
     "2718836809": [
@@ -570,6 +585,23 @@
         "page": 3,
         "full": "proofs/2724666489_p3.jpg",
         "thumb": "proofs/2724666489_p3_thumb.jpg"
+      }
+    ],
+    "2726632827": [
+      {
+        "page": 1,
+        "full": "proofs/2726425348_p1.jpg",
+        "thumb": "proofs/2726425348_p1_thumb.jpg"
+      },
+      {
+        "page": 2,
+        "full": "proofs/2726425348_p2.jpg",
+        "thumb": "proofs/2726425348_p2_thumb.jpg"
+      },
+      {
+        "page": 3,
+        "full": "proofs/2726425348_p3.jpg",
+        "thumb": "proofs/2726425348_p3_thumb.jpg"
       }
     ],
     "2726580763": [

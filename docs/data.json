@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-03T18:11:08.975914Z",
+  "updated_at": "2026-06-04T10:50:31.718416Z",
   "count": 51,
   "items": [
     {
@@ -360,7 +360,7 @@
       "invoice_number": "45946",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715912202",
@@ -380,7 +380,7 @@
       "invoice_number": "45621",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2716896134",
@@ -420,7 +420,7 @@
       "invoice_number": "45951",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2718837064",
@@ -461,26 +461,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
-    },
-    {
-      "id": "2726580763",
-      "name": "45960-abby's pizza",
-      "install_date": "2026-06-03",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2726216525",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45960",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Sign Proof"
     },
     {
       "id": "2726632830",
@@ -540,7 +520,7 @@
       "invoice_number": "45723",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2718836788",
@@ -580,7 +560,7 @@
       "invoice_number": "45982",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
     },
     {
       "id": "2726604394",
@@ -600,7 +580,7 @@
       "invoice_number": "45983",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2726604717",
@@ -620,7 +600,7 @@
       "invoice_number": "45912",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2716941500",
@@ -680,7 +660,7 @@
       "invoice_number": "45905",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2726594577",
@@ -700,7 +680,7 @@
       "invoice_number": "45889",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726633225",
@@ -740,7 +720,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726632827",
@@ -758,6 +738,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "INV-45986",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Production"
+    },
+    {
+      "id": "2726580763",
+      "name": "45960-abby's pizza",
+      "install_date": "2026-06-09",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2726216525",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45960",
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
@@ -880,7 +880,7 @@
       "invoice_number": "45913",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Production File Start"
     },
     {
       "id": "2726580741",
