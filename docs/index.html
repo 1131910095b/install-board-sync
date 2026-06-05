@@ -3010,7 +3010,7 @@ function installCNFont(pdf) {
 
 // ===== Static route map for PDF cover (company -> stops in list order) =====
 const COMPANY_ADDRESS = 'Unit 4/222 Fairbairn Rd, Sunshine West VIC 3020';
-const STATIC_MAP_W = 620, STATIC_MAP_H = 280;  // requested px (scale=2 -> retina). Landscape, full-width on cover.
+const STATIC_MAP_W = 640, STATIC_MAP_H = 360;  // requested px (scale=2 -> retina). Landscape, full-width on dedicated routes page.
 
 function fetchImageAsDataURL(url) {
   // Primary path: fetch the bytes directly. Google Static Maps returns
@@ -3303,17 +3303,12 @@ async function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, grou
   // Use the order passed in (matches the on-screen list / manual drag order)
   const sortedJobs = jobs;
 
-  // Reserve a band at the bottom for the two route maps (stacked, full width)
-  const mapW = pageW - margin * 2;                       // full content width
-  const mapH = mapW * (STATIC_MAP_H / STATIC_MAP_W);     // proportional, no distortion
-  const mapGap = 16;                                     // vertical gap between the two maps
-  const mapTitleH = 14;                                  // space above each map for its title
-  const routesLabelH = 16;                               // space for the "ROUTES" header
-  const footerY = pageH - 24;
-  const mapsBottom = footerY - 12;
-  const bandH = routesLabelH + (mapTitleH + mapH) * 2 + mapGap;
-  const mapsLabelY = mapsBottom - bandH;                 // ROUTES header top
-  const jobListLimit = mapsLabelY - 16;                  // job list must stop above ROUTES
+  // Job list gets the FULL first page; the two route maps go on their own page after.
+  const jobListLimit = pageH - 42;                        // list may run to the bottom of page 1
+  const mapW = pageW - margin * 2;                        // full content width (used on routes page)
+  const mapH = mapW * (STATIC_MAP_H / STATIC_MAP_W);      // proportional, no distortion
+  const mapGap = 22;                                      // vertical gap between the two maps
+  const mapTitleH = 16;                                   // space above each map for its title
 
   pdf.setFontSize(10);
   for (let i = 0; i < sortedJobs.length; i++) {
@@ -3367,17 +3362,32 @@ async function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, grou
     ]), 12000) || [null, null];
   } catch (e) { console.warn('route maps failed', e); }
 
+  // Page 1 footer (drawn before any maps page is added)
+  pdf.setFontSize(8);
+  pdf.setTextColor(...PDF_COLORS.textSecondary);
+  pdf.text(`Generated ${new Date().toLocaleString('en-AU')}`, margin, pageH - 24);
+  pdf.text('Cover page', pageW - margin, pageH - 24, { align: 'right' });
+
+  // === Route maps on their own page (full width, large) ===
   if (mapA || mapB) {
-    pdf.setFontSize(8);
+    pdf.addPage();
+    pdf.setFillColor(...PDF_COLORS.primary);
+    pdf.rect(0, 0, pageW, 6, 'F');
+    pdf.setFontSize(16);
+    pdf.setTextColor(...PDF_COLORS.dark);
+    pdf.setFont(undefined, 'bold');
+    pdf.text(`Routes — ${dateStr}`, margin, 52);
+    pdf.setFont(undefined, 'normal');
+    pdf.setFontSize(9);
     pdf.setTextColor(...PDF_COLORS.textSecondary);
-    pdf.text('ROUTES  (S = company, numbers = stops in order)', margin, mapsLabelY + 10);
+    pdf.text('S = company  ·  numbers = stops in order', margin, 68);
 
     const drawMap = (dataUrl, topY, label, hex) => {
       const rgb = [parseInt(hex.slice(0,2),16), parseInt(hex.slice(2,4),16), parseInt(hex.slice(4,6),16)];
-      pdf.setFontSize(9);
+      pdf.setFontSize(11);
       pdf.setTextColor(...rgb);
       pdf.setFont(undefined, 'bold');
-      pdf.text(label, margin, topY + 10);
+      pdf.text(label, margin, topY + 11);
       pdf.setFont(undefined, 'normal');
       const imgY = topY + mapTitleH;
       if (dataUrl) {
@@ -3395,17 +3405,15 @@ async function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, grou
         pdf.text('(no located stops)', margin + 8, imgY + 20);
       }
     };
-    const aTop = mapsLabelY + routesLabelH;
+    const aTop = 88;
     const bTop = aTop + mapTitleH + mapH + mapGap;
     drawMap(mapA, aTop, 'Group A', teamAHex);
     drawMap(mapB, bTop, 'Group B', teamBHex);
-  }
 
-  // Footer
-  pdf.setFontSize(8);
-  pdf.setTextColor(...PDF_COLORS.textSecondary);
-  pdf.text(`Generated ${new Date().toLocaleString('en-AU')}`, margin, pageH - 24);
-  pdf.text('Cover page', pageW - margin, pageH - 24, { align: 'right' });
+    pdf.setFontSize(8);
+    pdf.setTextColor(...PDF_COLORS.textSecondary);
+    pdf.text('Routes page', pageW - margin, pageH - 24, { align: 'right' });
+  }
 }
 
 async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum, totalPages, groupVehicle, groupInstaller) {
