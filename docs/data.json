@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-04T11:38:29.582496Z",
+  "updated_at": "2026-06-05T11:01:07.481959Z",
   "count": 51,
   "items": [
     {
@@ -540,7 +540,7 @@
       "invoice_number": "45880",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
     },
     {
       "id": "2726580750",
@@ -560,7 +560,7 @@
       "invoice_number": "45982",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726604394",
@@ -580,7 +580,7 @@
       "invoice_number": "45983",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2726604717",
@@ -703,26 +703,6 @@
       "production_status": "Production"
     },
     {
-      "id": "2726670156",
-      "name": "Leo’s beautiful garden interior signage",
-      "install_date": "2026-06-08",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "",
-      "installation_value": 650.0,
-      "sales": "",
-      "notes": "",
-      "production_id": "2716831493",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2726632827",
       "name": "Swarovski QVB",
       "install_date": "2026-06-09",
@@ -740,7 +720,7 @@
       "invoice_number": "INV-45986",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726580763",
@@ -801,6 +781,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Production"
+    },
+    {
+      "id": "2726670156",
+      "name": "Leo’s beautiful garden interior signage",
+      "install_date": "2026-06-11",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 650.0,
+      "sales": "",
+      "notes": "",
+      "production_id": "2716831493",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726604289",
