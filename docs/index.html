@@ -3123,11 +3123,11 @@ async function buildGroupRouteMap(orderedJobs, teamHex) {
   });
   // route line
   if (encoded) {
-    params.push(`path=${encodeURIComponent(`color:0x${teamHex}ff|weight:4|enc:${encoded}`)}`);
+    params.push(`path=${encodeURIComponent(`color:0x${teamHex}ff|weight:6|enc:${encoded}`)}`);
   } else {
     // fallback: straight lines company -> stops
     const pts = [`${origin.lat},${origin.lon}`, ...stops.map(s => `${s.lat},${s.lon}`)].join('|');
-    params.push(`path=${encodeURIComponent(`color:0x${teamHex}ff|weight:3|${pts}`)}`);
+    params.push(`path=${encodeURIComponent(`color:0x${teamHex}ff|weight:5|${pts}`)}`);
   }
   params.push(`key=${GMAPS_KEY}`);
   const url = `${base}?${params.join('&')}`;
@@ -3303,12 +3303,17 @@ async function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, grou
   // Use the order passed in (matches the on-screen list / manual drag order)
   const sortedJobs = jobs;
 
-  // Job list gets the FULL first page; the two route maps go on their own page after.
-  const jobListLimit = pageH - 42;                        // list may run to the bottom of page 1
-  const mapW = pageW - margin * 2;                        // full content width (used on routes page)
-  const mapH = mapW * (STATIC_MAP_H / STATIC_MAP_W);      // proportional, no distortion
-  const mapGap = 22;                                      // vertical gap between the two maps
-  const mapTitleH = 16;                                   // space above each map for its title
+  // Groups computed up front so we can reserve bottom space for maps when they exist.
+  const aJobs = sortedJobs.filter(j => j.team === 'Group A');
+  const bJobs = sortedJobs.filter(j => j.team === 'Group B');
+  const teamAHex = '1a56db', teamBHex = 'ff6d3b';   // map colors (A = stronger blue for visibility)
+  const willHaveMaps = aJobs.length > 0 || bJobs.length > 0;
+  const mapAspect = STATIC_MAP_H / STATIC_MAP_W;
+  const contentW = pageW - margin * 2;
+  const footBaseY = pageH - 24;
+  // Reserve a band at the bottom for maps when groups exist, so the list can't
+  // crowd them off the page; a short list simply leaves the maps more room.
+  const jobListLimit = willHaveMaps ? (footBaseY - 12 - 200) : (footBaseY - 18);
 
   pdf.setFontSize(10);
   for (let i = 0; i < sortedJobs.length; i++) {
@@ -3344,13 +3349,10 @@ async function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, grou
     sy += 20;
   }
 
-  // === Route maps (company -> stops, per group) ===
-  const aJobs = sortedJobs.filter(j => j.team === 'Group A');
-  const bJobs = sortedJobs.filter(j => j.team === 'Group B');
-  const teamAHex = '4f8cff', teamBHex = 'ff6d3b';
+  // Build the two route maps (company -> stops, per group)
   let mapA = null, mapB = null;
-  // Hard timeout: if Google Maps / geocoding / directions hang, give up after 12s and
-  // still produce the PDF. (try/catch alone can't rescue a never-resolving await.)
+  // Hard timeout: if Google Maps / geocoding / directions hang, give up after 12s
+  // and still produce the PDF (try/catch alone can't rescue a never-resolving await).
   const withTimeout = (p, ms) => Promise.race([
     p,
     new Promise(res => setTimeout(() => res(null), ms)),
@@ -3362,59 +3364,57 @@ async function drawCoverPage(pdf, date, jobs, pageW, pageH, margin, groupA, grou
     ]), 12000) || [null, null];
   } catch (e) { console.warn('route maps failed', e); }
 
-  // Page 1 footer (drawn before any maps page is added)
+  // === Route maps on the SAME (first) page, below the list, sized to fill the space ===
+  if (mapA || mapB) {
+    const routesLabelH = 14, mapTitleH = 14, mapGap = 14;
+    const mapsTop = sy + 8;
+    const mapsBottom = footBaseY - 12;
+    const availH = (mapsBottom - mapsTop) - routesLabelH - mapTitleH * 2 - mapGap; // for 2 images
+    let mapH = Math.min(availH / 2, contentW * mapAspect);  // keep aspect, never exceed full width
+    let mapW = mapH / mapAspect;
+    if (mapW > contentW) { mapW = contentW; mapH = mapW * mapAspect; }
+    const mapX = margin + (contentW - mapW) / 2;            // center horizontally
+
+    pdf.setFontSize(8);
+    pdf.setTextColor(...PDF_COLORS.textSecondary);
+    pdf.text('ROUTES  (S = company, numbers = stops in order)', margin, mapsTop + 10);
+
+    const drawMap = (dataUrl, topY, label, hex) => {
+      const rgb = [parseInt(hex.slice(0,2),16), parseInt(hex.slice(2,4),16), parseInt(hex.slice(4,6),16)];
+      pdf.setFontSize(9);
+      pdf.setTextColor(...rgb);
+      pdf.setFont(undefined, 'bold');
+      pdf.text(label, mapX, topY + 10);
+      pdf.setFont(undefined, 'normal');
+      const imgY = topY + mapTitleH;
+      if (dataUrl) {
+        try { pdf.addImage(dataUrl, 'PNG', mapX, imgY, mapW, mapH, undefined, 'FAST'); }
+        catch (e) {
+          pdf.setDrawColor(...PDF_COLORS.border);
+          pdf.roundedRect(mapX, imgY, mapW, mapH, 4, 4, 'S');
+          pdf.setFontSize(8); pdf.setTextColor(...PDF_COLORS.textSecondary);
+          pdf.text('(map unavailable)', mapX + 8, imgY + 20);
+        }
+      } else {
+        pdf.setDrawColor(...PDF_COLORS.border);
+        pdf.roundedRect(mapX, imgY, mapW, mapH, 4, 4, 'S');
+        pdf.setFontSize(8); pdf.setTextColor(...PDF_COLORS.textSecondary);
+        pdf.text('(no located stops)', mapX + 8, imgY + 20);
+      }
+    };
+    const aTop = mapsTop + routesLabelH;
+    const bTop = aTop + mapTitleH + mapH + mapGap;
+    drawMap(mapA, aTop, 'Group A', teamAHex);
+    drawMap(mapB, bTop, 'Group B', teamBHex);
+  }
+
+  // Footer (page 1)
   pdf.setFontSize(8);
   pdf.setTextColor(...PDF_COLORS.textSecondary);
   pdf.text(`Generated ${new Date().toLocaleString('en-AU')}`, margin, pageH - 24);
   pdf.text('Cover page', pageW - margin, pageH - 24, { align: 'right' });
-
-  // === Route maps on their own page (full width, large) ===
-  if (mapA || mapB) {
-    pdf.addPage();
-    pdf.setFillColor(...PDF_COLORS.primary);
-    pdf.rect(0, 0, pageW, 6, 'F');
-    pdf.setFontSize(16);
-    pdf.setTextColor(...PDF_COLORS.dark);
-    pdf.setFont(undefined, 'bold');
-    pdf.text(`Routes — ${dateStr}`, margin, 52);
-    pdf.setFont(undefined, 'normal');
-    pdf.setFontSize(9);
-    pdf.setTextColor(...PDF_COLORS.textSecondary);
-    pdf.text('S = company  ·  numbers = stops in order', margin, 68);
-
-    const drawMap = (dataUrl, topY, label, hex) => {
-      const rgb = [parseInt(hex.slice(0,2),16), parseInt(hex.slice(2,4),16), parseInt(hex.slice(4,6),16)];
-      pdf.setFontSize(11);
-      pdf.setTextColor(...rgb);
-      pdf.setFont(undefined, 'bold');
-      pdf.text(label, margin, topY + 11);
-      pdf.setFont(undefined, 'normal');
-      const imgY = topY + mapTitleH;
-      if (dataUrl) {
-        try { pdf.addImage(dataUrl, 'PNG', margin, imgY, mapW, mapH, undefined, 'FAST'); }
-        catch (e) {
-          pdf.setDrawColor(...PDF_COLORS.border);
-          pdf.roundedRect(margin, imgY, mapW, mapH, 4, 4, 'S');
-          pdf.setFontSize(8); pdf.setTextColor(...PDF_COLORS.textSecondary);
-          pdf.text('(map unavailable)', margin + 8, imgY + 20);
-        }
-      } else {
-        pdf.setDrawColor(...PDF_COLORS.border);
-        pdf.roundedRect(margin, imgY, mapW, mapH, 4, 4, 'S');
-        pdf.setFontSize(8); pdf.setTextColor(...PDF_COLORS.textSecondary);
-        pdf.text('(no located stops)', margin + 8, imgY + 20);
-      }
-    };
-    const aTop = 88;
-    const bTop = aTop + mapTitleH + mapH + mapGap;
-    drawMap(mapA, aTop, 'Group A', teamAHex);
-    drawMap(mapB, bTop, 'Group B', teamBHex);
-
-    pdf.setFontSize(8);
-    pdf.setTextColor(...PDF_COLORS.textSecondary);
-    pdf.text('Routes page', pageW - margin, pageH - 24, { align: 'right' });
-  }
 }
+
 
 async function renderJobSheet(pdf, job, margin, contentW, pageW, pageH, pageNum, totalPages, groupVehicle, groupInstaller) {
   // Installer shown on the sheet: group-level selection takes priority, else the item's own field
