@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-05T11:52:53.762840Z",
+  "updated_at": "2026-06-08T13:57:35.291683Z",
   "count": 51,
   "items": [
     {
@@ -140,7 +140,7 @@
       "invoice_number": "45949",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2715867150",
@@ -163,26 +163,6 @@
       "production_status": "Job Completed!"
     },
     {
-      "id": "2715912269",
-      "name": "CLOUD TOBCCONIST",
-      "install_date": "2026-05-27",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2688017173",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45871",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2716941656",
       "name": "INV-45829 ASTER COCKTAIL & WINE BAR  install the letter “T”",
       "install_date": "2026-05-27",
@@ -201,6 +181,26 @@
       "producer": "",
       "plan_hours": "0.5",
       "production_status": "Finished"
+    },
+    {
+      "id": "2715912269",
+      "name": "CLOUD TOBCCONIST",
+      "install_date": "2026-05-28",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2688017173",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45871",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2715942253",
@@ -483,26 +483,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2726613205",
-      "name": "KINCAID",
-      "install_date": "2026-06-03",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Low",
-      "installation_value": 0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2726173346",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45903",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2718983530",
       "name": "81个号码牌",
       "install_date": "2026-06-04",
@@ -541,26 +521,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
-    },
-    {
-      "id": "2726580750",
-      "name": "45982 Plumbcon car vinyl",
-      "install_date": "2026-06-04",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2726387543",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45982",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
     },
     {
       "id": "2726604394",
@@ -603,26 +563,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2716941500",
-      "name": "Main&Will Robin ACP",
-      "install_date": "2026-06-05",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Medium",
-      "installation_value": 0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2716723303",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45950",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2722409336",
       "name": "Midson construction",
       "install_date": "2026-06-05",
@@ -663,6 +603,26 @@
       "production_status": "Installation"
     },
     {
+      "id": "2726580750",
+      "name": "45982 Plumbcon car vinyl",
+      "install_date": "2026-06-05",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2726387543",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45982",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
       "id": "2726594577",
       "name": "Krupic Auto Repairs vinyl signage’s",
       "install_date": "2026-06-05",
@@ -683,29 +643,9 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2726633225",
-      "name": "ChezAmi",
-      "install_date": "2026-06-08",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2722198705",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45930",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2726632827",
       "name": "Swarovski QVB",
-      "install_date": "2026-06-09",
+      "install_date": "2026-06-08",
       "address": "455 George St, Sydney NSW 2000",
       "installer": "",
       "schedule_status": "",
@@ -720,7 +660,7 @@
       "invoice_number": "INV-45986",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2726580763",
@@ -740,7 +680,67 @@
       "invoice_number": "45960",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
+    },
+    {
+      "id": "2726613205",
+      "name": "KINCAID",
+      "install_date": "2026-06-09",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Low",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2726173346",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45903",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2726633225",
+      "name": "ChezAmi",
+      "install_date": "2026-06-09",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2722198705",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45930",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
+      "id": "2716941500",
+      "name": "Main&Will Robin ACP",
+      "install_date": "2026-06-10",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2716723303",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45950",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2718992861",
