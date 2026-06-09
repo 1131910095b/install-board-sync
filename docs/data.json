@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-08T14:52:52.438986Z",
-  "count": 51,
+  "updated_at": "2026-06-09T10:47:03.817515Z",
+  "count": 55,
   "items": [
     {
       "id": "2715867167",
@@ -200,7 +200,7 @@
       "invoice_number": "45871",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715942253",
@@ -580,7 +580,7 @@
       "invoice_number": "45977",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Production"
     },
     {
       "id": "2725596290",
@@ -600,7 +600,7 @@
       "invoice_number": "45905",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726580750",
@@ -620,7 +620,7 @@
       "invoice_number": "45982",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2726594577",
@@ -640,7 +640,7 @@
       "invoice_number": "45889",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2726632827",
@@ -680,7 +680,7 @@
       "invoice_number": "45960",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2726613205",
@@ -700,7 +700,7 @@
       "invoice_number": "45903",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2726633225",
@@ -720,7 +720,27 @@
       "invoice_number": "45930",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
+    },
+    {
+      "id": "2735765260",
+      "name": "45997QTY2-2440x307mm - 3mm thick acrylic",
+      "install_date": "2026-06-09",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2735477170",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45997",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Finished"
     },
     {
       "id": "2716941500",
@@ -780,7 +800,7 @@
       "invoice_number": "45901",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2726670156",
@@ -863,6 +883,26 @@
       "production_status": "Production"
     },
     {
+      "id": "2735761834",
+      "name": "DAHUA ESW LAVERTON",
+      "install_date": "2026-06-12",
+      "address": "Unit 16a/36 Hume Rd, Laverton North VIC 3026",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Low",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2735110110",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45996",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
       "id": "2715955378",
       "name": "INV-45913 on point",
       "install_date": "2026-06-17",
@@ -898,6 +938,46 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "INV-45967",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2735753109",
+      "name": "Supp Spot",
+      "install_date": "2026-06-22",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Low",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2734992276",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45993",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2735822311",
+      "name": "Volgren banner",
+      "install_date": "2026-06-26",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2735502506",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45999",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
