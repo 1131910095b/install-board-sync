@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-10T06:26:58.334536Z",
+  "updated_at": "2026-06-10T06:34:23.318355Z",
   "count": 58,
   "items": [
     {
@@ -706,7 +706,7 @@
       "id": "2726670156",
       "name": "Leo’s beautiful garden interior signage",
       "install_date": "2026-06-11",
-      "address": "",
+      "address": "5 Nicholson St BENTLEIGH VIC 3204",
       "installer": "",
       "schedule_status": "",
       "project_type": "",
@@ -717,7 +717,7 @@
       "production_id": "2716831493",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "",
+      "invoice_number": "45945",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
