@@ -776,6 +776,7 @@
   /* === Viewer role: read-only mode === */
   body[data-role="viewer"] .job-card { cursor: pointer; }
   body[data-role="viewer"] .job-card[draggable="true"] { cursor: pointer !important; }
+  body[data-role="viewer"] #syncBtn,
   body[data-role="viewer"] #downloadDayPdfBtn,
   body[data-role="viewer"] .download-day-btn,
   body[data-role="viewer"] #downloadJobPdfBtn,
@@ -1203,6 +1204,7 @@
     </div>
     <div class="actions">
       <button class="btn" id="refreshBtn" title="Reload data from server">↻ Refresh</button>
+      <button class="btn primary" id="syncBtn" title="Trigger a fresh sync from monday (takes a few minutes)">⟳ Sync from monday</button>
       <button class="btn success" id="downloadDayPdfBtn" title="Download today's PDF">↓ Today's PDF</button>
       <button class="btn" id="signOutBtn" title="Sign out">⎋ Sign Out</button>
     </div>
@@ -3806,6 +3808,83 @@ document.getElementById('refreshBtn').addEventListener('click', async () => {
   render();
   toast('Data refreshed', 'success');
 });
+
+// ============ MANUAL SYNC FROM MONDAY ============
+// Triggers the install-sync GitHub Actions workflow via the Cloudflare Worker,
+// then polls data.json until updated_at changes (workflow run + Pages redeploy).
+let SYNCING = false;
+async function syncFromMonday() {
+  if (SYNCING) return;
+  if (USER_ROLE !== 'editor') { toast('Editors only', 'info'); return; }
+  const pw = sessionStorage.getItem('loginPw');
+  if (!pw) { toast('Session expired. Sign out and log in again.', 'error'); return; }
+
+  const btn = document.getElementById('syncBtn');
+  const prevLabel = btn.textContent;
+  const beforeStamp = DATA.updated_at || '';
+
+  SYNCING = true;
+  btn.disabled = true;
+  btn.textContent = '⟳ Triggering…';
+
+  // 1) Trigger the workflow
+  try {
+    const r = await fetch(WORKER_URL + '/dispatch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Auth-Password': pw },
+      body: '{}',
+    });
+    if (!r.ok) {
+      const txt = await r.text();
+      throw new Error(`${r.status}: ${txt.slice(0, 150)}`);
+    }
+  } catch (err) {
+    console.error(err);
+    toast(`Could not start sync: ${err.message}`, 'error');
+    btn.disabled = false;
+    btn.textContent = prevLabel;
+    SYNCING = false;
+    return;
+  }
+
+  toast('Sync started — fetching latest from monday (this can take a few minutes)', 'success');
+  btn.textContent = '⟳ Syncing…';
+
+  // 2) Poll data.json for a changed updated_at.
+  //    Workflow run (~2-5 min) + GitHub Pages redeploy (~1-3 min) => allow ~12 min.
+  const POLL_MS = 15000;
+  const MAX_MS = 12 * 60 * 1000;
+  const start = Date.now();
+
+  const poll = async () => {
+    if (Date.now() - start > MAX_MS) {
+      toast('Sync was triggered but is taking a while. It will update automatically; you can also hit Refresh later.', 'info');
+      btn.disabled = false;
+      btn.textContent = prevLabel;
+      SYNCING = false;
+      return;
+    }
+    try {
+      const r = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
+      if (r.ok) {
+        const fresh = await r.json();
+        if (fresh.updated_at && fresh.updated_at !== beforeStamp) {
+          await loadData();
+          renderStats();
+          render();
+          toast('Synced ✓ Latest data from monday loaded', 'success');
+          btn.disabled = false;
+          btn.textContent = prevLabel;
+          SYNCING = false;
+          return;
+        }
+      }
+    } catch (e) { /* transient — keep polling */ }
+    setTimeout(poll, POLL_MS);
+  };
+  setTimeout(poll, POLL_MS);
+}
+document.getElementById('syncBtn').addEventListener('click', syncFromMonday);
 
 document.getElementById('downloadDayPdfBtn').addEventListener('click', () => {
   downloadDayPDF(ymd(new Date()));
