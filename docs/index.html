@@ -1212,7 +1212,6 @@
       <span class="role-badge" id="roleBadge"></span>
     </div>
     <div class="actions">
-      <button class="btn" id="refreshBtn" title="Reload data from server">↻ Refresh</button>
       <button class="btn primary" id="syncBtn" title="Trigger a fresh sync from monday (takes a few minutes)">⟳ Sync from monday</button>
       <button class="btn success" id="downloadDayPdfBtn" title="Download today's PDF">↓ Today's PDF</button>
       <button class="btn" id="signOutBtn" title="Sign out">⎋ Sign Out</button>
@@ -3809,13 +3808,6 @@ document.getElementById('customMonthPicker').addEventListener('change', (e) => {
     render();
   }
   weekDropdown.classList.remove('show');
-});
-
-document.getElementById('refreshBtn').addEventListener('click', async () => {
-  await loadData();
-  renderStats();
-  render();
-  toast('Data refreshed', 'success');
 });
 
 // ============ MANUAL SYNC FROM MONDAY ============
