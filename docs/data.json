@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-10T06:34:23.318355Z",
+  "updated_at": "2026-06-10T11:50:44.698993Z",
   "count": 58,
   "items": [
     {
@@ -680,7 +680,7 @@
       "invoice_number": "45953",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2719015710",
@@ -700,7 +700,7 @@
       "invoice_number": "45954",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2726670156",
@@ -720,13 +720,13 @@
       "invoice_number": "45945",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2736841152",
       "name": "Frankston Hopsital Stage 4",
       "install_date": "2026-06-11",
-      "address": "",
+      "address": "2 Hasting Rd\nFrankston VIC 3199",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -740,7 +740,7 @@
       "invoice_number": "45932",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2715919403",
@@ -860,7 +860,7 @@
       "invoice_number": "45996",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Production"
     },
     {
       "id": "2736841149",
@@ -900,7 +900,7 @@
       "invoice_number": "45994",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2715867289",
@@ -1020,7 +1020,7 @@
       "invoice_number": "45993",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Production"
     },
     {
       "id": "2735822311",
