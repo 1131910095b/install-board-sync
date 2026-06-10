@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-10T12:42:50.655176Z",
+  "updated_at": "2026-06-10T23:41:08.228258Z",
   "count": 58,
   "items": [
     {
@@ -500,7 +500,7 @@
       "invoice_number": "45977",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2726580750",
@@ -750,7 +750,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "",
-      "priority": "Medium",
+      "priority": "High",
       "installation_value": 1060.0,
       "sales": "Jenny",
       "notes": "",
@@ -830,7 +830,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "Medium",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "",
       "notes": "",
@@ -890,7 +890,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Delivery",
-      "priority": "Medium",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Jenny",
       "notes": "",
