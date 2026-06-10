@@ -322,7 +322,7 @@
     "file_count": 2
   },
   "2701060292": {
-    "key": "a25cdb77bb28",
+    "key": "cef73443fce5",
     "pages": [
       {
         "page": 1,
@@ -333,15 +333,10 @@
         "page": 2,
         "full": "proofs/2701060292_p2.jpg",
         "thumb": "proofs/2701060292_p2_thumb.jpg"
-      },
-      {
-        "page": 3,
-        "full": "proofs/2701060292_p3.jpg",
-        "thumb": "proofs/2701060292_p3_thumb.jpg"
       }
     ],
-    "source": "production_file",
-    "file_count": 3
+    "source": "sign_proof",
+    "file_count": 2
   },
   "2711129930": {
     "key": "5d075646ee5b",
