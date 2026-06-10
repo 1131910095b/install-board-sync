@@ -1388,6 +1388,7 @@ let USER_ROLE = null; // 'editor' or 'viewer' after login
 // ============ STATE ============
 let DATA = { items: [], updated_at: '', count: 0 };
 let LOCAL = JSON.parse(localStorage.getItem('localOverrides') || '{}'); // per-job local fields
+let SERVERDATES = {}; // raw server install_date per job id (pre-override), used to reconcile stale dragged dates
 let weekStart = startOfWeek(new Date());
 let dayCursor = new Date();
 let monthCursor = new Date(); // for month-based filtering in list view
@@ -1496,7 +1497,33 @@ async function loadData() {
     console.error(e);
     DATA = { items: [], updated_at: '', count: 0 };
   }
-  // Merge local overrides
+  // Snapshot the raw server install_date for every job (before overrides are applied).
+  SERVERDATES = {};
+  for (const it of (DATA.items || [])) SERVERDATES[it.id] = it.install_date || '';
+
+  // Reconcile stale local date overrides against fresh server data.
+  // A dragged date is only an optimistic placeholder until sync writes it back.
+  // Drop it once the server has moved on — synced to that date, or changed in monday directly.
+  let _dirty = false;
+  for (const item of DATA.items) {
+    const ov = LOCAL[item.id];
+    if (ov && ('install_date' in ov)) {
+      const serverDate = item.install_date || '';
+      const stale =
+        ov._base === undefined ||        // legacy override (no baseline) — can't trust it
+        serverDate !== ov._base ||       // server changed since the drag
+        serverDate === ov.install_date;  // server already caught up to the drag
+      if (stale) {
+        delete ov.install_date;
+        delete ov._base;
+        if (Object.keys(ov).length === 0) delete LOCAL[item.id];
+        _dirty = true;
+      }
+    }
+  }
+  if (_dirty) localStorage.setItem('localOverrides', JSON.stringify(LOCAL));
+
+  // Merge remaining local overrides
   for (const item of DATA.items) {
     if (LOCAL[item.id]) Object.assign(item, LOCAL[item.id]);
   }
@@ -1983,8 +2010,10 @@ async function rescheduleJob(jobId, newDate) {
   if (job.install_date === newDate) return;
 
   const oldDate = job.install_date;
-  // Local update first
-  saveLocal(jobId, { install_date: newDate });
+  // Local update first. Record the server's current date as a baseline so we can
+  // later detect when the server has moved on and drop this optimistic override.
+  const baseDate = (jobId in SERVERDATES) ? SERVERDATES[jobId] : oldDate;
+  saveLocal(jobId, { install_date: newDate, _base: baseDate });
   render();
   toast(`Moved "${job.name}" to ${newDate}`, 'info');
 
