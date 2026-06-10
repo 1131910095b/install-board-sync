@@ -813,6 +813,15 @@
   body[data-role="viewer"] .read-only-banner { display: block; }
   body[data-role="editor"] .read-only-banner { display: none; }
 
+  /* === Sync button spinner === */
+  @keyframes acespin { to { transform: rotate(360deg); } }
+  @keyframes acepulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(124,92,255,0.45); }
+    50%      { box-shadow: 0 0 0 7px rgba(124,92,255,0); }
+  }
+  #syncBtn .spin-icon { display: inline-block; animation: acespin 0.8s linear infinite; }
+  #syncBtn:disabled { opacity: 0.85; cursor: progress; animation: acepulse 1.5s ease-in-out infinite; }
+
   .map-layout {
     flex: 1;
     display: grid;
@@ -3825,7 +3834,7 @@ async function syncFromMonday() {
 
   SYNCING = true;
   btn.disabled = true;
-  btn.textContent = '⟳ Triggering…';
+  btn.innerHTML = '<span class="spin-icon">⟳</span> Triggering…';
 
   // 1) Trigger the workflow
   try {
@@ -3848,7 +3857,7 @@ async function syncFromMonday() {
   }
 
   toast('Sync started — fetching latest from monday (this can take a few minutes)', 'success');
-  btn.textContent = '⟳ Syncing…';
+  btn.innerHTML = '<span class="spin-icon">⟳</span> Syncing…';
 
   // 2) Poll data.json for a changed updated_at.
   //    Workflow run (~2-5 min) + GitHub Pages redeploy (~1-3 min) => allow ~12 min.
