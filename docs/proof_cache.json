@@ -1008,7 +1008,7 @@
     "file_count": 1
   },
   "2736722494": {
-    "key": "3a0744776c5f",
+    "key": "83104f2f9df6",
     "pages": [
       {
         "page": 1,
@@ -1019,10 +1019,15 @@
         "page": 2,
         "full": "proofs/2736722494_p2.jpg",
         "thumb": "proofs/2736722494_p2_thumb.jpg"
+      },
+      {
+        "page": 3,
+        "full": "proofs/2736722494_p3.jpg",
+        "thumb": "proofs/2736722494_p3_thumb.jpg"
       }
     ],
     "source": "production_file",
-    "file_count": 2
+    "file_count": 3
   },
   "2735110110": {
     "key": "62013a9909af",
