@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-11T03:57:51.600299Z",
-  "count": 58,
+  "updated_at": "2026-06-11T08:50:10.660727Z",
+  "count": 59,
   "items": [
     {
       "id": "2715867167",
@@ -680,7 +680,7 @@
       "invoice_number": "45953",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2719015710",
@@ -700,7 +700,7 @@
       "invoice_number": "45954",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2726670156",
@@ -740,7 +740,7 @@
       "invoice_number": "45932",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715919403",
@@ -900,7 +900,7 @@
       "invoice_number": "45994",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Finished"
     },
     {
       "id": "2715867289",
@@ -940,7 +940,7 @@
       "invoice_number": "45950",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2718836788",
@@ -981,6 +981,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production File Start"
+    },
+    {
+      "id": "2738671071",
+      "name": "TFC business card",
+      "install_date": "2026-06-17",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2738329992",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46005",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2726580741",
