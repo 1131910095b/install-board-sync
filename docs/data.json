@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-12T04:41:55.466012Z",
+  "updated_at": "2026-06-12T05:26:23.030908Z",
   "count": 62,
   "items": [
     {
@@ -860,7 +860,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2718836788",
@@ -870,7 +870,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
@@ -900,7 +900,7 @@
       "invoice_number": "45905",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2726681106",
@@ -920,33 +920,13 @@
       "invoice_number": "45895",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
-      "id": "2735761834",
-      "name": "DAHUA ESW LAVERTON",
-      "install_date": "2026-06-15",
-      "address": "Unit 16a/36 Hume Rd, Laverton North VIC 3026",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Low",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2735110110",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45996",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2739847884",
       "name": "Roulaana, Broadmeadows Central",
       "install_date": "2026-06-15",
-      "address": "",
+      "address": "G109, 1099-1169 Pascoe Vale Rd",
       "installer": "",
       "schedule_status": "",
       "project_type": "",
@@ -960,7 +940,7 @@
       "invoice_number": "45817",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2718992861",
@@ -981,6 +961,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Out Production"
+    },
+    {
+      "id": "2735761834",
+      "name": "DAHUA ESW LAVERTON",
+      "install_date": "2026-06-16",
+      "address": "Unit 16a/36 Hume Rd, Laverton North VIC 3026",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2735110110",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45996",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2739848755",
