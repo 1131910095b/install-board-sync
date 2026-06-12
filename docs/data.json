@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-12T05:26:23.030908Z",
+  "updated_at": "2026-06-12T05:35:51.487488Z",
   "count": 62,
   "items": [
     {
@@ -1157,7 +1157,7 @@
       "production_id": "2739724143",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "",
+      "invoice_number": "46006",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
