@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-12T05:35:51.487488Z",
+  "updated_at": "2026-06-12T08:27:55.141399Z",
   "count": 62,
   "items": [
     {
@@ -723,26 +723,6 @@
       "production_status": "Job Completed!"
     },
     {
-      "id": "2715919403",
-      "name": "MAHA RESTAURANT",
-      "install_date": "2026-06-12",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 1060.0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2691793672",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45901",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2726604289",
       "name": "WOODLANDS SA EDINBURGH",
       "install_date": "2026-06-12",
@@ -843,6 +823,26 @@
       "production_status": "Pre-Installation"
     },
     {
+      "id": "2715919403",
+      "name": "MAHA RESTAURANT",
+      "install_date": "2026-06-15",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 1060.0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2691793672",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45901",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2715867289",
       "name": "Village Bendigo Design",
       "install_date": "2026-06-15",
@@ -880,7 +880,7 @@
       "invoice_number": "45880",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2725596290",
@@ -1005,8 +1005,8 @@
     {
       "id": "2715955378",
       "name": "INV-45913 on point",
-      "install_date": "2026-06-17",
-      "address": "",
+      "install_date": "2026-06-19",
+      "address": "8 Industrial Dr sunshine west 3020",
       "installer": "",
       "schedule_status": "",
       "project_type": "",
@@ -1021,26 +1021,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production File Start"
-    },
-    {
-      "id": "2738671071",
-      "name": "TFC business card",
-      "install_date": "2026-06-17",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Pick Up",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2738329992",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46005",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Order Placed"
     },
     {
       "id": "2726580741",
@@ -1061,6 +1041,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
+    },
+    {
+      "id": "2738671071",
+      "name": "TFC business card",
+      "install_date": "2026-06-19",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2738329992",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46005",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2735753109",
