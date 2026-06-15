@@ -1183,5 +1183,42 @@
     ],
     "source": "production_file",
     "file_count": 2
+  },
+  "2679086112": {
+    "key": "6bc1b37894df",
+    "pages": [
+      {
+        "page": 1,
+        "full": "proofs/2679086112_p1.jpg",
+        "thumb": "proofs/2679086112_p1_thumb.jpg"
+      },
+      {
+        "page": 2,
+        "full": "proofs/2679086112_p2.jpg",
+        "thumb": "proofs/2679086112_p2_thumb.jpg"
+      },
+      {
+        "page": 3,
+        "full": "proofs/2679086112_p3.jpg",
+        "thumb": "proofs/2679086112_p3_thumb.jpg"
+      },
+      {
+        "page": 4,
+        "full": "proofs/2679086112_p4.jpg",
+        "thumb": "proofs/2679086112_p4_thumb.jpg"
+      },
+      {
+        "page": 5,
+        "full": "proofs/2679086112_p5.jpg",
+        "thumb": "proofs/2679086112_p5_thumb.jpg"
+      },
+      {
+        "page": 6,
+        "full": "proofs/2679086112_p6.jpg",
+        "thumb": "proofs/2679086112_p6_thumb.jpg"
+      }
+    ],
+    "source": "sign_proof",
+    "file_count": 2
   }
 }

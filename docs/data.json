@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-15T04:15:56.545988Z",
-  "count": 62,
+  "updated_at": "2026-06-15T05:44:02.498262Z",
+  "count": 64,
   "items": [
     {
       "id": "2715867167",
@@ -880,7 +880,7 @@
       "invoice_number": "45880",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2725596290",
@@ -960,7 +960,7 @@
       "invoice_number": "45892",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2735761834",
@@ -998,6 +998,46 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "45866、45876",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2743211565",
+      "name": "Local Tasker",
+      "install_date": "2026-06-16",
+      "address": "29 Northern Rd, Heidelberg West VIC 3081",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Jack",
+      "notes": "",
+      "production_id": "2679086112",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45240",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2743229131",
+      "name": "SC-wilson emporium",
+      "install_date": "2026-06-17",
+      "address": "287 Lonsdale St, Melbourne VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 250.0,
+      "sales": "Harry",
+      "notes": "",
+      "production_id": "2691295571",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45898",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
@@ -1060,7 +1100,7 @@
       "invoice_number": "46005",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2735753109",
