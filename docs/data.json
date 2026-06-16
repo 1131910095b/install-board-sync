@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-15T23:51:40.741959Z",
-  "count": 64,
+  "updated_at": "2026-06-16T02:34:32.975033Z",
+  "count": 68,
   "items": [
     {
       "id": "2715867167",
@@ -341,26 +341,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Job Completed!"
-    },
-    {
-      "id": "2715912202",
-      "name": "IDS MR Ramen",
-      "install_date": "2026-06-03",
-      "address": "TENANCY T901-3 & T901-4 STATE LIBRARY STATION VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2681954423",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45621",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
     },
     {
       "id": "2716896134",
@@ -980,7 +960,7 @@
       "invoice_number": "45996",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2739848755",
@@ -1000,7 +980,7 @@
       "invoice_number": "45866、45876",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2743211565",
@@ -1020,7 +1000,7 @@
       "invoice_number": "45240",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2743229131",
@@ -1043,6 +1023,26 @@
       "production_status": "Pre-Installation"
     },
     {
+      "id": "2744298029",
+      "name": "Taega (for installation)",
+      "install_date": "2026-06-17",
+      "address": "336 Burnley St, Richmond VIC 3121",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2744292676",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45821",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
       "id": "2715955378",
       "name": "INV-45913 on point",
       "install_date": "2026-06-19",
@@ -1060,7 +1060,7 @@
       "invoice_number": "45913",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Production"
     },
     {
       "id": "2726580741",
@@ -1103,6 +1103,46 @@
       "production_status": "Job Completed!"
     },
     {
+      "id": "2744298103",
+      "name": "Fink Engineering",
+      "install_date": "2026-06-19",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2744168377",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46010",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2715912202",
+      "name": "IDS MR Ramen",
+      "install_date": "2026-06-22",
+      "address": "TENANCY T901-3 & T901-4 STATE LIBRARY STATION VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2681954423",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45621",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
       "id": "2735753109",
       "name": "Supp Spot",
       "install_date": "2026-06-22",
@@ -1121,6 +1161,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2744261883",
+      "name": "Village 4个旗子重做",
+      "install_date": "2026-06-24",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2744228368",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2735822311",
@@ -1198,6 +1258,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46006",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2744261998",
+      "name": "Pho Le",
+      "install_date": "2026-07-03",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2744248789",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45988",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
