@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-17T04:06:32.685135Z",
-  "count": 68,
+  "updated_at": "2026-06-17T06:49:31.423773Z",
+  "count": 70,
   "items": [
     {
       "id": "2715867167",
@@ -720,7 +720,7 @@
       "invoice_number": "45965",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Out Production"
     },
     {
       "id": "2726595701",
@@ -820,7 +820,7 @@
       "invoice_number": "45901",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2715867289",
@@ -840,7 +840,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Production"
     },
     {
       "id": "2718836788",
@@ -1000,7 +1000,7 @@
       "invoice_number": "45240",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2743229131",
@@ -1040,7 +1040,7 @@
       "invoice_number": "45821",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715955378",
@@ -1058,6 +1058,46 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "45913",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
+      "id": "2746228847",
+      "name": "LORD BARRAMUNDI (Repair)",
+      "install_date": "2026-06-18",
+      "address": "1 MAIN ST, BOX HILL VIC 3128",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2746158702",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2746159422",
+      "name": "Canopy-Sheldon & Hammond",
+      "install_date": "2026-06-18",
+      "address": "11-13 REDWOOD DRIVE, NOTTING HILL VIC 3168",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 2350.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2726125995",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45907",
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
@@ -1120,7 +1160,7 @@
       "invoice_number": "46010",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Production File Start"
     },
     {
       "id": "2715912202",
