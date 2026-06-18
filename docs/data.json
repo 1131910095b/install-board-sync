@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-18T08:53:22.222979Z",
+  "updated_at": "2026-06-18T23:50:59.414546Z",
   "count": 76,
   "items": [
     {
@@ -1040,7 +1040,7 @@
       "invoice_number": "45913",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2716941500",
@@ -1060,7 +1060,7 @@
       "invoice_number": "45950",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2746228847",
@@ -1080,7 +1080,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2746159422",
@@ -1180,7 +1180,7 @@
       "invoice_number": "46026",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2747244142",
@@ -1200,7 +1200,7 @@
       "invoice_number": "46020",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2715912202",
