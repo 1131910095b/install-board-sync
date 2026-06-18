@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-18T03:58:06.348490Z",
-  "count": 75,
+  "updated_at": "2026-06-18T08:53:22.222979Z",
+  "count": 76,
   "items": [
     {
       "id": "2715867167",
@@ -1177,10 +1177,10 @@
       "production_id": "2747088158",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "",
+      "invoice_number": "46026",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2747244142",
@@ -1241,6 +1241,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2747736361",
+      "name": "Dahua Seadan Tullamarine Display Board",
+      "install_date": "2026-06-22",
+      "address": "Unit 5-6/2 Tullamarine Park Rd, TullamarineVIC 3043",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 250.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2743362372",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46022",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2744261883",
