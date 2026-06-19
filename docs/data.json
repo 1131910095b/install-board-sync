@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-18T23:50:59.414546Z",
-  "count": 76,
+  "updated_at": "2026-06-19T04:17:42.536243Z",
+  "count": 78,
   "items": [
     {
       "id": "2715867167",
@@ -1100,7 +1100,7 @@
       "invoice_number": "45907",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726580741",
@@ -1121,6 +1121,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
+    },
+    {
+      "id": "2735753109",
+      "name": "Supp Spot",
+      "install_date": "2026-06-19",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Low",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2734992276",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45993",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2738671071",
@@ -1200,7 +1220,7 @@
       "invoice_number": "46020",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2715912202",
@@ -1223,26 +1243,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2735753109",
-      "name": "Supp Spot",
-      "install_date": "2026-06-22",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Low",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2734992276",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45993",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2747736361",
       "name": "Dahua Seadan Tullamarine Display Board",
       "install_date": "2026-06-22",
@@ -1261,6 +1261,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2748827968",
+      "name": "SAABL-F-14/11 install",
+      "install_date": "2026-06-23",
+      "address": "108 Mt Pleasant Rd, Highton VIC 3216",
+      "installer": "Daniel, Kent",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 520.0,
+      "sales": "Fiona",
+      "notes": "",
+      "production_id": "2502851838",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45459",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Finished"
     },
     {
       "id": "2744261883",
@@ -1381,6 +1401,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2748894243",
+      "name": "Frankston 药房",
+      "install_date": "2026-06-30",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry, Jenny",
+      "notes": "",
+      "production_id": "2748682254",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46018",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2739852926",
