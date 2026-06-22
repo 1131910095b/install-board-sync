@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-22T10:22:50.389225Z",
+  "updated_at": "2026-06-22T23:26:32.716870Z",
   "count": 80,
   "items": [
     {
@@ -20,7 +20,7 @@
       "invoice_number": "45845",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2715912180",
@@ -160,7 +160,7 @@
       "invoice_number": "45845",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2716941656",
@@ -200,7 +200,7 @@
       "invoice_number": "45871",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2715942253",
@@ -320,7 +320,7 @@
       "invoice_number": "45850",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2715867271",
@@ -780,7 +780,7 @@
       "invoice_number": "45901",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Construct Attention"
     },
     {
       "id": "2715867289",
@@ -840,7 +840,7 @@
       "invoice_number": "45905",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2726681106",
@@ -920,7 +920,7 @@
       "invoice_number": "45996",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2739848755",
@@ -1140,7 +1140,7 @@
       "invoice_number": "46005",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2744298103",
@@ -1200,7 +1200,7 @@
       "invoice_number": "46020",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2715912202",
@@ -1440,7 +1440,7 @@
       "invoice_number": "46018",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Construct Attention"
     },
     {
       "id": "2739852926",
@@ -1520,7 +1520,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Construct Attention"
     },
     {
       "id": "2726604292",
