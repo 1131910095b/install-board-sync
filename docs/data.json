@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-21T23:22:39.895114Z",
-  "count": 78,
+  "updated_at": "2026-06-22T02:06:04.326464Z",
+  "count": 79,
   "items": [
     {
       "id": "2715867167",
@@ -740,7 +740,7 @@
       "invoice_number": "INV-45968",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Out Production"
     },
     {
       "id": "2736841149",
@@ -820,7 +820,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2718836788",
@@ -1120,7 +1120,7 @@
       "invoice_number": "INV-45967",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2735753109",
@@ -1260,7 +1260,7 @@
       "invoice_number": "46022",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2748827968",
@@ -1374,13 +1374,13 @@
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
-      "production_id": "2726428709",
+      "production_id": null,
       "team": "",
       "duration_hours": null,
-      "invoice_number": "INV-45966",
+      "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": ""
     },
     {
       "id": "2747258305",
@@ -1440,7 +1440,7 @@
       "invoice_number": "46006",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
     },
     {
       "id": "2744261998",
@@ -1520,7 +1520,7 @@
       "invoice_number": "45910",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2726632826",
@@ -1558,6 +1558,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "45964",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2752121467",
+      "name": "X-Infinity",
+      "install_date": "2026-07-31",
+      "address": "351 Elizabeth St, Melbourne VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Low",
+      "installation_value": 0,
+      "sales": "Chike, Jenny",
+      "notes": "",
+      "production_id": "2751926235",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45910",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
