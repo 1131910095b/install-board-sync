@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-22T04:13:04.458281Z",
-  "count": 79,
+  "updated_at": "2026-06-22T10:22:50.389225Z",
+  "count": 80,
   "items": [
     {
       "id": "2715867167",
@@ -723,26 +723,6 @@
       "production_status": "Out Production"
     },
     {
-      "id": "2726595701",
-      "name": "Woodlands BEVERIDGE & UPPER BURNIE",
-      "install_date": "2026-06-12",
-      "address": "368-370 Mount Street Upper Burnie Tasmania 7320",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2726425012",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "INV-45968",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Out Production"
-    },
-    {
       "id": "2736841149",
       "name": "Swarovski South Warf DFO",
       "install_date": "2026-06-12",
@@ -820,7 +800,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2718836788",
@@ -1240,7 +1220,7 @@
       "invoice_number": "45621",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2747736361",
@@ -1263,6 +1243,26 @@
       "production_status": "Job Completed!"
     },
     {
+      "id": "2726595701",
+      "name": "Woodlands BEVERIDGE & UPPER BURNIE",
+      "install_date": "2026-06-23",
+      "address": "368-370 Mount Street Upper Burnie Tasmania 7320",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2726425012",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "INV-45968",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
+    },
+    {
       "id": "2748827968",
       "name": "SAABL-F-14/11 install",
       "install_date": "2026-06-23",
@@ -1281,6 +1281,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Finished"
+    },
+    {
+      "id": "2752772717",
+      "name": "Woodlands MANOR LAKES",
+      "install_date": "2026-06-23",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 3400.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2745614952",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45878",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2744261883",
@@ -1460,7 +1480,7 @@
       "invoice_number": "45988",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Production"
     },
     {
       "id": "2726580751",
@@ -1520,7 +1540,7 @@
       "invoice_number": "45910",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2726632826",
