@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-23T06:24:06.809559Z",
+  "updated_at": "2026-06-23T07:29:06.952128Z",
   "count": 88,
   "items": [
     {
@@ -983,26 +983,6 @@
       "production_status": "Job Completed!"
     },
     {
-      "id": "2715955378",
-      "name": "INV-45913 on point",
-      "install_date": "2026-06-18",
-      "address": "8 Industrial Drive, sunshine west 3020",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 1000.0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2707640044",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45913",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Job Completed!"
-    },
-    {
       "id": "2716941500",
       "name": "Main&Will Robin ACP",
       "install_date": "2026-06-18",
@@ -1243,10 +1223,30 @@
       "production_status": "Finished"
     },
     {
+      "id": "2715955378",
+      "name": "INV-45913 on point",
+      "install_date": "2026-06-24",
+      "address": "8 Industrial Drive, sunshine west 3020",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 1000.0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2707640044",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45913",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Job Completed!"
+    },
+    {
       "id": "2744261883",
       "name": "Village 4个旗子重做",
       "install_date": "2026-06-24",
-      "address": "",
+      "address": "44 Darren Rd, Springvale South VIC 3172",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
