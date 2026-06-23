@@ -1897,5 +1897,17 @@
     ],
     "source": "production_file",
     "file_count": 4
+  },
+  "2753388615": {
+    "key": "cf61e3141dcf",
+    "pages": [
+      {
+        "page": 1,
+        "full": "proofs/2753388615_p1.jpg",
+        "thumb": "proofs/2753388615_p1_thumb.jpg"
+      }
+    ],
+    "source": "sign_proof",
+    "file_count": 1
   }
 }

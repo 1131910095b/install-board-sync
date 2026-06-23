@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-22T23:26:32.716870Z",
-  "count": 80,
+  "updated_at": "2026-06-23T01:33:43.508003Z",
+  "count": 84,
   "items": [
     {
       "id": "2715867167",
@@ -740,7 +740,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2736834999",
@@ -761,26 +761,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Finished"
-    },
-    {
-      "id": "2715919403",
-      "name": "MAHA RESTAURANT",
-      "install_date": "2026-06-15",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 1060.0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2691793672",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45901",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Construct Attention"
     },
     {
       "id": "2715867289",
@@ -1160,7 +1140,7 @@
       "invoice_number": "46010",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2747243897",
@@ -1320,7 +1300,27 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Out Production"
+    },
+    {
+      "id": "2715919403",
+      "name": "MAHA RESTAURANT",
+      "install_date": "2026-06-25",
+      "address": "21 BOND ST, MELBOURNE VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 1060.0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2691793672",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45901",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Construct Attention"
     },
     {
       "id": "2747243933",
@@ -1361,6 +1361,46 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2753509482",
+      "name": "sara stone sticker",
+      "install_date": "2026-06-26",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2753388615",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46029",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2753509214",
+      "name": "Frenchie Add On Window Sticker",
+      "install_date": "2026-06-29",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2753422814",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46030",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2726670231",
@@ -1503,6 +1543,26 @@
       "production_status": "Sign Proof"
     },
     {
+      "id": "2753554377",
+      "name": "Leeda Lightbox Bar",
+      "install_date": "2026-07-15",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Low",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2753423862",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46028",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
       "id": "2747243983",
       "name": "Insite Zeus",
       "install_date": "2026-07-21",
@@ -1520,7 +1580,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2726604292",
@@ -1530,7 +1590,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "Low",
+      "priority": "Medium",
       "installation_value": 0,
       "sales": "Jenny",
       "notes": "",
@@ -1540,7 +1600,7 @@
       "invoice_number": "45910",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2726632826",
@@ -1598,6 +1658,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "45910",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production File Start"
+    },
+    {
+      "id": "2753480957",
+      "name": "1Arena",
+      "install_date": "2026-07-31",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2753468023",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46014",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
