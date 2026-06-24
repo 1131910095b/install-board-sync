@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-24T01:28:23.760587Z",
-  "count": 88,
+  "updated_at": "2026-06-24T03:35:09.511622Z",
+  "count": 89,
   "items": [
     {
       "id": "2715867167",
@@ -520,7 +520,7 @@
       "invoice_number": "45889",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2726632827",
@@ -980,7 +980,7 @@
       "invoice_number": "45821",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2716941500",
@@ -1517,7 +1517,7 @@
       "production_id": "2753481821",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "",
+      "invoice_number": "46037",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
@@ -1538,6 +1538,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46031",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2755202553",
+      "name": "shepparton餐厅",
+      "install_date": "2026-07-01",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2755106470",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46019",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
