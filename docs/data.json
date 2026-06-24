@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-23T23:13:58.477421Z",
+  "updated_at": "2026-06-24T01:28:23.760587Z",
   "count": 88,
   "items": [
     {
@@ -840,7 +840,7 @@
       "invoice_number": "45895",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2739847884",
@@ -1240,7 +1240,7 @@
       "invoice_number": "45913",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2744261883",
@@ -1260,7 +1260,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2746159422",
@@ -1280,7 +1280,7 @@
       "invoice_number": "45907",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2752772717",
@@ -1340,7 +1340,7 @@
       "invoice_number": "46017",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
     },
     {
       "id": "2735822311",
@@ -1420,7 +1420,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2726583227",
@@ -1560,7 +1560,7 @@
       "invoice_number": "46006",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Out Production"
     },
     {
       "id": "2744261998",
@@ -1580,7 +1580,7 @@
       "invoice_number": "45988",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2726580751",
