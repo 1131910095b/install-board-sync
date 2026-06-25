@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-25T03:33:17.064996Z",
+  "updated_at": "2026-06-25T06:32:27.498967Z",
   "count": 90,
   "items": [
     {
@@ -461,26 +461,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Finished"
-    },
-    {
-      "id": "2722409336",
-      "name": "Midson construction",
-      "install_date": "2026-06-05",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2722234418",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45977",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Job Completed!"
     },
     {
       "id": "2726580750",
@@ -1341,6 +1321,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2722409336",
+      "name": "Midson construction",
+      "install_date": "2026-06-26",
+      "address": "5/28 West Ct, Derrimut",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2722234418",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45977",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Job Completed!"
     },
     {
       "id": "2735822311",
