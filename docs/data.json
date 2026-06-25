@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-25T06:39:53.758310Z",
+  "updated_at": "2026-06-25T07:43:01.842397Z",
   "count": 90,
   "items": [
     {
@@ -1080,7 +1080,7 @@
       "invoice_number": "46010",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Production"
     },
     {
       "id": "2747244142",
@@ -1283,29 +1283,9 @@
       "production_status": "Installation"
     },
     {
-      "id": "2747243933",
-      "name": "Fresh pasta menu vinyl",
-      "install_date": "2026-06-25",
-      "address": "Shop 32/101 Manningham Rd, Bulleen VIC 3105",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2747005251",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46017",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2722409336",
       "name": "Midson construction",
-      "install_date": "2026-06-26",
+      "install_date": "2026-06-25",
       "address": "5/28 West Ct, Derrimut",
       "installer": "",
       "schedule_status": "",
@@ -1325,7 +1305,7 @@
     {
       "id": "2735822311",
       "name": "Volgren banner",
-      "install_date": "2026-06-26",
+      "install_date": "2026-06-25",
       "address": "",
       "installer": "",
       "schedule_status": "",
@@ -1341,6 +1321,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2753509482",
+      "name": "sara stone sticker",
+      "install_date": "2026-06-25",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2753388615",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46029",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Finished"
     },
     {
       "id": "2747243897",
@@ -1363,24 +1363,44 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2753509482",
-      "name": "sara stone sticker",
-      "install_date": "2026-06-26",
+      "id": "2744261998",
+      "name": "Pho Le",
+      "install_date": "2026-06-29",
       "address": "",
       "installer": "",
       "schedule_status": "",
-      "project_type": "Pick Up",
+      "project_type": "Install",
       "priority": "",
       "installation_value": 0,
       "sales": "Barry",
       "notes": "",
-      "production_id": "2753388615",
+      "production_id": "2744248789",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "46029",
+      "invoice_number": "45988",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Finished"
+      "production_status": "Production"
+    },
+    {
+      "id": "2747243933",
+      "name": "Fresh pasta menu vinyl",
+      "install_date": "2026-06-29",
+      "address": "Shop 32/101 Manningham Rd, Bulleen VIC 3105",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2747005251",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46017",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2753509214",
@@ -1578,26 +1598,6 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46006",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
-      "id": "2744261998",
-      "name": "Pho Le",
-      "install_date": "2026-07-03",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2744248789",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45988",
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
