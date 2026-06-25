@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-24T23:12:31.339534Z",
-  "count": 89,
+  "updated_at": "2026-06-25T01:34:21.383454Z",
+  "count": 90,
   "items": [
     {
       "id": "2715867167",
@@ -1020,7 +1020,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2726580741",
@@ -1560,7 +1560,7 @@
       "invoice_number": "46019",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2739852926",
@@ -1601,6 +1601,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2756252902",
+      "name": "seoul garden bridge sign",
+      "install_date": "2026-07-03",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2756251563",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Construct Attention"
     },
     {
       "id": "2726580751",
