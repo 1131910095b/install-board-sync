@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-25T07:43:01.842397Z",
+  "updated_at": "2026-06-26T01:39:35.028408Z",
   "count": 90,
   "items": [
     {
@@ -840,7 +840,7 @@
       "invoice_number": "45817",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2718992861",
@@ -1220,7 +1220,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2746159422",
@@ -1280,7 +1280,7 @@
       "invoice_number": "45901",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2722409336",
@@ -1606,7 +1606,7 @@
       "id": "2756252902",
       "name": "seoul garden bridge sign",
       "install_date": "2026-07-03",
-      "address": "",
+      "address": "285/287 SPRINGVALE RD, GLEN WAVERLEY, VIC 3150",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -1700,7 +1700,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Construct Attention"
     },
     {
       "id": "2726604292",
