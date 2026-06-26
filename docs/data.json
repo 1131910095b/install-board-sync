@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-26T03:40:41.862362Z",
+  "updated_at": "2026-06-26T07:54:04.811977Z",
   "count": 90,
   "items": [
     {
@@ -1080,7 +1080,7 @@
       "invoice_number": "46010",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Out Production"
     },
     {
       "id": "2747244142",
@@ -1160,7 +1160,7 @@
       "invoice_number": "INV-45968",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2748827968",
@@ -1343,6 +1343,26 @@
       "production_status": "Finished"
     },
     {
+      "id": "2744261998",
+      "name": "Pho Le",
+      "install_date": "2026-06-26",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2744248789",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45988",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2747243897",
       "name": "TOYOTA TOOL BOX",
       "install_date": "2026-06-26",
@@ -1363,29 +1383,9 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2744261998",
-      "name": "Pho Le",
-      "install_date": "2026-06-29",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2744248789",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45988",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2747243933",
       "name": "Fresh pasta menu vinyl",
-      "install_date": "2026-06-29",
+      "install_date": "2026-06-26",
       "address": "Shop 32/101 Manningham Rd, Bulleen VIC 3105",
       "installer": "",
       "schedule_status": "",
@@ -1405,7 +1405,7 @@
     {
       "id": "2753509214",
       "name": "Frenchie Add On Window Sticker",
-      "install_date": "2026-06-29",
+      "install_date": "2026-06-26",
       "address": "",
       "installer": "",
       "schedule_status": "",
@@ -1421,6 +1421,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
+    },
+    {
+      "id": "2747258305",
+      "name": "Woodlands Mernda",
+      "install_date": "2026-06-29",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 5700.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2726180296",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45966&45874",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2726670231",
@@ -1461,26 +1481,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": ""
-    },
-    {
-      "id": "2747258305",
-      "name": "Woodlands Mernda",
-      "install_date": "2026-06-30",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 5700.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2726180296",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45966&45874",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
     },
     {
       "id": "2748894243",
