@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-28T23:11:44.281144Z",
+  "updated_at": "2026-06-29T01:39:16.177081Z",
   "count": 90,
   "items": [
     {
@@ -1565,8 +1565,8 @@
     {
       "id": "2755202553",
       "name": "shepparton餐厅",
-      "install_date": "2026-07-01",
-      "address": "",
+      "install_date": "2026-06-30",
+      "address": "56/58 KIALLA LAKES DR, KIALLA VIC 3631",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -1580,7 +1580,7 @@
       "invoice_number": "46019",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2739852926",
@@ -1640,7 +1640,7 @@
       "invoice_number": "45852",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
     },
     {
       "id": "2753554377",
@@ -1685,7 +1685,7 @@
     {
       "id": "2747243983",
       "name": "Insite Zeus",
-      "install_date": "2026-07-21",
+      "install_date": "2026-07-20",
       "address": "",
       "installer": "",
       "schedule_status": "",
