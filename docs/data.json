@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-29T23:04:29.651704Z",
-  "count": 90,
+  "updated_at": "2026-06-30T01:33:16.288756Z",
+  "count": 91,
   "items": [
     {
       "id": "2715867167",
@@ -700,7 +700,7 @@
       "invoice_number": "45965",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Production"
     },
     {
       "id": "2736841149",
@@ -1583,6 +1583,26 @@
       "production_status": "Production"
     },
     {
+      "id": "2761709540",
+      "name": "Swarovski - 2026 Summer Campaign & New Season Styling Event",
+      "install_date": "2026-06-30",
+      "address": "chadstone",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2757552896",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
+    },
+    {
       "id": "2739852926",
       "name": "LE GRAND CELLAR - BOX HILL CENTRAL",
       "install_date": "2026-07-03",
@@ -1700,7 +1720,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Production File Start"
     },
     {
       "id": "2726604292",
