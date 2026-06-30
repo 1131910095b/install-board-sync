@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-30T09:14:04.293338Z",
+  "updated_at": "2026-06-30T09:23:28.320585Z",
   "count": 97,
   "items": [
     {
@@ -1503,26 +1503,6 @@
       "production_status": "Order Placed"
     },
     {
-      "id": "2755202553",
-      "name": "shepparton餐厅",
-      "install_date": "2026-06-29",
-      "address": "56/58 KIALLA LAKES DR, KIALLA VIC 3631",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Medium",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2755106470",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46019",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2726583227",
       "name": "Woodlands MERNDA ADD ON SIGNAGE",
       "install_date": "2026-06-30",
@@ -1578,6 +1558,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "45966&45874",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
+      "id": "2755202553",
+      "name": "shepparton餐厅",
+      "install_date": "2026-07-01",
+      "address": "56/58 KIALLA LAKES DR, KIALLA VIC 3631",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2755106470",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46019",
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
