@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-30T23:19:40.195314Z",
-  "count": 97,
+  "updated_at": "2026-07-01T03:52:06.255560Z",
+  "count": 100,
   "items": [
     {
       "id": "2715867167",
@@ -240,7 +240,7 @@
       "invoice_number": "45706",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2715955550",
@@ -700,7 +700,7 @@
       "invoice_number": "45965",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2736841149",
@@ -1080,7 +1080,7 @@
       "invoice_number": "46010",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2747244142",
@@ -1160,7 +1160,7 @@
       "invoice_number": "INV-45968",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2748827968",
@@ -1200,7 +1200,7 @@
       "invoice_number": "45913",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2744261883",
@@ -1420,7 +1420,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2748894243",
@@ -1440,7 +1440,7 @@
       "invoice_number": "46018",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Construct Attention"
     },
     {
       "id": "2753710003",
@@ -1560,7 +1560,7 @@
       "invoice_number": "45966&45874",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2755202553",
@@ -1580,7 +1580,7 @@
       "invoice_number": "46019",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2761709540",
@@ -1600,7 +1600,7 @@
       "invoice_number": "46048",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Out Production"
     },
     {
       "id": "2762252288",
@@ -1640,7 +1640,7 @@
       "invoice_number": "46006",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Out Production"
     },
     {
       "id": "2756252902",
@@ -1669,7 +1669,7 @@
       "address": "",
       "installer": "",
       "schedule_status": "",
-      "project_type": "",
+      "project_type": "Delivery",
       "priority": "High",
       "installation_value": 0,
       "sales": "Chike",
@@ -1680,7 +1680,7 @@
       "invoice_number": "46053",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2762251909",
@@ -1740,7 +1740,7 @@
       "invoice_number": "45852",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Out Production"
     },
     {
       "id": "2753554377",
@@ -1820,7 +1820,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2762247652",
@@ -1843,6 +1843,46 @@
       "production_status": "Construct Attention"
     },
     {
+      "id": "2763661428",
+      "name": "kevin top tea plus",
+      "install_date": "2026-07-23",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2763485025",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46055",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2763657577",
+      "name": "enrich Moe",
+      "install_date": "2026-07-28",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2763533503",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46056",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
       "id": "2726604292",
       "name": "X-INFINITY",
       "install_date": "2026-07-30",
@@ -1861,6 +1901,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2763669737",
+      "name": "kevin帝皇",
+      "install_date": "2026-07-30",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2763513590",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46041",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2726632826",
