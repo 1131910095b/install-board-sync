@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-01T06:40:03.959567Z",
+  "updated_at": "2026-07-01T06:54:54.601037Z",
   "count": 101,
   "items": [
     {
@@ -1643,6 +1643,26 @@
       "production_status": "Order Placed"
     },
     {
+      "id": "2762252457",
+      "name": "glassons melbourne central - Repair",
+      "install_date": "2026-07-02",
+      "address": "Shop L1-115 Level 10 Melbourne Central Tower, 360 Elizabeth Street Melbourne\nContact staff member\nNumber 0416660648\nStore 1003-GLASSONS Melbourne Central",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2761630417",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46045",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
+    },
+    {
       "id": "2763905464",
       "name": "Mulgrave Lightbox Sheets x 2 replacement to banner (no production requested)",
       "install_date": "2026-07-02",
@@ -1741,26 +1761,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Out Production"
-    },
-    {
-      "id": "2762252457",
-      "name": "glassons melbourne central - Repair",
-      "install_date": "2026-07-06",
-      "address": "Shop L1-115 Level 10 Melbourne Central Tower, 360 Elizabeth Street Melbourne\nContact staff member\nNumber 0416660648\nStore 1003-GLASSONS Melbourne Central",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2761630417",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46045",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Installation"
     },
     {
       "id": "2726580751",
