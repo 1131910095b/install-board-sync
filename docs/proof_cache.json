@@ -1996,5 +1996,17 @@
     ],
     "source": "production_file",
     "file_count": 1
+  },
+  "2676048583": {
+    "key": "66b676a1fb2f",
+    "pages": [
+      {
+        "page": 1,
+        "full": "proofs/2676048583_p1.jpg",
+        "thumb": "proofs/2676048583_p1_thumb.jpg"
+      }
+    ],
+    "source": "sign_proof",
+    "file_count": 1
   }
 }
