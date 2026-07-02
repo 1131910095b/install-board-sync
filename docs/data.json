@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-01T23:22:18.412293Z",
-  "count": 101,
+  "updated_at": "2026-07-02T07:33:26.158360Z",
+  "count": 102,
   "items": [
     {
       "id": "2715867167",
@@ -1520,7 +1520,7 @@
       "invoice_number": "45966&45874",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2755202553",
@@ -1540,7 +1540,7 @@
       "invoice_number": "46019",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2761709540",
@@ -1600,7 +1600,7 @@
       "invoice_number": "45913",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Finished"
     },
     {
       "id": "2747243983",
@@ -1640,7 +1640,7 @@
       "invoice_number": "46017",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2762252457",
@@ -1680,7 +1680,27 @@
       "invoice_number": "45346",
       "producer": "Don, Deon",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2764923615",
+      "name": "Truck sticker - 02/07 15:00",
+      "install_date": "2026-07-02",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2764709230",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46061",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Job Completed!"
     },
     {
       "id": "2739852926",
@@ -1880,7 +1900,7 @@
       "invoice_number": "46055",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2763657577",
@@ -1900,7 +1920,7 @@
       "invoice_number": "46056",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2726604292",
@@ -1940,7 +1960,7 @@
       "invoice_number": "46041",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2726632826",
