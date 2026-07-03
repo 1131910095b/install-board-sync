@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-03T01:13:51.776965Z",
-  "count": 102,
+  "updated_at": "2026-07-03T02:56:20.130254Z",
+  "count": 103,
   "items": [
     {
       "id": "2715867167",
@@ -1260,7 +1260,7 @@
       "invoice_number": "45901",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2722409336",
@@ -1801,6 +1801,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Out Production"
+    },
+    {
+      "id": "2766554605",
+      "name": "UGG QV Vinyl",
+      "install_date": "2026-07-09",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2766623332",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46047",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Production"
     },
     {
       "id": "2753554377",
