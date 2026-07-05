@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-05T06:04:07.656287Z",
+  "updated_at": "2026-07-05T23:07:54.017621Z",
   "count": 103,
   "items": [
     {
@@ -1763,26 +1763,6 @@
       "production_status": "Installation"
     },
     {
-      "id": "2766554605",
-      "name": "UGG QV Vinyl",
-      "install_date": "2026-07-06",
-      "address": "QV Melbourne， 26 Red Cape Ln, Melbourne VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2766623332",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46047",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2726580751",
       "name": "MAMAS ROOFTOP PTY LTD",
       "install_date": "2026-07-09",
@@ -1818,6 +1798,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "45878",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2766554605",
+      "name": "UGG QV Vinyl",
+      "install_date": "2026-07-09",
+      "address": "QV Melbourne， 26 Red Cape Ln, Melbourne VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2766623332",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46047",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
