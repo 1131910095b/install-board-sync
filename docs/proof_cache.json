@@ -2159,5 +2159,17 @@
     ],
     "source": "production_file",
     "file_count": 12
+  },
+  "2761630417": {
+    "key": "421767d68449",
+    "pages": [
+      {
+        "page": 1,
+        "full": "proofs/2761630417_p1.jpg",
+        "thumb": "proofs/2761630417_p1_thumb.jpg"
+      }
+    ],
+    "source": "sign_proof",
+    "file_count": 1
   }
 }
