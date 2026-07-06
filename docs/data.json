@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-06T03:30:38.143059Z",
-  "count": 104,
+  "updated_at": "2026-07-06T06:15:15.487917Z",
+  "count": 105,
   "items": [
     {
       "id": "2715867167",
@@ -680,7 +680,7 @@
       "invoice_number": "45965",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2736841149",
@@ -1183,26 +1183,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2715919403",
-      "name": "MAHA RESTAURANT",
-      "install_date": "2026-06-25",
-      "address": "21 BOND ST, MELBOURNE VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 1060.0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2691793672",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45901",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2722409336",
       "name": "Midson construction",
       "install_date": "2026-06-25",
@@ -1340,7 +1320,7 @@
       "invoice_number": "46018",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2753710003",
@@ -1360,7 +1340,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Production File Start"
     },
     {
       "id": "2753654260",
@@ -1400,7 +1380,7 @@
       "invoice_number": "46031",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Out Production"
     },
     {
       "id": "2726583227",
@@ -1423,26 +1403,6 @@
       "production_status": ""
     },
     {
-      "id": "2747258305",
-      "name": "Woodlands Mernda",
-      "install_date": "2026-07-01",
-      "address": "2 LOMBARDY DRIVE, MERNDA",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 5700.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2726180296",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45966&45874",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2755202553",
       "name": "shepparton餐厅",
       "install_date": "2026-07-01",
@@ -1460,7 +1420,7 @@
       "invoice_number": "46019",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2761709540",
@@ -1540,7 +1500,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2747243933",
@@ -1603,26 +1563,6 @@
       "production_status": "Production"
     },
     {
-      "id": "2756252902",
-      "name": "seoul garden bridge sign",
-      "install_date": "2026-07-03",
-      "address": "285/287 SPRINGVALE RD, GLEN WAVERLEY, VIC 3150",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2756251563",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Construct Attention"
-    },
-    {
       "id": "2762312160",
       "name": "Swarovski - Westfiled",
       "install_date": "2026-07-03",
@@ -1640,7 +1580,7 @@
       "invoice_number": "46053",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2762251909",
@@ -1649,7 +1589,7 @@
       "address": "South Wharf DFO",
       "installer": "",
       "schedule_status": "",
-      "project_type": "",
+      "project_type": "Delivery",
       "priority": "High",
       "installation_value": 0,
       "sales": "Chike",
@@ -1660,7 +1600,7 @@
       "invoice_number": "46050",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715912269",
@@ -1743,9 +1683,49 @@
       "production_status": "Job Completed!"
     },
     {
+      "id": "2715919403",
+      "name": "MAHA RESTAURANT",
+      "install_date": "2026-07-07",
+      "address": "21 BOND ST, MELBOURNE VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 1060.0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2691793672",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45901",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
+    },
+    {
+      "id": "2747258305",
+      "name": "Woodlands Mernda",
+      "install_date": "2026-07-07",
+      "address": "2 LOMBARDY DRIVE, MERNDA",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 5700.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2726180296",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45966&45874",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
       "id": "2763905464",
       "name": "Mulgrave Lightbox Sheets x 2 replacement to banner (no production requested)",
-      "install_date": "2026-07-06",
+      "install_date": "2026-07-07",
       "address": "469 Wellington Rd, Mulgrave VIC 3170",
       "installer": "Kent",
       "schedule_status": "",
@@ -1763,6 +1743,26 @@
       "production_status": "Installation"
     },
     {
+      "id": "2770259582",
+      "name": "Funtionfit ROI",
+      "install_date": "2026-07-07",
+      "address": "620 COLLINS ST, WEST MELBOURNE VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2770200800",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46065",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Construct Attention"
+    },
+    {
       "id": "2770052427",
       "name": "Sara Stone Pull up banner",
       "install_date": "2026-07-08",
@@ -1777,7 +1777,7 @@
       "production_id": "2769951878",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "",
+      "invoice_number": "46068",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
@@ -1901,6 +1901,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
+    },
+    {
+      "id": "2756252902",
+      "name": "seoul garden bridge sign",
+      "install_date": "2026-07-16",
+      "address": "285/287 SPRINGVALE RD, GLEN WAVERLEY, VIC 3150",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2756251563",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production File Start"
     },
     {
       "id": "2762247652",
