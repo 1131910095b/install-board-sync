@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-06T08:06:17.831040Z",
+  "updated_at": "2026-07-06T23:14:20.362134Z",
   "count": 105,
   "items": [
     {
@@ -1483,26 +1483,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2747243983",
-      "name": "Insite Zeus",
-      "install_date": "2026-07-02",
-      "address": "SHOP T47, LVL 1, 14-16 HALL STREET\nMOONEE PONDS VIC 3039",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2747027166",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46021",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Production"
-    },
-    {
       "id": "2747243933",
       "name": "Fresh pasta menu vinyl",
       "install_date": "2026-07-02",
@@ -1640,27 +1620,7 @@
       "invoice_number": "45993",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
-    },
-    {
-      "id": "2744261998",
-      "name": "Pho Le",
-      "install_date": "2026-07-06",
-      "address": "500 ELIZABETH STREET, MELBOURNE 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2744248789",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45988",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2762252457",
@@ -1803,6 +1763,26 @@
       "production_status": "Out Production"
     },
     {
+      "id": "2744261998",
+      "name": "Pho Le",
+      "install_date": "2026-07-09",
+      "address": "500 ELIZABETH STREET, MELBOURNE 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2744248789",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45988",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2752772717",
       "name": "Woodlands MANOR LAKES",
       "install_date": "2026-07-09",
@@ -1901,6 +1881,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
+    },
+    {
+      "id": "2747243983",
+      "name": "Insite Zeus",
+      "install_date": "2026-07-16",
+      "address": "SHOP T47, LVL 1, 14-16 HALL STREET\nMOONEE PONDS VIC 3039",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2747027166",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46021",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Production"
     },
     {
       "id": "2756252902",
