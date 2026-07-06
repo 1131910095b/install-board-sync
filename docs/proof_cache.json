@@ -1372,7 +1372,7 @@
     "file_count": 1
   },
   "2744248789": {
-    "key": "745067de9f07",
+    "key": "255a98ec0df6",
     "pages": [
       {
         "page": 1,
@@ -1408,6 +1408,11 @@
         "page": 7,
         "full": "proofs/2744248789_p7.jpg",
         "thumb": "proofs/2744248789_p7_thumb.jpg"
+      },
+      {
+        "page": 8,
+        "full": "proofs/2744248789_p8.jpg",
+        "thumb": "proofs/2744248789_p8_thumb.jpg"
       }
     ],
     "source": "sign_proof",
@@ -1925,7 +1930,7 @@
     "file_count": 3
   },
   "2747027166": {
-    "key": "88ccd52a61ea",
+    "key": "694ae6d302c7",
     "pages": [
       {
         "page": 1,

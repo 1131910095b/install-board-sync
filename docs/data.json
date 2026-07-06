@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-05T23:07:54.017621Z",
+  "updated_at": "2026-07-06T01:19:14.469737Z",
   "count": 103,
   "items": [
     {
@@ -1380,7 +1380,7 @@
       "invoice_number": "46037",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2753687481",
@@ -1900,7 +1900,7 @@
       "invoice_number": "46046",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2763661428",
