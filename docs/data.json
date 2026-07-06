@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-06T01:19:14.469737Z",
-  "count": 103,
+  "updated_at": "2026-07-06T03:30:38.143059Z",
+  "count": 104,
   "items": [
     {
       "id": "2715867167",
@@ -1440,7 +1440,7 @@
       "invoice_number": "45966&45874",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2755202553",
@@ -1720,7 +1720,7 @@
       "invoice_number": "45988",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2762252457",
@@ -1740,7 +1740,7 @@
       "invoice_number": "46045",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2763905464",
@@ -1761,6 +1761,26 @@
       "producer": "Don, Deon",
       "plan_hours": "",
       "production_status": "Installation"
+    },
+    {
+      "id": "2770052427",
+      "name": "Sara Stone Pull up banner",
+      "install_date": "2026-07-08",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2769951878",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2726580751",
