@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-07T01:19:25.579225Z",
-  "count": 106,
+  "updated_at": "2026-07-07T03:21:04.642328Z",
+  "count": 107,
   "items": [
     {
       "id": "2715867167",
@@ -1740,7 +1740,7 @@
       "invoice_number": "46068",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2726580751",
@@ -1840,7 +1840,7 @@
       "invoice_number": "46064",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2753554377",
@@ -1958,6 +1958,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46046",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
+    },
+    {
+      "id": "2771568561",
+      "name": "Lift Mod",
+      "install_date": "2026-07-22",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2771514911",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46069",
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
@@ -2120,7 +2140,7 @@
       "invoice_number": "46014",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Production File Start"
     }
   ]
 }
