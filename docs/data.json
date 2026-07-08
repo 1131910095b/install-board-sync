@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-08T01:03:39.884774Z",
+  "updated_at": "2026-07-08T02:38:43.483548Z",
   "count": 109,
   "items": [
     {
@@ -1100,7 +1100,7 @@
       "invoice_number": "46022",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2726595701",
@@ -1280,7 +1280,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2748894243",
@@ -1380,7 +1380,7 @@
       "invoice_number": "46051",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715955378",
@@ -1660,7 +1660,7 @@
       "invoice_number": "45907",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2753710003",
@@ -2060,7 +2060,7 @@
       "invoice_number": "46056",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2726604292",
@@ -2100,7 +2100,7 @@
       "invoice_number": "46041",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Construct Attention"
     },
     {
       "id": "2726632826",
