@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-08T08:28:21.061890Z",
+  "updated_at": "2026-07-08T08:59:42.631799Z",
   "count": 109,
   "items": [
     {
@@ -1643,26 +1643,6 @@
       "production_status": "Out Production"
     },
     {
-      "id": "2746159422",
-      "name": "Canopy-Sheldon & Hammond",
-      "install_date": "2026-07-08",
-      "address": "11-13 REDWOOD DRIVE, NOTTING HILL VIC 3168",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "",
-      "installation_value": 2350.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2726125995",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45907",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Installation"
-    },
-    {
       "id": "2753710003",
       "name": "Village Healthmont Sticker",
       "install_date": "2026-07-08",
@@ -1761,6 +1741,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2746159422",
+      "name": "Canopy-Sheldon & Hammond",
+      "install_date": "2026-07-09",
+      "address": "11-13 REDWOOD DRIVE, NOTTING HILL VIC 3168",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 2350.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2726125995",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45907",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2752772717",
