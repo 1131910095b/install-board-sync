@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-08T05:52:04.575567Z",
+  "updated_at": "2026-07-08T08:28:21.061890Z",
   "count": 109,
   "items": [
     {
@@ -1620,7 +1620,7 @@
       "invoice_number": "46037",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2753687481",
@@ -1680,7 +1680,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2763905464",
@@ -1700,7 +1700,7 @@
       "invoice_number": "45346",
       "producer": "Don, Deon",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2770259582",
@@ -1820,7 +1820,7 @@
       "invoice_number": "46068",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2771912427",
@@ -2100,7 +2100,7 @@
       "invoice_number": "46041",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Production File Start"
     },
     {
       "id": "2726632826",
