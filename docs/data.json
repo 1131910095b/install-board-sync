@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-09T02:58:43.734866Z",
+  "updated_at": "2026-07-09T06:48:35.860234Z",
   "count": 111,
   "items": [
     {
@@ -1120,7 +1120,7 @@
       "invoice_number": "INV-45968",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2748827968",
@@ -1261,26 +1261,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
-    },
-    {
-      "id": "2726670231",
-      "name": "The Golf Sanctuary-Clayton",
-      "install_date": "2026-06-29",
-      "address": "Unit 1 1866 Dandenong Rd\nCLAYTON, VIC 3168",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2726443723",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "INV-45944",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Installation"
     },
     {
       "id": "2748894243",
@@ -1443,26 +1423,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2739852926",
-      "name": "LE GRAND CELLAR - BOX HILL CENTRAL",
-      "install_date": "2026-07-03",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2739724143",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46006",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2762312160",
       "name": "Swarovski - Westfiled",
       "install_date": "2026-07-03",
@@ -1581,6 +1541,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Job Completed!"
+    },
+    {
+      "id": "2739852926",
+      "name": "LE GRAND CELLAR - BOX HILL CENTRAL",
+      "install_date": "2026-07-07",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2739724143",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46006",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2747258305",
@@ -1723,26 +1703,6 @@
       "production_status": "Construct Attention"
     },
     {
-      "id": "2744261998",
-      "name": "Pho Le",
-      "install_date": "2026-07-09",
-      "address": "500 ELIZABETH STREET, MELBOURNE 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2744248789",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45988",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2746159422",
       "name": "Canopy-Sheldon & Hammond",
       "install_date": "2026-07-09",
@@ -1760,7 +1720,7 @@
       "invoice_number": "45907",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2726580751",
@@ -1781,26 +1741,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Out Production"
-    },
-    {
-      "id": "2752772717",
-      "name": "Woodlands MANOR LAKES",
-      "install_date": "2026-07-10",
-      "address": "396 Maracana Avenue, Manor Lakes, VIC 3024",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "",
-      "installation_value": 3400.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2745614952",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45878",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
     },
     {
       "id": "2766554605",
@@ -1830,7 +1770,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "",
-      "priority": "Medium",
+      "priority": "Urgent",
       "installation_value": 250.0,
       "sales": "Chike",
       "notes": "",
@@ -1841,6 +1781,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2744261998",
+      "name": "Pho Le",
+      "install_date": "2026-07-11",
+      "address": "500 ELIZABETH STREET, MELBOURNE 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2744248789",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45988",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2771444532",
@@ -1861,6 +1821,46 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
+    },
+    {
+      "id": "2752772717",
+      "name": "Woodlands MANOR LAKES",
+      "install_date": "2026-07-14",
+      "address": "396 Maracana Avenue, Manor Lakes, VIC 3024",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 3400.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2745614952",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45878",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2726670231",
+      "name": "The Golf Sanctuary-Clayton",
+      "install_date": "2026-07-15",
+      "address": "Unit 1 1866 Dandenong Rd\nCLAYTON, VIC 3168",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2726443723",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "INV-45944",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2753554377",
@@ -1923,26 +1923,6 @@
       "production_status": "Sign Proof"
     },
     {
-      "id": "2747243983",
-      "name": "Insite Zeus",
-      "install_date": "2026-07-16",
-      "address": "SHOP T47, LVL 1, 14-16 HALL STREET\nMOONEE PONDS VIC 3039",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2747027166",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46021",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2756252902",
       "name": "seoul garden bridge sign",
       "install_date": "2026-07-16",
@@ -2003,6 +1983,26 @@
       "production_status": "Sign Proof"
     },
     {
+      "id": "2747243983",
+      "name": "Insite Zeus",
+      "install_date": "2026-07-20",
+      "address": "SHOP T47, LVL 1, 14-16 HALL STREET\nMOONEE PONDS VIC 3039",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2747027166",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46021",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2771873688",
       "name": "STACK INFRASTRUCTURE",
       "install_date": "2026-07-20",
@@ -2040,7 +2040,7 @@
       "invoice_number": "46046",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
     },
     {
       "id": "2771568561",
@@ -2100,7 +2100,7 @@
       "invoice_number": "46056",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2726604292",
