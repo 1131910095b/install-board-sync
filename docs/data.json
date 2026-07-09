@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-09T07:48:29.588595Z",
+  "updated_at": "2026-07-09T23:19:31.085178Z",
   "count": 113,
   "items": [
     {
@@ -1120,7 +1120,7 @@
       "invoice_number": "INV-45968",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2748827968",
@@ -1703,6 +1703,26 @@
       "production_status": "Construct Attention"
     },
     {
+      "id": "2726580751",
+      "name": "MAMAS ROOFTOP PTY LTD",
+      "install_date": "2026-07-09",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2726163820",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45852",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Out Production"
+    },
+    {
       "id": "2746159422",
       "name": "Canopy-Sheldon & Hammond",
       "install_date": "2026-07-09",
@@ -1720,27 +1740,7 @@
       "invoice_number": "45907",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
-    },
-    {
-      "id": "2726580751",
-      "name": "MAMAS ROOFTOP PTY LTD",
-      "install_date": "2026-07-10",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Medium",
-      "installation_value": 0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2726163820",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45852",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Finished"
     },
     {
       "id": "2766554605",
@@ -1780,7 +1780,7 @@
       "invoice_number": "46042",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2744261998",
