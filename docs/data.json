@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-10T01:13:30.262930Z",
+  "updated_at": "2026-07-10T03:00:08.924133Z",
   "count": 113,
   "items": [
     {
@@ -1780,7 +1780,7 @@
       "invoice_number": "46042",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2744261998",
@@ -1820,7 +1820,7 @@
       "invoice_number": "46064",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2752772717",
@@ -1843,6 +1843,26 @@
       "production_status": "Pre-Installation"
     },
     {
+      "id": "2762247652",
+      "name": "MPE 222 broke",
+      "install_date": "2026-07-14",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2762106552",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46046",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2774787745",
       "name": "Publique Lightbox Quote",
       "install_date": "2026-07-14",
@@ -1860,7 +1880,7 @@
       "invoice_number": "46077",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726670231",
@@ -2063,26 +2083,6 @@
       "production_status": "Production File Start"
     },
     {
-      "id": "2762247652",
-      "name": "MPE 222 broke",
-      "install_date": "2026-07-22",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2762106552",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46046",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2771568561",
       "name": "Lift Mod",
       "install_date": "2026-07-22",
@@ -2140,7 +2140,7 @@
       "invoice_number": "46056",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2726604292",
