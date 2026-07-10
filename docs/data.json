@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-10T03:00:08.924133Z",
+  "updated_at": "2026-07-10T06:53:26.086804Z",
   "count": 113,
   "items": [
     {
@@ -1803,29 +1803,9 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2771444532",
-      "name": "Mena 转让店",
-      "install_date": "2026-07-13",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2771256527",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46064",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2752772717",
       "name": "Woodlands MANOR LAKES",
-      "install_date": "2026-07-14",
+      "install_date": "2026-07-13",
       "address": "396 Maracana Avenue, Manor Lakes, VIC 3024",
       "installer": "",
       "schedule_status": "",
@@ -1843,21 +1823,21 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2762247652",
-      "name": "MPE 222 broke",
-      "install_date": "2026-07-14",
+      "id": "2771444532",
+      "name": "Mena 转让店",
+      "install_date": "2026-07-13",
       "address": "",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "High",
+      "priority": "",
       "installation_value": 0,
       "sales": "Barry",
       "notes": "",
-      "production_id": "2762106552",
+      "production_id": "2771256527",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "46046",
+      "invoice_number": "46064",
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
@@ -1983,6 +1963,26 @@
       "production_status": "Production File Start"
     },
     {
+      "id": "2762247652",
+      "name": "MPE 222 broke",
+      "install_date": "2026-07-16",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2762106552",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46046",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2774314806",
       "name": "Venks Light box Panel",
       "install_date": "2026-07-16",
@@ -2000,7 +2000,7 @@
       "invoice_number": "46075",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Production"
     },
     {
       "id": "2774398524",
