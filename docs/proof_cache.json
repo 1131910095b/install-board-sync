@@ -1974,7 +1974,7 @@
     "file_count": 2
   },
   "2745893648": {
-    "key": "8e9dae1f6e6f",
+    "key": "1ad1d3bd064e",
     "pages": [
       {
         "page": 1,
@@ -1985,10 +1985,20 @@
         "page": 2,
         "full": "proofs/2745893648_p2.jpg",
         "thumb": "proofs/2745893648_p2_thumb.jpg"
+      },
+      {
+        "page": 3,
+        "full": "proofs/2745893648_p3.jpg",
+        "thumb": "proofs/2745893648_p3_thumb.jpg"
+      },
+      {
+        "page": 4,
+        "full": "proofs/2745893648_p4.jpg",
+        "thumb": "proofs/2745893648_p4_thumb.jpg"
       }
     ],
     "source": "sign_proof",
-    "file_count": 1
+    "file_count": 2
   },
   "2757556580": {
     "key": "b479445b510d",

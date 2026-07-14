@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-14T05:15:46.817225Z",
-  "count": 114,
+  "updated_at": "2026-07-14T07:27:05.578972Z",
+  "count": 116,
   "items": [
     {
       "id": "2715867167",
@@ -1823,26 +1823,6 @@
       "production_status": "Installation"
     },
     {
-      "id": "2771444532",
-      "name": "Mena 转让店",
-      "install_date": "2026-07-13",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2771256527",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46064",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2774787745",
       "name": "Publique Lightbox Quote",
       "install_date": "2026-07-14",
@@ -1940,7 +1920,27 @@
       "invoice_number": "46028",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Out Production"
+    },
+    {
+      "id": "2771444532",
+      "name": "Mena 转让店",
+      "install_date": "2026-07-15",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2771256527",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46064",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2756252902",
@@ -1980,7 +1980,7 @@
       "invoice_number": "46046",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Production File Start"
     },
     {
       "id": "2774314806",
@@ -2040,7 +2040,7 @@
       "invoice_number": "46062",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2747243983",
@@ -2080,7 +2080,7 @@
       "invoice_number": "45890",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2774804837",
@@ -2121,6 +2121,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Out Production"
+    },
+    {
+      "id": "2781982965",
+      "name": "SF Board",
+      "install_date": "2026-07-22",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2781909280",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2763661428",
@@ -2281,6 +2301,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production File Start"
+    },
+    {
+      "id": "2781925791",
+      "name": "BYD Nunawading",
+      "install_date": "2026-08-05",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2781815728",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46087",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     }
   ]
 }
