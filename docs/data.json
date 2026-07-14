@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-14T07:27:05.578972Z",
+  "updated_at": "2026-07-14T08:33:52.403102Z",
   "count": 116,
   "items": [
     {
@@ -381,26 +381,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Finished"
-    },
-    {
-      "id": "2718983530",
-      "name": "81个号码牌",
-      "install_date": "2026-06-04",
-      "address": "55 Hopkins St Footscray VIC 3011",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2718842570",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45723",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Job Completed!"
     },
     {
       "id": "2726604394",
@@ -1703,26 +1683,6 @@
       "production_status": "Construct Attention"
     },
     {
-      "id": "2726580751",
-      "name": "MAMAS ROOFTOP PTY LTD",
-      "install_date": "2026-07-09",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Medium",
-      "installation_value": 0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2726163820",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45852",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2746159422",
       "name": "Canopy-Sheldon & Hammond",
       "install_date": "2026-07-09",
@@ -1843,6 +1803,26 @@
       "production_status": "Production"
     },
     {
+      "id": "2718983530",
+      "name": "81个号码牌",
+      "install_date": "2026-07-15",
+      "address": "55 Hopkins St Footscray VIC 3011",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2718842570",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45723",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Job Completed!"
+    },
+    {
       "id": "2726670231",
       "name": "The Golf Sanctuary-Clayton",
       "install_date": "2026-07-15",
@@ -1858,6 +1838,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "INV-45944",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2726580751",
+      "name": "MAMAS ROOFTOP PTY LTD",
+      "install_date": "2026-07-15",
+      "address": "3/59-63 BOURKE ST\nMELBOURNE VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2726163820",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45852",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
@@ -1926,7 +1926,7 @@
       "id": "2771444532",
       "name": "Mena 转让店",
       "install_date": "2026-07-15",
-      "address": "",
+      "address": "1 CHAMP STREET, COBURG, VIC 3058",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
