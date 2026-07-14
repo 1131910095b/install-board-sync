@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-13T23:01:07.868337Z",
+  "updated_at": "2026-07-14T00:02:58.983949Z",
   "count": 113,
   "items": [
     {
@@ -1440,7 +1440,7 @@
       "invoice_number": "46053",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2762251909",
@@ -1850,7 +1850,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "Medium",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
