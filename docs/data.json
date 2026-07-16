@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-16T02:33:53.394171Z",
+  "updated_at": "2026-07-16T05:42:04.248698Z",
   "count": 117,
   "items": [
     {
@@ -200,7 +200,7 @@
       "invoice_number": "45929",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2715912272",
@@ -2340,7 +2340,7 @@
       "invoice_number": "46087",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     }
   ]
 }
