@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-15T23:03:28.448005Z",
+  "updated_at": "2026-07-16T00:58:39.814772Z",
   "count": 117,
   "items": [
     {
@@ -2040,7 +2040,7 @@
       "invoice_number": "46027",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2781734173",
@@ -2146,7 +2146,7 @@
       "id": "2781982965",
       "name": "SF Board",
       "install_date": "2026-07-22",
-      "address": "",
+      "address": "2 Prosperity StTruganina VIC 3029",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -2157,10 +2157,10 @@
       "production_id": "2781909280",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "",
+      "invoice_number": "46090",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2763661428",
