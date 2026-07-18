@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-17T08:10:21.440261Z",
-  "count": 117,
+  "updated_at": "2026-07-18T23:22:56.913130Z",
+  "count": 118,
   "items": [
     {
       "id": "2715867167",
@@ -1983,26 +1983,6 @@
       "production_status": "Out Production"
     },
     {
-      "id": "2726670231",
-      "name": "The Golf Sanctuary-Clayton",
-      "install_date": "2026-07-16",
-      "address": "Unit 1 1866 Dandenong Rd\nCLAYTON, VIC 3168",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2726443723",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "INV-45944",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2762247652",
       "name": "MPE 222 broke",
       "install_date": "2026-07-16",
@@ -2058,6 +2038,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46062",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2726670231",
+      "name": "The Golf Sanctuary-Clayton",
+      "install_date": "2026-07-20",
+      "address": "Unit 1 1866 Dandenong Rd\nCLAYTON, VIC 3168",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2726443723",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
@@ -2121,6 +2121,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2791184129",
+      "name": "Frankston Hospital Food Hall",
+      "install_date": "2026-07-20",
+      "address": "2 Hasting Rd\nFrankston VIC 3199",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 1060.0,
+      "sales": "Harry",
+      "notes": "",
+      "production_id": "2728297939",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45981",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2771568561",
