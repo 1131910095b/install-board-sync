@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-20T09:42:54.389148Z",
+  "updated_at": "2026-07-20T11:27:13.731579Z",
   "count": 119,
   "items": [
     {
@@ -1763,26 +1763,6 @@
       "production_status": "Job Completed!"
     },
     {
-      "id": "2752772717",
-      "name": "Woodlands MANOR LAKES",
-      "install_date": "2026-07-13",
-      "address": "396 Maracana Avenue, Manor Lakes, VIC 3024",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "",
-      "installation_value": 3400.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2745614952",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45878",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Job Completed!"
-    },
-    {
       "id": "2753653925",
       "name": "Moc Roll",
       "install_date": "2026-07-14",
@@ -2023,26 +2003,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2781734173",
-      "name": "Vanilla Oakleigh",
-      "install_date": "2026-07-17",
-      "address": "17-21 Eaton Mall, Oakleigh VIC 3166",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 250.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2763925090",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46062",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2726670231",
       "name": "The Golf Sanctuary-Clayton",
       "install_date": "2026-07-20",
@@ -2123,6 +2083,26 @@
       "production_status": "Installation"
     },
     {
+      "id": "2752772717",
+      "name": "Woodlands MANOR LAKES",
+      "install_date": "2026-07-21",
+      "address": "396 Maracana Avenue, Manor Lakes, VIC 3024",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 3400.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2745614952",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45878",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Job Completed!"
+    },
+    {
       "id": "2756252902",
       "name": "seoul garden bridge sign",
       "install_date": "2026-07-21",
@@ -2141,6 +2121,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2781734173",
+      "name": "Vanilla Oakleigh",
+      "install_date": "2026-07-21",
+      "address": "17-21 Eaton Mall, Oakleigh VIC 3166",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 250.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2763925090",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46062",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2771568561",
