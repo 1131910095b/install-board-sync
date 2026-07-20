@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-19T22:59:11.187481Z",
+  "updated_at": "2026-07-20T00:05:43.530229Z",
   "count": 118,
   "items": [
     {
@@ -200,7 +200,7 @@
       "invoice_number": "45929",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2715912272",
@@ -1780,7 +1780,7 @@
       "invoice_number": "45878",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2753653925",
@@ -1910,7 +1910,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Barry",
       "notes": "",
@@ -2010,7 +2010,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "",
-      "priority": "",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
@@ -2020,7 +2020,7 @@
       "invoice_number": "46027",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Production"
     },
     {
       "id": "2771873688",
@@ -2080,7 +2080,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2747243983",
@@ -2100,7 +2100,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2774804837",
@@ -2120,7 +2120,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2791184129",
@@ -2140,7 +2140,7 @@
       "invoice_number": "45981",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2771568561",
