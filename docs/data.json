@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-20T06:19:00.203440Z",
+  "updated_at": "2026-07-20T09:42:54.389148Z",
   "count": 119,
   "items": [
     {
@@ -1780,7 +1780,7 @@
       "invoice_number": "45878",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2753653925",
@@ -1903,26 +1903,6 @@
       "production_status": ""
     },
     {
-      "id": "2756252902",
-      "name": "seoul garden bridge sign",
-      "install_date": "2026-07-15",
-      "address": "285/287 SPRINGVALE RD, GLEN WAVERLEY, VIC 3150",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2756251563",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2771444532",
       "name": "Mena 转让店",
       "install_date": "2026-07-15",
@@ -2020,7 +2000,7 @@
       "invoice_number": "46027",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2771873688",
@@ -2143,6 +2123,26 @@
       "production_status": "Installation"
     },
     {
+      "id": "2756252902",
+      "name": "seoul garden bridge sign",
+      "install_date": "2026-07-21",
+      "address": "285/287 SPRINGVALE RD, GLEN WAVERLEY, VIC 3150",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2756251563",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2771568561",
       "name": "Lift Mod",
       "install_date": "2026-07-22",
@@ -2220,7 +2220,7 @@
       "invoice_number": "46096",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2763657577",
