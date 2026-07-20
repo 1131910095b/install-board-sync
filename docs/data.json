@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-20T02:54:10.545623Z",
-  "count": 118,
+  "updated_at": "2026-07-20T06:19:00.203440Z",
+  "count": 119,
   "items": [
     {
       "id": "2715867167",
@@ -2203,6 +2203,26 @@
       "production_status": "Sign Proof"
     },
     {
+      "id": "2793629975",
+      "name": "Bspoke lightbox panel",
+      "install_date": "2026-07-24",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2793285462",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46096",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Production"
+    },
+    {
       "id": "2763657577",
       "name": "enrich Moe",
       "install_date": "2026-07-28",
@@ -2240,7 +2260,7 @@
       "invoice_number": "45910",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2763669737",
