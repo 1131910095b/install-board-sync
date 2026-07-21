@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-21T01:01:52.443966Z",
+  "updated_at": "2026-07-21T02:35:22.870792Z",
   "count": 120,
   "items": [
     {
@@ -1923,26 +1923,6 @@
       "production_status": "Out Production"
     },
     {
-      "id": "2784033298",
-      "name": "Crown Food Hall",
-      "install_date": "2026-07-16",
-      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2779509250",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46027",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Installation"
-    },
-    {
       "id": "2771873688",
       "name": "STACK INFRASTRUCTURE",
       "install_date": "2026-07-17",
@@ -2000,7 +1980,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2774804837",
@@ -2183,6 +2163,26 @@
       "production_status": "Production"
     },
     {
+      "id": "2784033298",
+      "name": "Crown Food Hall",
+      "install_date": "2026-07-22",
+      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2779509250",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46027",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
+    },
+    {
       "id": "2795337654",
       "name": "LEEDA-NB-Chadstone",
       "install_date": "2026-07-22",
@@ -2240,7 +2240,7 @@
       "invoice_number": "46096",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2763657577",
