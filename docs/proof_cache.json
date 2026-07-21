@@ -2701,21 +2701,16 @@
     "file_count": 2
   },
   "2774148683": {
-    "key": "f79e85cdddb4",
+    "key": "0d78172be5b8",
     "pages": [
       {
         "page": 1,
         "full": "proofs/2774148683_p1.jpg",
         "thumb": "proofs/2774148683_p1_thumb.jpg"
-      },
-      {
-        "page": 2,
-        "full": "proofs/2774148683_p2.jpg",
-        "thumb": "proofs/2774148683_p2_thumb.jpg"
       }
     ],
     "source": "production_file",
-    "file_count": 2
+    "file_count": 1
   },
   "2781909280": {
     "key": "578ba8b01464",
