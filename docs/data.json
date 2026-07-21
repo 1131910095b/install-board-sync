@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-20T23:05:41.412964Z",
-  "count": 119,
+  "updated_at": "2026-07-21T00:48:08.583941Z",
+  "count": 120,
   "items": [
     {
       "id": "2715867167",
@@ -1503,26 +1503,6 @@
       "production_status": "Job Completed!"
     },
     {
-      "id": "2715919403",
-      "name": "MAHA RESTAURANT",
-      "install_date": "2026-07-07",
-      "address": "21 BOND ST, MELBOURNE VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 1060.0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2691793672",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45901",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Job Completed!"
-    },
-    {
       "id": "2739852926",
       "name": "LE GRAND CELLAR - BOX HILL CENTRAL",
       "install_date": "2026-07-07",
@@ -1943,26 +1923,6 @@
       "production_status": "Out Production"
     },
     {
-      "id": "2762247652",
-      "name": "MPE 222 broke",
-      "install_date": "2026-07-16",
-      "address": "L2/222 Bourke St Melbourne VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2762106552",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46046",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2784033298",
       "name": "Crown Food Hall",
       "install_date": "2026-07-16",
@@ -1980,7 +1940,7 @@
       "invoice_number": "46027",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2771873688",
@@ -2020,7 +1980,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2747243983",
@@ -2040,7 +2000,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2774804837",
@@ -2060,7 +2020,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2791184129",
@@ -2080,7 +2040,7 @@
       "invoice_number": "45981",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2752772717",
@@ -2100,7 +2060,7 @@
       "invoice_number": "45878",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2756252902",
@@ -2120,7 +2080,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2781734173",
@@ -2138,6 +2098,46 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46062",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
+    },
+    {
+      "id": "2715919403",
+      "name": "MAHA RESTAURANT",
+      "install_date": "2026-07-22",
+      "address": "21 BOND ST, MELBOURNE VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 1060.0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2691793672",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45901",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
+      "id": "2762247652",
+      "name": "MPE 222 broke",
+      "install_date": "2026-07-22",
+      "address": "L2/222 Bourke St Melbourne VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2762106552",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46046",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
@@ -2181,6 +2181,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2795337654",
+      "name": "LEEDA-NB-Chadstone",
+      "install_date": "2026-07-22",
+      "address": "Chaddy",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2780989976",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46078",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Out Production"
     },
     {
       "id": "2763661428",
@@ -2380,7 +2400,7 @@
       "invoice_number": "46087",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     }
   ]
 }
