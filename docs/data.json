@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-22T02:36:01.486319Z",
+  "updated_at": "2026-07-22T05:25:24.248175Z",
   "count": 120,
   "items": [
     {
@@ -1503,26 +1503,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2747258305",
-      "name": "Woodlands Mernda",
-      "install_date": "2026-07-07",
-      "address": "2 LOMBARDY DRIVE, MERNDA",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "High",
-      "installation_value": 5700.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2726180296",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45966&45874",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Job Completed!"
-    },
-    {
       "id": "2753654260",
       "name": "Village Helthmont Flag",
       "install_date": "2026-07-07",
@@ -1923,26 +1903,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2774804837",
-      "name": "SWAROVSKI - New Season Styling Event Print & Installation (Chadstone)",
-      "install_date": "2026-07-20",
-      "address": "Chadstone",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2774148683",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2791184129",
       "name": "Frankston Hospital Food Hall",
       "install_date": "2026-07-20",
@@ -2143,6 +2103,26 @@
       "production_status": "Installation"
     },
     {
+      "id": "2747258305",
+      "name": "Woodlands Mernda",
+      "install_date": "2026-07-23",
+      "address": "2 LOMBARDY DRIVE, MERNDA",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 5700.0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2726180296",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45966&45874",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Job Completed!"
+    },
+    {
       "id": "2763661428",
       "name": "kevin top tea plus",
       "install_date": "2026-07-23",
@@ -2186,7 +2166,7 @@
       "id": "2771873688",
       "name": "STACK INFRASTRUCTURE",
       "install_date": "2026-07-23",
-      "address": "removal from Level 14, 627 Chapel St to be installed in our new office at Level 6, 510 Chapel Street",
+      "address": "Level 6, 510 Chapel Street",
       "installer": "",
       "schedule_status": "",
       "project_type": "",
@@ -2198,6 +2178,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "45890",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2774804837",
+      "name": "SWAROVSKI - New Season Styling Event Print & Installation (Chadstone)",
+      "install_date": "2026-07-23",
+      "address": "Chadstone",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2774148683",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
