@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-23T05:54:39.412023Z",
-  "count": 121,
+  "updated_at": "2026-07-23T08:30:00.876893Z",
+  "count": 122,
   "items": [
     {
       "id": "2715867167",
@@ -1880,7 +1880,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2747243983",
@@ -2040,7 +2040,7 @@
       "invoice_number": "45901",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2735753109",
@@ -2200,7 +2200,7 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2795337654",
@@ -2260,7 +2260,27 @@
       "invoice_number": "46095",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Sign Proof"
+    },
+    {
+      "id": "2800693653",
+      "name": "smoke redo",
+      "install_date": "2026-07-27",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2800533958",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46105",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2763657577",
