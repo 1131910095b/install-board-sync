@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-24T05:51:20.278474Z",
+  "updated_at": "2026-07-24T06:57:50.852722Z",
   "count": 124,
   "items": [
     {
@@ -2063,26 +2063,6 @@
       "production_status": "Sign Proof"
     },
     {
-      "id": "2784033298",
-      "name": "Crown Food Hall",
-      "install_date": "2026-07-22",
-      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2779509250",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46027",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2747258305",
       "name": "Woodlands Mernda",
       "install_date": "2026-07-23",
@@ -2101,26 +2081,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Job Completed!"
-    },
-    {
-      "id": "2762247652",
-      "name": "MPE 222 broke",
-      "install_date": "2026-07-23",
-      "address": "L2/222 Bourke St Melbourne VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2762106552",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46046",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
     },
     {
       "id": "2771873688",
@@ -2183,26 +2143,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2795337654",
-      "name": "LEEDA-NB-Chadstone",
-      "install_date": "2026-07-23",
-      "address": "Tenancy B-201 & 201A, Chadstone",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2780989976",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46078",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Out Production"
-    },
-    {
       "id": "2800518627",
       "name": "ever run banner",
       "install_date": "2026-07-23",
@@ -2260,7 +2200,7 @@
       "invoice_number": "46090",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2800773718",
@@ -2280,13 +2220,73 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
+      "production_status": "Job Completed!"
+    },
+    {
+      "id": "2762247652",
+      "name": "MPE 222 broke",
+      "install_date": "2026-07-27",
+      "address": "L2/222 Bourke St Melbourne VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2762106552",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46046",
+      "producer": "",
+      "plan_hours": "",
       "production_status": "Installation"
+    },
+    {
+      "id": "2784033298",
+      "name": "Crown Food Hall",
+      "install_date": "2026-07-27",
+      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2779509250",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46027",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
+    },
+    {
+      "id": "2795337654",
+      "name": "LEEDA-NB-Chadstone",
+      "install_date": "2026-07-27",
+      "address": "Tenancy B-201 & 201A, Chadstone",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2780989976",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46078",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Out Production"
     },
     {
       "id": "2800693653",
       "name": "smoke redo",
       "install_date": "2026-07-27",
-      "address": "",
+      "address": "181 city road southbank",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -2300,7 +2300,7 @@
       "invoice_number": "46105",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2801711115",
