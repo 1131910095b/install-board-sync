@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-24T07:02:52.916577Z",
+  "updated_at": "2026-07-24T07:21:48.019724Z",
   "count": 124,
   "items": [
     {
@@ -2203,6 +2203,26 @@
       "production_status": "Job Completed!"
     },
     {
+      "id": "2784033298",
+      "name": "Crown Food Hall",
+      "install_date": "2026-07-24",
+      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2779509250",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46027",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
+    },
+    {
       "id": "2762247652",
       "name": "MPE 222 broke",
       "install_date": "2026-07-27",
@@ -2218,26 +2238,6 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46046",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Installation"
-    },
-    {
-      "id": "2784033298",
-      "name": "Crown Food Hall",
-      "install_date": "2026-07-27",
-      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2779509250",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46027",
       "producer": "",
       "plan_hours": "",
       "production_status": "Installation"
@@ -2303,26 +2303,6 @@
       "production_status": "Installation"
     },
     {
-      "id": "2801711115",
-      "name": "liam",
-      "install_date": "2026-07-27",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Pick Up",
-      "priority": "Medium",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2801658067",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46107",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2763657577",
       "name": "enrich Moe",
       "install_date": "2026-07-28",
@@ -2341,6 +2321,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2801711115",
+      "name": "liam",
+      "install_date": "2026-07-28",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2801658067",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46107",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726604292",
