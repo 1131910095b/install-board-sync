@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-27T01:11:21.089854Z",
+  "updated_at": "2026-07-27T02:52:35.970850Z",
   "count": 124,
   "items": [
     {
@@ -1660,7 +1660,7 @@
       "invoice_number": "45988",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2753653925",
@@ -2243,26 +2243,6 @@
       "production_status": "Installation"
     },
     {
-      "id": "2795337654",
-      "name": "LEEDA-NB-Chadstone",
-      "install_date": "2026-07-27",
-      "address": "Tenancy B-201 & 201A, Chadstone",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2780989976",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46078",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Out Production"
-    },
-    {
       "id": "2800693653",
       "name": "smoke redo",
       "install_date": "2026-07-27",
@@ -2461,6 +2441,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2795337654",
+      "name": "LEEDA-NB-Chadstone",
+      "install_date": "2026-08-01",
+      "address": "Tenancy B-201 & 201A, Chadstone",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2780989976",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46078",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Out Production"
     },
     {
       "id": "2781925791",
