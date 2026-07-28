@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-28T05:34:00.132824Z",
+  "updated_at": "2026-07-28T06:33:14.409573Z",
   "count": 124,
   "items": [
     {
@@ -2263,26 +2263,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2753480957",
-      "name": "1Arena",
-      "install_date": "2026-07-28",
-      "address": "1A BANK STREET, Boxhill",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2753468023",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46014",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2763657577",
       "name": "enrich Moe",
       "install_date": "2026-07-28",
@@ -2321,6 +2301,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Finished"
+    },
+    {
+      "id": "2753480957",
+      "name": "1Arena",
+      "install_date": "2026-07-29",
+      "address": "1A BANK STREET, Boxhill",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2753468023",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46014",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2726604292",
