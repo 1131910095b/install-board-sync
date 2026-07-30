@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-07-30T02:22:09.034429Z",
-  "count": 126,
+  "updated_at": "2026-07-30T05:24:53.424731Z",
+  "count": 127,
   "items": [
     {
       "id": "2715867167",
@@ -2360,7 +2360,7 @@
       "invoice_number": "46041",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2801711115",
@@ -2461,6 +2461,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2811115110",
+      "name": "Dahua Campelfield",
+      "install_date": "2026-08-04",
+      "address": "64B Merri Concourse, Campbellfield VIC 3059",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2809446294",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46112",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production File Start"
     },
     {
       "id": "2781925791",
