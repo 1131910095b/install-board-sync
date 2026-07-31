@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-31T06:14:13.896457Z",
+  "updated_at": "2026-07-31T07:10:22.680034Z",
   "count": 128,
   "items": [
     {
@@ -2440,7 +2440,7 @@
       "invoice_number": "46078",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2800518627",
@@ -2466,7 +2466,7 @@
       "id": "2812804498",
       "name": "Sohum Sign Proof",
       "install_date": "2026-08-03",
-      "address": "SHOP 24, THE ROYAL ARCADE, Melbourne VIC",
+      "address": "Royal Arcade, Shop 24/335 Bourke St, Melbourne VIC 3000",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
