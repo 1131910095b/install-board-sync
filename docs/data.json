@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T23:01:15.216195Z",
+  "updated_at": "2026-08-03T00:08:28.415503Z",
   "count": 128,
   "items": [
     {
@@ -2300,7 +2300,7 @@
       "invoice_number": "46014",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Out Production"
     },
     {
       "id": "2726604292",
