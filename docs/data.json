@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-03T02:44:18.424474Z",
-  "count": 128,
+  "updated_at": "2026-08-03T06:23:49.599246Z",
+  "count": 129,
   "items": [
     {
       "id": "2715867167",
@@ -2440,7 +2440,7 @@
       "invoice_number": "46041",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2800518627",
@@ -2460,7 +2460,7 @@
       "invoice_number": "46095",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2812804498",
@@ -2541,6 +2541,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
+    },
+    {
+      "id": "2816029379",
+      "name": "Sheldon & Hammond - Extra Signage",
+      "install_date": "2026-08-05",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2797281512",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46100",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2809333029",
