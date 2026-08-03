@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-03T06:23:49.599246Z",
+  "updated_at": "2026-08-03T10:13:44.493029Z",
   "count": 129,
   "items": [
     {
@@ -1563,26 +1563,6 @@
       "production_status": "Job Completed!"
     },
     {
-      "id": "2746159422",
-      "name": "Canopy-Sheldon & Hammond",
-      "install_date": "2026-07-09",
-      "address": "11-13 REDWOOD DRIVE, NOTTING HILL VIC 3168",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "",
-      "installation_value": 2350.0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2726125995",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45907",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Finished"
-    },
-    {
       "id": "2766554605",
       "name": "UGG QV Vinyl",
       "install_date": "2026-07-10",
@@ -1660,7 +1640,7 @@
       "invoice_number": "45868",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2762235465",
@@ -2463,24 +2443,24 @@
       "production_status": "Job Completed!"
     },
     {
-      "id": "2812804498",
-      "name": "Sohum Sign Proof",
-      "install_date": "2026-08-03",
-      "address": "Royal Arcade, Shop 24/335 Bourke St, Melbourne VIC 3000",
+      "id": "2746159422",
+      "name": "Canopy-Sheldon & Hammond",
+      "install_date": "2026-08-04",
+      "address": "11-13 REDWOOD DRIVE, NOTTING HILL VIC 3168",
       "installer": "",
       "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 250.0,
-      "sales": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 2350.0,
+      "sales": "Chike",
       "notes": "",
-      "production_id": "5018311485",
+      "production_id": "2726125995",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "45425",
-      "producer": "Don",
+      "invoice_number": "45907",
+      "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2811115110",
@@ -2501,6 +2481,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2812804498",
+      "name": "Sohum Sign Proof",
+      "install_date": "2026-08-04",
+      "address": "Royal Arcade, Shop 24/335 Bourke St, Melbourne VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 250.0,
+      "sales": "",
+      "notes": "",
+      "production_id": "5018311485",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45425",
+      "producer": "Don",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2781925791",
@@ -2540,7 +2540,7 @@
       "invoice_number": "46128",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2816029379",
