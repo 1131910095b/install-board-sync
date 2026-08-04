@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-03T23:09:21.201203Z",
-  "count": 129,
+  "updated_at": "2026-08-04T01:02:36.348098Z",
+  "count": 130,
   "items": [
     {
       "id": "2715867167",
@@ -1640,7 +1640,7 @@
       "invoice_number": "45868",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2762235465",
@@ -2270,7 +2270,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "Urgent",
+      "priority": "High",
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
@@ -2280,7 +2280,7 @@
       "invoice_number": "46014",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Production"
     },
     {
       "id": "2726604292",
@@ -2540,7 +2540,7 @@
       "invoice_number": "46128",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2816029379",
@@ -2550,7 +2550,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "High",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
@@ -2561,6 +2561,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2816937701",
+      "name": "didi易拉宝",
+      "install_date": "2026-08-07",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2816791358",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "00000",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
     },
     {
       "id": "2809333029",
