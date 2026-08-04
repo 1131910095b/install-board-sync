@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T05:32:58.420663Z",
+  "updated_at": "2026-08-04T07:22:49.081561Z",
   "count": 130,
   "items": [
     {
@@ -220,7 +220,7 @@
       "invoice_number": "45706",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2715955550",
@@ -2483,26 +2483,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2812804498",
-      "name": "Sohum Sign Proof",
-      "install_date": "2026-08-04",
-      "address": "Royal Arcade, Shop 24/335 Bourke St, Melbourne VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 250.0,
-      "sales": "",
-      "notes": "",
-      "production_id": "5018311485",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45425",
-      "producer": "Don",
-      "plan_hours": "",
-      "production_status": "Installation"
-    },
-    {
       "id": "2781925791",
       "name": "BYD Nunawading",
       "install_date": "2026-08-05",
@@ -2526,7 +2506,7 @@
       "id": "2810852053",
       "name": "Market Stall Co",
       "install_date": "2026-08-05",
-      "address": "",
+      "address": "Melbourne Convention & Exhibition\n\nCentre (MCEC)",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -2540,7 +2520,27 @@
       "invoice_number": "46128",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
+    },
+    {
+      "id": "2812804498",
+      "name": "Sohum Sign Proof",
+      "install_date": "2026-08-05",
+      "address": "Melbourne Convention & Exhibition\n\nCentre (MCEC)",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 250.0,
+      "sales": "",
+      "notes": "",
+      "production_id": "5018311485",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45425",
+      "producer": "Don",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2816029379",
@@ -2580,7 +2580,7 @@
       "invoice_number": "00000",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production"
     },
     {
       "id": "2809333029",

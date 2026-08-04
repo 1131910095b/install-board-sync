@@ -2927,7 +2927,7 @@
     "file_count": 1
   },
   "5018311485": {
-    "key": "247059a62c9e",
+    "key": "884a6919c343",
     "pages": [
       {
         "page": 1,
@@ -2938,10 +2938,15 @@
         "page": 2,
         "full": "proofs/5018311485_p2.jpg",
         "thumb": "proofs/5018311485_p2_thumb.jpg"
+      },
+      {
+        "page": 3,
+        "full": "proofs/5018311485_p3.jpg",
+        "thumb": "proofs/5018311485_p3_thumb.jpg"
       }
     ],
     "source": "sign_proof",
-    "file_count": 1
+    "file_count": 2
   },
   "2797281512": {
     "key": "447e362720f1",
@@ -3028,5 +3033,22 @@
     ],
     "source": "sign_proof",
     "file_count": 1
+  },
+  "2816791358": {
+    "key": "36780955aa2b",
+    "pages": [
+      {
+        "page": 1,
+        "full": "proofs/2816791358_p1.jpg",
+        "thumb": "proofs/2816791358_p1_thumb.jpg"
+      },
+      {
+        "page": 2,
+        "full": "proofs/2816791358_p2.jpg",
+        "thumb": "proofs/2816791358_p2_thumb.jpg"
+      }
+    ],
+    "source": "production_file",
+    "file_count": 2
   }
 }
