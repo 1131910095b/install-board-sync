@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-05T05:32:12.307260Z",
-  "count": 132,
+  "updated_at": "2026-08-05T07:39:44.650899Z",
+  "count": 134,
   "items": [
     {
       "id": "2715867167",
@@ -2500,7 +2500,7 @@
       "invoice_number": "46112",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2810852053",
@@ -2520,7 +2520,7 @@
       "invoice_number": "46128",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2812804498",
@@ -2603,6 +2603,26 @@
       "production_status": "Order Placed"
     },
     {
+      "id": "2819144826",
+      "name": "Cupcake C board",
+      "install_date": "2026-08-13",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2818958811",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46093",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
+    },
+    {
       "id": "2818615898",
       "name": "didi 赠送",
       "install_date": "2026-08-14",
@@ -2621,6 +2641,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
+    },
+    {
+      "id": "2819109350",
+      "name": "Jagermeister",
+      "install_date": "2026-08-20",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry, Jenny",
+      "notes": "",
+      "production_id": "2818911654",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46122",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
     },
     {
       "id": "2809333029",
