@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-05T00:57:03.842412Z",
-  "count": 131,
+  "updated_at": "2026-08-05T02:28:16.122537Z",
+  "count": 132,
   "items": [
     {
       "id": "2715867167",
@@ -2560,7 +2560,7 @@
       "invoice_number": "46100",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2816937701",
@@ -2598,6 +2598,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46137",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2818615898",
+      "name": "didi 赠送",
+      "install_date": "2026-08-14",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Delivery",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "",
+      "notes": "",
+      "production_id": "2818550232",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "00000",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
