@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-04T23:08:45.196163Z",
-  "count": 130,
+  "updated_at": "2026-08-05T00:57:03.842412Z",
+  "count": 131,
   "items": [
     {
       "id": "2715867167",
@@ -1500,7 +1500,7 @@
       "invoice_number": "46031",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2753710003",
@@ -2440,7 +2440,7 @@
       "invoice_number": "46095",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2746159422",
@@ -2581,6 +2581,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2818411884",
+      "name": "newhaven",
+      "install_date": "2026-08-12",
+      "address": "180 Albert Road, \nSouth Melbourne VIC, Australia",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "",
+      "notes": "",
+      "production_id": "2818361049",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46137",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2809333029",
