@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-06T05:35:33.743542Z",
-  "count": 134,
+  "updated_at": "2026-08-06T06:06:54.103748Z",
+  "count": 135,
   "items": [
     {
       "id": "2715867167",
@@ -2263,26 +2263,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2753480957",
-      "name": "1Arena",
-      "install_date": "2026-07-29",
-      "address": "1A BANK STREET, Boxhill",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2753468023",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46014",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2726604292",
       "name": "X-INFINITY",
       "install_date": "2026-07-30",
@@ -2563,6 +2543,26 @@
       "production_status": "Job Completed!"
     },
     {
+      "id": "2753480957",
+      "name": "1Arena",
+      "install_date": "2026-08-07",
+      "address": "1A BANK STREET, Boxhill",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2753468023",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46014",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2816937701",
       "name": "didi易拉宝",
       "install_date": "2026-08-07",
@@ -2638,6 +2638,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "00000",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
+      "id": "2820702965",
+      "name": "WSMC",
+      "install_date": "2026-08-17",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2820684365",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46142",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
