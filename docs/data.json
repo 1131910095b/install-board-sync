@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-07T07:53:39.023943Z",
-  "count": 136,
+  "updated_at": "2026-08-09T08:59:10.157422Z",
+  "count": 137,
   "items": [
     {
       "id": "2715867167",
@@ -1963,26 +1963,6 @@
       "production_status": "Sign Proof"
     },
     {
-      "id": "2770259582",
-      "name": "Funtionfit ROI",
-      "install_date": "2026-07-22",
-      "address": "620 COLLINS ST, WEST MELBOURNE VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2770200800",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46065",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2747258305",
       "name": "Woodlands Mernda",
       "install_date": "2026-07-23",
@@ -2580,7 +2560,47 @@
       "invoice_number": "00000",
       "producer": "",
       "plan_hours": "",
+      "production_status": "Pre-Installation"
+    },
+    {
+      "id": "2770259582",
+      "name": "Funtionfit ROI",
+      "install_date": "2026-08-10",
+      "address": "620 COLLINS ST, WEST MELBOURNE VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2770200800",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46065",
+      "producer": "",
+      "plan_hours": "",
       "production_status": "Production"
+    },
+    {
+      "id": "2824521451",
+      "name": "EVE",
+      "install_date": "2026-08-10",
+      "address": "Shopping Center, Acland Court, K1/158 Acland St, St Kilda VIC 3182",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2801675342",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46106",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2818411884",
@@ -2640,7 +2660,7 @@
       "invoice_number": "00000",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2820702965",
