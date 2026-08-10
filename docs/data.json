@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T03:54:47.262784Z",
+  "updated_at": "2026-08-10T05:26:52.023106Z",
   "count": 139,
   "items": [
     {
@@ -2423,26 +2423,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2781925791",
-      "name": "BYD Nunawading",
-      "install_date": "2026-08-04",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2781815728",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46087",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2811115110",
       "name": "Dahua Campelfield",
       "install_date": "2026-08-04",
@@ -2560,7 +2540,7 @@
       "invoice_number": "00000",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2770259582",
@@ -2601,6 +2581,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Installation"
+    },
+    {
+      "id": "2781925791",
+      "name": "BYD Nunawading",
+      "install_date": "2026-08-11",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2781815728",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46087",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2818411884",
