@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T22:44:29.424703Z",
+  "updated_at": "2026-08-10T23:41:08.812550Z",
   "count": 139,
   "items": [
     {
@@ -2560,7 +2560,7 @@
       "invoice_number": "46106",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2770259582",
@@ -2580,7 +2580,7 @@
       "invoice_number": "46065",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Installation"
     },
     {
       "id": "2781925791",
