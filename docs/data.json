@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T05:26:52.023106Z",
+  "updated_at": "2026-08-10T05:39:52.539395Z",
   "count": 139,
   "items": [
     {
@@ -2543,26 +2543,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2770259582",
-      "name": "Funtionfit ROI",
-      "install_date": "2026-08-10",
-      "address": "620 COLLINS ST, WEST MELBOURNE VIC 3000",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2770200800",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46065",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2824521451",
       "name": "EVE",
       "install_date": "2026-08-10",
@@ -2581,6 +2561,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Installation"
+    },
+    {
+      "id": "2770259582",
+      "name": "Funtionfit ROI",
+      "install_date": "2026-08-11",
+      "address": "620 COLLINS ST, WEST MELBOURNE VIC 3000",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2770200800",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46065",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2781925791",
