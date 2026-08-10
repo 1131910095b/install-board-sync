@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T05:39:52.539395Z",
+  "updated_at": "2026-08-10T06:39:22.500185Z",
   "count": 139,
   "items": [
     {
@@ -2560,7 +2560,7 @@
       "invoice_number": "46106",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2770259582",
@@ -2580,13 +2580,13 @@
       "invoice_number": "46065",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2781925791",
       "name": "BYD Nunawading",
       "install_date": "2026-08-11",
-      "address": "",
+      "address": "306-312 Whitehorse Rd, Nunawading VIC 3131",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -2600,7 +2600,7 @@
       "invoice_number": "46087",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2818411884",
@@ -2620,7 +2620,7 @@
       "invoice_number": "46137",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2819144826",
@@ -2706,18 +2706,18 @@
       "id": "2825521945",
       "name": "Iglesia",
       "install_date": "2026-08-17",
-      "address": "",
+      "address": "83 Stevedore St, Williamstown VIC 3016",
       "installer": "",
       "schedule_status": "",
       "project_type": "",
       "priority": "",
       "installation_value": 0,
-      "sales": "",
+      "sales": "Chike",
       "notes": "",
       "production_id": "2825414383",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "",
+      "invoice_number": "46152",
       "producer": "",
       "plan_hours": "",
       "production_status": "Order Placed"
