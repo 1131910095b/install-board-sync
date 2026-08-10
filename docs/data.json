@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-10T01:44:47.244365Z",
-  "count": 137,
+  "updated_at": "2026-08-10T03:54:47.262784Z",
+  "count": 139,
   "items": [
     {
       "id": "2715867167",
@@ -1240,7 +1240,7 @@
       "invoice_number": "46018",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2726583227",
@@ -2606,7 +2606,7 @@
       "id": "2818411884",
       "name": "newhaven",
       "install_date": "2026-08-12",
-      "address": "180 Albert Road, \nSouth Melbourne VIC, Australia",
+      "address": "L5 – 180 Albert Road",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -2703,6 +2703,26 @@
       "production_status": "Production"
     },
     {
+      "id": "2825521945",
+      "name": "Iglesia",
+      "install_date": "2026-08-17",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "",
+      "notes": "",
+      "production_id": "2825414383",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
       "id": "2819109350",
       "name": "Jagermeister",
       "install_date": "2026-08-20",
@@ -2718,6 +2738,26 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46122",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
+    },
+    {
+      "id": "2825521986",
+      "name": "Ripples cafe",
+      "install_date": "2026-08-27",
+      "address": "1543 high st， glen iris",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "",
+      "notes": "",
+      "production_id": "2825359192",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46144",
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
