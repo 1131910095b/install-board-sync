@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-11T22:51:27.745145Z",
+  "updated_at": "2026-08-11T23:50:07.212793Z",
   "count": 142,
   "items": [
     {
@@ -2443,26 +2443,6 @@
       "production_status": "Job Completed!"
     },
     {
-      "id": "2753480957",
-      "name": "1Arena",
-      "install_date": "2026-08-06",
-      "address": "1A BANK STREET, Boxhill",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2753468023",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46014",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2816937701",
       "name": "didi易拉宝",
       "install_date": "2026-08-07",
@@ -2520,7 +2500,7 @@
       "invoice_number": "46065",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Out Production"
     },
     {
       "id": "2781925791",
@@ -2540,7 +2520,7 @@
       "invoice_number": "46087",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
     },
     {
       "id": "2818411884",
@@ -2600,7 +2580,7 @@
       "invoice_number": "45868",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
     },
     {
       "id": "2812804498",
@@ -2610,7 +2590,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "Urgent",
+      "priority": "Medium",
       "installation_value": 250.0,
       "sales": "",
       "notes": "",
@@ -2620,7 +2600,7 @@
       "invoice_number": "45425",
       "producer": "Don",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2825521986",
@@ -2730,7 +2710,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "",
+      "priority": "High",
       "installation_value": 1000.0,
       "sales": "Barry",
       "notes": "",
@@ -2781,6 +2761,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production File Start"
+    },
+    {
+      "id": "2753480957",
+      "name": "1Arena",
+      "install_date": "2026-08-20",
+      "address": "1A BANK STREET, Boxhill",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2753468023",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46014",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2819109350",
