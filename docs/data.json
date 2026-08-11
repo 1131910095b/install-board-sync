@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-11T07:34:23.573648Z",
+  "updated_at": "2026-08-11T07:48:19.882928Z",
   "count": 142,
   "items": [
     {
@@ -2543,6 +2543,26 @@
       "production_status": "Installation"
     },
     {
+      "id": "2818411884",
+      "name": "newhaven",
+      "install_date": "2026-08-11",
+      "address": "L5 – 180 Albert Road",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "",
+      "notes": "",
+      "production_id": "2818361049",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46137",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production File Start"
+    },
+    {
       "id": "2747243983",
       "name": "Insite Zeus",
       "install_date": "2026-08-12",
@@ -2601,26 +2621,6 @@
       "producer": "Don",
       "plan_hours": "",
       "production_status": "Pre-Installation"
-    },
-    {
-      "id": "2818411884",
-      "name": "newhaven",
-      "install_date": "2026-08-12",
-      "address": "L5 – 180 Albert Road",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "",
-      "notes": "",
-      "production_id": "2818361049",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46137",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production File Start"
     },
     {
       "id": "2825521986",
