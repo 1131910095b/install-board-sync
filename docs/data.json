@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T07:35:00.698544Z",
+  "updated_at": "2026-08-12T22:50:16.471642Z",
   "count": 143,
   "items": [
     {
@@ -2583,6 +2583,26 @@
       "production_status": "Finished"
     },
     {
+      "id": "2819144826",
+      "name": "Cupcake C board",
+      "install_date": "2026-08-12",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2818958811",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46093",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
+    },
+    {
       "id": "2825521986",
       "name": "Ripples cafe",
       "install_date": "2026-08-12",
@@ -2641,26 +2661,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
-    },
-    {
-      "id": "2819144826",
-      "name": "Cupcake C board",
-      "install_date": "2026-08-13",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2818958811",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46093",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Sign Proof"
     },
     {
       "id": "2828697788",
@@ -2780,7 +2780,7 @@
       "invoice_number": "46142",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Pre-Production"
     },
     {
       "id": "2753480957",
