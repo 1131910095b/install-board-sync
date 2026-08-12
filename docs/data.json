@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-12T07:24:25.949728Z",
-  "count": 142,
+  "updated_at": "2026-08-12T07:35:00.698544Z",
+  "count": 143,
   "items": [
     {
       "id": "2715867167",
@@ -2063,26 +2063,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2784033298",
-      "name": "Crown Food Hall",
-      "install_date": "2026-07-24",
-      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2779509250",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46027",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2739852926",
       "name": "LE GRAND CELLAR - BOX HILL CENTRAL",
       "install_date": "2026-07-27",
@@ -2560,7 +2540,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Production"
     },
     {
       "id": "2753653925",
@@ -2640,7 +2620,27 @@
       "invoice_number": "46138",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Job Completed!"
+    },
+    {
+      "id": "2784033298",
+      "name": "Crown Food Hall",
+      "install_date": "2026-08-13",
+      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2779509250",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46027",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2819144826",
@@ -2661,6 +2661,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Sign Proof"
+    },
+    {
+      "id": "2828697788",
+      "name": "best brain 3",
+      "install_date": "2026-08-13",
+      "address": "68A High Street, Cranbourne",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2810820375",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46129",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2818615898",
