@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T23:50:21.765424Z",
+  "updated_at": "2026-08-13T01:55:34.197405Z",
   "count": 143,
   "items": [
     {
@@ -1294,13 +1294,13 @@
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
-      "production_id": "2757552896",
+      "production_id": null,
       "team": "",
       "duration_hours": null,
-      "invoice_number": "46048",
+      "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": ""
     },
     {
       "id": "2762252288",
@@ -1774,13 +1774,13 @@
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
-      "production_id": "2774109992",
+      "production_id": null,
       "team": "",
       "duration_hours": null,
-      "invoice_number": "46073",
+      "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": ""
     },
     {
       "id": "2726670231",
@@ -2512,7 +2512,7 @@
       "project_type": "Install",
       "priority": "High",
       "installation_value": 0,
-      "sales": "",
+      "sales": "Chike",
       "notes": "",
       "production_id": "2818361049",
       "team": "",
@@ -2520,7 +2520,7 @@
       "invoice_number": "46137",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Production"
     },
     {
       "id": "2747243983",
@@ -2720,7 +2720,7 @@
       "invoice_number": "46149",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2821987640",
