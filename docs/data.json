@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-13T04:12:45.627884Z",
+  "updated_at": "2026-08-13T05:58:22.741994Z",
   "count": 143,
   "items": [
     {
@@ -2760,7 +2760,7 @@
       "invoice_number": "46152",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Production File Start"
     },
     {
       "id": "2820702965",
