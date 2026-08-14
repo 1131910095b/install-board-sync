@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-14T01:52:40.137039Z",
+  "updated_at": "2026-08-14T04:09:26.368467Z",
   "count": 143,
   "items": [
     {
@@ -2680,7 +2680,7 @@
       "invoice_number": "46129",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
     },
     {
       "id": "2818615898",
@@ -2750,7 +2750,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "",
-      "priority": "High",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
@@ -2760,7 +2760,7 @@
       "invoice_number": "46152",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
     },
     {
       "id": "2820702965",
