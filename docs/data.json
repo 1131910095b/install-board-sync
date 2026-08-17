@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-16T23:48:32.780709Z",
-  "count": 144,
+  "updated_at": "2026-08-17T01:12:54.255632Z",
+  "count": 145,
   "items": [
     {
       "id": "2715867167",
@@ -2603,26 +2603,6 @@
       "production_status": "Sign Proof"
     },
     {
-      "id": "2825521986",
-      "name": "Ripples cafe",
-      "install_date": "2026-08-12",
-      "address": "1543 high st， glen iris",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "",
-      "notes": "",
-      "production_id": "2825359192",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46144",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Sign Proof"
-    },
-    {
       "id": "2827321919",
       "name": "Woodlands Manor Lakes mesh banner",
       "install_date": "2026-08-12",
@@ -2843,6 +2823,26 @@
       "production_status": "Installation"
     },
     {
+      "id": "2825521986",
+      "name": "Ripples cafe",
+      "install_date": "2026-08-27",
+      "address": "1543 high st， glen iris",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "",
+      "notes": "",
+      "production_id": "2825359192",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46144",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
+    },
+    {
       "id": "2831388265",
       "name": "Just Careers",
       "install_date": "2026-08-27",
@@ -2860,7 +2860,27 @@
       "invoice_number": "46150",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": "Sign Proof"
+    },
+    {
+      "id": "2834093548",
+      "name": "ak6 banh mi DFO",
+      "install_date": "2026-09-02",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2834055347",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46161",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Out Production"
     },
     {
       "id": "2809333029",
