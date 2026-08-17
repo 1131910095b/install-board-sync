@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-17T05:35:28.362657Z",
-  "count": 145,
+  "updated_at": "2026-08-17T22:30:55.990845Z",
+  "count": 147,
   "items": [
     {
       "id": "2715867167",
@@ -2540,7 +2540,7 @@
       "invoice_number": "46021",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2753653925",
@@ -2643,26 +2643,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2784033298",
-      "name": "Crown Food Hall",
-      "install_date": "2026-08-14",
-      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2779509250",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46027",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
       "id": "2818615898",
       "name": "didi 赠送",
       "install_date": "2026-08-14",
@@ -2681,6 +2661,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Job Completed!"
+    },
+    {
+      "id": "2820702965",
+      "name": "WSMC",
+      "install_date": "2026-08-14",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2820684365",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46142",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2821987640",
@@ -2743,24 +2743,24 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2820702965",
-      "name": "WSMC",
+      "id": "2784033298",
+      "name": "Crown Food Hall",
       "install_date": "2026-08-18",
-      "address": "",
+      "address": "8 WHITEMAN ST\nSOUTHBANK VIC 3006",
       "installer": "",
       "schedule_status": "",
-      "project_type": "Install",
-      "priority": "High",
+      "project_type": "",
+      "priority": "Urgent",
       "installation_value": 0,
-      "sales": "Jenny",
+      "sales": "Chike",
       "notes": "",
-      "production_id": "2820684365",
+      "production_id": "2779509250",
       "team": "",
       "duration_hours": null,
-      "invoice_number": "46142",
+      "invoice_number": "46027",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2753480957",
@@ -2821,6 +2821,46 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Installation"
+    },
+    {
+      "id": "2835280960",
+      "name": "Gongcha Carnegie-CH",
+      "install_date": "2026-08-21",
+      "address": "80 Koornang Rd, Carnegie VIC 3163",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2827142674",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46148",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Construct Attention"
+    },
+    {
+      "id": "2835269842",
+      "name": "Stickers and KT board",
+      "install_date": "2026-08-24",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Delivery",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2834668573",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46164",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
     },
     {
       "id": "2825521986",
