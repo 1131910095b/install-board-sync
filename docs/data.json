@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-18T01:11:05.662927Z",
+  "updated_at": "2026-08-18T02:37:26.770853Z",
   "count": 148,
   "items": [
     {
@@ -2600,7 +2600,7 @@
       "invoice_number": "46093",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Production File Start"
     },
     {
       "id": "2827321919",
@@ -2720,7 +2720,7 @@
       "invoice_number": "46152",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2827167782",
@@ -2800,7 +2800,7 @@
       "invoice_number": "46122",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production File Start"
+      "production_status": "Out Production"
     },
     {
       "id": "2826820070",
