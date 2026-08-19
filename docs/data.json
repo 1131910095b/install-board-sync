@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-19T04:37:00.236852Z",
+  "updated_at": "2026-08-19T05:30:50.229860Z",
   "count": 148,
   "items": [
     {
@@ -2840,7 +2840,7 @@
       "invoice_number": "46148",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Construct Attention"
+      "production_status": "Sign Proof"
     },
     {
       "id": "2835269842",
@@ -2854,13 +2854,13 @@
       "installation_value": 0,
       "sales": "Jenny",
       "notes": "",
-      "production_id": "2834668573",
+      "production_id": null,
       "team": "",
       "duration_hours": null,
-      "invoice_number": "46164",
+      "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Order Placed"
+      "production_status": ""
     },
     {
       "id": "2825521986",
