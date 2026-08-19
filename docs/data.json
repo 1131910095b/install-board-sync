@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-19T22:55:56.900510Z",
+  "updated_at": "2026-08-19T23:28:35.251386Z",
   "count": 148,
   "items": [
     {
@@ -2643,26 +2643,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2821987640",
-      "name": "AP BIBA",
-      "install_date": "2026-08-14",
-      "address": "Shop 2010, Zone B, Fountain Gate 3805",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 1000.0,
-      "sales": "Barry",
-      "notes": "",
-      "production_id": "2821751316",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2827167782",
       "name": "Arkim Papparich La Trobe",
       "install_date": "2026-08-14",
@@ -2678,26 +2658,6 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46149",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
-    },
-    {
-      "id": "2753480957",
-      "name": "1Arena",
-      "install_date": "2026-08-18",
-      "address": "1A BANK STREET, Boxhill",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2753468023",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46014",
       "producer": "",
       "plan_hours": "",
       "production_status": "Pre-Installation"
@@ -2760,7 +2720,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2748894243",
@@ -2830,7 +2790,7 @@
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
-      "priority": "",
+      "priority": "Urgent",
       "installation_value": 0,
       "sales": "Chike",
       "notes": "",
@@ -2840,7 +2800,27 @@
       "invoice_number": "46148",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Production"
+      "production_status": "Production"
+    },
+    {
+      "id": "2821987640",
+      "name": "AP BIBA",
+      "install_date": "2026-08-24",
+      "address": "Shop 2010, Zone B, Fountain Gate 3805",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 1000.0,
+      "sales": "Barry",
+      "notes": "",
+      "production_id": "2821751316",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
     },
     {
       "id": "2835269842",
@@ -2861,6 +2841,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": ""
+    },
+    {
+      "id": "2753480957",
+      "name": "1Arena",
+      "install_date": "2026-08-26",
+      "address": "1A BANK STREET, Boxhill",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2753468023",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46014",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2825521986",
