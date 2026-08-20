@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-20T06:13:23.966548Z",
+  "updated_at": "2026-08-20T06:55:55.525718Z",
   "count": 152,
   "items": [
     {
@@ -1840,7 +1840,7 @@
       "invoice_number": "46069",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Out Production"
+      "production_status": "Pre-Installation"
     },
     {
       "id": "2781734173",
@@ -2743,6 +2743,26 @@
       "production_status": "Finished"
     },
     {
+      "id": "2835280960",
+      "name": "Gongcha Carnegie-CH",
+      "install_date": "2026-08-20",
+      "address": "80 Koornang Rd, Carnegie VIC 3163",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2827142674",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46148",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production"
+    },
+    {
       "id": "2747258305",
       "name": "Woodlands Mernda",
       "install_date": "2026-08-21",
@@ -2781,26 +2801,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Finished"
-    },
-    {
-      "id": "2835280960",
-      "name": "Gongcha Carnegie-CH",
-      "install_date": "2026-08-21",
-      "address": "80 Koornang Rd, Carnegie VIC 3163",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2827142674",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46148",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
     },
     {
       "id": "2821987640",
