@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-20T00:33:37.345137Z",
-  "count": 148,
+  "updated_at": "2026-08-20T01:11:22.934645Z",
+  "count": 150,
   "items": [
     {
       "id": "2715867167",
@@ -2720,7 +2720,27 @@
       "invoice_number": "46152",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Installation"
+      "production_status": "Finished"
+    },
+    {
+      "id": "2826820070",
+      "name": "Cafe fresh",
+      "install_date": "2026-08-20",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "",
+      "installation_value": 0,
+      "sales": "",
+      "notes": "",
+      "production_id": "2826678755",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "45857",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Finished"
     },
     {
       "id": "2747258305",
@@ -2758,26 +2778,6 @@
       "team": "",
       "duration_hours": null,
       "invoice_number": "46106",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Finished"
-    },
-    {
-      "id": "2826820070",
-      "name": "Cafe fresh",
-      "install_date": "2026-08-21",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "",
-      "installation_value": 0,
-      "sales": "",
-      "notes": "",
-      "production_id": "2826678755",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "45857",
       "producer": "",
       "plan_hours": "",
       "production_status": "Finished"
@@ -2843,6 +2843,26 @@
       "production_status": ""
     },
     {
+      "id": "2838092975",
+      "name": "Perday",
+      "install_date": "2026-08-24",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Delivery",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2838089243",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46174",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Order Placed"
+    },
+    {
       "id": "2753480957",
       "name": "1Arena",
       "install_date": "2026-08-26",
@@ -2901,6 +2921,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Production File Start"
+    },
+    {
+      "id": "2838091999",
+      "name": "Razor House",
+      "install_date": "2026-08-28",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Medium",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2838089070",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46171",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Sign Proof"
     },
     {
       "id": "2834093548",
