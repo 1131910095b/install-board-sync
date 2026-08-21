@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-21T05:32:43.705889Z",
+  "updated_at": "2026-08-21T06:45:01.569304Z",
   "count": 154,
   "items": [
     {
@@ -2763,26 +2763,6 @@
       "production_status": "Pre-Installation"
     },
     {
-      "id": "2839543828",
-      "name": "Just bb",
-      "install_date": "2026-08-21",
-      "address": "",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Pick Up",
-      "priority": "High",
-      "installation_value": 0,
-      "sales": "Jenny",
-      "notes": "",
-      "production_id": "2839483188",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46182",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production File Start"
-    },
-    {
       "id": "2819144826",
       "name": "Cupcake C board",
       "install_date": "2026-08-24",
@@ -2901,6 +2881,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Installation"
+    },
+    {
+      "id": "2839543828",
+      "name": "Just bb",
+      "install_date": "2026-08-24",
+      "address": "",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Pick Up",
+      "priority": "High",
+      "installation_value": 0,
+      "sales": "Jenny",
+      "notes": "",
+      "production_id": "2839483188",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46182",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Production File Start"
     },
     {
       "id": "2753480957",
