@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-21T04:38:27.357967Z",
+  "updated_at": "2026-08-21T05:04:57.365984Z",
   "count": 154,
   "items": [
     {
@@ -2506,7 +2506,7 @@
       "id": "2819144826",
       "name": "Cupcake C board",
       "install_date": "2026-08-12",
-      "address": "",
+      "address": "79 Sunshine Rd, West Footscray",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -2520,7 +2520,7 @@
       "invoice_number": "46093",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2827321919",
@@ -2601,26 +2601,6 @@
       "producer": "",
       "plan_hours": "",
       "production_status": "Finished"
-    },
-    {
-      "id": "2827167782",
-      "name": "Arkim Papparich La Trobe",
-      "install_date": "2026-08-14",
-      "address": "8D The Agora, Bundoora VIC 3083",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2827112579",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46149",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Pre-Installation"
     },
     {
       "id": "2784033298",
@@ -2743,26 +2723,6 @@
       "production_status": "Finished"
     },
     {
-      "id": "2835280960",
-      "name": "Gongcha Carnegie-CH",
-      "install_date": "2026-08-20",
-      "address": "80 Koornang Rd, Carnegie VIC 3163",
-      "installer": "",
-      "schedule_status": "",
-      "project_type": "Install",
-      "priority": "Urgent",
-      "installation_value": 0,
-      "sales": "Chike",
-      "notes": "",
-      "production_id": "2827142674",
-      "team": "",
-      "duration_hours": null,
-      "invoice_number": "46148",
-      "producer": "",
-      "plan_hours": "",
-      "production_status": "Production"
-    },
-    {
       "id": "2747258305",
       "name": "Woodlands Mernda",
       "install_date": "2026-08-21",
@@ -2820,7 +2780,27 @@
       "invoice_number": "",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Production"
+      "production_status": "Installation"
+    },
+    {
+      "id": "2827167782",
+      "name": "Arkim Papparich La Trobe",
+      "install_date": "2026-08-24",
+      "address": "8D The Agora, Bundoora VIC 3083",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2827112579",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46149",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2835269842",
@@ -2841,6 +2821,26 @@
       "producer": "",
       "plan_hours": "",
       "production_status": ""
+    },
+    {
+      "id": "2835280960",
+      "name": "Gongcha Carnegie-CH",
+      "install_date": "2026-08-24",
+      "address": "80 Koornang Rd, Carnegie VIC 3163",
+      "installer": "",
+      "schedule_status": "",
+      "project_type": "Install",
+      "priority": "Urgent",
+      "installation_value": 0,
+      "sales": "Chike",
+      "notes": "",
+      "production_id": "2827142674",
+      "team": "",
+      "duration_hours": null,
+      "invoice_number": "46148",
+      "producer": "",
+      "plan_hours": "",
+      "production_status": "Installation"
     },
     {
       "id": "2838092975",
@@ -2866,7 +2866,7 @@
       "id": "2838459315",
       "name": "sunshine just careers removal",
       "install_date": "2026-08-24",
-      "address": "",
+      "address": "50 Boundary Rd, Sunshine West VIC 3020, Australia",
       "installer": "",
       "schedule_status": "",
       "project_type": "Install",
@@ -2880,7 +2880,7 @@
       "invoice_number": "46173",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Sign Proof"
+      "production_status": "Installation"
     },
     {
       "id": "2839543828",
