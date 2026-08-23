@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-23T23:27:46.695298Z",
+  "updated_at": "2026-08-23T23:50:23.976979Z",
   "count": 154,
   "items": [
     {
@@ -2640,7 +2640,7 @@
       "invoice_number": "INV-45944",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2748894243",
@@ -2660,7 +2660,7 @@
       "invoice_number": "46018",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Pre-Installation"
+      "production_status": "Installation"
     },
     {
       "id": "2825521945",
