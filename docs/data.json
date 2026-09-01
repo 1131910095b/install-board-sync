@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-01T01:09:55.855900Z",
+  "updated_at": "2026-09-01T03:45:55.852452Z",
   "count": 154,
   "items": [
     {
@@ -400,7 +400,7 @@
       "invoice_number": "45983",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2726604717",
@@ -620,7 +620,7 @@
       "invoice_number": "45932",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2726604289",
@@ -880,7 +880,7 @@
       "invoice_number": "45898",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2744298029",
@@ -1300,7 +1300,7 @@
       "invoice_number": "46051",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2715955378",
@@ -1400,7 +1400,7 @@
       "invoice_number": "46050",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2715912269",
@@ -1440,7 +1440,7 @@
       "invoice_number": "46045",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2753654260",
@@ -1680,7 +1680,7 @@
       "invoice_number": "45852",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2753554377",
@@ -2320,7 +2320,7 @@
       "invoice_number": "46112",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2810852053",
@@ -2420,7 +2420,7 @@
       "invoice_number": "46087",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2818411884",
@@ -2600,7 +2600,7 @@
       "invoice_number": "46027",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2819109350",
