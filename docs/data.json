@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-21T00:28:22.633040Z",
+  "updated_at": "2026-10-21T03:27:59.253833Z",
   "count": 154,
   "items": [
     {
@@ -1260,7 +1260,7 @@
       "invoice_number": "46019",
       "producer": "",
       "plan_hours": "",
-      "production_status": "Job Completed!"
+      "production_status": "Finished"
     },
     {
       "id": "2761709540",
